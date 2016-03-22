@@ -26,12 +26,12 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `yaftekun`.`tiporonda`
+-- Table `yaftekun`.`tipo_competencia`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `yaftekun`.`tiporonda` (
-  `idtiporonda` INT(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `yaftekun`.`tipo_competencia` (
+  `idtipo_competencia` INT(10) UNSIGNED NOT NULL,
   `nombre` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`idtiporonda`))
+  PRIMARY KEY (`idtipo_competencia`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `yaftekun`.`grupo_por_ronda` (
   `id_grupo_por_ronda` BIGINT(20) UNSIGNED NOT NULL,
   `idtorneo` BIGINT(20) UNSIGNED NOT NULL,
   `idronda` BIGINT(20) UNSIGNED NOT NULL,
-  `idtiporonda` INT(10) UNSIGNED NOT NULL,
+  `idtipo_competencia` INT(10) UNSIGNED NOT NULL,
   `idgrupo` INT(10) UNSIGNED NOT NULL,
   `idayvuelta` BIT(1) NOT NULL,
   `grupoporrondacol` VARCHAR(45) NULL DEFAULT NULL,
@@ -53,9 +53,9 @@ CREATE TABLE IF NOT EXISTS `yaftekun`.`grupo_por_ronda` (
     REFERENCES `yaftekun`.`grupo` (`idgrupo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_grupo_por_ronda_tiporonda`
-    FOREIGN KEY (`idtiporonda`)
-    REFERENCES `yaftekun`.`tiporonda` (`idtiporonda`)
+  CONSTRAINT `fk_grupo_por_ronda_tipo_competencia`
+    FOREIGN KEY (`idtipo_competencia`)
+    REFERENCES `yaftekun`.`tipo_competencia` (`idtipo_competencia`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -63,18 +63,18 @@ DEFAULT CHARACTER SET = utf8;
 
 CREATE INDEX `fk_grupo_por_ronda_grupo_idx` ON `yaftekun`.`grupo_por_ronda` (`idgrupo` ASC);
 
-CREATE INDEX `fk_grupo_por_ronda_tiporonda_idx` ON `yaftekun`.`grupo_por_ronda` (`idtiporonda` ASC);
+CREATE INDEX `fk_grupo_por_ronda_tipo_competencia_idx` ON `yaftekun`.`grupo_por_ronda` (`idtipo_competencia` ASC);
 
 
 -- -----------------------------------------------------
 -- Table `yaftekun`.`asignacion_en_grupo_por_ronda`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `yaftekun`.`asignacion_en_grupo_por_ronda` (
-  `asignacion_en_grupo_por_ronda` BIGINT(20) UNSIGNED NOT NULL,
+  `idasignacion_en_grupo_por_ronda` BIGINT(20) UNSIGNED NOT NULL,
   `id_grupo_por_ronda` BIGINT(20) UNSIGNED NOT NULL,
   `puesto_equipo_a` INT(10) UNSIGNED NOT NULL,
   `puesto_equipo_b` INT(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`asignacion_en_grupo_por_ronda`),
+  PRIMARY KEY (`idasignacion_en_grupo_por_ronda`),
   CONSTRAINT `fk_asignacion_en_grupo_por_ronda_grupo_por_ronda`
     FOREIGN KEY (`id_grupo_por_ronda`)
     REFERENCES `yaftekun`.`grupo_por_ronda` (`id_grupo_por_ronda`)
@@ -343,26 +343,37 @@ CREATE INDEX `fk_equipo_integrantes_tipo_participante_idx` ON `yaftekun`.`equipo
 
 
 -- -----------------------------------------------------
--- Table `yaftekun`.`quipo_por_torneo`
+-- Table `yaftekun`.`equipo_por_torneo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `yaftekun`.`quipo_por_torneo` (
+CREATE TABLE IF NOT EXISTS `yaftekun`.`equipo_por_torneo` (
   `idtorneo` BIGINT(20) UNSIGNED NOT NULL,
   `idequipo` BIGINT(20) UNSIGNED NOT NULL,
   PRIMARY KEY (`idtorneo`, `idequipo`),
-  CONSTRAINT `fk_quipo_por_torneo_torneo`
+  CONSTRAINT `fk_equipo_por_torneo_torneo`
     FOREIGN KEY (`idtorneo`)
     REFERENCES `yaftekun`.`torneo` (`idtorneo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_quipo_por_torneo_equipo`
+  CONSTRAINT `fk_equipo_por_torneo_equipo`
     FOREIGN KEY (`idequipo`)
     REFERENCES `yaftekun`.`equipo` (`idequipo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_quipo_por_torneo_equipo_idx` ON `yaftekun`.`quipo_por_torneo` (`idequipo` ASC);
+CREATE INDEX `fk_equipo_por_torneo_equipo_idx` ON `yaftekun`.`equipo_por_torneo` (`idequipo` ASC);
 
+-- -----------------------------------------------------
+-- Table `yaftekun`.`ronda`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `yaftekun`.`ronda` (
+  `idronda` BIGINT(20) UNSIGNED NOT NULL,
+  `idtorneo` BIGINT(20) UNSIGNED NOT NULL,
+  `nombre` VARCHAR(45) NULL DEFAULT NULL,
+  `cant_grupos` INT(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`idronda`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
