@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>YAFTEKUN</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="styles/js/bootstrapValidator.js"></script>
+    <script src="styles/js/Controles.js"></script>
+    <script src="styles/js/valida_participante.js"></script>
+
+    
+    <link rel="stylesheet" href="styles/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/css/propios.css">
+    <style>
+       
+    </style>
+</head>
+<body>
+    <form id="Participante" data-toggle="validator" action="none" method="POST">
+        <div class="container ">
+            <div class=" panel panel-yellow  ">
+                <div class="panel-heading ">
+                    <h1 class="input-group">Gestionar Participante</h1>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Datos del Participante
+                </div>
+                <div class="panel-body">
+
+                    <div class="row">
+
+                        <div class="form-group col-sm-6">
+                            <label class="control-label">Apellido</label>
+                            <div class="input-group ">
+                                <input type="text" id="txt_Apellido" name="apellido" class="form-control" placeholder="Apellido del participante" maxlength="100">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label class="control-label">Nombre</label>
+                            <div class="input-group ">
+                                <input type="text" id="txt_Nombre" name="nombre" class="form-control" placeholder="Nombre del participante" maxlength="100">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-2 col-sm-4 col-xs-12">
+                            <label class="control-label">Tipo Documento</label>
+                            <select id="ddl_TipoDocumento" name="tipo_documento" class="form-control">
+                                <option value="">[ SELECCIONE ]</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2 col-sm-4 col-xs-12">
+                            <label class="control-label">Número Documento</label>
+                            <input type="text" id="txt_NroDoc" class="form-control" name="numero_documento" placeholder="Documento" onkeypress="return validarNumeroControl(event)"  maxlength="8">
+                        </div>
+                        <div class="form-group col-md-2 col-sm-4 col-xs-12">
+                            <label class="control-label">Fecha Nacimiento</label>
+                            <input id="txt_FechaNacimiento" class="form-control" name="fecha_nacimiento" placeholder="Fecha nacimiento" onkeypress="return maskFecha(this)" maxlength="10">
+                        </div>
+                        <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                            <label class="control-label">Nacionalidad</label>
+                            <select id="ddl_Nacionalidad" name="nacionalidad" class="form-control">
+                                <option value="">[ SELECCIONE ]</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label class="control-label">Cobertura Medica</label>
+                            <input type="text" id="txt_CoberturaMedica" name="cobertura_medica" class="form-control" placeholder="Nombre de cobertura médica" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-3 col-sm-4 col-xs-12">
+                            <label class="control-label">Estado Civil</label>
+                            <select id="ddl_EstadoCivil" name="estado_civil" class="form-control">
+                                <option value="">[ SELECCIONE ]</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-9 col-sm-8 col-xs-12">
+                            <label class="control-label">Nombre Cónyugue</label>
+                            <input type="text" id="txt_Conyugue" name="conyugue" class="form-control" placeholder="" maxlength="50">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Domicilio
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="control-label">Calle</label>
+                        <input type="text" id="txt_Calle" name="calle" class="form-control" placeholder="Ingrese una calle" maxlength="100">
+                    </div>
+                    <div class="row">
+                        <div class="form-group  col-sm-2 col-xs-12">
+                            <label class="control-label">Altura</label>
+                            <input type="text" id="txt_Numero" class="form-control" name="numero" onkeypress="return validarNumeroControl(event)" placeholder="Ingrese altura de calle" maxlength="5">
+                        </div>
+                        <div class="form-group col-sm-2 col-xs-12">
+                            <label class="control-label">Piso</label>
+                            <input type="text" id="txt_Piso" name="piso" class="form-control" maxlength="2">
+                        </div>
+                        <div class="form-group col-sm-2 col-xs-12">
+                            <label class="control-label">Departamento</label>
+                            <input type="text" id="txt_Dto" class="form-control" maxlength="4">
+                        </div>
+                        <div class="form-group col-sm-2 col-xs-12">
+                            <label class="control-label">Código Postal</label>
+                            <input id="txt_CP" class="form-control" name="codigopostal" placeholder="Ingrese código postal" maxlength="8">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-4 col-xs-12">
+                            <label class="control-label">Provincia</label>
+                            <select id="ddl_Provincia" name="provincia" class="form-control">
+                                <option value="">[ SELECCIONE ]</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-8 col-xs-12">
+                            <label class="control-label">Localidad</label>
+                            <select id="ddl_Localidad" class="form-control" name="localidad">
+                                <option value="">[ SELECCIONE ]</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-4 col-xs-12">
+                            <label class="control-label">Teléfono</label>
+                            <input id="txt_Telefono" class="form-control" name="telefono" placeholder="Ingrese un teléfono"  onkeypress="return validarNumeroControl(event)"   maxlength="11">
+                        </div>
+                        <div class="form-group col-sm-4 col-xs-12">
+                            <label class="control-label">Teléfono Celular</label>
+                            <input id="txt_Celulalar" class="form-control" name="celular" placeholder="Ingrese un celular"  onkeypress="return validarNumeroControl(event)"  maxlength="11">
+                        </div>
+                        <div class="form-group col-sm-4 col-xs-12">
+                            <label class="control-label">Teléfono Radio</label>
+                            <input id="txt_Radio" class="form-control" name="radio" placeholder="Ingrese un radio"  onkeypress="return validarNumeroControl(event)"  maxlength="15">
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <label class="control-label">Mail</label>
+                            <input type="email" id="txt_Mail" class="form-control" name="mail" placeholder="Ingrse un mail" maxlength="100">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Datos como jugador
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group col-sm-6 col-md-3  col-xs-12">
+                            <label class="control-label">Pertenece al Equipo</label>
+                            <select id="ddl_Equipo" class="form-control" name="equipo">
+                                <option value="">[ SELECCIONE ]</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                        <div class="form-group  col-sm-6 col-md-3  col-xs-12">
+                            <label class="control-label">Posición que ocupa</label>
+                            <select id="ddl_Posicion" class="form-control" name="posicion">
+                                <option value="">[ SELECCIONE ]</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                   
+                        <div class="form-group  col-sm-6 col-md-3  col-xs-12">
+                            <label class="control-label">Número camiseta</label>
+                            <input type="text" id="txt_Camiseta" class="form-control" name="camiseta" placeholder="Ingrese un número de camiseta"  onkeypress="return validarNumeroControl(event)"  maxlength="2">
+                        </div>
+                        <div class="form-group  col-sm-6 col-md-3  col-xs-12">
+                            <label class="control-label">Estado</label>
+                            <select id="ddl_Estado" class="form-control" name="estado">
+                                <option value="">[ SELECCIONE ]</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            </div>
+        <div class="container">
+
+             <div class="panel-error">
+                Apartado para mostrar errores
+            </div>
+
+            <div class="col-lg-12" style="text-align: right; padding-top: 30px; padding-bottom: 10px;">
+
+
+
+                <button class="btn boton  boton-azul  btn-ancho120">
+                    <i class="fa fa-save"></i>Guardar
+                </button>
+
+                <button class="btn boton  boton-azul  btn-ancho120">
+                    <i class="fa fa-trash-o"></i>Eliminar
+                </button>
+
+                <button class="btn boton  boton-azul  btn-ancho120">
+                    <i class="fa fa-times"></i>Cancelar
+                </button>
+            </div>
+        </div>
+    </form>
+    
+</body>
+</html>
