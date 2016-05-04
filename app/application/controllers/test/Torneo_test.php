@@ -5,8 +5,9 @@ class Torneo_test extends CI_Controller {
 	 * Liga_prueba se usa para poder probar completo ABM de torneos. Este necesita una Liga.
 	 * 
 	 */
-	public $id_liga_prueba = '99999999999';
-	public $anio_prueba = '2016';
+	public $id_liga_prueba = 9999;
+	public $anio_prueba = 2016;
+	public $id_torneo_prueba;
 	
 	public $id_liga;
 	public $id_torneo;
@@ -29,13 +30,18 @@ class Torneo_test extends CI_Controller {
 	public function index()
 	{
 		$this->alta_test();
-		$this->consulta_test();
 		mysqli_next_result($this->db->conn_id);
-		$this->consulta_test_por_cuil();
+		
+		$this->consulta_test_por_anio();
 		mysqli_next_result($this->db->conn_id);
-		$this->consulta_test_por_cuil_inexistente();
+
+	
+/*		$this->consulta_test_por_cuil_inexistente();
 		mysqli_next_result($this->db->conn_id);
+*/		
 		$this->baja_test();
+		
+		
 		echo $this->unit->report();
 	}
 	
@@ -47,18 +53,23 @@ class Torneo_test extends CI_Controller {
 	{
 		$torneo = new stdClass();
 		
-		$torneo->id_liga 			= $this->$id_liga_prueba;
+		$torneo->id_liga 			= $this->id_liga_prueba;
 		$torneo->id_torneo 			= NULL;
-		$torneo->anio 				= '2016';
-		$torneo->nombre 			= 'Torneo nacional sub 60';
-		$torneo->cantidad_equipos	= 14;
+		$torneo->anio 				= $this->anio_prueba;
+		$torneo->nombre 			= 'Torneo nacional sub 60-';
+		$torneo->cantidad_equipos	= '14';
 		$torneo->id_usuario			= 99;
 		
 		$resultado['resultado']='OK';
-		$test = $this->Persona_model->alta($torneo);
+		$test = $this->Torneo_model->alta($torneo);
+		$this->id_torneo_prueba = $test['id'];				##Este es el id del torneo creado. 
+		
+		$resultado['id']=$test['id'];
+		
 		$expected_result = $resultado;
 		$test_name = 'Alta torneo';
-		$this->unit->run($test, $expected_result, $test_name);
+		$notes = var_export($test, true);
+		$this->unit->run($test, $expected_result, $test_name, $notes);
 	}
 	
 	/**
@@ -117,11 +128,23 @@ class Torneo_test extends CI_Controller {
 	 */
 	public function baja_test()
 	{
+	
+		$torneo = new stdClass();
+		
+		$torneo->id_liga 			= $this->id_liga_prueba;
+		$torneo->id_torneo 			= $this->id_torneo_prueba;
+		$torneo->anio 				= $this->anio_prueba;
+		$torneo->nombre 			= 'Torneo nacional sub 60-';
+		$torneo->cantidad_equipos	= '14';
+		$torneo->id_usuario			= 99;
+		
+		
 		$test = $this->Torneo_model->baja($torneo);
 		$resultado['resultado']='OK';
 		$expected_result = $resultado;
 		$test_name = 'Baja toneo por cuil';
-		$this->unit->run($test, $expected_result, $test_name);
+		$notes = var_export($test, true);
+		$this->unit->run($test, $expected_result, $test_name, $notes);
 	}
 	
 	

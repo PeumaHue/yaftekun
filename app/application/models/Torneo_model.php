@@ -80,7 +80,7 @@ class Torneo_model extends CI_Model {
 		if( $query	)
 		{	
 			$resultado['resultado']='OK';
-			$resultado['id']=$query->row_array()["id_liga"];
+			$resultado['id']=$query->row_array()["id_torneo"];
 		}	
 		else
 			$resultado['resultado']='ERROR';
