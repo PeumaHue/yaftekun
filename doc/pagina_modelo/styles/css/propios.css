@@ -371,6 +371,19 @@ a
     border-color: hsl(208, 56%, 41%);
 }
 
+.interlineado-X1
+{
+    line-height:28px
+}
+.interlineado-X2
+{
+    line-height:38px
+}
+.interlineado-X3
+{
+    line-height:48px
+}
+
 /***********************/
 /*
 .btn-guardar {

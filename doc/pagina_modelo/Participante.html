@@ -11,7 +11,7 @@
     <script src="styles/js/Controles.js"></script>
     <script src="styles/js/valida_participante.js"></script>
 
-    
+
     <link rel="stylesheet" href="styles/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/css/propios.css">
     <style>
@@ -29,7 +29,86 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Datos del Participante
+                    Integrantes del equipo
+                    <div class="pull-right">
+                        <div class="btn-group">
+                            <button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#equipo_body" aria-expanded="true">
+                                <i id="flecha_equipo" class="fa fa-chevron-up"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body collapse in" id="equipo_body" aria-expanded="true">
+
+                    <ul class="list-inline small interlineado-X1">
+                        <li class="col-xs-12 col-sm-3">RAIMUNDO SERGIO DANIEL</li>
+                        <li class="col-xs-12 col-sm-3">CUPO MARCO</li>
+                        <li class="col-xs-12 col-sm-3" >ANDOLFATO MARIANO</li>
+                        <li class="col-xs-12 col-sm-3">KOZLOWSKI CARLOS</li>
+                        <li class="col-xs-12 col-sm-3">ANDRADE GASTON</li>
+                    </ul>
+                    <div style="display: inline-block; width:100%">
+                   
+                    <span> Director Técnico: <span id="lbl_DT_Quipo" class="small">CADORANA</span></span> 
+                       <br />
+                    
+                        <span > Delegado:  <span id="Span1" class="small">CADORANA</span></span>
+                      
+                       </div>
+                </div>
+                
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title"><strong>Datos como jugador</strong></h2>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group col-sm-6 col-md-3  col-xs-12">
+                            <label class="control-label">Pertenece al Equipo</label>
+                            <select id="ddl_Equipo" class="form-control" name="equipo">
+                                <option value="">[ SELECCIONE ]</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                        <div class="form-group  col-sm-6 col-md-3  col-xs-12">
+                            <label class="control-label">Posición que ocupa</label>
+                            <select id="ddl_Posicion" class="form-control" name="posicion">
+                                <option value="">[ SELECCIONE ]</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group  col-sm-6 col-md-3  col-xs-12">
+                            <label class="control-label">Número camiseta</label>
+                            <input type="text" id="txt_Camiseta" class="form-control" name="camiseta" placeholder="Ingrese un número de camiseta" onkeypress="return validarNumeroControl(event)" maxlength="2">
+                        </div>
+                        <div class="form-group  col-sm-6 col-md-3  col-xs-12">
+                            <label class="control-label">Estado</label>
+                            <select id="ddl_Estado" class="form-control" name="estado">
+                                <option value="1">Activo</option>
+                                <option value="2">Inactivo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                    <h2 class="panel-title"><strong>Datos del Participante</strong></h2>
                 </div>
                 <div class="panel-body">
 
@@ -72,7 +151,7 @@
                         </div>
                         <div class="form-group col-md-2 col-sm-4 col-xs-12">
                             <label class="control-label">Número Documento</label>
-                            <input type="text" id="txt_NroDoc" class="form-control" name="numero_documento" placeholder="Documento" onkeypress="return validarNumeroControl(event)"  maxlength="8">
+                            <input type="text" id="txt_NroDoc" class="form-control" name="numero_documento" placeholder="Documento" onkeypress="return validarNumeroControl(event)" maxlength="8">
                         </div>
                         <div class="form-group col-md-2 col-sm-4 col-xs-12">
                             <label class="control-label">Fecha Nacimiento</label>
@@ -114,11 +193,22 @@
                 </div>
             </div>
 
+
+
+
             <div class="panel panel-default">
-                <div class="panel-heading">
+                <div class="panel-heading" id="domicilio">
                     Domicilio
+                    <div class="pull-right">
+                        <div class="btn-group">
+                            <button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#domicilio_body">
+                                <i id="flecha_domicilio" class="fa fa-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="panel-body">
+
+                <div class="panel-body collapse" id="domicilio_body">
                     <div class="form-group">
                         <label class="control-label">Calle</label>
                         <input type="text" id="txt_Calle" name="calle" class="form-control" placeholder="Ingrese una calle" maxlength="100">
@@ -166,15 +256,15 @@
                     <div class="row">
                         <div class="form-group col-sm-4 col-xs-12">
                             <label class="control-label">Teléfono</label>
-                            <input id="txt_Telefono" class="form-control" name="telefono" placeholder="Ingrese un teléfono"  onkeypress="return validarNumeroControl(event)"   maxlength="11">
+                            <input id="txt_Telefono" class="form-control" name="telefono" placeholder="Ingrese un teléfono" onkeypress="return validarNumeroControl(event)" maxlength="11">
                         </div>
                         <div class="form-group col-sm-4 col-xs-12">
                             <label class="control-label">Teléfono Celular</label>
-                            <input id="txt_Celulalar" class="form-control" name="celular" placeholder="Ingrese un celular"  onkeypress="return validarNumeroControl(event)"  maxlength="11">
+                            <input id="txt_Celulalar" class="form-control" name="celular" placeholder="Ingrese un celular" onkeypress="return validarNumeroControl(event)" maxlength="11">
                         </div>
                         <div class="form-group col-sm-4 col-xs-12">
                             <label class="control-label">Teléfono Radio</label>
-                            <input id="txt_Radio" class="form-control" name="radio" placeholder="Ingrese un radio"  onkeypress="return validarNumeroControl(event)"  maxlength="15">
+                            <input id="txt_Radio" class="form-control" name="radio" placeholder="Ingrese un radio" onkeypress="return validarNumeroControl(event)" maxlength="15">
                         </div>
                         <div class="form-group col-xs-12">
                             <label class="control-label">Mail</label>
@@ -185,56 +275,11 @@
                 </div>
             </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Datos como jugador
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="form-group col-sm-6 col-md-3  col-xs-12">
-                            <label class="control-label">Pertenece al Equipo</label>
-                            <select id="ddl_Equipo" class="form-control" name="equipo">
-                                <option value="">[ SELECCIONE ]</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="form-group  col-sm-6 col-md-3  col-xs-12">
-                            <label class="control-label">Posición que ocupa</label>
-                            <select id="ddl_Posicion" class="form-control" name="posicion">
-                                <option value="">[ SELECCIONE ]</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                   
-                        <div class="form-group  col-sm-6 col-md-3  col-xs-12">
-                            <label class="control-label">Número camiseta</label>
-                            <input type="text" id="txt_Camiseta" class="form-control" name="camiseta" placeholder="Ingrese un número de camiseta"  onkeypress="return validarNumeroControl(event)"  maxlength="2">
-                        </div>
-                        <div class="form-group  col-sm-6 col-md-3  col-xs-12">
-                            <label class="control-label">Estado</label>
-                            <select id="ddl_Estado" class="form-control" name="estado">
-                                <option value="">[ SELECCIONE ]</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
 
-                </div>
-
-            </div>
-            </div>
+        </div>
         <div class="container">
 
-             <div class="panel-error">
+            <div class="panel-error">
                 Apartado para mostrar errores
             </div>
 
@@ -256,6 +301,6 @@
             </div>
         </div>
     </form>
-    
+
 </body>
 </html>

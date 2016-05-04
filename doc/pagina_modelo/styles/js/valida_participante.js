@@ -1,4 +1,23 @@
 ﻿$(document).ready(function () {
+    $('#domicilio_body').on('shown.bs.collapse', function () {
+        $('#flecha_domicilio').removeClass().addClass("fa fa-chevron-up");
+    });
+
+    $('#domicilio_body').on('hidden.bs.collapse', function () {
+        $('#flecha_domicilio').removeClass().addClass("fa fa-chevron-down");
+    });
+
+    $('#equipo_body').on('shown.bs.collapse', function () {
+        $('#flecha_equipo').removeClass().addClass("fa fa-chevron-up");
+    });
+
+    $('#equipo_body').on('hidden.bs.collapse', function () {
+        $('#flecha_equipo').removeClass().addClass("fa fa-chevron-down");
+    });
+
+
+
+
     $('#Participante').bootstrapValidator({
         message: 'Este valor no es valido',
         feedbackIcons: {
@@ -34,14 +53,7 @@
                         message: 'Debe ingresar el número de documento'
                     }
                 }
-            },
-            nacionalidad: {
-                validators: {
-                    notEmpty: {
-                        message: 'Debe seleccionar un tipo documento'
-                    }
-                }
-            },
+            },            
             calle: {
                 validators: {
                     notEmpty: {
@@ -137,22 +149,12 @@
                 }
             },
             posicion: {
-                validators: {
+                validators: {                    
                     notEmpty: {
                         message: 'Defina una posición'
                     }
                 }
-            },
-            camiseta: {
-                validators: {
-                    digits: {
-                        message: 'solo se admiten números'
-                    },
-                    notEmpty: {
-                        message: 'debe ingresar un número de camiseta'
-                    }
-                }
-            },
+            },            
         }
     });
 });
