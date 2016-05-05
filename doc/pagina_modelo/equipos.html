@@ -11,7 +11,7 @@
     <script src="styles/js/valida_equipos.js"></script>
     <script src="styles/js/Controles.js"></script>
 
-    
+
     <link rel="stylesheet" href="styles/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/css/propios.css">
     <style>
@@ -23,15 +23,14 @@
         <div class="container ">
             <div class=" panel panel-green  ">
                 <div class="panel-heading ">
-                    
+
                     <h1 class="input-group">Gestionar Equipos</h1>
                 </div>
             </div>
 
-            <label>Nombre</label>
+            <label>Nombred de equipo</label>
             <div class="form-group">
                 <div class="input-group col-xs-12">
-
 
                     <input type="text" id="txt_Nombre" name="nombre" class="form-control" placeholder="Nombre del equipo" maxlength="100">
 
@@ -44,81 +43,10 @@
 
 
                 </div>
-
             </div>
-
-
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Dirección de Sede
-                </div>
-                <div class="panel-body">
-
-                    <div class="form-group">
-                        <label class="control-label">Calle</label>
-                        <input type="text" id="txt_Calle" name="calle" class="form-control" placeholder="Ingrese una calle" maxlength="100">
-                    </div>
-                    <div class="row">
-                        <div class="form-group  col-sm-2 col-xs-12">
-                            <label class="control-label">Altura</label>
-                            <input type="text" id="txt_Numero" class="form-control" name="numero" placeholder="Ingrese altura de calle" maxlength="5" onkeypress="return validarNumeroControl(event)">
-                        </div>
-                        <div class="form-group col-sm-2 col-xs-12">
-                            <label class="control-label">Piso</label>
-                            <input type="text" id="txt_Piso" class="form-control" maxlength="2">
-                        </div>
-                        <div class="form-group col-sm-2 col-xs-12">
-                            <label class="control-label">Departamento</label>
-                            <input type="text" id="txt_Dto" class="form-control" maxlength="4">
-                        </div>
-                        <div class="form-group col-sm-2 col-xs-12">
-                            <label class="control-label">Código Postal</label>
-                            <input id="txt_CP" class="form-control" name="codigopostal" maxlength="8">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-4 col-xs-12">
-                            <label class="control-label">Provincia</label>
-                            <select id="ddl_Provincia" name="provincia" class="form-control">
-                                <option value="">[ SELECCIONE ]</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-sm-8 col-xs-12">
-                            <label class="control-label">Localidad</label>
-                            <select id="ddl_Localidad" class="form-control" name="localidad">
-                                <option value="">[ SELECCIONE ]</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-4 col-xs-12">
-                            <label class="control-label">Teléfono</label>
-                            <input id="txt_Telefono" class="form-control" name="telefono" placeholder="Ingrese un teléfono">
-                        </div>
-                        <div class="form-group col-sm-8 col-xs-12">
-                            <label class="control-label">Mail</label>
-                            <input type="email" id="txt_Mail" class="form-control" name="mail" placeholder="Ingrse un mail" required="required">
-                        </div>
-                    </div>
-
-
-
-                </div>
-
-            </div>
-            <br />
-            <div class=" input-group col-xs-12">
-                <label>Sedes</label>
-                <textarea id="txt_Sedes" name="txt_Sedes" class="form-control" rows="3"></textarea>
+            <div class="form-group">
+                <label>Imagen del escudo del equipo</label>
+                <input type="file" >
             </div>
 
 
@@ -137,12 +65,14 @@
                 <button class="btn boton  boton-azul  btn-ancho120">
                     <i class="fa fa-save"></i>Guardar
                 </button>
-
+                <button class="btn boton  boton-azul  btn-ancho120">
+                    <i class="fa fa-trash-o"></i>Eliminar
+                </button>
                 <button class="btn boton  boton-azul  btn-ancho120">
                     <i class="fa fa-times"></i>Cancelar
                 </button>
             </div>
         </div>
-    </form>   
+    </form>
 </body>
 </html>

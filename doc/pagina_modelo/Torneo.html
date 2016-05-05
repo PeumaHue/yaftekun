@@ -10,12 +10,10 @@
     <script src="styles/js/bootstrapValidator.js"></script>
     <script src="styles/js/Controles.js"></script>
     <script src="styles/js/valida_torneo.js"></script>
-    
+
     <link rel="stylesheet" href="styles/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/css/propios.css">
-    <style>
-       
-    </style>
+    
 </head>
 <body>
     <form id="torneo" data-toggle="validator" action="none" method="POST">
@@ -30,21 +28,23 @@
             <div class="row">
                 <div class="form-group col-sm-6">
                     <label class="control-label">Nombre del Torneo</label>
-                    
+
                     <div class="input-group ">
-                                <input type="text" id="txt_NombreTorneo" class="form-control" name="nombre_torneo" placeholder="Ingrese el nombre del torneo" maxlength="200">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
+                        <input type="text" id="txt_NombreTorneo" class="form-control" name="nombre_torneo" placeholder="Ingrese el nombre del torneo" maxlength="200">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
                 </div>
-
-
-                <div class="form-group col-sm-6">
-                    <label class="control-label">Liga</label>
-                    <select id="ddl_Liga" name="liga" class="form-control">
+                <div class="form-group col-sm-3">
+                    <label class="control-label">Cantidad de equipos</label>
+                    <input type="text" id="txt_CantidadEquipos" class="form-control" name="cantidad_equipos" placeholder="Ingrese la cantidad de equipos" onkeypress="return validarNumeroControl(event)" maxlength="4">
+                </div>
+                <div class="form-group col-sm-3">
+                    <label class="control-label">Modalidad de Juego</label>
+                    <select id="ddl_ModalidadJuego" class="form-control" name="modalidad_juego">
                         <option value="">[ SELECCIONE ]</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -54,13 +54,68 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-sm-2">
+                <!-- <div class="form-group col-sm-2">
                     <label class="control-label">Año del Torneo</label>
                     <input type="text" id="txt_Anio" class="form-control" name="anio" placeholder="Ingrese el año" onkeypress="return validarNumeroControl(event)" maxlength="4">
-                </div>
-                <div class="form-group col-sm-3">
-                    <label class="control-label">Cantidad de equipos</label>
-                    <input type="text" id="txt_CantidadEquipos" class="form-control" name="cantidad_equipos" placeholder="Ingrese la cantidad de equipos" onkeypress="return validarNumeroControl(event)" maxlength="4">
+                </div>-->
+
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Equipos participantes del torneo
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body ">
+                            <div class="row" >
+                            <div class="form-group col-md-4">
+                                <label class="checkbox-inline">                                    
+                                    <input type="checkbox">
+                                    <img class="image_selecion_equipo" src="styles/imagenes/logo.png"  />
+                                    <label > Equipo número 1</label>
+                                </label>
+                            </div>    
+                            <div class="form-group col-md-4">
+                               <label class="checkbox-inline">                                    
+                                    <input type="checkbox">
+                                    <img class="image_selecion_equipo" src="styles/imagenes/logo.png"  />
+                                    <label > Equipo número dos</label>
+                                </label>
+                            </div>
+                            <div class="form-group col-md-4">
+                            <label class="checkbox-inline">                                    
+                                    <input type="checkbox">
+                                    <img class="image_selecion_equipo" src="styles/imagenes/logo.png"  />
+                                    <label > Equipo número tres</label>
+                                </label>
+                             </div>
+                               </div>
+                            <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="checkbox-inline">                                    
+                                    <input type="checkbox">
+                                    <img class="image_selecion_equipo" src="styles/imagenes/logo.png"  />
+                                    <label > Equipo número cuatro</label>
+                                </label>
+                            </div>    
+                            <div class="form-group col-md-4">
+                               <label class="checkbox-inline">                                    
+                                    <input type="checkbox">
+                                    <img class="image_selecion_equipo" src="styles/imagenes/logo.png"  />
+                                    <label > Equipo número cinco</label>
+                                </label>
+                            </div>
+                            <div class="form-group col-md-4">
+                            <label class="checkbox-inline">                                    
+                                    <input type="checkbox">
+                                    <img class="image_selecion_equipo" src="styles/imagenes/logo.png"  />
+                                    <label > Equipo número seis</label>
+                                </label>
+                             </div>
+                               </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
                 </div>
             </div>
         </div>

@@ -14,26 +14,7 @@ $(document).ready(function () {
                         message: 'Debe ingresar un nombre de torneo'
                     }
                 }
-            },
-            liga: {
-                validators: {
-                    notEmpty: {
-                        message: 'Debe seleccionar una liga'
-                    }
-                }
-            },
-            anio: {
-                validators: {
-                    notEmpty: {
-                        message: 'Ingrese un año'
-                    },
-                    regexp: {
-                        regexp: /^20[1-9]{2}|2[0-9]{3}$/,
-                        message: "El año ingrsado no es valido"
-                    }
-
-                }
-            },
+            },            
             cantidad_equipos: {
                 validators: {
                     digits: {
@@ -43,7 +24,14 @@ $(document).ready(function () {
                         message: 'debe ingresar la cantidad de equipos'
                     }
                 }
-            }
+            },
+            modalidad_juego: {
+                validators: {                   
+                    notEmpty: {
+                        message: 'debe seleccionar una modalidad de juego'
+                    }
+                }
+            },
         }
     });
 });
