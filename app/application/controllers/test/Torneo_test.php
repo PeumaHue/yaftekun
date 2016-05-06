@@ -35,7 +35,12 @@ class Torneo_test extends CI_Controller {
 		$this->consulta_test_por_anio();
 		mysqli_next_result($this->db->conn_id);
 
-	
+		$this->consulta_test();
+		mysqli_next_result($this->db->conn_id);
+		
+		$this->consulta_test_por_torneo_inexistente();		
+		mysqli_next_result($this->db->conn_id);
+		
 /*		$this->consulta_test_por_cuil_inexistente();
 		mysqli_next_result($this->db->conn_id);
 */		
@@ -102,7 +107,7 @@ class Torneo_test extends CI_Controller {
 	public function consulta_test_por_anio()
 	{
 		$test = $this->Torneo_model->consulta('', $this->anio_prueba);
-		$expected_result = 'is_object';
+		$expected_result = 'is_array';
 		$test_name = 'Consulta torneos por anio';
 		$notes = var_export($test, true);
 		$this->unit->run($test, $expected_result, $test_name, $notes);
@@ -114,8 +119,8 @@ class Torneo_test extends CI_Controller {
 	 */
 	public function consulta_test_por_torneo_inexistente()
 	{
-		$test = $this->Persona_model->consulta('','2050');
-		$expected_result = array();//Espera un array vacio
+		$test = $this->Torneo_model->consulta('','2050');
+		$expected_result = 'is_array'; //Espera un array vacio
 		$test_name = 'Consulta de torneo por anio inexistente';
 		$notes = var_export($test, true);
 		$this->unit->run($test, $expected_result, $test_name, $notes);
