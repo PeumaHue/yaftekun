@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <title>YAFTEKUN</title>
     <meta charset="utf-8">
@@ -9,7 +9,7 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="styles/js/bootstrapValidator.js"></script>
     <script src="styles/js/Controles.js"></script>
-    <script src="styles/js/valida_participante.js"></script>
+    <script src="styles/js/valida_dt.js"></script>
 
 
     <link rel="stylesheet" href="styles/css/bootstrap.min.css">
@@ -19,45 +19,46 @@
     </style>
 </head>
 <body>
-    <form id="Participante" data-toggle="validator" action="none" method="POST">
+    <form id="dt" data-toggle="validator" action="none" method="POST">
         <div class="container ">
-            <div class=" panel panel-yellow  ">
+            <div class=" panel panel-directores">
                 <div class="panel-heading ">
-                    <h1 class="input-group">Gestionar Participante</h1>
+                    <h1 class="input-group">Gestionar Directores Técnicos</h1>
                 </div>
             </div>
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Integrantes del equipo
+                    Listado de directores técnicos
                     <div class="pull-right">
                         <div class="btn-group">
-                            <button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#equipo_body" aria-expanded="true">
+                            <button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#dt_body" aria-expanded="true">
                                 <i id="flecha_equipo" class="fa fa-chevron-up"></i>
                             </button>
                         </div>
                     </div>
                 </div>
-                <div class="panel-body collapse in" id="equipo_body" aria-expanded="true">
+                <div class="panel-body collapse in" id="dt_body" aria-expanded="true">
 
                     <ul class="list-inline small interlineado-X1">
                         <li class="col-xs-12 col-sm-3">RAIMUNDO SERGIO DANIEL</li>
                         <li class="col-xs-12 col-sm-3">CUPO MARCO</li>
-                        <li class="col-xs-12 col-sm-3" >ANDOLFATO MARIANO</li>
+                        <li class="col-xs-12 col-sm-3">ANDOLFATO MARIANO</li>
                         <li class="col-xs-12 col-sm-3">KOZLOWSKI CARLOS</li>
                         <li class="col-xs-12 col-sm-3">ANDRADE GASTON</li>
                     </ul>                    
-                </div>                
+                </div>
+
             </div>
 
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Datos como jugador
+                    Datos como director técnico 
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="form-group col-sm-6 col-md-3  col-xs-12">
+                        <div class="form-group col-sm-6 col-md-4  col-xs-12">
                             <label class="control-label">Pertenece al Equipo</label>
                             <select id="ddl_Equipo" class="form-control" name="equipo">
                                 <option value="">[ SELECCIONE ]</option>
@@ -66,21 +67,6 @@
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                             </select>
-                        </div>
-                        <div class="form-group  col-sm-6 col-md-3  col-xs-12">
-                            <label class="control-label">Posición que ocupa</label>
-                            <select id="ddl_Posicion" class="form-control" name="posicion">
-                                <option value="">[ SELECCIONE ]</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group  col-sm-6 col-md-3  col-xs-12">
-                            <label class="control-label">Número camiseta</label>
-                            <input type="text" id="txt_Camiseta" class="form-control" name="camiseta" placeholder="Ingrese un número de camiseta" onkeypress="return validarNumeroControl(event)" maxlength="2">
                         </div>
                         <div class="form-group  col-sm-6 col-md-3  col-xs-12">
                             <label class="control-label">Estado</label>
@@ -98,11 +84,9 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-
-                    Datos del Participante
+                    Datos personales del director técnico
                 </div>
                 <div class="panel-body">
-
                     <div class="row">
 
                         <div class="form-group col-sm-6">
