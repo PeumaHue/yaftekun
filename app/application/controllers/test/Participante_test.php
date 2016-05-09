@@ -53,8 +53,10 @@ class Participante_test extends CI_Controller {
 	{
 		$this->alta_test();
 		mysqli_next_result($this->db->conn_id);
+		
  		$this->consulta_test_por_idparticipante();
  		mysqli_next_result($this->db->conn_id);
+ 		
  		$this->consulta_test_por_equipo();
  		mysqli_next_result($this->db->conn_id);
  		$this->consulta_test_por_id_inexistente();
@@ -62,7 +64,8 @@ class Participante_test extends CI_Controller {
  		$this->consulta_test_por_equipo_inexistente();
  		mysqli_next_result($this->db->conn_id);
 		$this->baja_test();
-		echo $this->unit->report();
+		
+		#echo $this->unit->report();
 	}
 	
 	/**
@@ -108,8 +111,10 @@ class Participante_test extends CI_Controller {
 		$expected_result = $resultado;
 		$test_name = 'Alta participante';
 		$notes = var_export($test, true);
-		$this->unit->run($test, $expected_result, $test_name, $notes);
+		echo $this->unit->run($test, $expected_result, $test_name, $notes);
 		$this->id_participante = $test['id'];
+		
+		
 	}
 	
 	/**
@@ -133,7 +138,8 @@ class Participante_test extends CI_Controller {
 		$expected_result = 'is_object';
 		$test_name = 'Consulta participante por ID';
 		$notes = var_export($test, true);
-		$this->unit->run($test, $expected_result, $test_name, $notes);
+		echo $this->unit->run($test, $expected_result, $test_name, $notes);
+		
 	}
 	
 	/**
@@ -146,7 +152,8 @@ class Participante_test extends CI_Controller {
 		$expected_result = 'is_object';
 		$test_name = 'Consulta participantes por equipo';
 		$notes = var_export($test, true);
-		$this->unit->run($test, $expected_result, $test_name, $notes);
+		echo $this->unit->run($test, $expected_result, $test_name, $notes);
+		
 	}
 	
 	/**
@@ -159,7 +166,8 @@ class Participante_test extends CI_Controller {
 		$expected_result = array();//Espera un array vacio
 		$test_name = 'Consulta de participante por id inexistente';
 		$notes = var_export($test, true);
-		$this->unit->run($test, $expected_result, $test_name, $notes);
+		echo $this->unit->run($test, $expected_result, $test_name, $notes);
+		
 	}
 	
 	/**
@@ -172,7 +180,8 @@ class Participante_test extends CI_Controller {
 		$expected_result = array();//Espera un array vacio
 		$test_name = 'Consulta de participante por equipo inexistente';
 		$notes = var_export($test, true);
-		$this->unit->run($test, $expected_result, $test_name, $notes);
+		echo $this->unit->run($test, $expected_result, $test_name, $notes);
+		
 	}
 	
 	
@@ -188,7 +197,8 @@ class Participante_test extends CI_Controller {
 		$expected_result = $resultado;
 		$test_name = 'Baja participante por id';
 		$notes = var_export($test, true);
-		$this->unit->run($test, $expected_result, $test_name, $notes);
+		echo $this->unit->run($test, $expected_result, $test_name, $notes);
+		
 	}
 		
 	/**

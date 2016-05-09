@@ -42,8 +42,12 @@ class Equipo_test extends CI_Controller {
 		$this->consulta_equipo_inexistente_test();
 		mysqli_next_result($this->db->conn_id);
 		
+		$this->consulta_equipo_liga_inexistente_test();
+		mysqli_next_result($this->db->conn_id);
+		
+		
 		$this->baja_test($this->id_equipo);
-		#mysqli_next_result($this->db->conn_id);
+		#mysqli_next_result($this->db->conn_id);#mysqli_more_results
 
 		echo $this->unit->report();
 		
@@ -68,10 +72,9 @@ class Equipo_test extends CI_Controller {
 		$equipo->fecha_creacion='20160101';
 		$equipo->imagen='C:\Bitnami\wampstack-5.6.19-0\apps\yaftekun\db\imagenes\aldosivi.png';
 		
-		
 		$test = $this->Equipo_model->alta($equipo);
+		$this->id_equipo = $test['id'];
 		
-		$this->id_equipo = $test['id'];			
 		$expected_result['resultado']='OK';
 		$expected_result['id']=$test['id'];
 		$test_name = 'Alta equipo';
@@ -120,6 +123,20 @@ class Equipo_test extends CI_Controller {
 		$notes = var_export($test, true);
 		$this->unit->run($test, $expected_result, $test_name, $notes);
 	}
+
+	/**
+	 * Funcion para testear la consulta del equipo cargado en el test Alta equipo
+	 * @return void
+	 */
+	public function consulta_equipo_liga_inexistente_test()
+	{
+		#$test = $this->Equipo_model->consulta(4294967299, NULL);
+		$test = $this->Equipo_model->consulta(NULL, 0);
+		$expected_result = 'is_array';
+		$test_name = 'consulta equipo liga inexistente test';
+		$notes = var_export($test, true);
+		$this->unit->run($test, $expected_result, $test_name, $notes);
+	}
 	
 	/**
 	 * Funcion para testear la consulta del equipo cargado en el test Alta equipo
@@ -143,6 +160,7 @@ class Equipo_test extends CI_Controller {
 		$expected_result['resultado']='OK';
 		$test_name = 'baja_parametro_test';
 		$notes = var_export($test, true);
+		
 		if (!$this->iniciado){
 			echo '<>eliminando el equipo: '.$id_equipo.'</p>';
 			echo $this->unit->run($test, $expected_result, $test_name, $notes);

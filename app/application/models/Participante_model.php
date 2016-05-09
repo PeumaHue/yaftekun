@@ -8,7 +8,7 @@ class Participante_model extends CI_Model {
 	private $sp_consulta 	= 'call participante_consulta(?, ?)';
 	private $sp_alta 		= 'call participante_alta(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 	private $sp_editar 		= 'call participante_editar(?, ?, ?, ?, ?)';
-	private $sp_baja 		= 'call participante_baja(?)';
+	private $sp_baja 		= 'call participante_baja(?, ?)';
 	
 	/**
 	 * Variables para los atributos del modelo
@@ -149,7 +149,7 @@ class Participante_model extends CI_Model {
 		if( $query	)
 		{	
 			$resultado['resultado']='OK';
-			$resultado['id']=$query->row_array()["id_participante_V"];
+			$resultado['id']=$query->row_array()["id"];
 		}	
 		else
 			$resultado['resultado']='ERROR';
@@ -206,9 +206,9 @@ class Participante_model extends CI_Model {
 	 * Baja de participante
 	 * @return 		array Devuelve un array con la la clave 'resultado', OK en caso de alta exitosa y sino ERROR
 	 */
-	public function baja($id_participante)
+	public function baja($id_participante, $quitar_de_equipo=TRUE)
 	{
-		if($query = $this->db->query($this->sp_baja, array('id_participante' => $id_participante)))
+		if($query = $this->db->query($this->sp_baja, array('id_participante' => $id_participante, 'quitar_de_equipo' => $quitar_de_equipo)))
 			$resultado['resultado']='OK';
 		else
 			$resultado['resultado']='ERROR';
