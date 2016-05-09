@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
     <title>YAFTEKUN</title>
-    <meta charset="utf-8">
+    <!--  <meta charset="utf-8"> -->
+    <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
