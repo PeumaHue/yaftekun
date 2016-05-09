@@ -389,6 +389,23 @@ a
     height:30px; margin-left:10px; margin-right:5px
 }
 
+.panel-buscador
+{
+    margin-top:-50px;    
+  
+}
+
+    .panel-buscador > .panel-heading
+    {
+        border:none;
+    }
+
+.margin-center
+{
+    margin-left:auto;
+    margin-right:auto;
+}
+
 /***********************/
 /*
 .btn-guardar {
