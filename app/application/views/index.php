@@ -43,13 +43,13 @@
                     <div class="panel-heading">
                         <div id="pnl_Torneos" class="row">
                             <a href="torneo.html">
-                                <div class="col-xs-3">
+                                <span class="col-xs-3">
                                     <i class="fa fa-comments fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">8</div>
-                                    <div>TORNEOS</div>
-                                </div>
+                                </span>
+                                <span class="col-xs-9 text-right">
+                                    <span class="huge">8</span><br>
+                                    <span>TORNEOS</span>
+                                </span>
                             </a>
                         </div>
                     </div>
@@ -62,13 +62,13 @@
                     <div class="panel-heading">
                         <div class="row">
                             <a href="EQUIPOS.HTML">
-                                <div class="col-xs-3">
+                                <span class="col-xs-3">
                                     <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">8</div>
-                                    <div>EQUIPOS</div>
-                                </div>
+                                </span>
+                                <span class="col-xs-9 text-right">
+                                    <span class="huge">8</span><br>
+                                    <span>EQUIPOS</span>
+                                </span>
                             </a>
                         </div>
                     </div>
@@ -82,13 +82,13 @@
                     <div class="panel-heading">
                         <div class="row">
                             <a href="participante.HTML">
-                                <div class="col-xs-3">
+                                <span class="col-xs-3">
                                     <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">265</div>
-                                    <div>JUAGADORES</div>
-                                </div>
+                                </span>
+                                <span class="col-xs-9 text-right">
+                                    <span class="huge">265</span><br>
+                                    <span>JUAGADORES</span>
+                                </span>
                             </a>
                         </div>
                     </div>
@@ -101,13 +101,13 @@
                     <div class="panel-heading">
                         <div class="row">
                             <a href="dt.html">
-                                <div class="col-xs-3">
+                                <span class="col-xs-3">
                                     <i class="fa fa-support fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">22</div>
-                                    <div>DIRECTORES TÉCNICOS</div>
-                                </div>
+                                </span>
+                                <span class="col-xs-9 text-right">
+                                    <span class="huge">22</span><br>
+                                    <span>DIRECTORES TÉCNICOS</span>
+                                </span>
                             </a>
                         </div>
                     </div>
@@ -119,13 +119,13 @@
                     <div class="panel-heading">
                         <div class="row">
                             <a href="arbitros.html">
-                                <div class="col-xs-3">
+                                <span class="col-xs-3">
                                     <i class="fa fa-support fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">22</div>
-                                    <div>ÁRBITROS</div>
-                                </div>
+                                </span>
+                                <span class="col-xs-9 text-right">
+                                    <span class="huge">22</span><br>
+                                    <span>ÁRBITROS</span>
+                                </span>
                             </a>
                         </div>
                     </div>
@@ -137,13 +137,13 @@
                     <div class="panel-heading">
                         <div class="row">
                             <a href="delegado.html">
-                                <div class="col-xs-3">
+                                <span class="col-xs-3">
                                     <i class="fa fa-support fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">22</div>
-                                    <div>DELEGADOS</div>
-                                </div>
+                                </span>
+                                <span class="col-xs-9 text-right">
+                                    <span class="huge">22</span><br>
+                                    <span>DELEGADOS</span>
+                                </span>
                             </a>
                         </div>
                     </div>
