@@ -162,8 +162,8 @@ class Participante_test extends CI_Controller {
 	 */
 	public function consulta_test_por_id_inexistente()
 	{
-		$test = $this->Participante_model->consulta(10, NULL);
-		$expected_result = 'is_object';
+		$test = $this->Participante_model->consulta(0, NULL);
+		$expected_result = array();
 		$test_name = 'Consulta de participante por id inexistente';
 		$notes = var_export($test, true);
 		echo $this->unit->run($test, $expected_result, $test_name, $notes);
