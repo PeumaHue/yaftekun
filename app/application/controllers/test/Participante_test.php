@@ -149,7 +149,7 @@ class Participante_test extends CI_Controller {
 	public function consulta_test_por_equipo()
 	{
 		$test = $this->Participante_model->consulta(NULL, $this->id_equipo);
-		$expected_result = 'is_object';
+		$expected_result = 'is_array';
 		$test_name = 'Consulta participantes por equipo';
 		$notes = var_export($test, true);
 		echo $this->unit->run($test, $expected_result, $test_name, $notes);
@@ -162,8 +162,8 @@ class Participante_test extends CI_Controller {
 	 */
 	public function consulta_test_por_id_inexistente()
 	{
-		$test = $this->Participante_model->consulta(1, NULL);
-		$expected_result = array();//Espera un array vacio
+		$test = $this->Participante_model->consulta(10, NULL);
+		$expected_result = 'is_object';
 		$test_name = 'Consulta de participante por id inexistente';
 		$notes = var_export($test, true);
 		echo $this->unit->run($test, $expected_result, $test_name, $notes);
