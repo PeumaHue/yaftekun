@@ -40,27 +40,27 @@ $lang['form_label_modalidad_juego']			= 'Modalidad de juego';
 
 
 
-$lang['form_label_arbitro']			= 'Árbitro';
-$lang['form_label_arbitros']		= 'Árbitros';
-$lang['form_label_jugador']			= 'Jugador';
-$lang['form_label_jugadores']		= 'Jugadores';
-$lang['form_label_torneo']			= 'Torneo';
-$lang['form_label_torneos']			= 'Torneos';
-$lang['form_label_equipo']			= 'Equipo';
-$lang['form_label_equipos']			= 'Equipos';
-$lang['form_label_director_tecnico']		= 'Director técnico';
-$lang['form_label_directores_tecnicos']		= 'Directores técnicos';
-$lang['form_label_delegado']		= 'Delegado';
-$lang['form_label_delegados']		= 'Delegados';
-
-
+$lang['form_label_arbitro']				= 'Árbitro';
+$lang['form_label_arbitros']			= 'Árbitros';
+$lang['form_label_jugador']				= 'Jugador';
+$lang['form_label_jugadores']			= 'Jugadores';
+$lang['form_label_torneo']				= 'Torneo';
+$lang['form_label_torneos']				= 'Torneos';
+$lang['form_label_equipo']				= 'Equipo';
+$lang['form_label_equipos']				= 'Equipos';
+$lang['form_label_director_tecnico']	= 'Director técnico';
+$lang['form_label_directores_tecnicos']	= 'Directores técnicos';
+$lang['form_label_delegado']			= 'Delegado';
+$lang['form_label_delegados']			= 'Delegados';
+$lang['form_label_equipo_imagen']		= 'Imagen del escudo';
+$lang['form_label_ayuda_nombre_equipo']	= 'Ingrese el nombre del nuevo equipo';
 /*
  * Paneles 
  */
-$lang['form_panel_datos_personales']				= 'Datos personales';
-$lang['form_panel_domicilio']						= 'Domicilio';
-$lang['form_panel_integrantes']						= 'Integrantes';
-$lang['form_label_informacion_general']				= 'Información general';
+$lang['form_panel_datos_personales']	= 'Datos personales';
+$lang['form_panel_domicilio']			= 'Domicilio';
+$lang['form_panel_integrantes']			= 'Integrantes';
+$lang['form_label_informacion_general']	= 'Información general';
 
 
 

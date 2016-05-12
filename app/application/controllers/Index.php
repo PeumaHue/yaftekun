@@ -5,7 +5,7 @@ class Index extends CI_Controller {
 	{
 		parent::__construct();
 		
-		$this->load->helper('url_helper');
+		$this->load->helper('url');
 		
 		$this->load->view('templates/header');
 		$this->load->view('index');
