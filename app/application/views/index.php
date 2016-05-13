@@ -1,3 +1,21 @@
+    <div class="jumbotron">
+        <div class="container text-center">
+            <h1>
+                <img class="img" src="<?php echo base_url("images/logotorneo.png"); ?>" alt="logo" width="34" height="42" style="margin: 10px">
+                TORNEO SENIOR OFICIAL</h1>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Navegación</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
 
 
     <div class="container">
@@ -5,9 +23,12 @@
         <div class="row col-lg-4 col-md-4 ">
 
             <div class="panel panel-default">
-                <div class="panel-heading"><?php echo lang('form_label_torneos');?></div>
+                <div class="panel-heading">
+                    TORNEOS CREADOS
+                </div>
                 <div class="panel-body">
-   					<?php echo $torneos;?>
+                    <p>SASA SARASA </p>
+                    <p>COPA DE INTER CLUBS</p>
                 </div>
                 <!-- /.panel-body -->
             </div>
@@ -27,7 +48,7 @@
                                 </span>
                                 <span class="col-xs-9 text-right">
                                     <span class="huge">8</span><br>
-                                    <span><?php echo lang('form_label_torneos');?></span>
+                                    <span>TORNEOS</span>
                                 </span>
                             </a>
                         </div>
@@ -46,7 +67,7 @@
                                 </span>
                                 <span class="col-xs-9 text-right">
                                     <span class="huge">8</span><br>
-                                    <span><?php echo lang('form_label_equipos');?></span>
+                                    <span>EQUIPOS</span>
                                 </span>
                             </a>
                         </div>
@@ -66,7 +87,7 @@
                                 </span>
                                 <span class="col-xs-9 text-right">
                                     <span class="huge">265</span><br>
-                                    <span><?php echo lang('form_label_jugadores');?></span>
+                                    <span>JUAGADORES</span>
                                 </span>
                             </a>
                         </div>
@@ -85,7 +106,7 @@
                                 </span>
                                 <span class="col-xs-9 text-right">
                                     <span class="huge">22</span><br>
-                                    <span><?php echo lang('form_label_directores_tecnicos');?></span>
+                                    <span>DIRECTORES TÉCNICOS</span>
                                 </span>
                             </a>
                         </div>
@@ -103,7 +124,7 @@
                                 </span>
                                 <span class="col-xs-9 text-right">
                                     <span class="huge">22</span><br>
-                                    <span><?php echo lang('form_label_arbitros');?></span>
+                                    <span>ÁRBITROS</span>
                                 </span>
                             </a>
                         </div>
@@ -121,7 +142,7 @@
                                 </span>
                                 <span class="col-xs-9 text-right">
                                     <span class="huge">22</span><br>
-                                    <span><?php echo lang('form_label_delegados');?></span>
+                                    <span>DELEGADOS</span>
                                 </span>
                             </a>
                         </div>
