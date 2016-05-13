@@ -7,8 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><?php echo lang('form_label_torneos');?></div>
                 <div class="panel-body">
-                    <p>SASA SARASA </p>
-                    <p>COPA DE INTER CLUBS</p>
+   					<?php echo $torneos;?>
                 </div>
                 <!-- /.panel-body -->
             </div>
