@@ -18,3 +18,11 @@
 </head>
 
 <body>
+    <div class="jumbotron">
+        <div class="container text-center">
+            <h1>
+                <img class="img" src="<?php echo base_url("images/logotorneo.png"); ?>" alt="logo" width="34" height="42" style="margin: 10px">
+                TORNEO SENIOR OFICIAL</h1>
+        </div>
+    </div>
+
