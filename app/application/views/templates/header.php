@@ -18,6 +18,7 @@
 </head>
 
 <body>
+
     <div class="jumbotron">
         <div class="container text-center">
             <h1>
@@ -25,4 +26,15 @@
                 TORNEO SENIOR OFICIAL</h1>
         </div>
     </div>
+	<br/>
+
+ <!-- <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Navegación</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav> -->
 

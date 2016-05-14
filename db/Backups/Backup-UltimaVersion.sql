@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `yaftekun` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `yaftekun`;
 -- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: yaftekun
@@ -25,14 +23,17 @@ DROP TABLE IF EXISTS `equipo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `equipo` (
-  `id_equipo` int(10) unsigned NOT NULL,
-  `id_liga` int(10) unsigned NOT NULL,
+  `id_equipo` bigint(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_liga` bigint(10) unsigned NOT NULL,
   `nombre` varchar(100) NOT NULL,
-  `id_estadio` int(10) unsigned DEFAULT NULL,
-  `id_usuario` int(10) unsigned NOT NULL,
+  `id_estadio` bigint(10) unsigned DEFAULT NULL,
+  `id_usuario` bigint(10) unsigned NOT NULL,
   `fecha_creacion` datetime NOT NULL,
-  PRIMARY KEY (`id_equipo`,`id_liga`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `imagen` tinytext,
+  PRIMARY KEY (`id_equipo`),
+  KEY `fk_equipo_liga_idx` (`id_liga`),
+  CONSTRAINT `fk_equipo_liga` FOREIGN KEY (`id_liga`) REFERENCES `liga` (`id_liga`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4294967329 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +42,35 @@ CREATE TABLE `equipo` (
 
 LOCK TABLES `equipo` WRITE;
 /*!40000 ALTER TABLE `equipo` DISABLE KEYS */;
+INSERT INTO `equipo` VALUES (1,1,'LANUS',1,1,'2016-05-03 09:09:42',NULL),(4294967295,4294967295,'liga de campeones',3,3,'2016-03-01 00:00:00',NULL),(4294967299,1,'aldosivi',1,1,'2016-05-05 19:57:29','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967300,1,'aldosivi',1,1,'2016-05-05 20:02:10','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967301,1,'aldosivi',1,1,'2016-05-05 20:02:11','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967305,1,'aldosivi',1,1,'2016-05-05 20:02:33','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967306,1,'aldosivi',1,1,'2016-05-05 20:02:34','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967307,1,'aldosivi',1,1,'2016-05-06 13:19:35','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967309,1,'aldosivi',1,1,'2016-05-06 14:27:22','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967310,1,'aldosivi',1,1,'2016-05-06 15:01:09','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967312,1,'aldosivi',1,1,'2016-05-06 15:10:16','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967313,1,'aldosivi',1,1,'2016-05-06 15:16:27','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967314,1,'aldosivi',1,1,'2016-05-06 15:17:34','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967315,1,'aldosivi',1,1,'2016-05-06 15:18:57','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967316,1,'aldosivi',1,1,'2016-05-06 15:19:37','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967327,1,'aldosivi',1,1,'2016-05-06 15:22:19','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png');
 /*!40000 ALTER TABLE `equipo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `equipo_integrante`
+--
+
+DROP TABLE IF EXISTS `equipo_integrante`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `equipo_integrante` (
+  `id_equipo` bigint(10) unsigned NOT NULL,
+  `id_participante` bigint(20) unsigned NOT NULL,
+  `id_tipo_participante` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id_equipo`,`id_participante`),
+  KEY `fk_equipo_integrante_participante_idx` (`id_participante`),
+  CONSTRAINT `fk_equipo_integrante_equipo` FOREIGN KEY (`id_equipo`) REFERENCES `equipo` (`id_equipo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_equipo_integrante_participante` FOREIGN KEY (`id_participante`) REFERENCES `participante` (`id_participante`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `equipo_integrante`
+--
+
+LOCK TABLES `equipo_integrante` WRITE;
+/*!40000 ALTER TABLE `equipo_integrante` DISABLE KEYS */;
+/*!40000 ALTER TABLE `equipo_integrante` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -83,12 +112,12 @@ DROP TABLE IF EXISTS `liga`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `liga` (
-  `id_liga` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_liga` bigint(10) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   `id_usuario` bigint(8) unsigned NOT NULL,
   `fecha_creacion` datetime NOT NULL,
   PRIMARY KEY (`id_liga`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,6 +126,7 @@ CREATE TABLE `liga` (
 
 LOCK TABLES `liga` WRITE;
 /*!40000 ALTER TABLE `liga` DISABLE KEYS */;
+INSERT INTO `liga` VALUES (1,'Primera A',1,'2016-05-05 19:18:53');
 /*!40000 ALTER TABLE `liga` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,13 +138,12 @@ DROP TABLE IF EXISTS `participante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `participante` (
-  `id_participante` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_participante` bigint(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_tipo_participante` int(10) unsigned NOT NULL,
-  `id_equipo` int(10) unsigned NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `apellido` varchar(100) NOT NULL,
   `numero_camiseta` varchar(2) DEFAULT NULL,
-  `id_tipoposicion_juego` int(11) DEFAULT NULL,
+  `id_tipo_posicion_juego` int(11) DEFAULT NULL,
   `id_tipo_estado_jugador` int(11) DEFAULT NULL,
   `numero_carnet_socio` int(11) DEFAULT NULL,
   `trayectoria` varchar(500) DEFAULT NULL,
@@ -139,7 +168,7 @@ CREATE TABLE `participante` (
   `fecha_creacion` datetime NOT NULL,
   `id_usuario` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_participante`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,8 +188,8 @@ DROP TABLE IF EXISTS `ronda`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ronda` (
-  `id_ronda` int(10) unsigned NOT NULL,
-  `id_torneo` int(10) unsigned NOT NULL,
+  `id_ronda` bigint(10) unsigned NOT NULL,
+  `id_torneo` bigint(10) unsigned NOT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   `id_modalidad` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_ronda`)
@@ -437,15 +466,15 @@ DROP TABLE IF EXISTS `torneo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `torneo` (
-  `id_torneo` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_liga` int(10) unsigned NOT NULL,
+  `id_torneo` bigint(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_liga` bigint(10) unsigned NOT NULL,
   `anio` smallint(4) unsigned NOT NULL,
   `nombre` varchar(200) NOT NULL,
   `cantidad_equipos` int(10) unsigned NOT NULL,
   `id_usuario` int(10) unsigned NOT NULL,
   `fecha_creacion` datetime NOT NULL,
   PRIMARY KEY (`id_torneo`,`id_liga`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -454,6 +483,7 @@ CREATE TABLE `torneo` (
 
 LOCK TABLES `torneo` WRITE;
 /*!40000 ALTER TABLE `torneo` DISABLE KEYS */;
+INSERT INTO `torneo` VALUES (19,2147483647,2016,'Torneo nacional sub 60',14,99,'2016-05-03 12:37:19'),(21,9999,2016,'Torneo nacional 2 sub 60',14,99,'2016-05-03 16:53:14'),(22,9999,2016,'Torneo Final',14,99,'2016-05-03 16:53:54'),(23,9999,2016,'Torneo de Verano',14,99,'2016-05-03 16:53:57');
 /*!40000 ALTER TABLE `torneo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -465,7 +495,7 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuarios` (
-  `id_usuario` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_usuario` bigint(10) unsigned NOT NULL,
   `kind` varchar(100) DEFAULT NULL,
   `gender` varchar(50) DEFAULT NULL,
   `sub` varchar(50) DEFAULT NULL,
@@ -505,13 +535,18 @@ UNLOCK TABLES;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `equipo_alta`(
-
-    IN nombre_IN varchar(100),
-    IN id_usuario_IN int(10)
+  id_liga_IN bigint unsigned,
+  nombre_IN varchar(100),
+  id_estadio_IN bigint unsigned,
+  id_usuario_IN bigint unsigned,
+  #fecha_creacion_IN datetime,
+  imagen_IN text(100)
 )
 BEGIN
-	insert into equipo (nombre, id_usuario, fecha_creacion) values (nombre_IN, id_usuario_IN, now() );
-	Select LAST_INSERT_ID();
+    INSERT INTO yaftekun.equipo 
+    (id_liga,nombre,id_estadio,id_usuario,fecha_creacion,imagen) VALUES 
+    (id_liga_IN, nombre_IN, id_estadio_IN, id_estadio_IN, now(), imagen_IN);
+	SELECT LAST_INSERT_ID() as id;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -529,10 +564,9 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `equipo_baja`(
-	IN id_equipo_IN INT
+	IN id_equipo_IN BIGINT
 )
 BEGIN
-
     delete 
 	from equipo
     where id_equipo = id_equipo_IN ;
@@ -553,18 +587,14 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `equipo_consulta`(
-
-	IN id_equipo_IN INT(10),
-    IN Id_liga_IN INT(10)
-  
+	IN id_equipo_IN BIGINT,
+    IN Id_liga_IN BIGINT
 )
 BEGIN
-
-
-	Select id_equipo, nombre, id_sede, id_usuario, fecha_creacion
+	Select id_equipo, id_liga, nombre, id_estadio, id_usuario, fecha_creacion, imagen
     from equipo
-    where 	id_liga = id_liga_in
-			AND ( id_equipo = id_equipo_IN or id_equipo_in IS NULL ) ;
+    where (id_liga = Id_liga_IN or Id_liga_IN IS NULL)
+		AND ( id_equipo = id_equipo_IN or id_equipo_IN IS NULL ) ;
 
 END ;;
 DELIMITER ;
@@ -583,17 +613,21 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `equipo_editar`(
-    IN id_equipo_IN INT(10),
-    IN nombre_IN varchar(100),
-    IN id_sede_IN INT(10),
-    IN id_usuario_IN int(10)
+  IN id_equipo_IN bigint,
+  IN id_liga_IN bigint(10),
+  IN nombre_IN varchar(100),
+  IN id_estadio_IN bigint,
+  IN id_usuario_IN bigint,
+  IN imagen_IN mediumblob
 )
 BEGIN
 	UPDATE equipo 
     SET  
-		nombre = nombre_IN,
-		id_sede = id_sede_IN,
-        id_usuario = id_usuario_IN
+		id_liga 	 = id_liga_IN,
+		nombre		 = nombre_IN,
+		id_estadio	 = id_estadio_IN,
+		id_usuario	 = id_usuario_IN,
+		imagen		 = imagen_IN 
     WHERE id_equipo = id_equipo_IN;
 END ;;
 DELIMITER ;
@@ -628,6 +662,33 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `liga_baja` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`%` PROCEDURE `liga_baja`(
+	IN id_liga_IN bigint
+)
+BEGIN
+	delete l 
+    from liga l 
+    left join equipo e on e.id_liga=l.id_liga
+    WHERE id_liga = id_liga_IN
+    and e.id_liga is null;
+    
+    select row_count();
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `liga_consulta` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -639,9 +700,7 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`127.0.0.1` PROCEDURE `liga_consulta`(
-
     IN id_liga_IN INT
-   
 )
 BEGIN
 	
@@ -649,6 +708,33 @@ BEGIN
     FROM liga
     WHERE id_liga = id_liga_IN or id_liga_IN IS NULL;
     
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `liga_editar` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`%` PROCEDURE `liga_editar`(
+	IN id_liga_IN bigint,
+	IN nombre_IN varchar(100),
+	IN id_usuario_IN bigint
+)
+BEGIN
+	UPDATE liga 
+    SET  
+		nombre		 = nombre_IN,
+		id_usuario	 = id_usuario_IN
+    WHERE id_liga = id_liga_IN;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -666,45 +752,77 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `participante_alta`(
-	IN id_tipo_participante_IN int(10),
-	IN id_equipo_IN int(10), 
-	IN nombre_IN varchar(100), 
-	IN apellido_IN varchar(100), 
-	IN numero_camiseta_IN varchar(2), 
-	IN id_tipoposicion_juego_IN int(11), 
-	IN id_tipo_estado_jugador_IN int(11), 
-	IN numero_carnet_socio_IN int(11), 
-	IN trayectoria_IN varchar(500), 
-	IN telefono_IN varchar(11), 
+	#IN id_participante_IN bigint,
+	IN id_tipo_participante_IN int,
+	IN nombre_IN varchar(100),
+	IN apellido_IN varchar(100),
+	IN numero_camiseta_IN varchar(2),
+	IN id_tipo_posicion_juego_IN int,
+	IN id_tipo_estado_jugador_IN int,
+	IN numero_carnet_socio_IN int,
+	IN trayectoria_IN varchar(500),
+	IN telefono_IN varchar(11),
 	IN telefono_celular_IN varchar(11),
-	IN telefono_radio_IN varchar(15), 
+	IN telefono_radio_IN varchar(15),
 	IN email_IN varchar(100),
-	IN fecha_nacimiento_IN datetime, 
-	IN calle_IN varchar(100), 
-	IN piso_IN int(11), 
-	IN numero_IN int(11), 
-	IN depto_IN varchar(4), 
-	IN codpostal_IN varchar(8), 
-	IN id_provincia_IN int(11), 
-	IN localidad_IN varchar(100), 
-	IN nacionalidad_IN varchar(50), 
-	IN id_estado_civil_IN int(11), 
-	IN conyuge_nombre_IN varchar(50), 
-	IN id_tipo_doc_IN int(11), 
-	IN nro_doc_IN varchar(8), 
-	IN cobertura_medica_IN varchar(50), 
-	IN fecha_creacion_IN datetime, 
-	IN id_usuario_IN int(10)
+	IN fecha_nacimiento_IN datetime,
+	IN calle_IN varchar(100),
+	IN piso_IN int,
+	IN numero_IN int,
+	IN depto_IN varchar(4),
+	IN codpostal_IN varchar(8),
+	IN id_provincia_IN int,
+	IN localidad_IN varchar(100),
+	IN nacionalidad_IN varchar(50),
+	IN id_estado_civil_IN int,
+	IN conyuge_nombre_IN varchar(50),
+	IN id_tipo_doc_IN int,
+	IN nro_doc_IN varchar(8),
+	IN cobertura_medica_IN varchar(50),
+	#IN fecha_creacion_IN datetime,
+	IN id_usuario_IN int unsigned,
+    IN id_equipo_IN bigint unsigned#,
+    
+    #IN id_tipointegranteequipo_IN int
 )
 BEGIN
-	insert into participante (id_tipo_participante,id_equipo,nombre,apellido,numero_camiseta,id_tipoposicion_juego,id_tipo_estado_jugador,numero_carnet_socio,trayectoria,telefono,telefono_celular,
-							  telefono_radio,email,fecha_nacimiento,calle,piso,numero,depto,codpostal,id_provincia,localidad,nacionalidad,id_estado_civil,conyuge_nombre,id_tipo_doc,nro_doc,
-                              cobertura_medica,fecha_creacion,id_usuario)
-    values 
-							 (id_tipo_participante_IN,id_equipo_IN,nombre_IN,apellido_IN,numero_camiseta_IN,id_tipoposicion_juego_IN,id_tipo_estado_jugador_IN,numero_carnet_socio_IN, 
-							  trayectoria_IN,telefono_IN,telefono_celular_IN,telefono_radio_IN,email_IN,fecha_nacimiento_IN,calle_IN,piso_IN,numero_IN,depto_IN,codpostal_IN,id_provincia_IN, 
-							  localidad_IN,nacionalidad_IN,id_estado_civil_IN,conyuge_nombre_IN,id_tipo_doc_IN,nro_doc_IN,cobertura_medica_IN,fecha_creacion_IN,id_usuario_IN,nombre_IN,now(),id_usuario_IN);
-	Select LAST_INSERT_ID();
+	
+	declare id_participante_V bigint;  
+    
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION, SQLWARNING
+	BEGIN
+		ROLLBACK;
+		SELECT 'Error, no se pudo guardar los datos.' as error;
+	END;
+ 
+	    
+	START TRANSACTION;
+
+	#set id_tipointegranteequipo_IN = coalesce(id_tipointegranteequipo_IN, id_tipo_participante_IN);
+
+	insert into participante 
+	(id_tipo_participante   ,nombre   ,apellido   ,numero_camiseta   ,id_tipo_posicion_juego   ,id_tipo_estado_jugador   ,numero_carnet_socio   ,trayectoria   ,telefono   ,telefono_celular   ,telefono_radio   ,email   ,fecha_nacimiento   ,calle   ,piso   ,numero   ,depto   ,codpostal   ,id_provincia   ,localidad   ,nacionalidad   ,id_estado_civil   ,conyuge_nombre   ,id_tipo_doc   ,nro_doc   ,cobertura_medica   ,fecha_creacion ,id_usuario) VALUES
+	(id_tipo_participante_IN,nombre_IN,apellido_IN,numero_camiseta_IN,id_tipo_posicion_juego_IN,id_tipo_estado_jugador_IN,numero_carnet_socio_IN,trayectoria_IN,telefono_IN,telefono_celular_IN,telefono_radio_IN,email_IN,fecha_nacimiento_IN,calle_IN,piso_IN,numero_IN,depto_IN,codpostal_IN,id_provincia_IN,localidad_IN,nacionalidad_IN,id_estado_civil_IN,conyuge_nombre_IN,id_tipo_doc_IN,nro_doc_IN,cobertura_medica_IN,now()          ,id_usuario_IN );
+	
+	
+	            
+    set id_participante_V = LAST_INSERT_ID();
+
+	
+	if id_equipo_IN is not null then
+		
+        INSERT INTO equipo_integrante 
+			(id_equipo   ,id_participante, id_tipo_participante) VALUES
+			(id_equipo_IN,id_participante_V, id_tipo_participante_IN);
+
+
+	end if; 
+
+	COMMIT;
+
+	select id_participante_V as id;
+	
+    
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -722,12 +840,40 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `participante_baja`(
-	IN id_participante_IN INT(10)
+	IN id_participante_IN INT,
+    IN quitar_de_equipos_IN boolean
 )
 BEGIN
-    delete 
-	from participante
-    where id_participante = id_participante_IN ;
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION, SQLWARNING
+	BEGIN
+		ROLLBACK;
+		SELECT 'Error, no se pudo guardar los datos.' as Error;
+	END;
+    
+	if quitar_de_equipos_IN = true then
+    	START TRANSACTION;
+    
+			delete 
+			from equipo_integrante
+			where id_participante = id_participante_IN;
+			
+			delete 
+			from participante
+			where id_participante = id_participante_IN ;
+
+		COMMIT;
+
+	else
+    
+		delete p
+		from participante p
+        left join equipo_integrante ei on p.id_participante=ei.id_participante
+		where id_participante = id_participante_IN 
+			and ei.id_participante is null;
+            
+    end if;
+
+    
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -745,14 +891,30 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `participante_consulta`(
-	IN id_participante_IN INT(10)
+	
+    IN id_participante_IN BIGINT(10),
+    IN id_equipo_IN BIGINT
+    
 )
 BEGIN
-	Select id_tipo_participante,id_equipo,nombre,apellido,numero_camiseta,id_tipoposicion_juego,id_tipo_estado_jugador,numero_carnet_socio,trayectoria,telefono,telefono_celular,
-  		    telefono_radio,email,fecha_nacimiento,calle,piso,numero,depto,codpostal,id_provincia,localidad,nacionalidad,id_estado_civil,conyuge_nombre,id_tipo_doc,nro_doc,
-		    cobertura_medica,fecha_creacion,id_usuario
-	from participante
-    where id_participante = id_participante_IN;
+	
+    
+    Select p.id_participante, p.id_tipo_participante, e.id_equipo, p.nombre, p.apellido,p.numero_camiseta,p.id_tipo_posicion_juego,p.id_tipo_estado_jugador,
+			p.numero_carnet_socio,p.trayectoria,p.telefono,p.telefono_celular,
+  		    p.telefono_radio,p.email,p.fecha_nacimiento,p.calle,p.piso,
+            p.numero,p.depto,p.codpostal,p.id_provincia,p.localidad,p.nacionalidad,p.id_estado_civil,p.conyuge_nombre,p.id_tipo_doc,p.nro_doc,
+		    p.cobertura_medica,p.fecha_creacion,p.id_usuario,
+            e.nombre as 'nombre_equipo'
+	
+    from participante p 
+    left join equipo_integrante ei on ei.id_participante = p.id_participante
+    left join equipo e on e.id_equipo = ei.id_equipo	
+    
+    
+    where (p.id_participante = id_participante_IN OR id_participante_IN is null )
+		and (ei.id_equipo = id_equipo_IN OR id_equipo_IN is null);	
+    
+    
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -770,68 +932,127 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `participante_editar`(
-	IN id_participante_IN int(10),
-    IN id_tipo_participante_IN int(10),
-	IN id_equipo_IN int(10), 
-	IN nombre_IN varchar(100), 
-	IN apellido_IN varchar(100), 
-	IN numero_camiseta_IN varchar(2), 
-	IN id_tipoposicion_juego_IN int(11), 
-	IN id_tipo_estado_jugador_IN int(11), 
-	IN numero_carnet_socio_IN int(11), 
-	IN trayectoria_IN varchar(500), 
-	IN telefono_IN varchar(11), 
+	IN id_participante_IN bigint,
+	IN id_tipo_participante_IN int,
+	IN nombre_IN varchar(100),
+	IN apellido_IN varchar(100),
+	IN numero_camiseta_IN varchar(2),
+	IN id_tipoposicion_juego_IN int,
+	IN id_tipo_estado_jugador_IN int,
+	IN numero_carnet_socio_IN int,
+	IN trayectoria_IN varchar(500),
+	IN telefono_IN varchar(11),
 	IN telefono_celular_IN varchar(11),
-	IN telefono_radio_IN varchar(15), 
+	IN telefono_radio_IN varchar(15),
 	IN email_IN varchar(100),
-	IN fecha_nacimiento_IN datetime, 
-	IN calle_IN varchar(100), 
-	IN piso_IN int(11), 
-	IN numero_IN int(11), 
-	IN depto_IN varchar(4), 
-	IN codpostal_IN varchar(8), 
-	IN id_provincia_IN int(11), 
-	IN localidad_IN varchar(100), 
-	IN nacionalidad_IN varchar(50), 
-	IN id_estado_civil_IN int(11), 
-	IN conyuge_nombre_IN varchar(50), 
-	IN id_tipo_doc_IN int(11), 
-	IN nro_doc_IN varchar(8), 
-	IN cobertura_medica_IN varchar(50), 
-	IN fecha_creacion_IN datetime, 
-	IN id_usuario_IN int(10)
+	IN fecha_nacimiento_IN datetime,
+	IN calle_IN varchar(100),
+	IN piso_IN int,
+	IN numero_IN int,
+	IN depto_IN varchar(4),
+	IN codpostal_IN varchar(8),
+	IN id_provincia_IN int,
+	IN localidad_IN varchar(100),
+	IN nacionalidad_IN varchar(50),
+	IN id_estado_civil_IN int,
+	IN conyuge_nombre_IN varchar(50),
+	IN id_tipo_doc_IN int,
+	IN nro_doc_IN varchar(8),
+	IN cobertura_medica_IN varchar(50),
+	#IN fecha_creacion_IN datetime,
+	IN id_usuario_IN int unsigned,
+    IN id_equipo_IN bigint unsigned,
+    
+    IN id_tipointegranteequipo_IN int
 )
 BEGIN
+
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION, SQLWARNING
+	BEGIN
+		ROLLBACK;
+		SELECT 'Error, no se pudo guardar los datos.' as Error;
+	END;
+   
+	START TRANSACTION;
+
 	UPDATE participante
     SET
 		id_tipo_participante = id_tipo_participante_IN,
-        id_equipo = id_equipo_IN,
-        nombre = nombre_IN,
-        apellido = apellido_IN,
-        numero_camiseta = numero_camiseta_IN,
-        id_tipoposicion_juego = id_tipoposicion_juego_IN,
-        id_tipo_estado_jugador = id_tipo_estado_jugador_IN,
-        numero_carnet_socio = numero_carnet_socio_IN,
-        trayectoria = trayectoria_IN,
-        telefono = telefono_IN,
-        telefono_celular = telefono_celular_IN,
-		telefono_radio = telefono_radio_IN,
-        email = email_IN,
-        fecha_nacimiento = fecha_nacimiento_IN,
-        calle = calle_IN,
-        piso = piso_IN,
-        numero = numero_IN,
-        depto = depto_IN,
-        codpostal = codpostal_IN,
-        id_provincia = id_provincia_IN,
-        localidad = localidad_IN,
-        nacionalidad = nacionalidad_IN,
-        id_estado_civil = id_estado_civil_IN,
-        conyuge_nombre = conyuge_nombre_IN,
-        id_tipo_doc = id_tipo_doc_IN,
-        nro_doc = nro_doc_IN,
-        cobertura_medica = cobertura_medica_IN,
-        id_usuario = id_usuario_IN; 
+		nombre = nombre_IN ,
+		apellido = apellido_IN ,
+		numero_camiseta =  numero_camiseta_IN , 
+		id_tipoposicion_juego = id_tipoposicion_juego_IN ,
+		id_tipo_estado_jugador = id_tipo_estado_jugador_IN ,
+		numero_carnet_socio = numero_carnet_socio_IN ,
+		trayectoria = trayectoria_IN ,
+		telefono = telefono_IN ,
+		telefono_celular = telefono_celular_IN ,
+		telefono_radio = telefono_radio_IN ,
+		email = email_IN ,
+		fecha_nacimiento = fecha_nacimiento_IN ,
+		calle = calle_IN ,
+		piso = piso_IN ,
+		numero = numero_IN ,
+		depto = depto_IN ,
+		codpostal = codpostal_IN ,
+		id_provincia = id_provincia_IN ,
+		localidad = localidad_IN ,
+		nacionalidad = nacionalidad_IN ,
+		id_estado_civil = id_estado_civil_IN ,
+		conyuge_nombre = conyuge_nombre_IN ,
+		id_tipo_doc = id_tipo_doc_IN ,
+		nro_doc = nro_doc_IN ,
+		cobertura_medica = cobertura_medica_IN ,
+		id_usuario = id_usuario_IN 
+	where 
+		id_participante = id_participante_IN;
+        
+	if id_equipo_IN is not null then
+		if (select count(*) from equipo_integrante where id_participante = id_participante_IN) = 1 then
+			update equipo_integrante set
+				id_equipo = id_equipo_IN
+			where id_participante = id_participante_IN; 
+        end if;
+    end if;
+    
+    COMMIT;
+    
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `resumen_consulta` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`127.0.0.1` PROCEDURE `resumen_consulta`()
+BEGIN
+	declare anio_v 			int;
+    declare	total_torneo 	int;
+    declare	total_equipo 	int;
+    declare	total_jugador 	int;
+    declare	total_dt 		int;
+    declare	total_arbitros 	int;
+    declare	total_delegados int;
+    
+	SET anio_v  = year(now());
+
+	SET total_torneo 	= (Select count(*) from torneo where anio = anio_v);
+    SET total_equipo 	= (Select count(*) from equipo);
+    SET total_jugador 	= (Select count(*) from participante where id_tipo_participante = 1);#Jugadores
+    SET total_dt 		= (Select count(*) from participante where id_tipo_participante = 3);#DTS
+    SET total_arbitros 	= (Select count(*) from participante where id_tipo_participante = 2);#DTS
+	SET total_delegados = (Select count(*) from participante where id_tipo_participante = 4);#DTS
+    
+    select total_torneo, total_equipo, total_jugador, total_dt, total_arbitros, total_delegados;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -846,7 +1067,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `tipo_amonestacion_consulta`()
 BEGIN
@@ -866,7 +1087,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `tipo_documento_consulta`()
 BEGIN
@@ -886,7 +1107,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `tipo_estado_civil_consulta`()
 BEGIN
@@ -906,7 +1127,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `tipo_estado_jugador_consulta`()
 BEGIN
@@ -926,7 +1147,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `tipo_participante_consulta`()
 BEGIN
@@ -946,7 +1167,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `tipo_provincia_consulta`()
 BEGIN
@@ -979,8 +1200,10 @@ CREATE DEFINER=`root`@`127.0.0.1` PROCEDURE `torneo_alta`(
 )
 BEGIN
 
-	insert into torneo (id_liga, nombre, anio, cantidad_equipos, id_usuario) values (id_liga_IN, nombre_IN, anio_IN , cantidad_equipos_IN, id_usuario_IN, now() );
-	Select LAST_INSERT_ID() as id_torneo;
+	insert into torneo (id_liga, nombre, anio, cantidad_equipos, id_usuario,fecha_creacion) 
+				values (id_liga_IN, nombre_IN, anio_IN , cantidad_equipos_IN, id_usuario_IN, now() );
+	
+    Select LAST_INSERT_ID() as id_torneo;
 
 END ;;
 DELIMITER ;
@@ -1000,7 +1223,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`127.0.0.1` PROCEDURE `torneo_baja`(
 
-	IN id_torneo_IN INT
+	IN id_torneo_IN bigint
 
 )
 BEGIN
@@ -1028,18 +1251,22 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`127.0.0.1` PROCEDURE `torneo_consulta`(
 
-	IN id_torneo_IN INT, 
-    IN anio_IN tinyint(4)
+	IN id_torneo_IN bigint , 
+    IN anio_IN INT 
 
 )
 BEGIN
 
+	
+    IF anio_IN is null THEN 
+		SET anio_IN  = year(now()) ;
+	END IF;
+
 	Select id_liga, id_torneo, anio, nombre, cantidad_equipos, id_usuario, fecha_creacion
     from torneo
-    where id_torneo = id_torneo_IN OR id_torneo IS NULL
-		  OR anio = anio_IN or anio_IN IS NULL ;
+    where (id_torneo = id_torneo_IN OR id_torneo_IN is null )
+		  AND anio = anio_IN ;
     
-
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1054,7 +1281,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`127.0.0.1` PROCEDURE `torneo_editar`(
 
@@ -1098,4 +1325,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-29 18:24:55
+-- Dump completed on 2016-05-13 18:41:59

@@ -1,14 +1,13 @@
+
+
     <div class="container">
 
         <div class="row col-lg-4 col-md-4 ">
 
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    TORNEOS CREADOS
-                </div>
+                <div class="panel-heading"><?php echo lang('form_label_torneos');?></div>
                 <div class="panel-body">
-                    <p>SASA SARASA </p>
-                    <p>COPA DE INTER CLUBS</p>
+   					<?php echo $torneos;?>
                 </div>
                 <!-- /.panel-body -->
             </div>
@@ -28,7 +27,7 @@
                                 </span>
                                 <span class="col-xs-9 text-right">
                                     <span class="huge">8</span><br>
-                                    <span>TORNEOS</span>
+                                    <span><?php echo lang('form_label_torneos');?></span>
                                 </span>
                             </a>
                         </div>
@@ -47,7 +46,7 @@
                                 </span>
                                 <span class="col-xs-9 text-right">
                                     <span class="huge">8</span><br>
-                                    <span>EQUIPOS</span>
+                                    <span><?php echo lang('form_label_equipos');?></span>
                                 </span>
                             </a>
                         </div>
@@ -67,7 +66,7 @@
                                 </span>
                                 <span class="col-xs-9 text-right">
                                     <span class="huge">265</span><br>
-                                    <span>JUAGADORES</span>
+                                    <span><?php echo lang('form_label_jugadores');?></span>
                                 </span>
                             </a>
                         </div>
@@ -86,7 +85,7 @@
                                 </span>
                                 <span class="col-xs-9 text-right">
                                     <span class="huge">22</span><br>
-                                    <span>DIRECTORES TÉCNICOS</span>
+                                    <span><?php echo lang('form_label_directores_tecnicos');?></span>
                                 </span>
                             </a>
                         </div>
@@ -104,7 +103,7 @@
                                 </span>
                                 <span class="col-xs-9 text-right">
                                     <span class="huge">22</span><br>
-                                    <span>ÁRBITROS</span>
+                                    <span><?php echo lang('form_label_arbitros');?></span>
                                 </span>
                             </a>
                         </div>
@@ -122,7 +121,7 @@
                                 </span>
                                 <span class="col-xs-9 text-right">
                                     <span class="huge">22</span><br>
-                                    <span>DELEGADOS</span>
+                                    <span><?php echo lang('form_label_delegados');?></span>
                                 </span>
                             </a>
                         </div>
