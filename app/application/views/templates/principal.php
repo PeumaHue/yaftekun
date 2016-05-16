@@ -1,4 +1,3 @@
-
 <form id=<?php echo $form_id; ?> data-toggle="validator" action="none" method="POST">
 	<div class="container ">
 		<div class="<?php echo $titulo_formato_panel; ?>">
