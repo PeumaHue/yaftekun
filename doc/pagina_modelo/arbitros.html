@@ -20,12 +20,17 @@
 </head>
 <body>
     <form id="arbitro" data-toggle="validator" action="none" method="POST">
-        <div class="container ">
-            <div class=" panel panel-arbitros">
-                <div class="panel-heading ">
-                    <h1 class="input-group">Gestionar Árbitros</h1>
-                </div>
+        <nav class="navbar navbar-inverse">
+        <div class="container-fluid panel-arbitros">
+            <div class="navbar-collapse titulo_gupo" id="myNavbar">
+                <h2 class="input-group">Gestionar Árbitros</h2>
+
             </div>
+        </div>
+    </nav>
+
+        <div class="container ">
+            
             <div class="panel panel-default">
                 <div class="panel-heading panel-arbitros">
                     Listado de árbitros
@@ -50,32 +55,42 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading panel-arbitros">
-                    Datos personales del árbitro
+                   
+                    
+                    <div class="row show-grid ">
+                        <div class="col-xs-12 col-sm-6 ">Datos personales del árbitro </div>
+                        <div class="col-xs-8 col-sm-5">
+                            <div class="input-group">
+                                <input type="text" id="txt_Busqueda" name="" class="form-control" placeholder="Búsqueda" maxlength="100">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            
+                        </div>
+                            <div class="col-xs-1">
+                            <button type="button" class="btn btn-primary btn-circle">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <div class="row">
 
                         <div class="form-group col-sm-6">
                             <label class="control-label">Apellido</label>
-                            <div class="input-group ">
+                           
                                 <input type="text" id="txt_Apellido" name="apellido" class="form-control" placeholder="Apellido del participante" maxlength="100">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
+                               
                         </div>
                         <div class="form-group col-sm-6">
                             <label class="control-label">Nombre</label>
-                            <div class="input-group ">
+                           
                                 <input type="text" id="txt_Nombre" name="nombre" class="form-control" placeholder="Nombre del participante" maxlength="100">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
+                              
                         </div>
 
                     </div>
