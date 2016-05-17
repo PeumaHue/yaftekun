@@ -16,7 +16,7 @@
 </head>
 <body>
     <nav class="navbar navbar-inverse">
-        <div class="container-fluid panel-azul">
+        <div class="container-fluid panel-torneos">
             <div class="navbar-collapse titulo_gupo" id="myNavbar">
                 <h2 class="input-group">Gestionar Torneo</h2>
 
@@ -27,48 +27,13 @@
     <form id="torneo" data-toggle="validator" action="none" method="POST">
         <div class="container ">
 
-            <div class="row">
-                <div class="form-group col-sm-6">
-                    <label class="control-label">Nombre del Torneo</label>
-
-                    <div class="input-group ">
-                        <input type="text" id="txt_NombreTorneo" class="form-control" name="nombre_torneo" placeholder="Ingrese el nombre del torneo" maxlength="200">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group col-sm-3">
-                    <label class="control-label">Cantidad de equipos</label>
-                    <input type="text" id="txt_CantidadEquipos" class="form-control" name="cantidad_equipos" placeholder="Ingrese la cantidad de equipos" onkeypress="return validarNumeroControl(event)" maxlength="4">
-                </div>
-                <div class="form-group col-sm-3">
-                    <label class="control-label">Modalidad de Juego</label>
-                    <select id="ddl_ModalidadJuego" class="form-control" name="modalidad_juego">
-                        <option value="">[ SELECCIONE ]</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <!-- <div class="form-group col-sm-2">
-                    <label class="control-label">Año del Torneo</label>
-                    <input type="text" id="txt_Anio" class="form-control" name="anio" placeholder="Ingrese el año" onkeypress="return validarNumeroControl(event)" maxlength="4">
-                </div>-->
-
-
-                <div class="col-xs-12">
+            <div class="col-xs-12">
                     <div class="panel panel-default">
 
                         <div class="panel-heading">
                             <div class="row show-grid ">
-                                <span class="col-md-3  ">Equipos participantes del torneo </span>
-                                <div class="col-md-3">
+                                <div class="col-xs-12 col-sm-4 ">Equipos participantes del torneo </div>
+                                <div class="col-xs-8 col-sm-5">
                                     <div class="input-group">
                                         <input type="text" id="Text1" name="apellido" class="form-control" placeholder="Búsqueda" maxlength="100">
                                         <span class="input-group-btn">
@@ -79,16 +44,16 @@
                                     </div>
 
                                 </div>
-                                <div class="col-md-1">
+                                <div class="col-xs-1">
                                     <button type="button" class="btn btn-primary btn-circle">
-                                        <i class="fa fa-list"></i>
+                                        <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-xs-3 col-sm-2">
                                     <div class="pull-right">
                                         <div class="btn-group">
-                                            <button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#domicilio_body">
-                                                <i id="I1" class="fa fa-chevron-down"></i>
+                                            <button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#torneo_body">
+                                                <i id="flecha_torneo" class="fa fa-chevron-down"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -97,7 +62,7 @@
                         </div>
 
                         <!-- /.panel-heading -->
-                        <div class="panel-body ">
+                        <div id="torneo_body" class="panel-body ">
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <label class="checkbox-inline">
@@ -150,10 +115,42 @@
                     <!-- /.panel -->
                 </div>
 
-            </div>
-        </div>
-        <div class="container">
 
+            
+                <div class="form-group col-sm-6">
+                    <label class="control-label">Nombre del Torneo</label>
+
+                    
+                        <input type="text" id="txt_NombreTorneo" class="form-control" name="nombre_torneo" placeholder="Ingrese el nombre del torneo" maxlength="200">
+                        
+
+                </div>
+                <div class="form-group col-sm-3">
+                    <label class="control-label">Cantidad de equipos</label>
+                    <input type="text" id="txt_CantidadEquipos" class="form-control" name="cantidad_equipos" placeholder="Ingrese la cantidad de equipos" onkeypress="return validarNumeroControl(event)" maxlength="4">
+                </div>
+                <div class="form-group col-sm-3">
+                    <label class="control-label">Modalidad de Juego</label>
+                    <select id="ddl_ModalidadJuego" class="form-control" name="modalidad_juego">
+                        <option value="">[ SELECCIONE ]</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+           
+            <div class="row">
+                <!-- <div class="form-group col-sm-2">
+                    <label class="control-label">Año del Torneo</label>
+                    <input type="text" id="txt_Anio" class="form-control" name="anio" placeholder="Ingrese el año" onkeypress="return validarNumeroControl(event)" maxlength="4">
+                </div>-->
+
+
+                
+
+            </div>
+        
             <div class="panel-error">
                 Apartado para mostrar errores
             </div>
@@ -174,56 +171,6 @@
                     <i class="fa fa-times"></i>Cancelar
                 </button>
             </div>
-
-
-
-
-
-
-
-            <div class="col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="row show-grid">
-                            <div class="col-md-4">Equipos participantes del torneo </div>
-                            <div class="col-md-4">
-                                <div class="input-group ">
-                                    <input type="text" id="txt_Apellido" name="apellido" class="form-control" placeholder="Apellido del participante" maxlength="100">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="pull-right">
-                                    <div class="btn-group">
-                                        <button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#domicilio_body">
-                                            <i id="flecha_domicilio" class="fa fa-chevron-down"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body ">
-
-                        <div class="row">
-                        </div>
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-            </div>
-
-
-
-
-
-
-
         </div>
     </form>
 </body>

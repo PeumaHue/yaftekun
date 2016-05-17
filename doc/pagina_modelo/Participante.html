@@ -20,16 +20,21 @@
 </head>
 <body>
     <form id="Participante" data-toggle="validator" action="none" method="POST">
-        <div class="container ">
-            <div class=" panel panel-yellow  ">
-                <div class="panel-heading ">
-                    <h1 class="input-group">Gestionar Participante</h1>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid panel-jugadores">
+                <div class="navbar-collapse titulo_gupo" id="myNavbar">
+                    <h2 class="input-group">Jugadores</h2>
+
                 </div>
             </div>
+        </nav>
+        <div class="container ">
+
+
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Integrantes del equipo
+                    Jugadores
                     <div class="pull-right">
                         <div class="btn-group">
                             <button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#equipo_body" aria-expanded="true">
@@ -43,11 +48,11 @@
                     <ul class="list-inline small interlineado-X1">
                         <li class="col-xs-12 col-sm-3">RAIMUNDO SERGIO DANIEL</li>
                         <li class="col-xs-12 col-sm-3">CUPO MARCO</li>
-                        <li class="col-xs-12 col-sm-3" >ANDOLFATO MARIANO</li>
+                        <li class="col-xs-12 col-sm-3">ANDOLFATO MARIANO</li>
                         <li class="col-xs-12 col-sm-3">KOZLOWSKI CARLOS</li>
                         <li class="col-xs-12 col-sm-3">ANDRADE GASTON</li>
-                    </ul>                    
-                </div>                
+                    </ul>
+                </div>
             </div>
 
 
@@ -98,36 +103,35 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-
-                    Datos del Participante
-                </div>
-                <div class="panel-body">
-
-                    <div class="row">
-
-                        <div class="form-group col-sm-6">
-                            <label class="control-label">Apellido</label>
-                            <div class="input-group ">
-                                <input type="text" id="txt_Apellido" name="apellido" class="form-control" placeholder="Apellido del participante" maxlength="100">
+                    <div class="row show-grid ">
+                        <div class="col-xs-12 col-sm-6 ">Datos del jugador</div>
+                        <div class="col-xs-8 col-sm-5 ">
+                            <div class="input-group">
+                                <input type="text" id="txt_buscar" class="form-control" placeholder="Búsqueda" maxlength="100">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" type="button">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
                             </div>
+                        </div>
+                        <div class="col-xs-1">
+                            <button type="button" class="btn btn-primary btn-circle">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label class="control-label">Apellido</label>
+                            <input type="text" id="txt_Apellido" name="apellido" class="form-control" placeholder="Apellido del participante" maxlength="100">
                         </div>
                         <div class="form-group col-sm-6">
                             <label class="control-label">Nombre</label>
-                            <div class="input-group ">
-                                <input type="text" id="txt_Nombre" name="nombre" class="form-control" placeholder="Nombre del participante" maxlength="100">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
+                            <input type="text" id="txt_Nombre" name="nombre" class="form-control" placeholder="Nombre del participante" maxlength="100">
                         </div>
-
                     </div>
                     <div class="row">
                         <div class="form-group col-md-2 col-sm-4 col-xs-12">
@@ -267,8 +271,6 @@
             </div>
 
 
-        </div>
-        <div class="container">
 
             <div class="panel-error">
                 Apartado para mostrar errores

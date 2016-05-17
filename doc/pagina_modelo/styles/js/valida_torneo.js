@@ -1,5 +1,16 @@
 ﻿
 $(document).ready(function () {
+    
+    $('#torneo_body').on('shown.bs.collapse', function () {
+        $('#flecha_torneo').removeClass().addClass("fa fa-chevron-up");
+        });
+
+    $('#torneo_body').on('hidden.bs.collapse', function () {
+        $('#flecha_torneo').removeClass().addClass("fa fa-chevron-down");
+        });
+
+
+
     $('#torneo').bootstrapValidator({
         message: 'Este valor no es valido',
         feedbackIcons: {

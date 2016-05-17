@@ -154,6 +154,8 @@ a
 }
 
 
+
+
 .panel-heading
 {
     font-weight: bold;
@@ -195,27 +197,42 @@ a
     color:#fff !important;
 }
 
-.panel-green {
-    border-color: hsl(120, 39%, 54%);
+.panel-torneos
+{
+    border-color: #337ab7;
+    background-color:#337ab7;
 }
-.panel-green .panel-heading {
+
+    .panel-torneos > .panel-heading
+    {
+        color: #fff;
+        background-color: #337ab7;
+        border-color: #337ab7;
+    }
+
+.panel-equipos {
+    border-color: hsl(120, 39%, 54%);
+    background-color: hsl(120, 39%, 54%);
+}
+.panel-equipos .panel-heading {
     border-color: hsl(120, 39%, 54%);
     color:hsl(0, 100%, 100%) ;
     background-color: hsl(120, 39%, 54%);
 }
-.panel-yellow a {
+.panel-jugadores a {
     color: hsl(120, 39%, 54%);
 }
 
 
-.panel-yellow {
+.panel-jugadores {
     border-color: hsl(35, 84%, 62%);
+    background-color: hsl(35, 84%, 62%);
 }
-.panel-yellow a {
+.panel-jugadores a {
     color:#fff;
 }
 
-.panel-yellow .panel-heading {
+.panel-jugadores .panel-heading {
     border-color: hsl(35, 84%, 62%);
     color: hsl(0, 100%, 100%);
     background-color: hsl(35, 84%, 62%);
@@ -224,6 +241,7 @@ a
 
 .panel-arbitros {
     border-color: hsl(2, 64%, 58%);
+    background-color: hsl(2, 64%, 58%);
 }
 .panel-arbitros .panel-heading {
     border-color: hsl(2, 64%, 58%);
@@ -232,10 +250,12 @@ a
 }
 .panel-arbitros a {
     color: hsl(2, 64%, 58%);
+
 }
 
 .panel-directores {
     border-color: hsl(194, 66%, 51%);
+    background-color: hsl(194, 66%, 51%);
 }
 .panel-directores .panel-heading {
     border-color: hsl(194, 66%, 51%);
@@ -249,6 +269,7 @@ a
 
 .panel-delegados {
     border-color: hsl(39, 39%, 67%);
+    background-color:hsl(39, 39%, 67%);
 }
 .panel-delegados .panel-heading {
     border-color: hsl(39, 39%, 67%);
@@ -427,6 +448,26 @@ a
 {
     margin-left:auto;
     margin-right:auto;
+}
+
+.btn-circle.btn-lg
+{
+    width: 50px;
+    height: 50px;
+    padding: 10px 16px;
+    border-radius: 25px;
+    font-size: 18px;
+    line-height: 1.33;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.428571429;
 }
 
 /***********************/
