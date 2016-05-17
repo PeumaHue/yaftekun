@@ -7,7 +7,7 @@ class Participante_test extends CI_Controller {
 	 */
 	
 	public $id_participante;
-	public $id_tipo_participante;
+	public $id_tipo_participante = 1;
 	public $id_equipo = 1;
 	public $nombre;
 	public $apellido;
@@ -59,11 +59,20 @@ class Participante_test extends CI_Controller {
  		
  		$this->consulta_test_por_equipo();
  		mysqli_next_result($this->db->conn_id);
+ 		
+ 		$this->consulta_test_participantes_por_tipo();
+ 		mysqli_next_result($this->db->conn_id);
+ 		
  		$this->consulta_test_por_id_inexistente();
  		mysqli_next_result($this->db->conn_id);
+ 		
  		$this->consulta_test_por_equipo_inexistente();
  		mysqli_next_result($this->db->conn_id);
-		$this->baja_test();
+ 		
+ 		$this->consulta_test_por_tipo_participante_inexistente();
+ 		mysqli_next_result($this->db->conn_id);
+		
+ 		$this->baja_test();
 		
 		#echo $this->unit->report();
 	}
@@ -129,12 +138,12 @@ class Participante_test extends CI_Controller {
 	
 	
 	/**
-	 * Funcion para testear la consulta satisfactoria del participante de un equipo
+	 * Funcion para testear la consulta satisfactoria del participante
 	 * @return void
 	 */
 	public function consulta_test_por_idparticipante()
 	{
-		$test = $this->Participante_model->consulta($this->id_participante, NULL);
+		$test = $this->Participante_model->consulta($this->id_participante, NULL, NULL);
 		$expected_result = 'is_object';
 		$test_name = 'Consulta participante por ID';
 		$notes = var_export($test, true);
@@ -143,12 +152,12 @@ class Participante_test extends CI_Controller {
 	}
 	
 	/**
-	 * Funcion para testear la consulta satisfactoria del participante de un equipo
+	 * Funcion para testear la consulta satisfactoria de los participantes de un equipo
 	 * @return void
 	 */
 	public function consulta_test_por_equipo()
 	{
-		$test = $this->Participante_model->consulta(NULL, $this->id_equipo);
+		$test = $this->Participante_model->consulta(NULL, $this->id_equipo, NULL);
 		$expected_result = 'is_array';
 		$test_name = 'Consulta participantes por equipo';
 		$notes = var_export($test, true);
@@ -157,12 +166,26 @@ class Participante_test extends CI_Controller {
 	}
 	
 	/**
+	 * Funcion para testear la consulta satisfactoria de participantes por tipo
+	 * @return void
+	 */
+	public function consulta_test_participantes_por_tipo()
+	{
+		$test = $this->Participante_model->consulta(NULL, NULL, $this->id_tipo_participante);
+		$expected_result = 'is_array';
+		$test_name = 'Consulta participantes por tipo';
+		$notes = var_export($test, true);
+		echo $this->unit->run($test, $expected_result, $test_name, $notes);
+	
+	}
+	
+	/**
 	 * Funcion para testear la consulta satisfactoria de un participante inexistente por ID
 	 * @return void
 	 */
 	public function consulta_test_por_id_inexistente()
 	{
-		$test = $this->Participante_model->consulta(0, NULL);
+		$test = $this->Participante_model->consulta(0, NULL, NULL);
 		$expected_result = array();
 		$test_name = 'Consulta de participante por id inexistente';
 		$notes = var_export($test, true);
@@ -176,12 +199,26 @@ class Participante_test extends CI_Controller {
 	 */
 	public function consulta_test_por_equipo_inexistente()
 	{
-		$test = $this->Participante_model->consulta(NULL, 4);
+		$test = $this->Participante_model->consulta(NULL, 4, NULL);
 		$expected_result = array();//Espera un array vacio
 		$test_name = 'Consulta de participante por equipo inexistente';
 		$notes = var_export($test, true);
 		echo $this->unit->run($test, $expected_result, $test_name, $notes);
 		
+	}
+	
+	/**
+	 * Funcion para testear la consulta satisfactoria de participantes inexistentes por tipo
+	 * @return void
+	 */
+	public function consulta_test_por_tipo_participante_inexistente()
+	{
+		$test = $this->Participante_model->consulta(NULL, NULL, 99);
+		$expected_result = array();//Espera un array vacio
+		$test_name = 'Consulta de participante por tipo participante inexistente';
+		$notes = var_export($test, true);
+		echo $this->unit->run($test, $expected_result, $test_name, $notes);
+	
 	}
 	
 	

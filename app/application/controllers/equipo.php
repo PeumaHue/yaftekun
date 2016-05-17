@@ -47,7 +47,7 @@ class Equipo extends CI_Controller {
 	{
 		$this->variables['form_id'] = '"equipos"';
 		$this->variables['titulo_label'] = 'html_equipo_titulo_default';
-		$this->variables['titulo_formato_panel'] = 'panel panel-green';
+		$this->variables['titulo_formato_panel'] = 'panel panel-equipos';
 		$this->variables['grilla_ppal_label'] = 'form_label_equipos';
 		
 		/*

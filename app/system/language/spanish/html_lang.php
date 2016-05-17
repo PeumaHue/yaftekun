@@ -14,11 +14,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 
 $lang['html_participante_titulo_default']		= 'Participantes';
-$lang['html_arbitro_titulo_default']			= 'Arbitros';
-$lang['html_jugadores_titulo_default']			= 'Jugadores';
+$lang['html_arbitro_titulo_default']			= 'Árbitros';
+$lang['html_jugador_titulo_default']			= 'Jugadores';
 $lang['html_director_tecnico_titulo_default']	= 'Directores Técnicos';
 $lang['html_equipo_titulo_default']				= 'Equipos';
-$lang['html_torneos_titulo_default']			= 'Torneos';
+$lang['html_torneo_titulo_default']			= 'Torneos';
+$lang['html_delegado_titulo_default']			= 'Delegados';
 
 /*
 $lang['html_persona_titulo_alta']			= 'Alta de Personas';

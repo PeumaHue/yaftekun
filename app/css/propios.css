@@ -180,27 +180,37 @@ a
     -moz-osx-font-smoothing: grayscale;
 }
 
-.panel-green {
+.panel-torneos {
+  border-color: #337ab7;
+}
+.panel-torneos > .panel-heading {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+
+
+.panel-equipos {
     border-color: hsl(120, 39%, 54%);
 }
-.panel-green .panel-heading {
+.panel-equipos .panel-heading {
     border-color: hsl(120, 39%, 54%);
     color:hsl(0, 100%, 100%) ;
     background-color: hsl(120, 39%, 54%);
 }
-.panel-yellow a {
+.panel-jugadores a {
     color: hsl(120, 39%, 54%);
 }
 
 
-.panel-yellow {
+.panel-jugadores {
     border-color: hsl(35, 84%, 62%);
 }
-.panel-yellow a {
+.panel-jugadores a {
     color:#fff;
 }
 
-.panel-yellow .panel-heading {
+.panel-jugadores .panel-heading {
     border-color: hsl(35, 84%, 62%);
     color: hsl(0, 100%, 100%);
     background-color: hsl(35, 84%, 62%);

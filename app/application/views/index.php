@@ -4,7 +4,7 @@
 
         <div class="row col-lg-4 col-md-4 ">
 
-            <div class="panel panel-default">
+            <div class="panel panel-torneos">
                 <div class="panel-heading"><?php echo lang('form_label_torneos');?></div>
                 <div class="panel-body">
    					<?php echo $torneos;?>
@@ -37,7 +37,7 @@
 
             <!--EQUIPOS-->
             <div class="col-lg-6 col-md-6">
-                <div class="panel panel-green">
+                <div class="panel panel-equipos">
                     <div class="panel-heading">
                         <div class="row">
                             <a href="<?php echo site_url('equipo'); ?>">
@@ -57,10 +57,10 @@
 
             <!--JUGADORES-->
             <div class="col-lg-6 col-md-6">
-                <div class="panel panel-yellow">
+                <div class="panel panel-jugadores">
                     <div class="panel-heading">
                         <div class="row">
-                            <a href="participante.HTML">
+                            <a href="<?php echo site_url('jugador'); ?>">
                                 <span class="col-xs-3">
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </span>
@@ -79,7 +79,7 @@
                 <div class="panel panel-directores">
                     <div class="panel-heading">
                         <div class="row">
-                            <a href="dt.html">
+                            <a href="<?php echo site_url('director_tecnico'); ?>">
                                 <span class="col-xs-3">
                                     <i class="fa fa-support fa-5x"></i>
                                 </span>
@@ -97,7 +97,7 @@
                 <div class="panel panel-arbitros">
                     <div class="panel-heading">
                         <div class="row">
-                            <a href="arbitros.html">
+                            <a href="<?php echo site_url('arbitro'); ?>">
                                 <span class="col-xs-3">
                                     <i class="fa fa-support fa-5x"></i>
                                 </span>
@@ -115,7 +115,7 @@
                 <div class="panel panel-delegados">
                     <div class="panel-heading">
                         <div class="row">
-                            <a href="delegado.html">
+                            <a href="<?php echo site_url('delegado'); ?>">
                                 <span class="col-xs-3">
                                     <i class="fa fa-support fa-5x"></i>
                                 </span>
