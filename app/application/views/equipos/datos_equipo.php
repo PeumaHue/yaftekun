@@ -1,30 +1,54 @@
 <form id="datosequipo" data-toggle="validator" action="none" method="POST">
 	<div class="container">
-		<label><?php echo lang('form_label_nombre');?></label>
-			<div class="form-group">
-				<div class="input-group col-xs-12">
-	
-					<input type="text" id="txt_Nombre" name="nombre"
-						class="form-control"
-						placeholder="<?php echo lang('form_label_ayuda_nombre_equipo');?>"
-						maxlength="100"> <span class="input-group-btn">
-						<button class="btn btn-default" type="button">
-							<i class="fa fa-search"></i>
-						</button>
-					</span>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<?php echo lang('html_equipos_titulo_datos');?>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<div class="input-group col-xs-12">
+						<!-- placeholder="<?php echo lang('form_label_ayuda_nombre_equipo');?>"-->
+						<input type="text" id="txt_IdLiga" name="liga"
+							class="form-control"
+							placeholder="Ingrese el id de la liga para el equipo" 
+							maxlength="100"> 
+		
+						<input type="text" id="txt_IdEstadio" name="estadio"
+							class="form-control"
+							placeholder="Ingrese el id del estadio para el equipo" 
+							maxlength="100"> 
+						
+						<input type="text" id="txt_IdUduario" name="usuario"
+							class="form-control"
+							placeholder="Ingrese su id de usuario" 
+							maxlength="100"> 
+						
+						<input type="text" id="txt_Nombre" name="nombre"
+							class="form-control"
+							placeholder="<?php echo lang('form_label_ayuda_nombre_equipo');?>"
+							maxlength="100"> 
+						
+						<div class="form-group">
+							<label><?php echo lang('form_label_equipo_imagen');?></label> 
+							<input type="file">
+						</div>			
+							
+					</div>
 				</div>
+				<!-- 
+				<div class="form-group">
+					<label><?php echo lang('form_label_equipo_imagen');?></label> <input
+						type="file">
+				</div>
+				 -->
+		
 			</div>
-			<div class="form-group">
-				<label><?php echo lang('form_label_equipo_imagen');?></label> <input
-					type="file">
-			</div>
-	
-	
+			
 			<div class="panel-error">
 				Apartado para mostrar errores
 				<?php echo lang('form_label_equipos');?>
 			</div>
-	
+		</div>
 	</div>
 
 	<div class="container">
