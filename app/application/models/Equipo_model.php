@@ -77,10 +77,17 @@ class Equipo_model extends CI_Model {
 				$this->imagen		=$row["imagen"];
 
 			}
+			
+			if (mysqli_more_results($this->db->conn_id)) {
+				mysqli_next_result($this->db->conn_id);
+			}
 			return $this;
 		}
 		else
 		{
+			if (mysqli_more_results($this->db->conn_id)) {
+				mysqli_next_result($this->db->conn_id);
+			}
 			return $query->result_array();
 		}
 
@@ -108,10 +115,14 @@ class Equipo_model extends CI_Model {
 			$resultado['resultado']='OK';
 			$resultado['id']=$query->row_array()["id"];
 		}
-		else
+		else{
 			$resultado['resultado']='ERROR';
+		}
 
-			return $resultado;
+		if (mysqli_more_results($this->db->conn_id)) {
+			mysqli_next_result($this->db->conn_id);
+		}
+		return $resultado;
 	}
 
 	/**
@@ -130,11 +141,17 @@ class Equipo_model extends CI_Model {
 						'id_usuario_IN'	=> $equipo->id_usuario,
 						'imagen_IN'	 	=> $equipo->imagen
 				))
-				)
+				){
 			$resultado['resultado']='OK';
-			else
-				$resultado['resultado']='ERROR';
-				return $resultado;
+		}
+		else{
+			$resultado['resultado']='ERROR';
+		}
+			
+		if (mysqli_more_results($this->db->conn_id)) {
+			mysqli_next_result($this->db->conn_id);
+		}
+		return $resultado;
 	}
 
 	/**
@@ -143,10 +160,16 @@ class Equipo_model extends CI_Model {
 	 */
 	public function baja($equipo)
 	{
-		if($query = $this->db->query($this->sp_baja, array('id_equipo_IN' => $equipo->id_equipo)))
+		if($query = $this->db->query($this->sp_baja, array('id_equipo_IN' => $equipo->id_equipo))) {
 			$resultado['resultado']='OK';
-			else
-				$resultado['resultado']='ERROR';
-				return $resultado;
+		}
+		else{
+			$resultado['resultado']='ERROR';
+		}
+		
+		if (mysqli_more_results($this->db->conn_id)) {
+			mysqli_next_result($this->db->conn_id);
+		}
+		return $resultado;
 	}
 }

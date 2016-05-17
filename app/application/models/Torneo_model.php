@@ -52,10 +52,16 @@ class Torneo_model extends CI_Model {
 				$this->fecha_creacion=$row["fecha_creacion"];
 				
 			}
+			if (mysqli_more_results($this->db->conn_id)) {
+				mysqli_next_result($this->db->conn_id);
+			}
 			return $this;
 		}
 		else
 		{
+			if (mysqli_more_results($this->db->conn_id)) {
+				mysqli_next_result($this->db->conn_id);
+			}
 			return $query->result_array();
 		}
 
@@ -82,9 +88,13 @@ class Torneo_model extends CI_Model {
 			$resultado['resultado']='OK';
 			$resultado['id']=$query->row_array()["id_torneo"];
 		}	
-		else
+		else{
 			$resultado['resultado']='ERROR';
+		}
 		
+		if (mysqli_more_results($this->db->conn_id)) {
+			mysqli_next_result($this->db->conn_id);
+		}
 		return $resultado;
 	}
 	
@@ -105,8 +115,13 @@ class Torneo_model extends CI_Model {
 				))
 				)
 			$resultado['resultado']='OK';
-		else
+		else{
 			$resultado['resultado']='ERROR';
+		}
+		
+		if (mysqli_more_results($this->db->conn_id)) {
+			mysqli_next_result($this->db->conn_id);
+		}
 		return $resultado;
 	}
 	
@@ -118,8 +133,13 @@ class Torneo_model extends CI_Model {
 	{
 		if($query = $this->db->query($this->sp_baja, array('id_torneo' => $torneo->id_torneo)))
 			$resultado['resultado']='OK';
-		else
+		else{
 			$resultado['resultado']='ERROR';
+		}
+		
+		if (mysqli_more_results($this->db->conn_id)) {
+			mysqli_next_result($this->db->conn_id);
+		}
 		return $resultado;
 	}
 }

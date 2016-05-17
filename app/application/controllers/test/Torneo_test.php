@@ -30,19 +30,14 @@ class Torneo_test extends CI_Controller {
 	public function index()
 	{
 		$this->alta_test();
-		mysqli_next_result($this->db->conn_id);
 		
 		$this->consulta_test_por_anio();
-		mysqli_next_result($this->db->conn_id);
 
 		$this->consulta_test();
-		mysqli_next_result($this->db->conn_id);
 		
-		$this->consulta_test_por_torneo_inexistente();		
-		mysqli_next_result($this->db->conn_id);
+		$this->consulta_test_por_torneo_inexistente();	
 		
 /*		$this->consulta_test_por_cuil_inexistente();
-		mysqli_next_result($this->db->conn_id);
 */		
 		$this->baja_test();
 		

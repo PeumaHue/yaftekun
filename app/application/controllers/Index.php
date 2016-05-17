@@ -18,7 +18,11 @@ class Index extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('Torneo_model');
+		$this->load->model('Tablero_inicial_model');
+		
 		$this->_renderizar_torneos();
+		$this->_obtener_datos_tablero();
+		
 		$this->load->view('templates/header');
 		$this->load->view('index', $this->variables);
 		$this->load->view('templates/footer');
@@ -47,6 +51,16 @@ class Index extends CI_Controller {
 			$html = $html . '<p>' . $i['nombre'] . '</p>';
 		}
 		$this->variables['torneos']=$html;
+	}
+	
+	/**
+	 * Funcion que obtiene los datos del tablero desde el modelo y los carga en variables.
+	 *
+	 */
+	private function _obtener_datos_tablero()
+	{
+		$tablero = $this->Tablero_inicial_model->consulta();
+		$this->variables['tablero_totales']=$tablero;
 	}
 	
 	/**

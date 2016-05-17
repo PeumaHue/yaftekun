@@ -97,10 +97,16 @@ class Participante_model extends CI_Model {
 				$this->id_usuario=$row["id_usuario"];
 				$this->nombre_equipo=$row["nombre_equipo"];
 			}
+			if (mysqli_more_results($this->db->conn_id)) {
+				mysqli_next_result($this->db->conn_id);
+			}
 			return $this;
 		}
 		else
 		{
+			if (mysqli_more_results($this->db->conn_id)) {
+				mysqli_next_result($this->db->conn_id);
+			}
 			return $query->result_array();
 		}
 
@@ -151,9 +157,13 @@ class Participante_model extends CI_Model {
 			$resultado['resultado']='OK';
 			$resultado['id']=$query->row_array()["id"];
 		}	
-		else
+		else{
 			$resultado['resultado']='ERROR';
-		
+		}
+			
+		if (mysqli_more_results($this->db->conn_id)) {
+			mysqli_next_result($this->db->conn_id);
+		}
 		return $resultado;
 	}
 	
@@ -197,8 +207,13 @@ class Participante_model extends CI_Model {
 				))
 				)
 			$resultado['resultado']='OK';
-		else
+		else{
 			$resultado['resultado']='ERROR';
+		}
+		
+		if (mysqli_more_results($this->db->conn_id)) {
+			mysqli_next_result($this->db->conn_id);
+		}	
 		return $resultado;
 	}
 	
@@ -208,10 +223,15 @@ class Participante_model extends CI_Model {
 	 */
 	public function baja($id_participante, $quitar_de_equipo=TRUE)
 	{
-		if($query = $this->db->query($this->sp_baja, array('id_participante' => $id_participante, 'quitar_de_equipo' => $quitar_de_equipo)))
+		if($query = $this->db->query($this->sp_baja, array('id_participante' => $id_participante, 'quitar_de_equipo' => $quitar_de_equipo))){
 			$resultado['resultado']='OK';
-		else
+		}
+		else{
 			$resultado['resultado']='ERROR';
+		}
+		if (mysqli_more_results($this->db->conn_id)) {
+			mysqli_next_result($this->db->conn_id);
+		}
 		return $resultado;
 	}
 }
