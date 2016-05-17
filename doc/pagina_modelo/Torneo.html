@@ -13,17 +13,19 @@
 
     <link rel="stylesheet" href="styles/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/css/propios.css">
-    
 </head>
 <body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid panel-azul">
+            <div class="navbar-collapse titulo_gupo" id="myNavbar">
+                <h2 class="input-group">Gestionar Torneo</h2>
+
+            </div>
+        </div>
+    </nav>
+
     <form id="torneo" data-toggle="validator" action="none" method="POST">
         <div class="container ">
-            <div class=" panel panel-primary ">
-                <div class="panel-heading ">
-
-                    <h1 class="input-group">Gestionar Torneo</h1>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="form-group col-sm-6">
@@ -59,64 +61,95 @@
                     <input type="text" id="txt_Anio" class="form-control" name="anio" placeholder="Ingrese el año" onkeypress="return validarNumeroControl(event)" maxlength="4">
                 </div>-->
 
+
                 <div class="col-xs-12">
                     <div class="panel panel-default">
+
                         <div class="panel-heading">
-                            Equipos participantes del torneo
+                            <div class="row show-grid ">
+                                <span class="col-md-3  ">Equipos participantes del torneo </span>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <input type="text" id="Text1" name="apellido" class="form-control" placeholder="Búsqueda" maxlength="100">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-primary btn-circle">
+                                        <i class="fa fa-list"></i>
+                                    </button>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="pull-right">
+                                        <div class="btn-group">
+                                            <button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#domicilio_body">
+                                                <i id="I1" class="fa fa-chevron-down"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                         <!-- /.panel-heading -->
                         <div class="panel-body ">
-                            <div class="row" >
-                            <div class="form-group col-md-4">
-                                <label class="checkbox-inline">                                    
-                                    <input type="checkbox">
-                                    <img class="image_selecion_equipo" src="styles/imagenes/logo.png"  />
-                                    <label > Equipo número 1</label>
-                                </label>
-                            </div>    
-                            <div class="form-group col-md-4">
-                               <label class="checkbox-inline">                                    
-                                    <input type="checkbox">
-                                    <img class="image_selecion_equipo" src="styles/imagenes/logo.png"  />
-                                    <label > Equipo número dos</label>
-                                </label>
-                            </div>
-                            <div class="form-group col-md-4">
-                            <label class="checkbox-inline">                                    
-                                    <input type="checkbox">
-                                    <img class="image_selecion_equipo" src="styles/imagenes/logo.png"  />
-                                    <label > Equipo número tres</label>
-                                </label>
-                             </div>
-                               </div>
                             <div class="row">
-                            <div class="form-group col-md-4">
-                                <label class="checkbox-inline">                                    
-                                    <input type="checkbox">
-                                    <img class="image_selecion_equipo" src="styles/imagenes/logo.png"  />
-                                    <label > Equipo número cuatro</label>
-                                </label>
-                            </div>    
-                            <div class="form-group col-md-4">
-                               <label class="checkbox-inline">                                    
-                                    <input type="checkbox">
-                                    <img class="image_selecion_equipo" src="styles/imagenes/logo.png"  />
-                                    <label > Equipo número cinco</label>
-                                </label>
+                                <div class="form-group col-md-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox">
+                                        <img class="image_selecion_equipo" src="styles/imagenes/logo.png" />
+                                        <label>Equipo número 1</label>
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox">
+                                        <img class="image_selecion_equipo" src="styles/imagenes/logo.png" />
+                                        <label>Equipo número dos</label>
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox">
+                                        <img class="image_selecion_equipo" src="styles/imagenes/logo.png" />
+                                        <label>Equipo número tres</label>
+                                    </label>
+                                </div>
                             </div>
-                            <div class="form-group col-md-4">
-                            <label class="checkbox-inline">                                    
-                                    <input type="checkbox">
-                                    <img class="image_selecion_equipo" src="styles/imagenes/logo.png"  />
-                                    <label > Equipo número seis</label>
-                                </label>
-                             </div>
-                               </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox">
+                                        <img class="image_selecion_equipo" src="styles/imagenes/logo.png" />
+                                        <label>Equipo número cuatro</label>
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox">
+                                        <img class="image_selecion_equipo" src="styles/imagenes/logo.png" />
+                                        <label>Equipo número cinco</label>
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox">
+                                        <img class="image_selecion_equipo" src="styles/imagenes/logo.png" />
+                                        <label>Equipo número seis</label>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
                 </div>
+
             </div>
         </div>
         <div class="container">
@@ -141,6 +174,56 @@
                     <i class="fa fa-times"></i>Cancelar
                 </button>
             </div>
+
+
+
+
+
+
+
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row show-grid">
+                            <div class="col-md-4">Equipos participantes del torneo </div>
+                            <div class="col-md-4">
+                                <div class="input-group ">
+                                    <input type="text" id="txt_Apellido" name="apellido" class="form-control" placeholder="Apellido del participante" maxlength="100">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="pull-right">
+                                    <div class="btn-group">
+                                        <button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#domicilio_body">
+                                            <i id="flecha_domicilio" class="fa fa-chevron-down"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body ">
+
+                        <div class="row">
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+
+
+
+
+
+
+
         </div>
     </form>
 </body>
