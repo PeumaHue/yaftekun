@@ -18,7 +18,7 @@ $lang['html_arbitro_titulo_default']			= 'Árbitros';
 $lang['html_jugador_titulo_default']			= 'Jugadores';
 $lang['html_director_tecnico_titulo_default']	= 'Directores Técnicos';
 $lang['html_equipo_titulo_default']				= 'Equipos';
-$lang['html_torneo_titulo_default']			= 'Torneos';
+$lang['html_torneo_titulo_default']				= 'Torneos';
 $lang['html_delegado_titulo_default']			= 'Delegados';
 
 /*
