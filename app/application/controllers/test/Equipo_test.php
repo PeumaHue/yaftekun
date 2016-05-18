@@ -27,27 +27,20 @@ class Equipo_test extends CI_Controller {
 	 */
 	public function index()
 	{
-		
 		$this->iniciado=TRUE;
 		
 		$this->alta_test();
-		mysqli_next_result($this->db->conn_id);
 				
 		$this->consulta_equipo_puntual_test();
-		mysqli_next_result($this->db->conn_id);
-		
+				
 		$this->consulta_equipo_liga_test();
-		mysqli_next_result($this->db->conn_id);
-		
+				
 		$this->consulta_equipo_inexistente_test();
-		mysqli_next_result($this->db->conn_id);
-		
+				
 		$this->consulta_equipo_liga_inexistente_test();
-		mysqli_next_result($this->db->conn_id);
-		
 		
 		$this->baja_test($this->id_equipo);
-		#mysqli_next_result($this->db->conn_id);#mysqli_more_results
+		
 
 		echo $this->unit->report();
 		

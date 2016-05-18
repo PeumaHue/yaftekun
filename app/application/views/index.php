@@ -26,7 +26,7 @@
                                     <i class="fa fa-comments fa-5x"></i>
                                 </span>
                                 <span class="col-xs-9 text-right">
-                                    <span class="huge">8</span><br>
+                                    <span class="huge"><?php echo $tablero_totales->total_torneo;?></span><br>
                                     <span><?php echo lang('form_label_torneos');?></span>
                                 </span>
                             </a>
@@ -45,7 +45,7 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </span>
                                 <span class="col-xs-9 text-right">
-                                    <span class="huge">8</span><br>
+                                    <span class="huge"><?php echo $tablero_totales->total_equipo;?></span><br>
                                     <span><?php echo lang('form_label_equipos');?></span>
                                 </span>
                             </a>
@@ -65,7 +65,7 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </span>
                                 <span class="col-xs-9 text-right">
-                                    <span class="huge">265</span><br>
+                                    <span class="huge"><?php echo $tablero_totales->total_jugador;?></span><br>
                                     <span><?php echo lang('form_label_jugadores');?></span>
                                 </span>
                             </a>
@@ -84,7 +84,7 @@
                                     <i class="fa fa-support fa-5x"></i>
                                 </span>
                                 <span class="col-xs-9 text-right">
-                                    <span class="huge">22</span><br>
+                                    <span class="huge"><?php echo $tablero_totales->total_dt;?></span><br>
                                     <span><?php echo lang('form_label_directores_tecnicos');?></span>
                                 </span>
                             </a>
@@ -102,7 +102,7 @@
                                     <i class="fa fa-support fa-5x"></i>
                                 </span>
                                 <span class="col-xs-9 text-right">
-                                    <span class="huge">22</span><br>
+                                    <span class="huge"><?php echo $tablero_totales->total_arbitros;?></span><br>
                                     <span><?php echo lang('form_label_arbitros');?></span>
                                 </span>
                             </a>
@@ -120,7 +120,7 @@
                                     <i class="fa fa-support fa-5x"></i>
                                 </span>
                                 <span class="col-xs-9 text-right">
-                                    <span class="huge">22</span><br>
+                                    <span class="huge"><?php echo $tablero_totales->total_delegados;?></span><br>
                                     <span><?php echo lang('form_label_delegados');?></span>
                                 </span>
                             </a>

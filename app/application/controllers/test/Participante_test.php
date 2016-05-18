@@ -52,25 +52,19 @@ class Participante_test extends CI_Controller {
 	public function index()
 	{
 		$this->alta_test();
-		mysqli_next_result($this->db->conn_id);
-		
+				
  		$this->consulta_test_por_idparticipante();
- 		mysqli_next_result($this->db->conn_id);
- 		
+ 		 		
  		$this->consulta_test_por_equipo();
- 		mysqli_next_result($this->db->conn_id);
- 		
+ 		 		
  		$this->consulta_test_participantes_por_tipo();
- 		mysqli_next_result($this->db->conn_id);
- 		
+ 		 		
  		$this->consulta_test_por_id_inexistente();
- 		mysqli_next_result($this->db->conn_id);
  		
  		$this->consulta_test_por_equipo_inexistente();
- 		mysqli_next_result($this->db->conn_id);
- 		
+ 		 		
  		$this->consulta_test_por_tipo_participante_inexistente();
- 		mysqli_next_result($this->db->conn_id);
+ 		
 		
  		$this->baja_test();
 		
