@@ -21,7 +21,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div id="pnl_Torneos" class="row">
-                            <a href="torneo.html">
+                            <a href="<?php echo site_url('torneo'); ?>">
                                 <span class="col-xs-3">
                                     <i class="fa fa-comments fa-5x"></i>
                                 </span>
