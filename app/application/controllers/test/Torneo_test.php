@@ -7,6 +7,7 @@ class Torneo_test extends CI_Controller {
 	 */
 	public $id_liga_prueba = 9999;
 	public $anio_prueba = 2016;
+	public $id_tipo_modalidad_prueba = 1;
 	public $id_torneo_prueba;
 	
 	public $id_liga;
@@ -46,12 +47,13 @@ class Torneo_test extends CI_Controller {
 	{
 		$torneo = new stdClass();
 		
-		$torneo->id_liga 			= $this->id_liga_prueba;
-		$torneo->id_torneo 			= NULL;
-		$torneo->anio 				= $this->anio_prueba;
-		$torneo->nombre 			= 'Torneo nacional sub 60-';
-		$torneo->cantidad_equipos	= '14';
-		$torneo->id_usuario			= 99;
+		$torneo->id_liga 					= $this->id_liga_prueba;
+		$torneo->id_torneo 					= NULL;
+		$torneo->anio 						= $this->anio_prueba;
+		$torneo->id_tipo_modalidad			= $this->id_tipo_modalidad_prueba;
+		$torneo->nombre 					= 'Torneo nacional sub 60-';
+		$torneo->cantidad_equipos			= '14';
+		$torneo->id_usuario					= 99;
 		
 		$resultado['resultado']='OK';
 		$test = $this->Torneo_model->alta($torneo);
