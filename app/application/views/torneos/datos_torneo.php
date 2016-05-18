@@ -8,7 +8,7 @@
                 </div>
                 <div class="form-group col-sm-3">
                     <label class="control-label"><?php echo lang('form_label_modalidad_juego');?></label>
-                    <?php echo form_dropdown('modalidad_juego', $modalidades, '', 'class="form-control"'); ?>
+                    <?php echo form_dropdown('id_tipo_modalidad', $modalidades, $modalidad, 'class="form-control"'); ?>
                 </div>
            
             <div class="row">
@@ -37,4 +37,5 @@
                 </a>
             </div>
         </div>
+        <?php echo form_hidden('id_torneo', $this->datos_formulario->id_torneo); ?>
     </form>

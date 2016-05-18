@@ -27,6 +27,7 @@ class Torneo extends CI_Controller {
 		$this->load->helper(array('url', 'form'));
 		$this->load->model('Torneo_model');
 		$this->variables['accion'] = site_url('persona/alta');
+		$this->variables['id_torneo'] = '';
 	}
 	
 	/**
@@ -77,15 +78,64 @@ class Torneo extends CI_Controller {
 	}
 	
 	/**
+	 * Funcion que muestra el formulario de edición y guarda la misma cuando la validacion del formulario no arroja errores
+	 * @return void
+	 */
+	public function editar($id_torneo=NULL)
+	{
+		$this->_setear_variables('', '', site_url('torneo/editar'), '', '');
+		//Si no es un post, no se llama al editar y solo se muestran los campos para editar
+		if(!$this->input->post('nombre'))
+		{
+			$this->datos_formulario->id_torneo=$id_torneo;
+			$torneo = $this->Torneo_model->consulta($id_torneo);
+			$this->datos_formulario->nombre = $torneo->nombre;
+			$this->datos_formulario->cantidad_equipos = $torneo->cantidad_equipos;
+			$this->datos_formulario->id_tipo_modalidad = $torneo->id_tipo_modalidad;
+			$this->_obtener_combo_modalidad($this->datos_formulario->id_tipo_modalidad);
+		}
+		else
+		{
+			$this->_setear_campos();
+			$this->_setear_reglas();
+			$torneo = new stdClass();
+			if($this->form_validation->run() == FALSE)
+			{
+				$this->variables['mensaje']= validation_errors();
+			}
+			else if($this->Torneo_model->editar($this->_obtener_post($this->datos_formulario->id_torneo))['resultado']='OK')
+			{
+					
+				$this->variables['mensaje'] = lang('message_guardar_cambios_ok');
+			}
+			else
+			{
+				$this->variables['mensaje'] = lang('message_guardar_error');;
+			}
+		}
+		$this->load->view('templates/header');
+		$this->_renderizar_torneos();
+		$this->load->view('torneos/principal_torneo', $this->variables);
+		$this->load->view('torneos/datos_torneo', $this->variables);
+		$this->load->view('templates/footer');
+	}
+	
+	/**
 	 * Obtiene los datos del post y los devuelve en forma de objeto
+	 * @param 		integer 	$id_torneo id del torneo para cuando se trata de una edición
 	 * @return		object		$persona
 	 */
-	private function _obtener_post()
+	private function _obtener_post($id_torneo=NULL)
 	{
+		$fecha = getdate();
 		$torneo = new stdClass();
+		$torneo->id_torneo 			= $id_torneo = '' ? $id_torneo : $this->input->post('id_torneo');
 		$torneo->nombre 			= $this->input->post('nombre');
 		$torneo->cantidad_equipos 	= $this->input->post('cantidad_equipos');
-		$torneo->modalidad_juego 	= $this->input->post('modalidad_juego') != '0' ? $this->input->post('modalidad_juego') : '';
+		$torneo->id_tipo_modalidad 	= $this->input->post('id_tipo_modalidad');
+		$torneo->id_liga			= '1';// @todo Por el momento hay una única liga
+		$torneo->id_usuario			= '1';// @todo Pasar el usuario logueado
+		$torneo->anio				= $fecha['year'];
 		return $torneo;
 	}
 	
@@ -95,6 +145,7 @@ class Torneo extends CI_Controller {
 	 */
 	private function _setear_campos()
 	{
+		$this->datos_formulario->id_torneo = '';
 		$this->datos_formulario->nombre = '';
 		$this->datos_formulario->cantidad_equipos = '';
 		$this->datos_formulario->modalidad_juego = '';
@@ -109,9 +160,7 @@ class Torneo extends CI_Controller {
 	{
 		$this->form_validation->set_rules('nombre', 'Nombre', 'trim|required');
 		$this->form_validation->set_rules('cantidad_equipos', 'Cantidad de equipos', 'trim|required');
-		$this->form_validation->set_rules('modalidad_juego', 'Modalidad de juego', 'required');
-	
-		//$this->form_validation->set_error_delimiters('<div class="alert alert-danger"><a href="#" class="close" variables-dismiss="alert" aria-label="close">&times;</a>', '</div>');
+		$this->form_validation->set_rules('id_tipo_modalidad', 'Modalidad de juego', 'required');
 	}
 	
 	/**
@@ -123,10 +172,13 @@ class Torneo extends CI_Controller {
 	{
 		$fecha = getdate();
 		$torneos = $this->Torneo_model->consulta(NULL, $fecha['year']);
+		$link_torneo = site_url('torneo/editar');
 		$html = '';
 		foreach ($torneos as $i)
 		{
-			$html = $html . '<div class="form-group col-md-4"><label class="checkbox-inline">' . $i['nombre'] . '</label></div>';
+			$link_torneo = $link_torneo . '/' . $i['id_torneo'];
+			$html = $html . '<div class="form-group col-md-4"><a href="' . $link_torneo . '" class="btn btn-link">' . $i['nombre'] . '</a></div>';
+			$link_torneo = site_url('torneo/editar');
 		}
 		$this->variables['torneos']=$html;
 	}
@@ -142,6 +194,8 @@ class Torneo extends CI_Controller {
 		$this->variables['accion'] 		= $accion;
 		$this->variables['cancelar'] 	= $cancelar;
 		$this->variables['volver'] 		= $volver;
+		$this->variables['modalidades']	= '';
+		$this->variables['modalidad']	= '';
 	}
 	
 	/**
@@ -157,14 +211,20 @@ class Torneo extends CI_Controller {
 		$this->variables['datos_ppal'] 				= '';
 	}
 	
-	private function _obtener_combo_modalidad()
+	/**
+	 * Funcion que completa el combo de modalidades si no recibe ningún parametro, sino muestra el combo con el id que recibe
+	 * @param 		integer 	$id_tipo_modalidad
+	 * @return void
+	 */
+	private function _obtener_combo_modalidad($id_tipo_modalidad=NULL)
 	{
 		$modalidades = $this->Torneo_model->consulta_tipo_modalidad();
-		$descripcion['0'] = "[SELECCIONE]";
+		$descripcion[''] = "[SELECCIONE]";
 		foreach ($modalidades as $i)
 		{
 			$descripcion[$i['id_tipo_modalidad']] = $i['descripcion'];
 		}
 		$this->variables['modalidades']=$descripcion;
+		$this->variables['modalidad']= isset($id_tipo_modalidad) ? $id_tipo_modalidad : '';
 	}
 }
