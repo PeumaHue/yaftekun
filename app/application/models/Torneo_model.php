@@ -1,14 +1,14 @@
 <?php
 class Torneo_model extends CI_Model {
-
 	/**
 	 * Variables para los stored procedures usados por el modelo
 	 * @var string
 	 */
-	private $sp_consulta 	= 'call torneo_consulta(?, ?)';
-	private $sp_alta 		= 'call torneo_alta(?, ?, ?, ?, ?)';
-	private $sp_editar 		= 'call torneo_editar(?, ?, ?, ?, ?)';
-	private $sp_baja 		= 'call torneo_baja(?)';
+	private $sp_consulta 				= 'call torneo_consulta(?, ?)';
+	private $sp_alta 					= 'call torneo_alta(?, ?, ?, ?, ?)';
+	private $sp_editar 					= 'call torneo_editar(?, ?, ?, ?, ?)';
+	private $sp_baja 					= 'call torneo_baja(?)';
+	private $sp_consulta_tipo_modalidad = 'call tipo_modalidad_consulta()';
 	
 	/**
 	 * Variables para los atributos del modelo
@@ -52,13 +52,18 @@ class Torneo_model extends CI_Model {
 				$this->fecha_creacion=$row["fecha_creacion"];
 				
 			}
+			if (mysqli_more_results($this->db->conn_id)) {
+				mysqli_next_result($this->db->conn_id);
+			}
 			return $this;
 		}
 		else
 		{
+			if (mysqli_more_results($this->db->conn_id)) {
+				mysqli_next_result($this->db->conn_id);
+			}
 			return $query->result_array();
 		}
-
 	}
 	
 	/**
@@ -82,9 +87,13 @@ class Torneo_model extends CI_Model {
 			$resultado['resultado']='OK';
 			$resultado['id']=$query->row_array()["id_torneo"];
 		}	
-		else
+		else{
 			$resultado['resultado']='ERROR';
+		}
 		
+		if (mysqli_more_results($this->db->conn_id)) {
+			mysqli_next_result($this->db->conn_id);
+		}
 		return $resultado;
 	}
 	
@@ -105,8 +114,13 @@ class Torneo_model extends CI_Model {
 				))
 				)
 			$resultado['resultado']='OK';
-		else
+		else{
 			$resultado['resultado']='ERROR';
+		}
+		
+		if (mysqli_more_results($this->db->conn_id)) {
+			mysqli_next_result($this->db->conn_id);
+		}
 		return $resultado;
 	}
 	
@@ -118,8 +132,27 @@ class Torneo_model extends CI_Model {
 	{
 		if($query = $this->db->query($this->sp_baja, array('id_torneo' => $torneo->id_torneo)))
 			$resultado['resultado']='OK';
-		else
+		else{
 			$resultado['resultado']='ERROR';
+		}
+		
+		if (mysqli_more_results($this->db->conn_id)) {
+			mysqli_next_result($this->db->conn_id);
+		}
 		return $resultado;
+	}
+	
+	/**
+	 * Consulta los tipos de modalidades de torneo
+	 * @return	array Devuelve un array con los tipos de modalidad
+	 */
+	public function consulta_tipo_modalidad()
+	{
+		$query = $this->db->query($this->sp_consulta_tipo_modalidad);
+		if (mysqli_more_results($this->db->conn_id))
+		{
+			mysqli_next_result($this->db->conn_id);
+		}
+		return $query->result_array();
 	}
 }
