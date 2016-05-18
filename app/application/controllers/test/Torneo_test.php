@@ -30,23 +30,11 @@ class Torneo_test extends CI_Controller {
 	public function index()
 	{
 		$this->alta_test();
-		mysqli_next_result($this->db->conn_id);
-		
 		$this->consulta_test_por_anio();
-		mysqli_next_result($this->db->conn_id);
-
 		$this->consulta_test();
-		mysqli_next_result($this->db->conn_id);
-		
-		$this->consulta_test_por_torneo_inexistente();		
-		mysqli_next_result($this->db->conn_id);
-		
-/*		$this->consulta_test_por_cuil_inexistente();
-		mysqli_next_result($this->db->conn_id);
-*/		
+		$this->consulta_test_por_torneo_inexistente();	
 		$this->baja_test();
-		
-		
+		$this->consulta_tipo_modalidad();
 		echo $this->unit->report();
 	}
 	
@@ -84,7 +72,6 @@ class Torneo_test extends CI_Controller {
 	 */
 	public function alta_duplicada_test()
 	{
-
 	}
 	
 	/**
@@ -147,18 +134,27 @@ class Torneo_test extends CI_Controller {
 		$test = $this->Torneo_model->baja($torneo);
 		$resultado['resultado']='OK';
 		$expected_result = $resultado;
-		$test_name = 'Baja toneo por cuil';
+		$test_name = 'Baja torneo por cuil';
 		$notes = var_export($test, true);
 		$this->unit->run($test, $expected_result, $test_name, $notes);
 	}
 	
+	/**
+	 * Funcion para testear la consulta satisfactoria de un torneo
+	 * @return void
+	 */
+	public function consulta_tipo_modalidad()
+	{
+		$test = $this->Torneo_model->consulta_tipo_modalidad();
+		$expected_result = 'is_array';
+		$test_name = 'Consulta de tipos de modalidad de torneo';
+		$notes = var_export($test, true);
+		$this->unit->run($test, $expected_result, $test_name, $notes);
+	}
 	
 	/**
 	 * @todo
 	 * falta validacion de rega de negocio. .
 	 * @return void
-	 */
-	
-	
-	
+	 */	
 }
