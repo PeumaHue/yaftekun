@@ -28,7 +28,7 @@
                     <i class="fa fa-save"></i><?php echo lang('form_button_grabar');?>
                 </button>
 
-                <a href="#" class="btn boton  boton-azul  btn-ancho120" role="button">
+                <a href="<?php echo $eliminar; ?>" class="btn boton  boton-azul  btn-ancho120" role="button">
                     <i class="fa fa-trash-o"></i><?php echo lang('form_button_eliminar');?>
                 </a>
 

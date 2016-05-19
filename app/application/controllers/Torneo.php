@@ -28,6 +28,7 @@ class Torneo extends CI_Controller {
 		$this->load->model('Torneo_model');
 		$this->variables['accion'] = site_url('persona/alta');
 		$this->variables['id_torneo'] = '';
+		$this->load->view('templates/header');
 	}
 	
 	/**
@@ -36,7 +37,6 @@ class Torneo extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('templates/header');
 		/**
 		 * @todo Usar el template principal cuando este adaptado a la última versión de Sergio
 		$this->_setear_principal();
@@ -53,7 +53,7 @@ class Torneo extends CI_Controller {
 	 */
 	public function alta()
 	{
-		$this->_setear_variables('', '', site_url('torneo/alta'), site_url('torneo'), '');
+		$this->_setear_variables('', '', site_url('torneo/alta'), site_url('torneo'), '', '');
 		$this->_obtener_combo_modalidad();
 		$this->_setear_campos();
 		$this->_setear_reglas();
@@ -61,16 +61,19 @@ class Torneo extends CI_Controller {
 		{
 			$this->variables['mensaje']= validation_errors();
 		}
-		else if($this->Torneo_model->alta($this->_obtener_post())['resultado']='OK')
-		{
-	
-			$this->variables['mensaje'] = lang('message_guardar_ok');
-		}
 		else
 		{
-			$this->variables['mensaje'] = lang('message_guardar_error');
+			$query = $this->Torneo_model->alta($this->_obtener_post());
+			if($query['resultado']='OK')
+			{	
+				$this->variables['mensaje'] = lang('message_guardar_ok');
+				$this->variables['eliminar'] = site_url('torneo/baja') . '/' . $query['id'];
+			}
+			else
+			{
+				$this->variables['mensaje'] = lang('message_guardar_error');
+			}
 		}
-		$this->load->view('templates/header');
 		$this->_renderizar_torneos();
 		$this->load->view('torneos/principal_torneo', $this->variables);
 		$this->load->view('torneos/datos_torneo', $this->variables);
@@ -83,7 +86,7 @@ class Torneo extends CI_Controller {
 	 */
 	public function editar($id_torneo=NULL)
 	{
-		$this->_setear_variables('', '', site_url('torneo/editar'), '', '');
+		$this->_setear_variables('', '', site_url('torneo/editar'), site_url('torneo'), '', site_url('torneo/baja') . '/' . $id_torneo);
 		//Si no es un post, no se llama al editar y solo se muestran los campos para editar
 		if(!$this->input->post('nombre'))
 		{
@@ -112,12 +115,24 @@ class Torneo extends CI_Controller {
 			{
 				$this->variables['mensaje'] = lang('message_guardar_error');;
 			}
+			$this->_obtener_combo_modalidad($this->datos_formulario->id_tipo_modalidad);
 		}
-		$this->load->view('templates/header');
 		$this->_renderizar_torneos();
 		$this->load->view('torneos/principal_torneo', $this->variables);
 		$this->load->view('torneos/datos_torneo', $this->variables);
 		$this->load->view('templates/footer');
+	}
+	
+	/**
+	 * Funcion de baja
+	 * @return void
+	 */
+	public function baja($id_torneo=NULL)
+	{
+		$torneo = new stdClass();
+		$torneo->id_torneo = $id_torneo;
+		$this->Torneo_model->baja($torneo);
+		$this->index();
 	}
 	
 	/**
@@ -145,10 +160,10 @@ class Torneo extends CI_Controller {
 	 */
 	private function _setear_campos()
 	{
-		$this->datos_formulario->id_torneo = '';
-		$this->datos_formulario->nombre = '';
-		$this->datos_formulario->cantidad_equipos = '';
-		$this->datos_formulario->modalidad_juego = '';
+		$this->datos_formulario->id_torneo = isset($this->datos_formulario->id_torneo) ? $this->datos_formulario->id_torneo : '';
+		$this->datos_formulario->nombre = isset($this->datos_formulario->nombre) ? $this->datos_formulario->nombre : '';
+		$this->datos_formulario->cantidad_equipos = isset($this->datos_formulario->cantidad_equipos) ? $this->datos_formulario->cantidad_equipos : '';
+		$this->datos_formulario->id_tipo_modalidad = isset($this->datos_formulario->id_tipo_modalidad) ? $this->datos_formulario->id_tipo_modalidad : '';
 	}
 	
 	/**
@@ -187,13 +202,14 @@ class Torneo extends CI_Controller {
 	 * Funcion que setea las parametros basicos de las variables de la pagina
 	 * @return void
 	 */
-	private function _setear_variables($titulo=NULL, $mensaje=NULL, $accion=NULL, $cancelar=NULL, $volver=NULL)
+	private function _setear_variables($titulo=NULL, $mensaje=NULL, $accion=NULL, $cancelar=NULL, $volver=NULL, $eliminar=NULL)
 	{
 		$this->variables['titulo'] 		= $titulo;
 		$this->variables['mensaje'] 	= $mensaje;
 		$this->variables['accion'] 		= $accion;
 		$this->variables['cancelar'] 	= $cancelar;
 		$this->variables['volver'] 		= $volver;
+		$this->variables['eliminar']	= $eliminar;
 		$this->variables['modalidades']	= '';
 		$this->variables['modalidad']	= '';
 	}
