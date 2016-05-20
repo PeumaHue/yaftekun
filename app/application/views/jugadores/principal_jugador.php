@@ -2,7 +2,7 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid panel-jugadores">
                 <div class="navbar-collapse titulo_gupo " id="myNavbar">
-                    <h2 class="input-group font-20"><?php echo lang('html_jugador_titulo_default');?></h2>
+                    <h2 class="input-group"><?php echo lang('html_jugador_titulo_default');?></h2>
                     												
 
                 </div>
