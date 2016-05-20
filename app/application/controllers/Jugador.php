@@ -10,14 +10,18 @@ class Jugador extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Participante_model');
 		$this->load->helper('url');
+		$this->variables['includes']='<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
+		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/valida_participante.js').'"></script>';
+		$this->variables['includes']= $this->variables['includes']. '<script src="'.base_url('js/controles.js').'"></script>';
+		
 	}
 	
 	public function index() {
 		// JUGADOR: id_tipo_participante (1)
-		$this->_renderizar_datos(NULL, NULL, 1);
+		//$this->_renderizar_datos(NULL, NULL, 1);
 		$this->_setear_variables();
-		$this->load->view('templates/header');
-		$this->load->view('templates/principal',$this->variables);
+		$this->load->view('templates/header', $this->variables);	
+		$this->load->view('jugadores/principal_jugador');
 		$this->load->view('jugadores/datos_jugador');
 		$this->load->view('templates/footer');
 	}
