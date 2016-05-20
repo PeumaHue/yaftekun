@@ -8,7 +8,7 @@
                 </div>
                 <div class="form-group col-sm-3">
                     <label class="control-label"><?php echo lang('form_label_modalidad_juego');?></label>
-                    <?php echo form_dropdown('modalidad_juego', $modalidades, '', 'class="form-control"'); ?>
+                    <?php echo form_dropdown('id_tipo_modalidad', $modalidades, $modalidad, 'class="form-control"'); ?>
                 </div>
            
             <div class="row">
@@ -28,7 +28,7 @@
                     <i class="fa fa-save"></i><?php echo lang('form_button_grabar');?>
                 </button>
 
-                <a href="#" class="btn boton  boton-azul  btn-ancho120" role="button">
+                <a href="<?php echo $eliminar; ?>" class="btn boton  boton-azul  btn-ancho120" role="button">
                     <i class="fa fa-trash-o"></i><?php echo lang('form_button_eliminar');?>
                 </a>
 
@@ -37,4 +37,5 @@
                 </a>
             </div>
         </div>
+        <?php echo form_hidden('id_torneo', $this->datos_formulario->id_torneo); ?>
     </form>

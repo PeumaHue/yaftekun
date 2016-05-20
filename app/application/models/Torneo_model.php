@@ -5,8 +5,8 @@ class Torneo_model extends CI_Model {
 	 * @var string
 	 */
 	private $sp_consulta 				= 'call torneo_consulta(?, ?)';
-	private $sp_alta 					= 'call torneo_alta(?, ?, ?, ?, ?)';
-	private $sp_editar 					= 'call torneo_editar(?, ?, ?, ?, ?)';
+	private $sp_alta 					= 'call torneo_alta(?, ?, ?, ?, ?, ?)';
+	private $sp_editar 					= 'call torneo_editar(?, ?, ?, ?, ?, ?)';
 	private $sp_baja 					= 'call torneo_baja(?)';
 	private $sp_consulta_tipo_modalidad = 'call tipo_modalidad_consulta()';
 	
@@ -17,6 +17,7 @@ class Torneo_model extends CI_Model {
 	public $id_torneo;
 	public $id_liga;
 	public $anio;
+	public $id_tipo_modalidad;
 	public $nombre;
 	public $cantidad_equipos;
 	public $id_usuario;
@@ -43,13 +44,14 @@ class Torneo_model extends CI_Model {
 		{
 			if ($query->num_rows() > 0) {
 				$row=$query->row_array();
-				$this->id_liga=$row["id_liga"];
-				$this->id_toneo=$row["id_torneo"];
-				$this->anio=$row["anio"];
-				$this->nombre=$row["nombre"];
-				$this->cantidad_equipos=$row["cantidad_equipos"];
-				$this->id_usuario=$row["id_usuario"];
-				$this->fecha_creacion=$row["fecha_creacion"];
+				$this->id_liga=$row['id_liga'];
+				$this->id_torneo=$row['id_torneo'];
+				$this->id_tipo_modalidad=$row['id_tipo_modalidad'];
+				$this->anio=$row['anio'];
+				$this->nombre=$row['nombre'];
+				$this->cantidad_equipos=$row['cantidad_equipos'];
+				$this->id_usuario=$row['id_usuario'];
+				$this->fecha_creacion=$row['fecha_creacion'];
 				
 			}
 			if (mysqli_more_results($this->db->conn_id)) {
@@ -77,6 +79,7 @@ class Torneo_model extends CI_Model {
 				array(
 						'id_liga' 			=> $torneo->id_liga, 
 						'anio' 				=> $torneo->anio, 
+						'id_tipo_modalidad'	=> $torneo->id_tipo_modalidad,
 						'nombre' 			=> $torneo->nombre, 
 						'cantidad_equipos' 	=> $torneo->cantidad_equipos,
 						'id_usuario'		=>$torneo->id_usuario
@@ -107,7 +110,8 @@ class Torneo_model extends CI_Model {
 		if($this->db->query($this->sp_editar, 
 				array(
 						'id_torneo' 			=> $torneo->id_torneo, 
-						'anio' 					=> $torneo->anio, 
+						'anio' 					=> $torneo->anio,
+						'id_tipo_modalidad'		=> $torneo->id_tipo_modalidad,
 						'nombre' 				=> $torneo->nombre, 
 						'cantidad_equipos' 		=> $torneo->cantidad_equipos,
 						'id_usuario'			=> $torneo->id_usuario
