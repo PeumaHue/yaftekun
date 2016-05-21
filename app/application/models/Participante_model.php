@@ -9,6 +9,12 @@ class Participante_model extends CI_Model {
 	private $sp_alta 		= 'call participante_alta(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 	private $sp_editar 		= 'call participante_editar(?, ?, ?, ?, ?)';
 	private $sp_baja 		= 'call participante_baja(?, ?)';
+	private $sp_consulta_tipos_de_participantes = 'call tipo_participante_consulta()';
+	private $sp_consulta_tipos_de_estados_de_participantes = 'call tipo_estado_jugador_consulta()';
+	private $sp_consulta_tipos_de_estados_civiles_de_participantes = 'call tipo_estado_civil_consulta()';
+	private $sp_consulta_tipos_de_documentos_de_participantes = 'call tipo_documento_consulta()';
+	private $sp_consulta_provincias = 'call tipo_provincia_consulta()';
+	private $sp_consulta_tipos_de_posiciones_juego = 'call tipo_posicion_juego_consulta()';
 	
 	/**
 	 * Variables para los atributos del modelo
@@ -234,4 +240,93 @@ class Participante_model extends CI_Model {
 		}
 		return $resultado;
 	}
+
+	/**
+	 * Consulta los tipos de participantes de torneo
+	 * @return	array Devuelve un array con los tipos de participantes
+	 */
+	public function consulta_tipos_de_participantes()
+	{
+		$query = $this->db->query($this->sp_consulta_tipos_de_participantes);
+		if (mysqli_more_results($this->db->conn_id))
+		{
+			mysqli_next_result($this->db->conn_id);
+		}
+		return $query->result_array();
+	}
+	
+	/**
+	 * Consulta los tipos de estados de los participantes
+	 * @return	array Devuelve un array con los posibles tipos de estados de los participantes
+	 */
+	public function consulta_tipos_de_estados_de_participantes()
+	{
+		$query = $this->db->query($this->sp_consulta_tipos_de_estados_de_participantes);
+		if (mysqli_more_results($this->db->conn_id))
+		{
+			mysqli_next_result($this->db->conn_id);
+		}
+		return $query->result_array();
+	}
+	
+	/**
+	 * Consulta los tipos de estados civiles de los participantes
+	 * @return	array Devuelve un array con los posibles tipos de estados civiles de los participantes
+	 */
+	public function consulta_tipos_de_estados_civiles_de_participantes()
+	{
+		$query = $this->db->query($this->sp_consulta_tipos_de_estados_civiles_de_participantes);
+		if (mysqli_more_results($this->db->conn_id))
+		{
+			mysqli_next_result($this->db->conn_id);
+		}
+		return $query->result_array();
+	}
+	
+	/**
+	 * Consulta los tipos de documentos de los participantes
+	 * @return	array Devuelve un array con los posibles tipos de documentos de los participantes
+	 */
+	public function consulta_tipos_de_documentos_de_participantes()
+	{
+		$query = $this->db->query($this->sp_consulta_tipos_de_documentos_de_participantes);
+		if (mysqli_more_results($this->db->conn_id))
+		{
+			mysqli_next_result($this->db->conn_id);
+		}
+		return $query->result_array();
+	}
+	
+	/**
+	 * Consulta las provincias
+	 * @return	array Devuelve un array con las provincias
+	 */
+	public function consulta_provincias()
+	{
+		$query = $this->db->query($this->sp_consulta_provincias);
+		if (mysqli_more_results($this->db->conn_id))
+		{
+			mysqli_next_result($this->db->conn_id);
+		}
+		return $query->result_array();
+	}
+	
+	/**
+	 * Consulta las tipos de posiciones de juego de los jugadores
+	 * @return	array Devuelve un array con los tipos de posiciones de juego
+	 */
+	public function consulta_tipos_de_posiciones_de_juego()
+	{
+		$query = $this->db->query($this->sp_consulta_tipos_de_posiciones_juego);
+		if (mysqli_more_results($this->db->conn_id))
+		{
+			mysqli_next_result($this->db->conn_id);
+		}
+		return $query->result_array();
+	}
+	
+	
+	
+	
+	
 }

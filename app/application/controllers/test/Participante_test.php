@@ -64,11 +64,22 @@ class Participante_test extends CI_Controller {
  		$this->consulta_test_por_equipo_inexistente();
  		 		
  		$this->consulta_test_por_tipo_participante_inexistente();
- 		
 		
  		$this->baja_test();
-		
-		#echo $this->unit->report();
+ 		
+ 		$this->consulta_test_tipos_de_participantes();
+ 		
+ 		$this->consulta_test_tipos_de_estados_de_participantes();
+ 		
+ 		$this->consulta_test_tipos_de_estados_civiles_de_participantes();
+ 		
+ 		$this->consulta_test_tipos_de_documentos_de_participantes();
+ 		
+ 		$this->consulta_test_provincias();
+ 		
+ 		$this->consulta_test_tipos_de_posiciones_de_juego();
+ 		
+		echo $this->unit->report();
 	}
 	
 	/**
@@ -114,7 +125,7 @@ class Participante_test extends CI_Controller {
 		$expected_result = $resultado;
 		$test_name = 'Alta participante';
 		$notes = var_export($test, true);
-		echo $this->unit->run($test, $expected_result, $test_name, $notes);
+		$this->unit->run($test, $expected_result, $test_name, $notes);
 		$this->id_participante = $test['id'];
 		
 		
@@ -141,8 +152,7 @@ class Participante_test extends CI_Controller {
 		$expected_result = 'is_object';
 		$test_name = 'Consulta participante por ID';
 		$notes = var_export($test, true);
-		echo $this->unit->run($test, $expected_result, $test_name, $notes);
-		
+		$this->unit->run($test, $expected_result, $test_name, $notes);		
 	}
 	
 	/**
@@ -155,8 +165,7 @@ class Participante_test extends CI_Controller {
 		$expected_result = 'is_array';
 		$test_name = 'Consulta participantes por equipo';
 		$notes = var_export($test, true);
-		echo $this->unit->run($test, $expected_result, $test_name, $notes);
-		
+		$this->unit->run($test, $expected_result, $test_name, $notes);		
 	}
 	
 	/**
@@ -169,8 +178,7 @@ class Participante_test extends CI_Controller {
 		$expected_result = 'is_array';
 		$test_name = 'Consulta participantes por tipo';
 		$notes = var_export($test, true);
-		echo $this->unit->run($test, $expected_result, $test_name, $notes);
-	
+		$this->unit->run($test, $expected_result, $test_name, $notes);	
 	}
 	
 	/**
@@ -183,8 +191,7 @@ class Participante_test extends CI_Controller {
 		$expected_result = array();
 		$test_name = 'Consulta de participante por id inexistente';
 		$notes = var_export($test, true);
-		echo $this->unit->run($test, $expected_result, $test_name, $notes);
-		
+		$this->unit->run($test, $expected_result, $test_name, $notes);	
 	}
 	
 	/**
@@ -197,8 +204,7 @@ class Participante_test extends CI_Controller {
 		$expected_result = array();//Espera un array vacio
 		$test_name = 'Consulta de participante por equipo inexistente';
 		$notes = var_export($test, true);
-		echo $this->unit->run($test, $expected_result, $test_name, $notes);
-		
+		$this->unit->run($test, $expected_result, $test_name, $notes);	
 	}
 	
 	/**
@@ -211,12 +217,9 @@ class Participante_test extends CI_Controller {
 		$expected_result = array();//Espera un array vacio
 		$test_name = 'Consulta de participante por tipo participante inexistente';
 		$notes = var_export($test, true);
-		echo $this->unit->run($test, $expected_result, $test_name, $notes);
-	
+		$this->unit->run($test, $expected_result, $test_name, $notes);
 	}
-	
-	
-	
+		
 	/**
 	 * Funcion para testear la baja satisfactoria de un participante.  
 	 * @return void
@@ -228,10 +231,87 @@ class Participante_test extends CI_Controller {
 		$expected_result = $resultado;
 		$test_name = 'Baja participante por id';
 		$notes = var_export($test, true);
-		echo $this->unit->run($test, $expected_result, $test_name, $notes);
-		
+		$this->unit->run($test, $expected_result, $test_name, $notes);		
 	}
-		
+	
+	/**
+	 * Funcion para testear la consulta satisfactoria de los tipos de participantes
+	 * @return void
+	 */
+	public function consulta_test_tipos_de_participantes()
+	{
+		$test = $this->Participante_model->consulta_tipos_de_participantes();
+		$expected_result = 'is_array';
+		$test_name = 'Consulta de tipos de participantes';
+		$notes = var_export($test, true);
+		$this->unit->run($test, $expected_result, $test_name, $notes);
+	}
+	
+	/**
+	 * Funcion para testear la consulta satisfactoria de los tipos de estados de los participantes
+	 * @return void
+	 */
+	public function consulta_test_tipos_de_estados_de_participantes()
+	{
+		$test = $this->Participante_model->consulta_tipos_de_estados_de_participantes(); 
+		$expected_result = 'is_array';
+		$test_name = 'Consulta de tipos de estados de los participantes';
+		$notes = var_export($test, true);
+		$this->unit->run($test, $expected_result, $test_name, $notes);
+	}
+	
+	/**
+	 * Funcion para testear la consulta satisfactoria de los tipos de estados civiles de los participantes
+	 * @return void
+	 */
+	public function consulta_test_tipos_de_estados_civiles_de_participantes()
+	{
+		$test = $this->Participante_model->consulta_tipos_de_estados_civiles_de_participantes();
+		$expected_result = 'is_array';
+		$test_name = 'Consulta de tipos de estados civiles de los participantes';
+		$notes = var_export($test, true);
+		$this->unit->run($test, $expected_result, $test_name, $notes);
+	}
+	
+	/**
+	 * Funcion para testear la consulta satisfactoria de los tipos de documentos de los participantes
+	 * @return void
+	 */
+	public function consulta_test_tipos_de_documentos_de_participantes()
+	{
+		$test = $this->Participante_model->consulta_tipos_de_documentos_de_participantes();
+		$expected_result = 'is_array';
+		$test_name = 'Consulta de tipos de documentos de los participantes';
+		$notes = var_export($test, true);
+		$this->unit->run($test, $expected_result, $test_name, $notes);
+	}
+	
+	/**
+	 * Funcion para testear la consulta satisfactoria de las provincias
+	 * @return void
+	 */
+	public function consulta_test_provincias()
+	{
+		$test = $this->Participante_model->consulta_provincias();
+		$expected_result = 'is_array';
+		$test_name = 'Consulta de provincias';
+		$notes = var_export($test, true);
+		$this->unit->run($test, $expected_result, $test_name, $notes);
+	}
+	
+	/**
+	 * Funcion para testear la consulta satisfactoria de los tipos de posiciones de juego
+	 * @return void
+	 */
+	public function consulta_test_tipos_de_posiciones_de_juego()
+	{
+		$test = $this->Participante_model->consulta_tipos_de_posiciones_de_juego();
+		$expected_result = 'is_array';
+		$test_name = 'Consulta de tipos de posiciones de juego';
+		$notes = var_export($test, true);
+		$this->unit->run($test, $expected_result, $test_name, $notes);
+	}
+	
 	/**
 	 * @todo
 	 * falta validacion de rega de negocio. .
