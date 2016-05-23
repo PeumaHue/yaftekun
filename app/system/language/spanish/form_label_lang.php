@@ -27,6 +27,9 @@ $lang['form_label_departamento']		= 'Dpto';
 $lang['form_label_codigo_postal']		= 'cód. postal';
 $lang['form_label_provincia']			= 'Provincia';
 $lang['form_label_localidad']			= 'Localidad';
+$lang['form_label_telefono']			= 'Teléfono';
+$lang['form_label_celular']				= 'Teléfono celular';
+$lang['form_label_radio']				= 'Teléfono radio';
 
 
 $lang['form_label_comentario']				= 'Comentario';
