@@ -10,14 +10,17 @@ class Arbitro extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Participante_model');
 		$this->load->helper('url');
+		$this->variables['includes']='<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
+		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/valida_arbitro.js').'"></script>';
+		$this->variables['includes']= $this->variables['includes']. '<script src="'.base_url('js/controles.js').'"></script>';
 	}
 	
 	public function index() {
 		// ARBITRO: id_tipo_participante (2)
 		$this->_renderizar_datos(NULL, NULL, 2);
 		$this->_setear_variables();
-		$this->load->view('templates/header');
-		$this->load->view('templates/principal',$this->variables);
+		$this->load->view('templates/header', $this->variables);
+		$this->load->view('arbitros/principal_arbitro');
 		$this->load->view('arbitros/datos_arbitro');
 		$this->load->view('templates/footer');
 	}
@@ -39,10 +42,10 @@ class Arbitro extends CI_Controller {
 	
 	private function _setear_variables($titulo=NULL, $mensaje=NULL, $accion=NULL, $cancelar=NULL, $volver=NULL)
 	{
-		$this->variables['form_id'] = '"arbitros"';
+		//$this->variables['form_id'] = '"arbitros"';
 		$this->variables['titulo_label'] = 'html_arbitro_titulo_default';
-		$this->variables['titulo_formato_panel'] = 'panel panel-arbitros';
-		$this->variables['grilla_ppal_label'] = 'form_label_arbitro';
+		//$this->variables['titulo_formato_panel'] = 'panel panel-arbitros';
+		//$this->variables['grilla_ppal_label'] = 'form_label_arbitro';
 	
 		/*
 			$this->variables['titulo'] = $titulo;
