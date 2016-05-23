@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $('#domicilio_body').on('shown.bs.collapse', function () {
+    $('#domicilio_body').on('shown.bs.collapse', function () { 
         $('#flecha_domicilio').removeClass().addClass("fa fa-chevron-up");
     });
 
@@ -15,7 +15,17 @@
         $('#flecha_equipo').removeClass().addClass("fa fa-chevron-down");
     });
 
-
+    
+    $('#txt_Camiseta').keypress(function() {return validarNumeroControl(event);});
+    $('#txt_NroDoc').keypress(function() {return validarNumeroControl(event);});
+    $('#txt_FechaNacimiento').keypress(function() { return validarNumeroControl(event);});
+    $('#txt_FechaNacimiento').keypress(function() {return maskFecha(this);});
+    $('#txt_Numero').keypress(function() {return validarNumeroControl(event);});
+    $('#txt_Telefono').keypress(function() {return validarNumeroControl(event);});
+    $('#txt_Celulalar').keypress(function() {return validarNumeroControl(event);});
+    $('#txt_Radio').keypress(function() {return validarNumeroControl(event);});
+    
+    
 
 
     $('#Participante').bootstrapValidator({

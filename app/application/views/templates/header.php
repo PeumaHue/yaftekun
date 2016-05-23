@@ -31,7 +31,7 @@
                 TORNEO SENIOR OFICIAL</h1>
         </div>
     </div>
-	<br/>
+
 
  <!-- <nav class="navbar navbar-inverse">
         <div class="container-fluid">
