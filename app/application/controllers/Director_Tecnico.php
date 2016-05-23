@@ -10,14 +10,17 @@ class Director_Tecnico extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Participante_model');
 		$this->load->helper('url');
+		$this->variables['includes']='<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
+		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/valida_dt.js').'"></script>';
+		$this->variables['includes']= $this->variables['includes']. '<script src="'.base_url('js/controles.js').'"></script>';
 	}
 	
 	public function index() {
 		// DIRECTOR TECNICO: id_tipo_participante (3)
 		$this->_renderizar_datos(NULL, NULL, 3);
 		$this->_setear_variables();
-		$this->load->view('templates/header');
-		$this->load->view('templates/principal',$this->variables);
+		$this->load->view('templates/header',$this->variables);		
+		$this->load->view('directores_tecnicos/principal_director_tecnico');
 		$this->load->view('directores_tecnicos/datos_director_tecnico');
 		$this->load->view('templates/footer');
 	}
@@ -39,10 +42,10 @@ class Director_Tecnico extends CI_Controller {
 	
 	private function _setear_variables($titulo=NULL, $mensaje=NULL, $accion=NULL, $cancelar=NULL, $volver=NULL)
 	{
-		$this->variables['form_id'] = '"directores_tecnicos"';
+		//$this->variables['form_id'] = '"directores_tecnicos"';
 		$this->variables['titulo_label'] = 'html_director_tecnico_titulo_default';
-		$this->variables['titulo_formato_panel'] = 'panel panel-directores';
-		$this->variables['grilla_ppal_label'] = 'form_label_director_tecnico';
+		//$this->variables['titulo_formato_panel'] = 'panel panel-directores';
+		//this->variables['grilla_ppal_label'] = 'form_label_director_tecnico';
 	
 		/*
 			$this->variables['titulo'] = $titulo;
