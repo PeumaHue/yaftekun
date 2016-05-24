@@ -5,7 +5,7 @@ class Equipo_model extends CI_Model {
 	 * Variables para los stored procedures usados por el modelo
 	 * @var string
 	 */
-	private $sp_consulta 	= 'call equipo_consulta(?, ?)';
+	private $sp_consulta 	= 'call equipo_consulta(?, ?, ?, ?)';
 	private $sp_alta 		= 'call equipo_alta(?, ?, ?, ?, ?)';
 	private $sp_editar 		= 'call equipo_editar(?, ?, ?, ?, ?)';
 	private $sp_baja 		= 'call equipo_baja(?)';
@@ -62,7 +62,7 @@ class Equipo_model extends CI_Model {
 	#public function consulta($id_equipo=NULL, $id_liga = NULL)
 	public function consulta($id_equipo, $id_liga)
 	{
-		$query = $this->db->query($this->sp_consulta, array('id_equipo_IN' => $id_equipo, 'id_liga_IN' => $id_liga ));
+		$query = $this->db->query($this->sp_consulta, array('id_equipo_IN' => $id_equipo, 'id_liga_IN' => $id_liga, 'row_count_IN'=>NULL, 'offset_IN'=>NULL ));
 
 		if($id_equipo)
 		{

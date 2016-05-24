@@ -35,7 +35,7 @@
 							<div class="pull-right">
 								<div class="btn-group">
 									<button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#principal_body">
-										<i id="flecha_torneo" class="fa fa-chevron-down"></i>
+										<i id="flecha_principal" class="fa fa-chevron-down"></i>
 									</button>
 								</div>
 							</div>
@@ -51,5 +51,7 @@
 				
 			</div>
 		</div>
+<!-- 		
 	</div>
 </form>
+ -->
