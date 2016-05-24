@@ -10,15 +10,18 @@ class delegado extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Participante_model');
 		$this->load->helper('url');
+		$this->variables['includes']='<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
+		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/valida_delegado.js').'"></script>';
+		$this->variables['includes']= $this->variables['includes']. '<script src="'.base_url('js/controles.js').'"></script>';
 	}
 	
 	public function index() {
 		// DELEGADO: id_tipo_participante (4)
 		$this->_renderizar_datos(NULL, NULL, 4);
 		$this->_setear_variables();
-		$this->load->view('templates/header');
-		$this->load->view('templates/principal',$this->variables);
+		$this->load->view('templates/header',$this->variables);
 		$this->load->view('delegados/datos_delegado');
+		$this->load->view('delegados/principal_delegado');
 		$this->load->view('templates/footer');
 	}
 	
