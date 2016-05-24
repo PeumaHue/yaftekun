@@ -8,11 +8,11 @@
     });
 
     $('#dt_body').on('shown.bs.collapse', function () {
-        $('#flecha_equipo').removeClass().addClass("fa fa-chevron-up");
+        $('#flecha_dt').removeClass().addClass("fa fa-chevron-up");
     });
 
     $('#dt_body').on('hidden.bs.collapse', function () {
-        $('#flecha_equipo').removeClass().addClass("fa fa-chevron-down");
+        $('#flecha_dt').removeClass().addClass("fa fa-chevron-down");
     });
 
 

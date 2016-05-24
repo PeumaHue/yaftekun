@@ -7,12 +7,12 @@
         $('#flecha_domicilio').removeClass().addClass("fa fa-chevron-down");
     });
 
-    $('#equipo_body').on('shown.bs.collapse', function () {
-        $('#flecha_equipo').removeClass().addClass("fa fa-chevron-up");
+    $('#delegado_body').on('shown.bs.collapse', function () {
+        $('#flecha_delegado').removeClass().addClass("fa fa-chevron-up");
     });
 
-    $('#equipo_body').on('hidden.bs.collapse', function () {
-        $('#flecha_equipo').removeClass().addClass("fa fa-chevron-down");
+    $('#delegado_body').on('hidden.bs.collapse', function () {
+        $('#flecha_delegado').removeClass().addClass("fa fa-chevron-down");
     });
 
 
