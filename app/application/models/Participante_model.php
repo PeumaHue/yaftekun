@@ -5,7 +5,7 @@ class Participante_model extends CI_Model {
 	 * Variables para los stored procedures usados por el modelo
 	 * @var string
 	 */
-	private $sp_consulta 	= 'call participante_consulta(?, ?, ?)';
+	private $sp_consulta 	= 'call participante_consulta(?, ?, ?, ?, ?)';
 	private $sp_alta 		= 'call participante_alta(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 	private $sp_editar 		= 'call participante_editar(?, ?, ?, ?, ?)';
 	private $sp_baja 		= 'call participante_baja(?, ?)';
@@ -51,7 +51,6 @@ class Participante_model extends CI_Model {
 	public $nombre_equipo;
 	public $id_equipo;
 	
-	
 	public function __construct()
 	{
 		$this->load->database();
@@ -63,11 +62,12 @@ class Participante_model extends CI_Model {
 	 * Consulta de participante por ID o por Equipo
 	 * @param 		integer 	$id_participante
 	 * @param 		integer 	$id_equipo
+	 * @param       integer     $id_tipo_participante
 	 * @return 		mixed 		object|array Si se consulta para clave primaria retorna un objeto.  Caso contrario retorna un array.
 	 */
 	public function consulta($id_participante=NULL, $id_equipo = NULL, $id_tipo_participante = NULL)
 	{
-		$query = $this->db->query($this->sp_consulta, array('id_participante' => $id_participante, 'id_equipo' => $id_equipo, 'id_tipo_participante' => $id_tipo_participante));
+		$query = $this->db->query($this->sp_consulta, array('id_participante' => $id_participante, 'id_equipo' => $id_equipo, 'id_tipo_participante' => $id_tipo_participante, 'row_count' => NULL, 'offset' => NULL));
 		if($id_participante)
 		{
 			if ($query->num_rows() > 0) {
