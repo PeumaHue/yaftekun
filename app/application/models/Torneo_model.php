@@ -39,7 +39,7 @@ class Torneo_model extends CI_Model {
 	 */
 	public function consulta($id_torneo=NULL, $anio = NULL)
 	{
-		$query = $this->db->query($this->sp_consulta, array('id_torneo' => $id_torneo, 'anio' => $anio, 'row_count_IN'=>NULL, 'offset_IN'=>NULL  ));
+		$query = $this->db->query($this->sp_consulta, array('id_torneo' => $id_torneo, 'anio' => $anio, 'row_count'=>NULL, 'offset'=>NULL  ));
 		if($id_torneo)
 		{
 			if ($query->num_rows() > 0) {
