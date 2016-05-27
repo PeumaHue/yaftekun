@@ -22,13 +22,17 @@ class Torneo extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->datos_formulario = new stdClass();//Instancio una clase vacia para evitar el warning "Creating default object from empty value"
 		$this->load->library('form_validation');
 		$this->load->helper(array('url', 'form'));
 		$this->load->model('Torneo_model');
+		$this->datos_formulario = new stdClass();//Instancio una clase vacia para evitar el warning "Creating default object from empty value"
+		$this->variables['includes']='<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
+		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/valida_torneo.js').'"></script>';
 		$this->variables['accion'] = site_url('persona/alta');
 		$this->variables['id_torneo'] = '';
-		$this->load->view('templates/header');
+		$this->variables['reset'] = FALSE;//Variable para indicar si hay que resetear los campos del formulario
+		$this->load->view('templates/header', $this->variables);
+		$this->_setear_campos();
 	}
 	
 	/**
@@ -37,11 +41,6 @@ class Torneo extends CI_Controller {
 	 */
 	public function index()
 	{
-		/**
-		 * @todo Usar el template principal cuando este adaptado a la última versión de Sergio
-		$this->_setear_principal();
-		$this->load->view('templates/principal', $this->variables);
-		 */
 		$this->_renderizar_torneos();
 		$this->load->view('torneos/principal_torneo', $this->variables);
 		$this->load->view('templates/footer');
@@ -55,7 +54,6 @@ class Torneo extends CI_Controller {
 	{
 		$this->_setear_variables('', '', site_url('torneo/alta'), site_url('torneo'), '', '');
 		$this->_obtener_combo_modalidad();
-		$this->_setear_campos();
 		$this->_setear_reglas();
 		if($this->form_validation->run() == FALSE)
 		{
@@ -67,7 +65,7 @@ class Torneo extends CI_Controller {
 			if($query['resultado']='OK')
 			{	
 				$this->variables['mensaje'] = lang('message_guardar_ok');
-				$this->variables['eliminar'] = site_url('torneo/baja') . '/' . $query['id'];
+				$this->variables['reset'] = TRUE;
 			}
 			else
 			{
@@ -86,7 +84,7 @@ class Torneo extends CI_Controller {
 	 */
 	public function editar($id_torneo=NULL)
 	{
-		$this->_setear_variables('', '', site_url('torneo/editar'), site_url('torneo'), '', site_url('torneo/baja') . '/' . $id_torneo);
+		$this->_setear_variables('', '', site_url('torneo/editar'), site_url('torneo'), '', site_url('torneo/baja') . '/' . ($id_torneo==NULL ? $this->input->post('id_torneo') : $id_torneo));
 		//Si no es un post, no se llama al editar y solo se muestran los campos para editar
 		if(!$this->input->post('nombre'))
 		{
@@ -99,7 +97,6 @@ class Torneo extends CI_Controller {
 		}
 		else
 		{
-			$this->_setear_campos();
 			$this->_setear_reglas();
 			$torneo = new stdClass();
 			if($this->form_validation->run() == FALSE)
@@ -160,10 +157,10 @@ class Torneo extends CI_Controller {
 	 */
 	private function _setear_campos()
 	{
-		$this->datos_formulario->id_torneo = isset($this->datos_formulario->id_torneo) ? $this->datos_formulario->id_torneo : '';
-		$this->datos_formulario->nombre = isset($this->datos_formulario->nombre) ? $this->datos_formulario->nombre : '';
-		$this->datos_formulario->cantidad_equipos = isset($this->datos_formulario->cantidad_equipos) ? $this->datos_formulario->cantidad_equipos : '';
-		$this->datos_formulario->id_tipo_modalidad = isset($this->datos_formulario->id_tipo_modalidad) ? $this->datos_formulario->id_tipo_modalidad : '';
+		$this->datos_formulario->id_torneo = '';
+		$this->datos_formulario->nombre = '';
+		$this->datos_formulario->cantidad_equipos = '';
+		$this->datos_formulario->id_tipo_modalidad = '';
 	}
 	
 	/**
