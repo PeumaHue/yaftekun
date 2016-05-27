@@ -1,14 +1,28 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
+	setear_botones();
+	validar_torneo();
+});
+
+function setear_botones()
+{
+	originalLocation = window.location.href;
+	if(originalLocation.indexOf("torneo/alta") >= 0)//Si esta en el alta no se muestra el boton eliminar
+	{
+		$("#btn_eliminar").addClass("disabled");
+	}	
+}
+
+function validar_torneo()
+{
     $('#torneo').bootstrapValidator({
-        message: 'Este valor no es valido',
+        message: 'Este valor no es válido',
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            nombre_torneo: {
+            nombre: {
                 validators: {
                     notEmpty: {
                         message: 'Debe ingresar un nombre de torneo'
@@ -18,20 +32,20 @@ $(document).ready(function () {
             cantidad_equipos: {
                 validators: {
                     digits: {
-                        message: 'solo se admiten números'
+                        message: 'Sólo se admiten números'
                     },
                     notEmpty: {
-                        message: 'debe ingresar la cantidad de equipos'
+                        message: 'Debe ingresar la cantidad de equipos'
                     }
                 }
             },
-            modalidad_juego: {
+            id_tipo_modalidad: {
                 validators: {                   
                     notEmpty: {
-                        message: 'debe seleccionar una modalidad de juego'
+                        message: 'Debe seleccionar una modalidad de juego'
                     }
                 }
             },
         }
     });
-});
+}
