@@ -176,7 +176,6 @@ class Torneo extends CI_Controller {
 	
 	/**
 	 * Funcion que renderiza los ultimos torneos creados
-	 * @todo traer solo un TOP 10
 	 * 
 	 */
 	private function _renderizar_torneos()
