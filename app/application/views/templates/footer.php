@@ -1,8 +1,7 @@
- 	<br>
- 	<footer class="footer"> 
- 	<div class="container">
-        <p class="text-muted">FALTA PIE DE PAGINA.</p>
-      </div>
-    </footer>
+    	</div>
+	</div>
+</div>
+<footer class="footer">   
+</footer>
 </body>
 </html>

@@ -24,16 +24,16 @@ $lang['form_label_calle']				= 'Calle';
 $lang['form_label_numero_calle']		= 'Número';
 $lang['form_label_piso']				= 'Piso';
 $lang['form_label_departamento']		= 'Dpto';
-$lang['form_label_codigo_postal']		= 'cód. postal';
+$lang['form_label_codigo_postal']		= 'Código postal';
 $lang['form_label_provincia']			= 'Provincia';
 $lang['form_label_localidad']			= 'Localidad';
-$lang['form_label_telefono']			= 'Teléfono';
+$lang['form_label_telefono']			= 'Teléfono fijo';
 $lang['form_label_celular']				= 'Teléfono celular';
 $lang['form_label_radio']				= 'Teléfono radio';
 
 
 $lang['form_label_comentario']				= 'Comentario';
-$lang['form_label_nombre_conyuge']			= 'Nombre cónyuge';
+$lang['form_label_nombre_conyuge']			= 'Nombre del cónyuge';
 $lang['form_label_cobertura_medica']		= 'Cobertura médica';
 $lang['form_label_estado']					= 'Estado';
 $lang['form_label_posicion_juego']			= 'Posición de juego';
@@ -63,7 +63,7 @@ $lang['form_label_ayuda_nombre_equipo']	= 'Ingrese el nombre del nuevo equipo';
 /*
  * Paneles 
  */
-$lang['form_panel_datos_personales']	= 'Datos personales';
+$lang['form_panel_datos_personales']	= 'Agregar';
 $lang['form_panel_domicilio']			= 'Domicilio';
 $lang['form_panel_integrantes']			= 'Integrantes';
 $lang['form_label_informacion_general']	= 'Información general';

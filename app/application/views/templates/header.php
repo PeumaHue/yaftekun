@@ -23,23 +23,13 @@
 </head>
 
 <body>
-
-    <div class="jumbotron">
-        <div class="container text-center">
-            <h1>
-                <img class="img" src="<?php echo base_url("images/logotorneo.png"); ?>" alt="logo" width="34" height="42" style="margin: 10px">
-                TORNEO SENIOR OFICIAL</h1>
-        </div>
-    </div>
-
-
- <!-- <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Navegación</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav> -->
+<div id="container2">
+	<div class="wrapper">
+    	<div class="jumbotron">
+        	<div class="container text-center">
+            	<h1>
+                	<img class="img" src="<?php echo base_url("images/logotorneo.png"); ?>" alt="logo" width="34" height="42" style="margin: 10px">
+                	TORNEO SENIOR OFICIAL</h1>
+	        </div>
+    	</div>
 
