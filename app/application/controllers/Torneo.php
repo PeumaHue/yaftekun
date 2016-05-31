@@ -112,7 +112,7 @@ class Torneo extends CI_Controller {
 			{
 				$this->variables['mensaje'] = lang('message_guardar_error');;
 			}
-			$this->_obtener_combo_modalidad($this->datos_formulario->id_tipo_modalidad);
+			$this->_obtener_combo_modalidad($this->input->post('id_tipo_modalidad'));
 		}
 		$this->_renderizar_torneos();
 		$this->load->view('torneos/principal_torneo', $this->variables);
