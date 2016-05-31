@@ -32,12 +32,12 @@ class Torneo extends CI_Controller {
 		$this->variables['id_torneo'] = '';
 		$this->variables['reset'] = FALSE;//Variable para indicar si hay que resetear los campos del formulario
 		
-		/*
+		
 		 
-		 $this->load->view('templates/header', $this->variables);
+		$this->load->view('templates/header', $this->variables);
 		$this->_setear_campos();
 		
-		*/
+		
 		
 	}
 	
