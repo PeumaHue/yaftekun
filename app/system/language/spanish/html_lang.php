@@ -20,10 +20,3 @@ $lang['html_director_tecnico_titulo_default']	= 'Directores Técnicos';
 $lang['html_equipo_titulo_default']				= 'Equipos';
 $lang['html_torneo_titulo_default']				= 'Torneos';
 $lang['html_delegado_titulo_default']			= 'Delegados';
-
-/*
-$lang['html_persona_titulo_alta']			= 'Alta de Personas';
-$lang['html_persona_titulo_consulta']		= 'Búsqueda de personas';
-$lang['html_persona_titulo_ver']			= 'Detalle persona';
-$lang['html_persona_titulo_modificar']		= 'Modificar persona';
-*/
