@@ -7,9 +7,11 @@ class Equipo_model extends CI_Model {
 	 */
 	private $sp_consulta 	= 'call equipo_consulta(?, ?, ?, ?)';
 	private $sp_alta 		= 'call equipo_alta(?, ?, ?, ?, ?)';
-	private $sp_editar 		= 'call equipo_editar(?, ?, ?, ?, ?)';
+	private $sp_editar 		= 'call equipo_editar(?, ?, ?, ?, ?, ?)';
 	private $sp_baja 		= 'call equipo_baja(?)';
-
+	private $sp_ligas		= 'call liga_consulta(?)';
+	private $sp_estadios	= 'call estadio_consulta()';
+	
 	/**
 	 * Variables para los atributos del modelo
 	 * @var bigint
@@ -59,7 +61,6 @@ class Equipo_model extends CI_Model {
 	 * @param 		bigint 	$id_liga
 	 * @return 		mixed 		object|array Si se consulta para clave primaria retorna un objeto.  Caso contrario retorna un array.
 	 */
-	#public function consulta($id_equipo=NULL, $id_liga = NULL)
 	public function consulta($id_equipo, $id_liga)
 	{
 		$query = $this->db->query($this->sp_consulta, array('id_equipo_IN' => $id_equipo, 'id_liga_IN' => $id_liga, 'row_count_IN'=>NULL, 'offset_IN'=>NULL ));
@@ -141,7 +142,8 @@ class Equipo_model extends CI_Model {
 						'id_usuario_IN'	=> $equipo->id_usuario,
 						'imagen_IN'	 	=> $equipo->imagen
 				))
-				){
+				)
+		{
 			$resultado['resultado']='OK';
 		}
 		else{
@@ -172,4 +174,24 @@ class Equipo_model extends CI_Model {
 		}
 		return $resultado;
 	}
+	
+	public function obtener_ligas(){
+		$query = $this->db->query($this->sp_ligas, array('id_liga_IN' => NULL));
+		
+		if (mysqli_more_results($this->db->conn_id)) {
+			mysqli_next_result($this->db->conn_id);
+		}
+		return $query->result_array();
+	}
+	
+	public function obtener_estadios(){
+		$query = $this->db->query($this->sp_estadios);
+	
+		if (mysqli_more_results($this->db->conn_id)) {
+			mysqli_next_result($this->db->conn_id);
+		}
+		return $query->result_array();
+	}
+	
+	
 }
