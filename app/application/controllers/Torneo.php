@@ -61,8 +61,7 @@ class Torneo extends CI_Controller {
 		}
 		else
 		{
-			$query = $this->Torneo_model->alta($this->_obtener_post());
-			if($query['resultado']='OK')
+			if($this->Torneo_model->alta($this->_obtener_post())['resultado']='OK')
 			{	
 				$this->variables['mensaje'] = lang('message_guardar_ok');
 				$this->variables['reset'] = TRUE;
@@ -112,7 +111,7 @@ class Torneo extends CI_Controller {
 			{
 				$this->variables['mensaje'] = lang('message_guardar_error');;
 			}
-			$this->_obtener_combo_modalidad($this->datos_formulario->id_tipo_modalidad);
+			$this->_obtener_combo_modalidad($this->input->post('id_tipo_modalidad'));
 		}
 		$this->_renderizar_torneos();
 		$this->load->view('torneos/principal_torneo', $this->variables);
@@ -152,7 +151,7 @@ class Torneo extends CI_Controller {
 	}
 	
 	/**
-	 * Funcion que limpia los campos del formulario
+	 * Funcion que inicializa las variables de los campos del formulario para la edición
 	 * @return void
 	 */
 	private function _setear_campos()
@@ -177,7 +176,6 @@ class Torneo extends CI_Controller {
 	
 	/**
 	 * Funcion que renderiza los ultimos torneos creados
-	 * @todo traer solo un TOP 10
 	 * 
 	 */
 	private function _renderizar_torneos()
@@ -210,20 +208,7 @@ class Torneo extends CI_Controller {
 		$this->variables['modalidades']	= '';
 		$this->variables['modalidad']	= '';
 	}
-	
-	/**
-	 * Funcion que setea las parametros de la vista templates/principal
-	 * @return void
-	 */
-	private function _setear_principal()
-	{
-		$this->variables['form_id'] 				= '"Torneos"';
-		$this->variables['titulo_label'] 			= 'html_torneo_titulo_default';
-		$this->variables['titulo_formato_panel'] 	= 'panel panel-torneos';
-		$this->variables['grilla_ppal_label'] 		= 'form_label_torneos';
-		$this->variables['datos_ppal'] 				= '';
-	}
-	
+		
 	/**
 	 * Funcion que completa el combo de modalidades si no recibe ningún parametro, sino muestra el combo con el id que recibe
 	 * @param 		integer 	$id_tipo_modalidad
