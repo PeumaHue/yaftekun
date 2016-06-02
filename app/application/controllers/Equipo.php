@@ -50,22 +50,32 @@ class Equipo extends CI_Controller {
 	 */
 	public function alta(){
 	
-
-		$this->load->library('upload', $this->conf);
-		
 		$this->_setear_variables('','',site_url('equipo/alta'),site_url('equipo'),'','');
 		$this->_setear_campos();
 		$this->_setear_reglas();
 		
-		if ($this->form_validation->run()==FALSE){
+		if ($this->form_validation->run()==FALSE)
+		{
 			$this->variables['mensaje']= validation_errors();
 		}
-		else {
+		else 
+		{
+			$this->load->library('upload', $this->conf);
+			if ( ! $this->upload->do_upload('imagen'))
+			{
+				$this->variables['mensaje'] = $this->upload->display_errors();
 			
-			$query = $this->Equipo_model->alta($this->_obtener_post());
-			move_uploaded_file($_FILES["imagen"]["tmp_name"], $this->conf->upload_path.$_FILES["imagen"]["name"]);
-			
-			
+			}
+			elseif ($this->Equipo_model->alta($this->_obtener_post())['resultado']='OK')
+			{
+				$this->variables['mensaje'] = lang('message_guardar_ok');
+				$this->variables['reset'] = TRUE;
+				
+			}
+			else
+			{
+				$this->variables['mensaje'] = lang('message_guardar_error');
+			}
 		}
 		
 		$this->variables['ligas']=_obtener_array_asociativo($this->Equipo_model->obtener_ligas(), 'id_liga', 'nombre');
@@ -86,17 +96,13 @@ class Equipo extends CI_Controller {
 		$this->variables['ligas']=_obtener_array_asociativo($this->Equipo_model->obtener_ligas(), 'id_liga', 'nombre');
 		$this->variables['estadios']=_obtener_array_asociativo($this->Equipo_model->obtener_estadios(), 'id_estadio', 'nombre');
 		
-		if (!$this->input->post('nombre')){
+		if (!$this->input->post('nombre'))
+		{
 			$this->_cargar_datos_formulario($this->Equipo_model->consulta($id_equipo,NULL));
-			#$this->_setear_variables('','',site_url('equipo/editar').'/'.$this->datos_formulario->id_equipo,site_url('equipo'),'',site_url('equipo/baja'.'/'.$this->datos_formulario->id_equipo));
 			$this->_setear_variables('','',site_url('equipo/editar'),site_url('equipo'),'',site_url('equipo/baja'.'/'.$this->datos_formulario->id_equipo));
 			
 		}
 		else {
-			/*
-			echo $id_equipo;
-			die();
-			*/
 			$this->_setear_campos();
 			$this->_setear_variables('','',site_url('equipo/editar'),site_url('equipo'),'',site_url('equipo/baja'.'/'.$this->datos_formulario->id_equipo));
 			$this->_setear_reglas();
@@ -106,7 +112,21 @@ class Equipo extends CI_Controller {
 			}
 			else 
 			{
-				$query = $this->Equipo_model->editar($this->_obtener_post());
+				$this->load->library('upload', $this->conf);
+				if ( (! $this->upload->do_upload('imagen')) && ($this->upload->data(['file_name'])!=='') )
+				{
+					$this->variables['mensaje'] = $this->upload->display_errors();
+						
+				}
+				elseif ($this->Equipo_model->editar($this->_obtener_post())['resultado']='OK')
+				{
+					$this->variables['mensaje'] = lang('message_guardar_ok');
+					$this->variables['reset'] = TRUE;
+				}
+				else
+				{
+					$this->variables['mensaje'] = lang('message_guardar_error');
+				}
 			}
 		}
 		
@@ -138,8 +158,7 @@ class Equipo extends CI_Controller {
 		$equipo->nombre 			= $this->input->post('nombre');
 		$equipo->id_estadio 		= $this->input->post('id_estadio');
 		$equipo->id_usuario 		= $this->input->post('id_usuario');
-		#$equipo->imagen 			= $this->input->files() # files('name');
-		$equipo->imagen 			= $this->input->post('imagen');
+		$equipo->imagen 			= $this->upload->data('file_name'); 
 
 		return $equipo;
 	}

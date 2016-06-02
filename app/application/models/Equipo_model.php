@@ -63,7 +63,7 @@ class Equipo_model extends CI_Model {
 	 */
 	public function consulta($id_equipo, $id_liga)
 	{
-		$query = $this->db->query($this->sp_consulta, array('id_equipo_IN' => $id_equipo, 'id_liga_IN' => $id_liga, 'row_count_IN'=>NULL, 'offset_IN'=>NULL ));
+		$query = $this->db->query($this->sp_consulta, array('id_equipo' => $id_equipo, 'id_liga' => $id_liga, 'row_count'=>NULL, 'offset'=>NULL ));
 
 		if($id_equipo)
 		{
@@ -103,12 +103,12 @@ class Equipo_model extends CI_Model {
 	{
 		$query = $this->db->query($this->sp_alta,
 				array(
-						'id_liga_IN' 		=> $equipo->id_liga,
-						'nombre_IN' 		=> $equipo->nombre,
-						'id_estadio_IN' 	=> $equipo->id_estadio,
-						'id_usuario_IN' 	=> $equipo->id_usuario,
+						'id_liga' 		=> $equipo->id_liga,
+						'nombre' 		=> $equipo->nombre,
+						'id_estadio' 	=> $equipo->id_estadio,
+						'id_usuario' 	=> $equipo->id_usuario,
 						#'fecha_creacion_IN' => $equipo->fecha_creacion,
-						'imagen_IN'			=>$equipo->imagen
+						'imagen'			=>$equipo->imagen
 				));
 
 		if( $query )
@@ -135,12 +135,12 @@ class Equipo_model extends CI_Model {
 	{
 		if($this->db->query($this->sp_editar,
 				array(
-						'id_equipo_IN'	=> $equipo->id_equipo,
-						'id_liga_IN'	=> $equipo->id_liga,
-						'nombre_IN'	 	=> $equipo->nombre,
-						'id_estadio_IN'	=> $equipo->id_estadio,
-						'id_usuario_IN'	=> $equipo->id_usuario,
-						'imagen_IN'	 	=> $equipo->imagen
+						'id_equipo'	=> $equipo->id_equipo,
+						'id_liga'	=> $equipo->id_liga,
+						'nombre'	 	=> $equipo->nombre,
+						'id_estadio'	=> $equipo->id_estadio,
+						'id_usuario'	=> $equipo->id_usuario,
+						'imagen'	 	=> $equipo->imagen
 				))
 				)
 		{
@@ -162,7 +162,7 @@ class Equipo_model extends CI_Model {
 	 */
 	public function baja($equipo)
 	{
-		if($query = $this->db->query($this->sp_baja, array('id_equipo_IN' => $equipo->id_equipo))) {
+		if($query = $this->db->query($this->sp_baja, array('id_equipo' => $equipo->id_equipo))) {
 			$resultado['resultado']='OK';
 		}
 		else{
@@ -176,7 +176,7 @@ class Equipo_model extends CI_Model {
 	}
 	
 	public function obtener_ligas(){
-		$query = $this->db->query($this->sp_ligas, array('id_liga_IN' => NULL));
+		$query = $this->db->query($this->sp_ligas, array('id_liga' => NULL));
 		
 		if (mysqli_more_results($this->db->conn_id)) {
 			mysqli_next_result($this->db->conn_id);
