@@ -37,9 +37,11 @@ class Equipo_test extends CI_Controller {
 				
 		$this->consulta_equipo_inexistente_test();
 				
+		$this->editar_test($this->id_equipo);
+		
 		$this->consulta_equipo_liga_inexistente_test();
 		
-		$this->baja_test($this->id_equipo);
+		#$this->baja_test($this->id_equipo);
 		
 
 		echo $this->unit->report();
@@ -164,7 +166,31 @@ class Equipo_test extends CI_Controller {
 		#echo $this->unit->report();
 	}
 
+	/**
+	 * Funcion para testear la edicion del ultimo equipo dado de alta
+	 * @return void
+	 */
+	public function editar_test($id_equipo)
+	{
+		$equipo = new stdClass();
 	
+		$equipo->id_equipo=$id_equipo;
+		$equipo->id_liga=1;
+		$equipo->nombre='EDITADO2';
+		$equipo->id_estadio=1;
+		$equipo->id_usuario=1;
+		$equipo->fecha_creacion='20170101';
+		$equipo->imagen='C:\Bitnami\wampstack-5.6.19-0\apps\yaftekun\db\imagenes\editado.png';
+		
+		$test = $this->Equipo_model->editar($equipo);
+		$expected_result['resultado']='OK';
+		$test_name = 'editar test';
+		$notes = var_export($test, true).$id_equipo;
+	
+		$this->unit->run($test, $expected_result, $test_name, $notes);
+		
+		#echo $this->unit->report();
+	}
 	
 
 	

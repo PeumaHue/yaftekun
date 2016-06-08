@@ -16,4 +16,22 @@ function _renderizar_datos_link($ruta, $campoID, $campoMostrar, $datos, $divClas
 		$html = $html.'<div class="'.$divClass.'"><a href="' .site_url($ruta).'/'.$item[$campoID] . '" class="'.$linkClass.'">' . $item[$campoMostrar] . '</a></div>';
 	endforeach;
 	return $html;
+};
+
+/**
+ * Funcion que obtinen un array asociativo para pasarlo como completar un combo
+ * util para pasar parametros a form_dropdown.
+ * @param 		object 	$datos	obtenidos del modelo
+ * @param 		string	$campo_clave nombre del campo clave
+ * @param 		string 	$campo_descripcion nombre del campo a mostrar en el combo
+ * @return array con lista y clave seleccionada
+ */
+function _obtener_array_asociativo($datos, $campo_clave, $campo_descripcion)
+{
+	$resultado[''] = "[".lang('form_combo_seleccionar')."]";
+	foreach ($datos as $i)
+	{
+		$resultado[$i[$campo_clave]] = $i[$campo_descripcion];
+	}
+	return $resultado;
 }
