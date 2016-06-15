@@ -6,6 +6,7 @@ class Equipo extends CI_Controller {
 	 * @var array
 	 */
 	private $variables;
+	private $subeimagen;
 	public $conf;
 	
 	/**
@@ -14,7 +15,7 @@ class Equipo extends CI_Controller {
 	 */
 	public $datos_formulario;
 	
-	
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -29,17 +30,33 @@ class Equipo extends CI_Controller {
 		$this->conf['max_width'] = '100';
 		$this->conf['max_height'] = '100';
 		
+		$this->subeimagen = false;
 		$this->load->view('templates/header');
+		
 	}
 	
 	public function index() {
 		$this->variables['ligas']=_obtener_array_asociativo($this->Equipo_model->obtener_ligas(), 'id_liga', 'nombre');
 		$this->variables['estadios']=_obtener_array_asociativo($this->Equipo_model->obtener_estadios(), 'id_estadio', 'nombre');
-		$this->variables['html_datos_ppal'] =_renderizar_datos_link('equipo/editar', 'id_equipo','nombre',$this->Equipo_model->consulta(NULL,NULL));
+		$this->variables['html_datos_ppal'] =_renderizar_datos_link('equipo/editar', 'id_equipo','nombre',$this->Equipo_model->consulta(NULL,NULL,NULL));
 		
 		$this->_setear_campos();
 		$this->_setear_variables('','',site_url('equipo/alta'),site_url('equipo'),'','');
 				
+		$this->load->view('equipos/principal',$this->variables);
+		#$this->load->view('equipos/datos_equipo');
+		$this->load->view('templates/footer');
+	}
+
+	public function busqueda($nombre) {
+		$this->_setear_campos();
+		$this->variables['ligas']=_obtener_array_asociativo($this->Equipo_model->obtener_ligas(), 'id_liga', 'nombre');
+		$this->variables['estadios']=_obtener_array_asociativo($this->Equipo_model->obtener_estadios(), 'id_estadio', 'nombre');
+		$this->variables['html_datos_ppal'] =_renderizar_datos_link('equipo/editar', 'id_equipo','nombre',$this->Equipo_model->consulta(NULL,NULL,$nombre));
+	
+		
+		$this->_setear_variables('','',site_url('equipo/alta'),site_url('equipo'),'','');
+	
 		$this->load->view('equipos/principal',$this->variables);
 		#$this->load->view('equipos/datos_equipo');
 		$this->load->view('templates/footer');
@@ -50,9 +67,11 @@ class Equipo extends CI_Controller {
 	 */
 	public function alta(){
 	
+		
 		$this->_setear_variables('','',site_url('equipo/alta'),site_url('equipo'),'','');
 		$this->_setear_campos();
 		$this->_setear_reglas();
+		$this->variables['mensaje']='';
 		
 		if ($this->form_validation->run()==FALSE)
 		{
@@ -60,27 +79,35 @@ class Equipo extends CI_Controller {
 		}
 		else 
 		{
-			$this->load->library('upload', $this->conf);
-			if ( ! $this->upload->do_upload('imagen'))
+			$this->subeimagen = ($_FILES['imagen']['tmp_name']!='');
+			if ($this->subeimagen)
 			{
-				$this->variables['mensaje'] = $this->upload->display_errors();
-			
-			}
-			elseif ($this->Equipo_model->alta($this->_obtener_post())['resultado']='OK')
-			{
-				$this->variables['mensaje'] = lang('message_guardar_ok');
-				$this->variables['reset'] = TRUE;
+				$this->load->library('upload', $this->conf);
 				
+				if ( ! $this->upload->do_upload('imagen'))
+				{
+					$this->variables['mensaje'] = $this->upload->display_errors();
+						
+				}
 			}
-			else
+			
+			if ($this->variables['mensaje']=='')
 			{
-				$this->variables['mensaje'] = lang('message_guardar_error');
+				if ($this->Equipo_model->alta($this->_obtener_post())['resultado']=='OK')
+				{
+					$this->variables['mensaje'] = lang('message_guardar_ok');
+					$this->variables['reset'] = TRUE;
+				}
+				else
+				{
+					$this->variables['mensaje'] = lang('message_guardar_error');
+				}
 			}
 		}
 		
 		$this->variables['ligas']=_obtener_array_asociativo($this->Equipo_model->obtener_ligas(), 'id_liga', 'nombre');
 		$this->variables['estadios']=_obtener_array_asociativo($this->Equipo_model->obtener_estadios(), 'id_estadio', 'nombre');
-		$this->variables['html_datos_ppal'] =_renderizar_datos_link('equipo/editar', 'id_equipo','nombre',$this->Equipo_model->consulta(NULL,NULL));
+		$this->variables['html_datos_ppal'] =_renderizar_datos_link('equipo/editar', 'id_equipo','nombre',$this->Equipo_model->consulta(NULL,NULL,NULL));
 		
 		$this->load->view('equipos/principal',$this->variables);
 		$this->load->view('equipos/datos_equipo');
@@ -98,11 +125,13 @@ class Equipo extends CI_Controller {
 		
 		if (!$this->input->post('nombre'))
 		{
-			$this->_cargar_datos_formulario($this->Equipo_model->consulta($id_equipo,NULL));
+			$this->_cargar_datos_formulario($this->Equipo_model->consulta($id_equipo,NULL,NULL));
 			$this->_setear_variables('','',site_url('equipo/editar'),site_url('equipo'),'',site_url('equipo/baja'.'/'.$this->datos_formulario->id_equipo));
 			
 		}
 		else {
+			
+			$this->subeimagen = ($_FILES['imagen']['tmp_name']!='');
 			$this->_setear_campos();
 			$this->_setear_variables('','',site_url('equipo/editar'),site_url('equipo'),'',site_url('equipo/baja'.'/'.$this->datos_formulario->id_equipo));
 			$this->_setear_reglas();
@@ -112,25 +141,31 @@ class Equipo extends CI_Controller {
 			}
 			else 
 			{
-				$this->load->library('upload', $this->conf);
-				if ( (! $this->upload->do_upload('imagen')) && ($this->upload->data(['file_name'])!=='') )
+				if ($this->subeimagen)
 				{
-					$this->variables['mensaje'] = $this->upload->display_errors();
-						
+					$this->load->library('upload', $this->conf);
+					if (! $this->upload->do_upload('imagen')) 
+					{
+						$this->variables['mensaje'] = $this->upload->display_errors();
+					}	
 				}
-				elseif ($this->Equipo_model->editar($this->_obtener_post())['resultado']='OK')
+				if ($this->variables['mensaje']=='')
 				{
-					$this->variables['mensaje'] = lang('message_guardar_ok');
-					$this->variables['reset'] = TRUE;
+					if ($this->Equipo_model->editar($this->_obtener_post())['resultado']='OK')
+					{
+						$this->variables['mensaje'] = lang('message_guardar_ok');
+						$this->variables['reset'] = TRUE;
+					}
+					else
+					{
+						$this->variables['mensaje'] = lang('message_guardar_error');
+					}	
 				}
-				else
-				{
-					$this->variables['mensaje'] = lang('message_guardar_error');
-				}
+				
 			}
 		}
 		
-		$this->variables['html_datos_ppal'] =_renderizar_datos_link('equipo/editar', 'id_equipo','nombre',$this->Equipo_model->consulta(NULL,NULL));
+		$this->variables['html_datos_ppal'] =_renderizar_datos_link('equipo/editar', 'id_equipo','nombre',$this->Equipo_model->consulta(NULL,NULL,NULL));
 		$this->load->view('equipos/principal',$this->variables);
 		$this->load->view('equipos/datos_equipo');
 		$this->load->view('templates/footer');
@@ -158,8 +193,15 @@ class Equipo extends CI_Controller {
 		$equipo->nombre 			= $this->input->post('nombre');
 		$equipo->id_estadio 		= $this->input->post('id_estadio');
 		$equipo->id_usuario 		= $this->input->post('id_usuario');
-		$equipo->imagen 			= $this->upload->data('file_name'); 
-
+		if ($this->subeimagen)
+		{
+			$equipo->imagen 			= $this->upload->data('file_name');
+		}
+		else 
+		{
+			$equipo->imagen 			= $this->input->post('imagen_original');
+		}
+		
 		return $equipo;
 	}
 	
@@ -169,14 +211,20 @@ class Equipo extends CI_Controller {
 	 */
 	private function _setear_campos()
 	{
+		if (isset($this->datos_formulario->id_equipo))
+		{
+			echo "breackpoint";
+		}
 		$this->datos_formulario->id_equipo = isset($this->datos_formulario->id_equipo) ? $this->datos_formulario->id_equipo : '';
 		$this->datos_formulario->id_liga = isset($this->datos_formulario->id_liga) ? $this->datos_formulario->id_liga : '';
 		$this->datos_formulario->nombre = isset($this->datos_formulario->nombre) ? $this->datos_formulario->nombre : '';
 		$this->datos_formulario->id_estadio = isset($this->datos_formulario->id_estadio) ? $this->datos_formulario->id_estadio : '';
 		$this->datos_formulario->id_usuario = isset($this->datos_formulario->id_usuario) ? $this->datos_formulario->id_usuario : '';
 		$this->datos_formulario->imagen = isset($this->datos_formulario->imagen) ? $this->datos_formulario->imagen : '';
-		
+		$this->datos_formulario->imagen_original = isset($this->datos_formulario->imagen_original) ? $this->datos_formulario->imagen_original : '';
+		$this->datos_formulario->busqueda = isset($this->datos_formulario->busqueda) ? $this->datos_formulario->busqueda : '';
 	}
+	
 	/**
 	 * Funcion que setea las reglas de validacion del formulario y sus mensajes de errores
 	 * @todo traducir los mensajes de errores en los archivos de configuracion para no tener que usar set_messsage
@@ -199,6 +247,12 @@ class Equipo extends CI_Controller {
 		$this->variables['cancelar'] 	= $cancelar;
 		$this->variables['volver'] 		= $volver;
 		$this->variables['eliminar']	= $eliminar;
+		$this->variables['busqueda']	='equipo/busqueda';
+		if (!isset($this->variables['reset']))
+		{
+			$this->variables['reset']=false;
+		}
+				
 		
 		
 		$this->variables['form_id'] = '"equipos"';
@@ -218,6 +272,7 @@ class Equipo extends CI_Controller {
 		$this->datos_formulario->id_usuario         = $objeto->id_usuario       ;
 		$this->datos_formulario->fecha_creacion     = $objeto->fecha_creacion   ;
 		$this->datos_formulario->imagen             = $objeto->imagen           ;
+		$this->datos_formulario->imagen_original    = $objeto->imagen           ;
 	}
 	
 }

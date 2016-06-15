@@ -11,7 +11,7 @@
 			<input type="text" 
 				id="nombre" 
 				name="nombre"
-				value="<?php echo set_value('nombre',$this->datos_formulario->nombre); ?>"
+				value="<?php echo ($reset) ? '' : set_value('nombre',$this->datos_formulario->nombre); ?>"
 				class="form-control"
 				placeholder="<?php echo lang('form_label_ayuda_nombre_equipo');?>"
 				maxlength="100"> 
@@ -20,7 +20,7 @@
 			<div class="form-group">
 				<label><?php echo lang('form_label_equipo_imagen');?></label> 
 				<input type="file" name="imagen" value="<?php echo set_value('imagen',$this->datos_formulario->imagen); ?>">
-				<?php echo set_value('imagen',$this->datos_formulario->imagen); ?>
+				<?php echo set_value('imagen_original',$this->datos_formulario->imagen_original); ?>
 			</div>
 		</div>				
 					
@@ -48,4 +48,5 @@
 	</div>
 	<?php echo form_hidden('id_equipo', $this->datos_formulario->id_equipo); ?>
 	<?php echo form_hidden('id_usuario', 1); ?>
+	<?php echo form_hidden('imagen_original', $this->datos_formulario->imagen); ?>
 </form>

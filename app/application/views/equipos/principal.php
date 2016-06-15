@@ -1,3 +1,12 @@
+ 
+<script>
+function buscar(){
+	var url="<?php echo $busqueda; ?>" + "/" + document.getElementById("TextBusqueda").value;
+	console.log(url);
+	window.location = url;
+	}
+</script>
+
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid <?php echo $titulo_formato_panel; ?>">
     	<div class="navbar-collapse titulo_gupo" id="myNavbar">
@@ -17,7 +26,7 @@
 							<div class="input-group">
 								<input type="text" id="TextBusqueda" name="busqueda" class="form-control" placeholder="Búsqueda" maxlength="100">
 								<span class="input-group-btn">
-									<button class="btn btn-default" type="button">
+									<button class="btn btn-default" type="button" onclick="buscar()">
 										<i class="fa fa-search"></i>
 									</button>
 								</span>

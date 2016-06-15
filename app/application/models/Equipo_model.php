@@ -1,11 +1,15 @@
 <?php
+
+
+
+
 class Equipo_model extends CI_Model {
 
 	/**
 	 * Variables para los stored procedures usados por el modelo
 	 * @var string
 	 */
-	private $sp_consulta 	= 'call equipo_consulta(?, ?, ?, ?)';
+	private $sp_consulta 	= 'call equipo_consulta(?, ?, ?, ?, ?)';
 	private $sp_alta 		= 'call equipo_alta(?, ?, ?, ?, ?)';
 	private $sp_editar 		= 'call equipo_editar(?, ?, ?, ?, ?, ?)';
 	private $sp_baja 		= 'call equipo_baja(?)';
@@ -47,6 +51,9 @@ class Equipo_model extends CI_Model {
 	 * @var mediumblob
 	*/
 	public $imagen;
+
+
+	
 	
 	public function __construct()
 	{
@@ -61,9 +68,9 @@ class Equipo_model extends CI_Model {
 	 * @param 		bigint 	$id_liga
 	 * @return 		mixed 		object|array Si se consulta para clave primaria retorna un objeto.  Caso contrario retorna un array.
 	 */
-	public function consulta($id_equipo, $id_liga)
+	public function consulta($id_equipo, $id_liga, $nombre)
 	{
-		$query = $this->db->query($this->sp_consulta, array('id_equipo' => $id_equipo, 'id_liga' => $id_liga, 'row_count'=>NULL, 'offset'=>NULL ));
+		$query = $this->db->query($this->sp_consulta, array('id_equipo' => $id_equipo, 'id_liga' => $id_liga, 'nombre' => $nombre, 'row_count'=>NULL, 'offset'=>NULL ));
 
 		if($id_equipo)
 		{
@@ -99,31 +106,44 @@ class Equipo_model extends CI_Model {
 	 * @param		object	$equipo
 	 * @return 		array Devuelve un array con la la clave 'resultado', OK en caso de alta exitosa y sino ERROR
 	 */
+	
 	public function alta($equipo)
 	{
-		$query = $this->db->query($this->sp_alta,
-				array(
-						'id_liga' 		=> $equipo->id_liga,
-						'nombre' 		=> $equipo->nombre,
-						'id_estadio' 	=> $equipo->id_estadio,
-						'id_usuario' 	=> $equipo->id_usuario,
-						#'fecha_creacion_IN' => $equipo->fecha_creacion,
-						'imagen'			=>$equipo->imagen
-				));
-
-		if( $query )
-		{
-			$resultado['resultado']='OK';
-			$resultado['id']=$query->row_array()["id"];
-		}
-		else{
-			$resultado['resultado']='ERROR';
-		}
-
-		if (mysqli_more_results($this->db->conn_id)) {
-			mysqli_next_result($this->db->conn_id);
-		}
-		return $resultado;
+		#try {
+			$query = $this->db->query($this->sp_alta,
+					array(
+							'id_liga' 		=> $equipo->id_liga,
+							'nombre' 		=> $equipo->nombre,
+							'id_estadio' 	=> $equipo->id_estadio,
+							'id_usuario' 	=> $equipo->id_usuario,
+							#'fecha_creacion_IN' => $equipo->fecha_creacion,
+							'imagen'			=>$equipo->imagen
+					));
+			
+			if( $query )
+			{
+				$resultado['resultado']='OK';
+				$resultado['id']=$query->row_array()["id"];
+			}
+			else{
+				$resultado['resultado']='ERROR';
+			}
+				
+		#}
+		
+		#catch (Exception $ex)
+		#{
+		#	$resultado['resultado']='ERROR';
+		#}
+		
+		#finally
+		#{
+			if (mysqli_more_results($this->db->conn_id)) {
+				mysqli_next_result($this->db->conn_id);
+			}
+			return $resultado;
+		#}
+		
 	}
 
 	/**
@@ -134,15 +154,16 @@ class Equipo_model extends CI_Model {
 	public function editar($equipo)
 	{
 		if($this->db->query($this->sp_editar,
-				array(
-						'id_equipo'	=> $equipo->id_equipo,
-						'id_liga'	=> $equipo->id_liga,
-						'nombre'	 	=> $equipo->nombre,
-						'id_estadio'	=> $equipo->id_estadio,
-						'id_usuario'	=> $equipo->id_usuario,
-						'imagen'	 	=> $equipo->imagen
-				))
-				)
+								array(
+										'id_equipo'	=> $equipo->id_equipo,
+										'id_liga'	=> $equipo->id_liga,
+										'nombre'	 	=> $equipo->nombre,
+										'id_estadio'	=> $equipo->id_estadio,
+										'id_usuario'	=> $equipo->id_usuario,
+										'imagen'	 	=> $equipo->imagen
+								)
+							)
+							)
 		{
 			$resultado['resultado']='OK';
 		}
@@ -154,6 +175,8 @@ class Equipo_model extends CI_Model {
 			mysqli_next_result($this->db->conn_id);
 		}
 		return $resultado;
+		
+		
 	}
 
 	/**
@@ -192,6 +215,7 @@ class Equipo_model extends CI_Model {
 		}
 		return $query->result_array();
 	}
+
 	
 	
 }
