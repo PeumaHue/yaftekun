@@ -54,7 +54,7 @@ $lang['form_label_equipo']				= 'Equipo';
 $lang['form_label_equipos']				= 'Equipos';
 $lang['form_label_estadio']				= 'Estadio';
 $lang['form_label_usuario']				= 'Usuario';
-$lang['form_label_liga']				= 'liga';
+$lang['form_label_liga']				= 'Liga';
 $lang['form_label_director_tecnico']	= 'Director técnico';
 $lang['form_label_directores_tecnicos']	= 'Directores técnicos';
 $lang['form_label_delegado']			= 'Delegado';
@@ -86,3 +86,5 @@ $lang['form_button_ver']			= 'Ver';
 $lang['form_button_modificar']		= 'Modificar';
 $lang['form_button_eliminar']		= 'Eliminar';
 $lang['form_button_selecccionar']	= 'Seleccionar';
+
+$lang['form_combo_seleccionar']		= 'Seleccione';

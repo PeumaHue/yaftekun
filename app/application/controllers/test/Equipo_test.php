@@ -33,10 +33,16 @@ class Equipo_test extends CI_Controller {
 				
 		$this->consulta_equipo_puntual_test();
 				
+		$this->consulta_equipo_por_nombre_test();
+		
 		$this->consulta_equipo_liga_test();
 				
 		$this->consulta_equipo_inexistente_test();
 				
+		#$this->alta_test();
+		
+		$this->editar_test($this->id_equipo);
+		
 		$this->consulta_equipo_liga_inexistente_test();
 		
 		$this->baja_test($this->id_equipo);
@@ -59,7 +65,7 @@ class Equipo_test extends CI_Controller {
 		$equipo = new stdClass();
 		
 		$equipo->id_liga=1;
-		$equipo->nombre='aldosivi';
+		$equipo->nombre='aldosivi1';
 		$equipo->id_estadio=1;
 		$equipo->id_usuario=1;
 		$equipo->fecha_creacion='20160101';
@@ -82,7 +88,7 @@ class Equipo_test extends CI_Controller {
 	public function consulta_equipo_puntual_test()
 	{
 		#$test = $this->Equipo_model->consulta(4294967299, NULL);
-		$test = $this->Equipo_model->consulta($this->id_equipo, NULL);
+		$test = $this->Equipo_model->consulta($this->id_equipo, NULL,NULL);
 		$expected_result = 'is_object';
 		$test_name = 'consulta_equipo_puntual_test';
 		$notes = var_export($test, true);
@@ -93,10 +99,24 @@ class Equipo_test extends CI_Controller {
 	 * Funcion para testear el alta de una persona existente
 	 * @return void
 	 */
+	public function consulta_equipo_por_nombre_test()
+	{
+		#$test = $this->Equipo_model->consulta(4294967299, NULL);
+		$test = $this->Equipo_model->consulta(NULL, NULL,'dos');
+		$expected_result = 'is_array';
+		$test_name = 'consulta_equipo_puntual_test';
+		$notes = var_export($test, true);
+		$this->unit->run($test, $expected_result, $test_name, $notes);
+	}
+	
+	/**
+	 * Funcion para testear el alta de una persona existente
+	 * @return void
+	 */
 	public function consulta_equipo_inexistente_test()
 	{
 		#$test = $this->Equipo_model->consulta(4294967299, NULL);
-		$test = $this->Equipo_model->consulta(0, NULL);
+		$test = $this->Equipo_model->consulta(0, NULL, NULL);
 		$expected_result = 'is_array';
 		$test_name = 'consulta_equipo_inexistente_test';
 		$notes = var_export($test, true);
@@ -110,7 +130,7 @@ class Equipo_test extends CI_Controller {
 	public function consulta_equipo_liga_test()
 	{
 		#$test = $this->Equipo_model->consulta(4294967299, NULL);
-		$test = $this->Equipo_model->consulta(NULL, 1);
+		$test = $this->Equipo_model->consulta(NULL, 1, NULL);
 		$expected_result = 'is_array';
 		$test_name = 'consulta_equipo_por_liga_test';
 		$notes = var_export($test, true);
@@ -124,7 +144,7 @@ class Equipo_test extends CI_Controller {
 	public function consulta_equipo_liga_inexistente_test()
 	{
 		#$test = $this->Equipo_model->consulta(4294967299, NULL);
-		$test = $this->Equipo_model->consulta(NULL, 0);
+		$test = $this->Equipo_model->consulta(NULL, 0, NULL);
 		$expected_result = 'is_array';
 		$test_name = 'consulta equipo liga inexistente test';
 		$notes = var_export($test, true);
@@ -164,7 +184,31 @@ class Equipo_test extends CI_Controller {
 		#echo $this->unit->report();
 	}
 
+	/**
+	 * Funcion para testear la edicion del ultimo equipo dado de alta
+	 * @return void
+	 */
+	public function editar_test($id_equipo)
+	{
+		$equipo = new stdClass();
 	
+		$equipo->id_equipo=$id_equipo;
+		$equipo->id_liga=1;
+		$equipo->nombre='EDITADO2';
+		$equipo->id_estadio=1;
+		$equipo->id_usuario=1;
+		$equipo->fecha_creacion='20170101';
+		$equipo->imagen='C:\Bitnami\wampstack-5.6.19-0\apps\yaftekun\db\imagenes\editado.png';
+		
+		$test = $this->Equipo_model->editar($equipo);
+		$expected_result['resultado']='OK';
+		$test_name = 'editar test';
+		$notes = var_export($test, true).$id_equipo;
+	
+		$this->unit->run($test, $expected_result, $test_name, $notes);
+		
+		#echo $this->unit->report();
+	}
 	
 
 	

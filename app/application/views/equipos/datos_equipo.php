@@ -1,39 +1,17 @@
 		<div class="form-group col-sm-6">
-			<label class="control-label">ID DE LA LIGA</label>
-			<input type="text" 
-				id="id_liga" 
-				name="id_liga"
-				value="<?php echo set_value('id_liga',$this->datos_formulario->id_liga); ?>"
-				class="form-control"
-				placeholder="Ingrese el id de la liga para el equipo" 
-				maxlength="100"> 
+           	<label class="control-label"><?php echo lang('form_label_liga');?></label>
+			<?php echo form_dropdown('id_liga', $ligas, set_value('id_liga',$this->datos_formulario->id_liga), 'class="form-control"'); ?>
 		</div>
 		<div class="form-group col-sm-6">
-			<label class="control-label">ID DEL ESTADIO</label>
-			<input type="text" 
-				id="id_estadio" 
-				name="id_estadio"
-				value="<?php echo set_value('id_estadio',$this->datos_formulario->id_estadio); ?>"
-				class="form-control"
-				placeholder="Ingrese el id del estadio para el equipo" 
-				maxlength="100"> 
+            <label class="control-label"><?php echo lang('form_label_estadio');?></label>
+			<?php echo form_dropdown('id_estadio', $estadios, set_value('id_estadio',$this->datos_formulario->id_estadio), 'class="form-control"'); ?>
 		</div>
 		<div class="form-group col-sm-6">
-			<label class="control-label">ID DEL USUARIO</label>
-			<input type="text" 
-				id="id_usuario" 
-				name="id_usuario"
-				value="<?php echo set_value('id_usuario',$this->datos_formulario->id_usuario); ?>"
-				class="form-control"
-				placeholder="Ingrese su id de usuario" 
-				maxlength="100"> 
-		</div>
-		<div class="form-group col-sm-6">
-			<label class="control-label">NOMBRE DEL EQUIPO</label>				
+			<label class="control-label"><?php echo lang('form_label_nombre');?></label>				
 			<input type="text" 
 				id="nombre" 
 				name="nombre"
-				value="<?php echo set_value('nombre',$this->datos_formulario->nombre); ?>"
+				value="<?php echo ($reset) ? '' : set_value('nombre',$this->datos_formulario->nombre); ?>"
 				class="form-control"
 				placeholder="<?php echo lang('form_label_ayuda_nombre_equipo');?>"
 				maxlength="100"> 
@@ -42,7 +20,8 @@
 			<div class="form-group">
 				<label><?php echo lang('form_label_equipo_imagen');?></label> 
 				<input type="file" name="imagen" value="<?php echo set_value('imagen',$this->datos_formulario->imagen); ?>">
-			</div>			
+				<?php echo set_value('imagen_original',$this->datos_formulario->imagen_original); ?>
+			</div>
 		</div>				
 					
 				
@@ -67,4 +46,7 @@
             </div>
  		
 	</div>
+	<?php echo form_hidden('id_equipo', $this->datos_formulario->id_equipo); ?>
+	<?php echo form_hidden('id_usuario', 1); ?>
+	<?php echo form_hidden('imagen_original', $this->datos_formulario->imagen); ?>
 </form>

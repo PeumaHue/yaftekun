@@ -4,7 +4,7 @@ class Torneo_model extends CI_Model {
 	 * Variables para los stored procedures usados por el modelo
 	 * @var string
 	 */
-	private $sp_consulta 				= 'call torneo_consulta(?, ?, ?, ?)';
+	private $sp_consulta 				= 'call torneo_consulta(?, ?, ?, ?, ?)';
 	private $sp_alta 					= 'call torneo_alta(?, ?, ?, ?, ?, ?)';
 	private $sp_editar 					= 'call torneo_editar(?, ?, ?, ?, ?, ?)';
 	private $sp_baja 					= 'call torneo_baja(?)';
@@ -37,9 +37,9 @@ class Torneo_model extends CI_Model {
 	 * @param 		integer 	$anio
 	 * @return 		mixed 		object|array Si se consulta para clave primaria retorna un objeto.  Caso contrario retorna un array.
 	 */
-	public function consulta($id_torneo=NULL, $anio = NULL)
+	public function consulta($id_torneo=NULL, $anio = NULL, $nombre = NULL)
 	{
-		$query = $this->db->query($this->sp_consulta, array('id_torneo' => $id_torneo, 'anio' => $anio, 'row_count'=>NULL, 'offset'=>NULL));
+		$query = $this->db->query($this->sp_consulta, array('id_torneo' => $id_torneo, 'anio' => $anio, 'nombre' => $nombre ,'row_count'=>NULL, 'offset'=>NULL));
 		if($id_torneo)
 		{
 			if ($query->num_rows() > 0) {
