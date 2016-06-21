@@ -6,7 +6,7 @@ class Participante_model extends CI_Model {
 	 * @var string
 	 */
 	private $sp_consulta 	= 'call participante_consulta(?, ?, ?, ?, ?)';
-	private $sp_alta 		= 'call participante_alta(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+	private $sp_alta 		= 'call participante_alta(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 	private $sp_editar 		= 'call participante_editar(?, ?, ?, ?, ?)';
 	private $sp_baja 		= 'call participante_baja(?, ?)';
 	private $sp_consulta_tipos_de_participantes = 'call tipo_participante_consulta()';
@@ -47,6 +47,7 @@ class Participante_model extends CI_Model {
 	public $id_tipo_doc;
 	public $nro_doc;
 	public $cobertura_medica;
+	public $fecha_apto_medico;
 	public $id_usuario;
 	public $nombre_equipo;
 	public $id_equipo;
@@ -99,6 +100,7 @@ class Participante_model extends CI_Model {
 				$this->id_tipo_doc=$row["id_tipo_doc"];
 				$this->nro_doc=$row["nro_doc"];
 				$this->cobertura_medica=$row["cobertura_medica"];
+				$this->fecha_apto_medico=$row["fecha_apto_medico"];
 				$this->fecha_creacion=$row["fecha_creacion"];
 				$this->id_usuario=$row["id_usuario"];
 				$this->nombre_equipo=$row["nombre_equipo"];
@@ -154,6 +156,7 @@ class Participante_model extends CI_Model {
 						'id_tipo_doc'			=>$participante->id_tipo_doc,
 						'nro_doc'				=>$participante->nro_doc,
 						'cobertura_medica'		=>$participante->cobertura_medica,
+						'fecha_apto_medico'     =>$participante->fecha_apto_medico,
 						'id_usuario'			=>$participante->id_usuario
 						
 				));
@@ -209,6 +212,7 @@ class Participante_model extends CI_Model {
 						'id_tipo_doc'			=>$participante->id_tipo_doc,
 						'nro_doc'				=>$participante->nro_doc,
 						'cobertura_medica'		=>$participante->cobertura_medica,
+						'fecha_apto_medico'     =>$participante->fecha_apto_medico,
 						'id_usuario'			=>$participante->id_usuario
 				))
 				)

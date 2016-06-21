@@ -34,6 +34,7 @@ class Participante_test extends CI_Controller {
 	public $id_tipo_doc;
 	public $nro_doc;
 	public $cobertura_medica;
+	public $fecha_apto_medico;
 	public $fecha_creacion;
 	public $id_usuario;
 	
@@ -117,8 +118,8 @@ class Participante_test extends CI_Controller {
 		$participante->id_tipo_doc = 1;
 		$participante->nro_doc = 26965501;
 		$participante->cobertura_medica = "OSDE";
+		$participante->fecha_apto_medico = 20171010;
 		$participante->id_usuario = 1;
-			
 		$resultado['resultado']='OK';
 		$test = $this->Participante_model->alta($participante);
 		$resultado['id'] = $test['id'];

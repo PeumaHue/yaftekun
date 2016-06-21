@@ -27,6 +27,51 @@ footer {
 
 
 /**********************************************          
+    IMAGEN FORMULARIO PARTICIPANTE
+**********************************************/
+.thumbnail_fotoparticipante {
+  width: 250px;
+  display: block;
+  padding: 0px;
+  margin-bottom: 30px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 0px solid #ddd;
+  border-radius: 8px 8px 8px 8px;
+  -webkit-transition: border .2s ease-in-out;
+       -o-transition: border .2s ease-in-out;
+          transition: border .2s ease-in-out;
+}
+.thumbnail_fotoparticipante > img,
+.thumbnail_fotoparticipante a > img {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.img-thumbnail {
+  display: inline-block;
+  height: 285px;
+  width: 250px;
+  padding: 0px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 0px solid #ddd;
+  border-radius: 8px 8px 0px 0px;
+  -webkit-transition: all .2s ease-in-out;
+       -o-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+}
+.thumbnail_fotoparticipante_caption {
+  padding-top: 12px;
+  padding-bottom: 8px;
+  background-color: #2E2E2E;
+  text-align: center;
+  border-radius: 0px 0px 8px 8px;
+}
+
+
+
+/**********************************************          
     CABECERA
 **********************************************/
 .jumbotron
@@ -202,6 +247,11 @@ a
     color:hsl(0, 100%, 100%) ;
     background-color: hsl(120, 39%, 54%);
 }
+
+/**********************************************          
+    PANEL JUGADORES
+**********************************************/
+
 .panel-jugadores .panel-heading {
     color: hsl(0, 100%, 100%);
     border-color: hsl(35, 84%, 62%); 
@@ -216,6 +266,9 @@ a
     font-family: Arial, Helvetica, sans-serif;
     padding: 10px 5px 15px 20px;
 }
+
+
+
 
 
 
