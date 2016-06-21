@@ -18,7 +18,7 @@
                                 <div class="col-xs-12 col-sm-4 "><?php echo lang('html_torneo_titulo_default');?></div>
                                 <div class="col-xs-8 col-sm-5">
                                     <div class="input-group">
-                                        <input type="text" id="Text1" name="apellido" class="form-control" placeholder="Búsqueda" maxlength="100">
+                                        <input type="text" id="txt_busqueda" name="apellido" class="form-control" placeholder="Búsqueda rápida" maxlength="100">                                        
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" type="button">
                                                 <i class="fa fa-search"></i>
