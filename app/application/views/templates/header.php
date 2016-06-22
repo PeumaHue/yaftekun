@@ -8,8 +8,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-	<link rel="shortcut icon" href="<?php echo base_url("images/favicon.ico"); ?>" type="image/x-icon" />
 	<link rel="stylesheet" href="<?php echo base_url("css/bootstrap.min.css"); ?>" />
 	<link rel="stylesheet" href="<?php echo base_url("css/propios.css"); ?>" />
    	
