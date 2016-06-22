@@ -517,6 +517,11 @@ a
     margin-right: 5px;
 }
 
+#txt_busqueda
+{
+	float:none;
+}
+
 /***********************/
 /*
 .btn-guardar {
