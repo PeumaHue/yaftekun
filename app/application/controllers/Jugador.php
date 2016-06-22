@@ -5,6 +5,18 @@ class Jugador extends CI_Controller {
 	 * @var array
 	 */
 	private $variables;
+	
+	/**
+	 * Array para guardar exclusivamente los values del formulario
+	 * @var array
+	 */
+	public $datos_formulario;
+	public $mensaje;
+	
+	
+	private $subeimagen;
+	public $conf;
+	
 	public function __construct()
 	{
 		parent::__construct();
@@ -20,13 +32,20 @@ class Jugador extends CI_Controller {
 		$this->variables['reset'] = FALSE;//Variable para indicar si hay que resetear los campos del formulario
 		$this->load->view('templates/header', $this->variables);
 		$this->_setear_campos();
+		
+		$this->conf['upload_path'] = './images/jugadores/';
+		$this->conf['allowed_types'] = 'gif|jpg|png';
+		$this->conf['max_size']     = '2000';
+		$this->conf['max_width'] = '1000';
+		$this->conf['max_height'] = '1000';
+		$this->subeimagen = false;
+		
 	}
 	
 	public function index() {
 		$this->_renderizar_jugadores();
 		$this->load->view('jugadores/principal_jugador', $this->variables);
 		$this->load->view('jugadores/busqueda_jugador', $this->variables);
-		//$this->load->view('jugadores/mensajes_jugador', $this->variables);
 		$this->load->view('templates/footer');
 	}
 	
@@ -37,7 +56,7 @@ class Jugador extends CI_Controller {
 	 */
 	public function alta()
 	{
-		$this->_setear_variables('', '', site_url('jugador/alta'), site_url('jugador'), '', '', 'Agregar');
+		$this->_setear_variables('', '', site_url('jugador/alta'),'', site_url('jugador'), '', 'Agregar');
 		$this->_obtener_combo_documento();
 		$this->_obtener_combo_estado_civil();
 		$this->_obtener_combo_estado_jugador();
@@ -50,7 +69,7 @@ class Jugador extends CI_Controller {
 		}
 		else
 		{
-			$query = $this->Torneo_model->alta($this->_obtener_post());
+			$query = $this->Participante_model->alta($this->_obtener_post());
 			if($query['resultado']='OK')
 			{
 				$this->variables['mensaje'] = lang('message_guardar_ok');
@@ -64,6 +83,7 @@ class Jugador extends CI_Controller {
 		$this->_renderizar_jugadores();
 		$this->load->view('jugadores/principal_jugador', $this->variables);
 		$this->load->view('jugadores/datos_jugador', $this->variables);
+		$this->load->view('jugadores/mensajes_jugador', $this->variables);
 		$this->load->view('templates/footer');
 	}
 	
@@ -74,64 +94,159 @@ class Jugador extends CI_Controller {
 	 */
 	public function editar($id_participante=NULL)
 	{
-		$this->_setear_variables('', '', site_url('jugador/editar'), site_url('jugador'), '', site_url('jugador/baja') . '/' . ($id_participante==NULL ? $this->input->post('id_participante') : $id_participante), 'Editar');
+		$this->_setear_variables('', '', site_url('jugador/editar'), '', site_url('jugador'), site_url('jugador/baja') . '/' . ($id_participante==NULL ? $this->input->post('id_participante') : $id_participante), 'Editar');
 		//Si no es un post, no se llama al editar y solo se muestran los campos para editar
 		if(!$this->input->post('nombre'))
 		{
-			$this->datos_formulario->id_participante=$id_participante;
-			$jugador = $this->Participante_model->consulta($id_participante, NULL, NULL);
-			$this->datos_formulario->apellido = $jugador->apellido;
-			$this->datos_formulario->nombre = $jugador->nombre;
-			$this->datos_formulario->nro_doc = $jugador->nro_doc;	
-			$this->datos_formulario->fecha_nacimiento = $jugador->fecha_nacimiento;
-			$this->datos_formulario->nacionalidad = $jugador->nacionalidad;
-			$this->datos_formulario->conyuge_nombre = $jugador->conyuge_nombre;
-			$this->datos_formulario->cobertura_medica = $jugador->cobertura_medica;
+			$participante = $this->Participante_model->consulta($id_participante, NULL, NULL);
+			$this->datos_formulario->id_participante = $id_participante;
+			$this->datos_formulario->id_tipo_participante = 1;
+			$this->datos_formulario->nombre_archivo_foto = $participante->nombre_archivo_foto;
+			$this->datos_formulario->nombre = $participante->nombre;
+			$this->datos_formulario->apellido = $participante->apellido;
+			$this->datos_formulario->numero_camiseta = $participante->numero_camiseta;
+			$this->datos_formulario->id_tipo_posicion_juego = $participante->id_tipo_posicion_juego;
+			$this->_obtener_combo_estado_jugador($this->datos_formulario->id_tipo_estado_jugador = $participante->id_tipo_estado_jugador);
+			$this->datos_formulario->numero_carnet_socio = $participante->numero_carnet_socio;
+			$this->_obtener_combo_equipo($this->datos_formulario->id_equipo = $participante->id_equipo);
+			$this->datos_formulario->trayectoria = $participante->trayectoria;
+			$this->datos_formulario->telefono = $participante->telefono;
+			$this->datos_formulario->telefono_celular = $participante->telefono_celular;
+			$this->datos_formulario->telefono_radio = $participante->telefono_radio;
+			$this->datos_formulario->email = $participante->email;
+			$this->datos_formulario->fecha_nacimiento = $participante->fecha_nacimiento;
+			$this->datos_formulario->calle = $participante->calle;
+			$this->datos_formulario->piso = $participante->piso;
+			$this->datos_formulario->numero = $participante->numero;
+			$this->datos_formulario->depto = $participante->depto;
+			$this->datos_formulario->codpostal = $participante->codpostal;
+			$this->_obtener_combo_provincia($this->datos_formulario->id_provincia = $participante->id_provincia);
+			$this->datos_formulario->localidad = $participante->localidad;
+			$this->datos_formulario->nacionalidad = $participante->nacionalidad;
+			$this->_obtener_combo_estado_civil($this->datos_formulario->id_estado_civil = $participante->id_estado_civil);
+			$this->datos_formulario->conyuge_nombre = $participante->conyuge_nombre;
+			$this->_obtener_combo_documento($this->datos_formulario->id_tipo_doc = $participante->id_tipo_doc);
+			$this->datos_formulario->nro_doc = $participante->nro_doc;
+			$this->datos_formulario->cobertura_medica = $participante->cobertura_medica;
+			$this->datos_formulario->fecha_apto_medico = $participante->fecha_apto_medico;
+			$this->datos_formulario->nombre_archivo_apto_medico = $participante->nombre_archivo_apto_medico;
 			
-			//$this->_obtener_combo_modalidad($this->datos_formulario->id_tipo_modalidad);
+			$this->datos_formulario->nombre_archivo_foto             = $participante->nombre_archivo_foto;
+			$this->datos_formulario->imagen_original    = $participante->nombre_archivo_foto;
+			
 		}
 		else
 		{
 			$this->_setear_reglas();
-			$torneo = new stdClass();
+			$this->subeimagen = ($_FILES['imagen']['tmp_name']!='');
+			$participante = new stdClass();
 			if($this->form_validation->run() == FALSE)
 			{
 				$this->variables['mensaje']= validation_errors();
 			}
-			else if($this->Participante_model->editar($this->_obtener_post($this->datos_formulario->id_participante))['resultado']='OK')
-			{
-				$this->variables['mensaje'] = lang('message_guardar_cambios_ok');
-			}
 			else
 			{
-				$this->variables['mensaje'] = lang('message_guardar_error');;
+				if ($this->subeimagen)
+				{
+					$this->load->library('upload', $this->conf);
+					if (! $this->upload->do_upload('imagen'))
+					{
+						$this->variables['mensaje'] = $this->upload->display_errors();
+					}
+				}
+				if ($this->variables['mensaje']=='')
+				{
+					if($this->Participante_model->editar($this->_obtener_post($this->datos_formulario->id_participante))['resultado']='OK')
+					{
+						$this->variables['mensaje'] = lang('message_guardar_cambios_ok');
+					}
+					else
+					{
+						$this->variables['mensaje'] = lang('message_guardar_error');;
+					}
+				}
 			}
-			//$this->_obtener_combo_modalidad($this->datos_formulario->id_tipo_modalidad);
+			$this->_obtener_combo_documento($this->input->post('id_tipo_doc'));
+			$this->_obtener_combo_estado_civil($this->input->post('id_estado_civil'));
+			$this->_obtener_combo_equipo($this->input->post('id_equipo'));
+			$this->_obtener_combo_estado_jugador($this->input->post('id_tipo_estado_jugador'));
+			$this->_obtener_combo_provincia($this->input->post('id_provincia'));
 		}
 		$this->_renderizar_jugadores();
 		$this->load->view('jugadores/principal_jugador', $this->variables);
 		$this->load->view('jugadores/datos_jugador', $this->variables);
+		$this->load->view('jugadores/mensajes_jugador', $this->variables);
 		$this->load->view('templates/footer');
 	}
 	
 	
 	/**
+	 * Funcion de baja
+	 * @return void
+	 */
+	public function baja($id_participante=NULL)
+	{
+		if($this->Participante_model->baja($id_participante, true)['resultado']='OK')
+		{
+			$this->variables['mensaje'] = lang('message_guardar_cambios_ok');
+		}
+		else
+		{
+			$this->variables['mensaje'] = lang('message_guardar_error');;
+		}
+		$this->index();
+	}
+	
+	
+	/**
 	 * Obtiene los datos del post y los devuelve en forma de objeto
-	 * @param 		integer 	$id_torneo id del torneo para cuando se trata de una edición
+	 * @param 		integer 	$id_participante id del participante para cuando se trata de una edición
 	 * @return		object		$persona
 	 */
-	private function _obtener_post($id_torneo=NULL)
+	private function _obtener_post($id_participante=NULL)
 	{
-		$fecha = getdate();
-		$torneo = new stdClass();
-		$torneo->id_torneo 			= $id_torneo = '' ? $id_torneo : $this->input->post('id_torneo');
-		$torneo->nombre 			= $this->input->post('nombre');
-		$torneo->cantidad_equipos 	= $this->input->post('cantidad_equipos');
-		$torneo->id_tipo_modalidad 	= $this->input->post('id_tipo_modalidad');
-		$torneo->id_liga			= '1';// @todo Por el momento hay una única liga
-		$torneo->id_usuario			= '1';// @todo Pasar el usuario logueado
-		$torneo->anio				= $fecha['year'];
-		return $torneo;
+		$participante = new stdClass();
+		$participante->id_participante 	          = $id_participante = '' ? $id_participante : $this->input->post('id_participante');
+		$participante->id_tipo_participante       = $this->input->post('id_tipo_participante');
+		$participante->nombre_archivo_foto        = $this->input->post('nombre_archivo_foto');
+		$participante->nombre 			          = $this->input->post('nombre');
+		$participante->apellido                   = $this->input->post('apellido');
+		$participante->numero_camiseta            = $this->input->post('numero_camiseta');
+		$participante->id_tipo_posicion_juego     = $this->input->post('id_tipo_posicion_juego');
+		$participante->id_tipo_estado_jugador     = $this->input->post('id_tipo_estado_jugador');
+		$participante->numero_carnet_socio        = $this->input->post('numero_carnet_socio');
+		$participante->id_equipo                  = $this->input->post('id_equipo');
+		$participante->trayectoria                = $this->input->post('trayectoria');
+		$participante->telefono                   = $this->input->post('telefono');
+		$participante->telefono_celular           = $this->input->post('telefono_celular');
+		$participante->telefono_radio             = $this->input->post('telefono_radio');
+		$participante->email                      = $this->input->post('email');
+		$participante->fecha_nacimiento           = $this->input->post('fecha_nacimiento');
+		$participante->calle			          = $this->input->post('calle');
+		$participante->piso                       = $this->input->post('piso');
+		$participante->numero                     = $this->input->post('numero');
+		$participante->depto                      = $this->input->post('depto');
+		$participante->codpostal                  = $this->input->post('codpostal');
+		$participante->id_provincia               = $this->input->post('id_provincia');
+		$participante->localidad                  = $this->input->post('localidad');
+		$participante->nacionalidad               = $this->input->post('nacionalidad');
+		$participante->id_estado_civil            = $this->input->post('id_estado_civil');
+		$participante->conyuge_nombre             = $this->input->post('conyuge_nombre');
+		$participante->id_tipo_doc 	              = $this->input->post('id_tipo_doc');
+		$participante->nro_doc                    = $this->input->post('nro_doc');
+		$participante->cobertura_medica           = $this->input->post('cobertura_medica');
+		$participante->fecha_apto_medico          = $this->input->post('fecha_apto_medico');
+		$participante->nombre_archivo_apto_medico = $this->input->post('nombre_archivo_apto_medico');
+		$participante->id_usuario			      = '1';// @todo Pasar el usuario logueado
+		if ($this->subeimagen)
+		{
+			$participante->nombre_archivo_foto 			= $this->upload->data('file_name');
+		}
+		else
+		{
+			$participante->nombre_archivo_foto 			= $this->input->post('imagen_original');
+		}
+		return $participante;
 	}
 	
 	/**
@@ -140,14 +255,40 @@ class Jugador extends CI_Controller {
 	 */
 	private function _setear_campos()
 	{
-		$this->datos_formulario->apellido= '';
+		$this->datos_formulario->id_participante = '';
+		$this->datos_formulario->id_tipo_participante = 1;
+		$this->datos_formulario->nombre_archivo_foto = '';
 		$this->datos_formulario->nombre = '';
-		$this->datos_formulario->nro_doc = '';
-		$this->datos_formulario->fecha_nacimiento = '';
-		$this->datos_formulario->nacionalidad = '';
-		$this->datos_formulario->conyuge_nombre = '';
-		$this->datos_formulario->cobertura_medica = '';
+		$this->datos_formulario->apellido = '';
+		$this->datos_formulario->numero_camiseta = '1';
+		$this->datos_formulario->id_tipo_posicion_juego = '';
+		$this->datos_formulario->id_tipo_estado_jugador = '';
+		$this->datos_formulario->numero_carnet_socio = '';
+		$this->datos_formulario->id_equipo = '';
 		$this->datos_formulario->trayectoria = '';
+		$this->datos_formulario->telefono = '';
+		$this->datos_formulario->telefono_celular = '';
+		$this->datos_formulario->telefono_radio = '';
+		$this->datos_formulario->email = '';
+		$this->datos_formulario->fecha_nacimiento = '';
+		$this->datos_formulario->calle = '';
+		$this->datos_formulario->piso = '';
+		$this->datos_formulario->numero = '';
+		$this->datos_formulario->depto = '';
+		$this->datos_formulario->codpostal = '';
+		$this->datos_formulario->id_provincia = '';
+		$this->datos_formulario->localidad = '';
+		$this->datos_formulario->nacionalidad = '';
+		$this->datos_formulario->id_estado_civil = '';
+		$this->datos_formulario->conyuge_nombre = '';
+		$this->datos_formulario->id_tipo_doc = '';
+		$this->datos_formulario->nro_doc = '';
+		$this->datos_formulario->cobertura_medica = '';
+		$this->datos_formulario->fecha_apto_medico = '';
+		$this->datos_formulario->nombre_archivo_apto_medico = '';
+		
+		$this->datos_formulario->nombre_archivo_foto = isset($this->datos_formulario->nombre_archivo_foto) ? $this->datos_formulario->nombre_archivo_foto : '';
+		$this->datos_formulario->imagen_original = isset($this->datos_formulario->imagen_original) ? $this->datos_formulario->imagen_original : '';
 	}
 	
 	/**
@@ -157,9 +298,8 @@ class Jugador extends CI_Controller {
 	 */
 	private function _setear_reglas()
 	{
-		$this->form_validation->set_rules('nombre', 'Nombre', 'trim|required');
-		$this->form_validation->set_rules('cantidad_equipos', 'Cantidad de equipos', 'trim|required');
-		$this->form_validation->set_rules('id_tipo_modalidad', 'Modalidad de juego', 'required');
+		$this->form_validation->set_rules('apellido', 'Apellido fff', 'trim|required');
+		//$this->form_validation->set_rules('nombre', 'Nombre fff', 'trim|required');
 	}
 	
 	private function _renderizar_jugadores()
@@ -170,7 +310,7 @@ class Jugador extends CI_Controller {
 		foreach ($jugadores as $i)
 		{
 			$link_jugador = $link_jugador . '/' . $i['id_participante'];
-			$html = $html . '<div class="form-group col-md-4"><a href="' . $link_jugador . '" class="btn btn-link">' . $i['nombre'] . '</a></div>';
+			$html = $html . '<div class="form-group col-md-4"><a href="' . $link_jugador . '" class="btn btn-link">' . $i['nombre'].'&nbsp;'.$i['apellido'].'</a></div>';
 			$link_jugador = site_url('jugador/editar');
 		}
 		$this->variables['jugadores']=$html;
@@ -264,7 +404,7 @@ class Jugador extends CI_Controller {
 	 */
 	private function _obtener_combo_equipo($id_equipo=NULL)
 	{
-		$equipos = $this->Equipo_model->consulta(NULL, 1);  //@todo 
+		$equipos = $this->Equipo_model->consulta(NULL, 1, NULL);  //@todo 
 		$descripcion[''] = lang('form_label_equipo');
 		foreach ($equipos as $i)
 		{
@@ -291,6 +431,15 @@ class Jugador extends CI_Controller {
 		$this->variables['provincia']= isset($id_tipo_provincia) ? $id_tipo_provincia : '';
 	}
 	
+	public function archivo_upload()
+	{
+		$this->load->model('Archivo_model');
+		
+		if ($this->input->post('upload')) {
+			$this->Archivo_model->do_upload();
+		}
+		$data['images'] = $this->Archivo_model->get_images();
+	}
 	
 	
 }

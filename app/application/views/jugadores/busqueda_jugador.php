@@ -1,3 +1,4 @@
+ <form id="participante" data-toggle="validator" action="<?php echo $accion; ?>" method="POST">
 <div class="container">
 <div class="panel panel-default">
 	<div class="panel-heading">
