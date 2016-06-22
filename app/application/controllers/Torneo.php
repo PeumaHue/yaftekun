@@ -142,7 +142,8 @@ class Torneo extends CI_Controller {
 		$torneo = new stdClass();
 		$torneo->id_torneo = $id_torneo;
 		$this->Torneo_model->baja($torneo);
-		$this->index();
+		//$this->index();
+		redirect(site_url('torneo'));
 	}
 	
 	/**
