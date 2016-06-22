@@ -36,6 +36,10 @@ class Equipo_test extends CI_Controller {
 		$this->consulta_equipo_por_nombre_test();
 		
 		$this->consulta_equipo_liga_test();
+		
+		$this->obtener_estadios_test();
+		
+		$this->obtener_ligas_test();
 				
 		$this->consulta_equipo_inexistente_test();
 				
@@ -137,6 +141,34 @@ class Equipo_test extends CI_Controller {
 		$this->unit->run($test, $expected_result, $test_name, $notes);
 	}
 
+	/**
+	 * Funcion para testear la consulta del equipo cargado en el test Alta equipo
+	 * @return void
+	 */
+	public function obtener_estadios_test()
+	{
+		#$test = $this->Equipo_model->consulta(4294967299, NULL);
+		$test = $this->Equipo_model->obtener_estadios();
+		$expected_result = 'is_array';
+		$test_name = 'obtener_estadios_test';
+		$notes = var_export($test, true);
+		$this->unit->run($test, $expected_result, $test_name, $notes);
+	}
+	
+	/**
+	 * Funcion para testear la consulta del equipo cargado en el test Alta equipo
+	 * @return void
+	 */
+	public function obtener_ligas_test()
+	{
+		#$test = $this->Equipo_model->consulta(4294967299, NULL);
+		$test = $this->Equipo_model->obtener_ligas();
+		$expected_result = 'is_array';
+		$test_name = 'obtener_ligas_test';
+		$notes = var_export($test, true);
+		$this->unit->run($test, $expected_result, $test_name, $notes);
+	}
+	
 	/**
 	 * Funcion para testear la consulta del equipo cargado en el test Alta equipo
 	 * @return void

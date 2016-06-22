@@ -68,9 +68,9 @@ class Equipo_model extends CI_Model {
 	 * @param 		bigint 	$id_liga
 	 * @return 		mixed 		object|array Si se consulta para clave primaria retorna un objeto.  Caso contrario retorna un array.
 	 */
-	public function consulta($id_equipo, $id_liga, $nombre)
+	public function consulta($id_equipo, $id_liga, $nombre, $row_count=10, $offset=0)
 	{
-		$query = $this->db->query($this->sp_consulta, array('id_equipo' => $id_equipo, 'id_liga' => $id_liga, 'nombre' => $nombre, 'row_count'=>NULL, 'offset'=>NULL ));
+		$query = $this->db->query($this->sp_consulta, array('id_equipo' => $id_equipo, 'id_liga' => $id_liga, 'nombre' => $nombre, 'row_count'=>$row_count, 'offset'=>$offset ));
 
 		if($id_equipo)
 		{

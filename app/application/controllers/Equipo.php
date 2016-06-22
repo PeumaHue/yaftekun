@@ -21,8 +21,15 @@ class Equipo extends CI_Controller {
 		parent::__construct();
 		$this->datos_formulario = new stdClass();
 		$this->load->library('form_validation');
-		$this->load->model('Equipo_model');
 		$this->load->helper(array('url', 'form', 'HYaftekun'));
+		$this->load->model('Equipo_model');
+		
+		$this->variables['includes']='<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
+		$this->variables['includes']=$this->variables['includes'].'<script src="'.base_url('js/valida_equipos.js').'"></script>';
+		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/jquery.easy-autocomplete.js').'"></script>';
+		$this->variables['includes']= $this->variables['includes'].'<link rel="stylesheet" href="'.base_url('css/easy-autocomplete.min.css').'" />';
+		$this->variables['includes']= $this->variables['includes'].'<link rel="stylesheet" href="'.base_url('css/easy-autocomplete.themes.min.css').'" />';
+		
 		#echo "<p>NOCACHEADO</p>";
 		$this->conf['upload_path'] = './images/escudos/';
 		$this->conf['allowed_types'] = 'gif|jpg|png';
@@ -31,23 +38,32 @@ class Equipo extends CI_Controller {
 		$this->conf['max_height'] = '100';
 		
 		$this->subeimagen = false;
-		$this->load->view('templates/header');
-		
+		$this->_setear_campos();
 	}
 	
 	public function index() {
-		$this->variables['ligas']=_obtener_array_asociativo($this->Equipo_model->obtener_ligas(), 'id_liga', 'nombre');
-		$this->variables['estadios']=_obtener_array_asociativo($this->Equipo_model->obtener_estadios(), 'id_estadio', 'nombre');
+		
+// 		$this->variables['ligas']=_obtener_array_asociativo($this->Equipo_model->obtener_ligas(), 'id_liga', 'nombre');
+// 		$this->variables['estadios']=_obtener_array_asociativo($this->Equipo_model->obtener_estadios(), 'id_estadio', 'nombre');
 		$this->variables['html_datos_ppal'] =_renderizar_datos_link('equipo/editar', 'id_equipo','nombre',$this->Equipo_model->consulta(NULL,NULL,NULL));
 		
-		$this->_setear_campos();
+// 		$this->_setear_campos();
 		$this->_setear_variables('','',site_url('equipo/alta'),site_url('equipo'),'','');
-				
+		
+		$this->load->view('templates/header', $this->variables);
 		$this->load->view('equipos/principal',$this->variables);
-		#$this->load->view('equipos/datos_equipo');
 		$this->load->view('templates/footer');
 	}
 
+	/**
+	 * Funcion que realiza una búsqueda por nombre de equipo
+	 * @return void
+	 */
+	public function obtener_autocomplete($nombre=NULL)
+	{
+		echo json_encode($this->Equipo_model->consulta(NULL, NULL, $nombre));
+	}
+	
 	public function busqueda($nombre) {
 		$this->_setear_campos();
 		$this->variables['ligas']=_obtener_array_asociativo($this->Equipo_model->obtener_ligas(), 'id_liga', 'nombre');
@@ -57,6 +73,7 @@ class Equipo extends CI_Controller {
 		
 		$this->_setear_variables('','',site_url('equipo/alta'),site_url('equipo'),'','');
 	
+		$this->load->view('templates/header', $this->variables);
 		$this->load->view('equipos/principal',$this->variables);
 		#$this->load->view('equipos/datos_equipo');
 		$this->load->view('templates/footer');
@@ -69,10 +86,9 @@ class Equipo extends CI_Controller {
 	
 		
 		$this->_setear_variables('','',site_url('equipo/alta'),site_url('equipo'),'','');
-		$this->_setear_campos();
+// 		$this->_setear_campos();
 		$this->_setear_reglas();
-		$this->variables['mensaje']='';
-		
+
 		if ($this->form_validation->run()==FALSE)
 		{
 			$this->variables['mensaje']= validation_errors();
@@ -109,6 +125,7 @@ class Equipo extends CI_Controller {
 		$this->variables['estadios']=_obtener_array_asociativo($this->Equipo_model->obtener_estadios(), 'id_estadio', 'nombre');
 		$this->variables['html_datos_ppal'] =_renderizar_datos_link('equipo/editar', 'id_equipo','nombre',$this->Equipo_model->consulta(NULL,NULL,NULL));
 		
+		$this->load->view('templates/header', $this->variables);
 		$this->load->view('equipos/principal',$this->variables);
 		$this->load->view('equipos/datos_equipo');
 		$this->load->view('templates/footer');
@@ -122,18 +139,15 @@ class Equipo extends CI_Controller {
 	{
 		$this->variables['ligas']=_obtener_array_asociativo($this->Equipo_model->obtener_ligas(), 'id_liga', 'nombre');
 		$this->variables['estadios']=_obtener_array_asociativo($this->Equipo_model->obtener_estadios(), 'id_estadio', 'nombre');
+		$this->_setear_variables('','',site_url('equipo/editar'),site_url('equipo'),'',site_url('equipo/baja'.'/'.$this->datos_formulario->id_equipo));
 		
 		if (!$this->input->post('nombre'))
 		{
 			$this->_cargar_datos_formulario($this->Equipo_model->consulta($id_equipo,NULL,NULL));
-			$this->_setear_variables('','',site_url('equipo/editar'),site_url('equipo'),'',site_url('equipo/baja'.'/'.$this->datos_formulario->id_equipo));
-			
 		}
 		else {
 			
 			$this->subeimagen = ($_FILES['imagen']['tmp_name']!='');
-			$this->_setear_campos();
-			$this->_setear_variables('','',site_url('equipo/editar'),site_url('equipo'),'',site_url('equipo/baja'.'/'.$this->datos_formulario->id_equipo));
 			$this->_setear_reglas();
 			if ($this->form_validation->run()==FALSE)
 			{
@@ -166,6 +180,8 @@ class Equipo extends CI_Controller {
 		}
 		
 		$this->variables['html_datos_ppal'] =_renderizar_datos_link('equipo/editar', 'id_equipo','nombre',$this->Equipo_model->consulta(NULL,NULL,NULL));
+		
+		$this->load->view('templates/header', $this->variables);
 		$this->load->view('equipos/principal',$this->variables);
 		$this->load->view('equipos/datos_equipo');
 		$this->load->view('templates/footer');
@@ -211,11 +227,7 @@ class Equipo extends CI_Controller {
 	 */
 	private function _setear_campos()
 	{
-		if (isset($this->datos_formulario->id_equipo))
-		{
-			echo "breackpoint";
-		}
-		$this->datos_formulario->id_equipo = isset($this->datos_formulario->id_equipo) ? $this->datos_formulario->id_equipo : '';
+		$this->datos_formulario->id_equipo = '';
 		$this->datos_formulario->id_liga = isset($this->datos_formulario->id_liga) ? $this->datos_formulario->id_liga : '';
 		$this->datos_formulario->nombre = isset($this->datos_formulario->nombre) ? $this->datos_formulario->nombre : '';
 		$this->datos_formulario->id_estadio = isset($this->datos_formulario->id_estadio) ? $this->datos_formulario->id_estadio : '';

@@ -32,15 +32,15 @@
 
 			<div class="col-lg-12" style="text-align: right; padding-top: 30px; padding-bottom: 10px;">
 
-                <button type="submit" class="btn boton  boton-azul  btn-ancho120">
+                <button id="btn_grabar" type="submit" class="btn boton  boton-azul  btn-ancho120">
                     <i class="fa fa-save"></i><?php echo lang('form_button_grabar');?>
                 </button>
 
-                <a href="<?php echo $eliminar; ?>" class="btn boton  boton-azul  btn-ancho120" role="button">
+                <a id="btn_eliminar" href="<?php echo $eliminar; ?>" class="btn boton  boton-azul  btn-ancho120" role="button">
                     <i class="fa fa-trash-o"></i><?php echo lang('form_button_eliminar');?>
                 </a>
 
-                <a href="<?php echo $cancelar; ?>" class="btn boton  boton-azul  btn-ancho120" role="button">
+                <a id="btn_cancelar" href="<?php echo $cancelar; ?>" class="btn boton  boton-azul  btn-ancho120" role="button">
                     <i class="fa fa-times"></i><?php echo lang('form_button_cancelar');?>
                 </a>
             </div>
