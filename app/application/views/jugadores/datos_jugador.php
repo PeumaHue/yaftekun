@@ -7,21 +7,21 @@
 			</div>
  		    <div class="panel-body">
 				<div class="row">
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<div class="row">
             				<div class="form-group col-sm-12">
+            					<div align="center">
 									<div class="thumbnail_fotoparticipante">
 										<div id="thumbnail_fotoparticipante_caption">
-							   	    </div>
-							   	    <input type="file" type="file" multiple="multiple" name="imagen" value="<?php echo set_value('imagen',$this->datos_formulario->nombre_archivo_foto); ?>" class="btn btn-primary">
-									<?php echo set_value('imagen_original',$this->datos_formulario->imagen_original); ?>
-							   	    
-									<input id="fileUpload" multiple="multiple" type="file" class="btn btn-primary"/>
+									    </div>
+							   	    	<img id="foto" class="img-thumbnail" src="<?php echo base_url('images/jugadores/'. $this->datos_formulario->nombre_archivo_foto);?>" />
 									</div>
+								    <input type="file" id="imagen" name="imagen" class="filestyle" data-buttonName="btn-primary" data-input="false">
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-8">
+					<div class="col-sm-9">
 							<div class="row">
 								<div class="form-group col-sm-6">
 									<input type="text" id="txt_Apellido" value="<?php echo ($reset) ? '' : set_value('apellido',$this->datos_formulario->apellido); ?>" name="apellido" class="form-control"  maxlength="100" placeholder="<?php echo lang('form_label_apellido');?>">

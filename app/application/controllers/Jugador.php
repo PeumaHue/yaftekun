@@ -17,6 +17,8 @@ class Jugador extends CI_Controller {
 	private $subeimagen;
 	public $conf;
 	
+	public $imagen_original;
+	
 	public function __construct()
 	{
 		parent::__construct();
@@ -25,7 +27,9 @@ class Jugador extends CI_Controller {
 		$this->load->model('Participante_model');
 		$this->load->model('Equipo_model');
 		$this->datos_formulario = new stdClass();//Instancio una clase vacia para evitar el warning "Creating default object from empty value"
-		$this->variables['includes']='<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
+		$this->variables['includes']='<script src="'.base_url('js/bootstrap-filestyle.min.js').'"></script>';
+		$this->variables['includes']=$this->variables['includes'].'<script src="'.base_url('js/bootstrap-filestyle.js').'"></script>';
+		$this->variables['includes']=$this->variables['includes'].'<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/valida_jugador.js').'"></script>';
 		$this->variables['accion'] = site_url('Jugador/alta');
 		$this->variables['id_participante'] = '';
@@ -62,6 +66,7 @@ class Jugador extends CI_Controller {
 		$this->_obtener_combo_estado_jugador();
 		$this->_obtener_combo_equipo();
 		$this->_obtener_combo_provincia();
+		$this->datos_formulario->nombre_archivo_foto='no-foto.png';
 		$this->_setear_reglas();
 		if($this->form_validation->run() == FALSE)
 		{
@@ -69,16 +74,33 @@ class Jugador extends CI_Controller {
 		}
 		else
 		{
+			$this->subeimagen = ($_FILES['imagen']['tmp_name']!='');
+			if ($this->subeimagen)
+			{
+				$this->load->library('upload', $this->conf);
+			
+				if ( ! $this->upload->do_upload('imagen'))
+				{
+					$this->variables['mensaje'] = $this->upload->display_errors();
+			
+				}
+			}
+			
+			if ($this->variables['mensaje']=='')
+			{
+				if($query['resultado']='OK')
+				{
+					$this->variables['mensaje'] = lang('message_guardar_ok');
+					$this->variables['reset'] = TRUE;
+				}
+				else
+				{
+					$this->variables['mensaje'] = lang('message_guardar_error');
+				}
+			}
+			
 			$query = $this->Participante_model->alta($this->_obtener_post());
-			if($query['resultado']='OK')
-			{
-				$this->variables['mensaje'] = lang('message_guardar_ok');
-				$this->variables['reset'] = TRUE;
-			}
-			else
-			{
-				$this->variables['mensaje'] = lang('message_guardar_error');
-			}
+			
 		}
 		$this->_renderizar_jugadores();
 		$this->load->view('jugadores/principal_jugador', $this->variables);
@@ -133,6 +155,7 @@ class Jugador extends CI_Controller {
 			
 			$this->datos_formulario->nombre_archivo_foto             = $participante->nombre_archivo_foto;
 			$this->datos_formulario->imagen_original    = $participante->nombre_archivo_foto;
+		
 			
 		}
 		else
@@ -171,6 +194,15 @@ class Jugador extends CI_Controller {
 			$this->_obtener_combo_equipo($this->input->post('id_equipo'));
 			$this->_obtener_combo_estado_jugador($this->input->post('id_tipo_estado_jugador'));
 			$this->_obtener_combo_provincia($this->input->post('id_provincia'));
+			if ($this->subeimagen)
+			{
+				$this->datos_formulario->nombre_archivo_foto = $this->upload->data('file_name');
+			}
+			else
+			{
+			    $this->datos_formulario->nombre_archivo_foto = $this->input->post('imagen_original');
+			}
+
 		}
 		$this->_renderizar_jugadores();
 		$this->load->view('jugadores/principal_jugador', $this->variables);
@@ -287,7 +319,7 @@ class Jugador extends CI_Controller {
 		$this->datos_formulario->fecha_apto_medico = '';
 		$this->datos_formulario->nombre_archivo_apto_medico = '';
 		
-		$this->datos_formulario->nombre_archivo_foto = isset($this->datos_formulario->nombre_archivo_foto) ? $this->datos_formulario->nombre_archivo_foto : '';
+		$this->datos_formulario->nombre_archivo_foto = isset($this->datos_formulario->nombre_archivo_foto) ? $this->datos_formulario->nombre_archivo_foto : 'no-foto.png';
 		$this->datos_formulario->imagen_original = isset($this->datos_formulario->imagen_original) ? $this->datos_formulario->imagen_original : '';
 	}
 	
@@ -404,7 +436,7 @@ class Jugador extends CI_Controller {
 	 */
 	private function _obtener_combo_equipo($id_equipo=NULL)
 	{
-		$equipos = $this->Equipo_model->consulta(NULL, 1, NULL);  //@todo 
+		$equipos = $this->Equipo_model->consulta(NULL, 1, NULL, 500, 0);  //@todo 
 		$descripcion[''] = lang('form_label_equipo');
 		foreach ($equipos as $i)
 		{

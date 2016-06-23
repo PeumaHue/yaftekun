@@ -29,14 +29,14 @@ footer {
     IMAGEN FORMULARIO PARTICIPANTE
 **********************************************/
 .thumbnail_fotoparticipante {
-  width: 250px;
-  display: block;
+  width: 180px;
+  /*display: block;*/
   padding: 0px;
   margin-bottom: 30px;
   line-height: 1.42857143;
   background-color: #fff;
-  border: 0px solid #ddd;
-  border-radius: 8px 8px 8px 8px;
+  border: 3px solid #ddd;
+  border-radius: 6px 6px 6px 6px;
   -webkit-transition: border .2s ease-in-out;
        -o-transition: border .2s ease-in-out;
           transition: border .2s ease-in-out;
@@ -48,14 +48,14 @@ footer {
 }
 
 .img-thumbnail {
-  display: inline-block;
-  height: 285px;
-  width: 250px;
+  /*display: inline-block;*/
+  height: 185px;
+  width: 180px;
   padding: 0px;
   line-height: 1.42857143;
   background-color: #fff;
   border: 0px solid #ddd;
-  border-radius: 8px 8px 0px 0px;
+  border-radius: 4px 4px 4px 4px;
   -webkit-transition: all .2s ease-in-out;
        -o-transition: all .2s ease-in-out;
           transition: all .2s ease-in-out;
@@ -63,11 +63,13 @@ footer {
 .thumbnail_fotoparticipante_caption {
   padding-top: 12px;
   padding-bottom: 8px;
-  background-color: #2E2E2E;
+  background-color: #ffffff;
+  border-radius:  6px 6px 6px 6px;
+  width: 174px;
+  height: 65px;
   text-align: center;
-  border-radius:  0px 0px 8px 8px;
-  width: 250px;
 }
+
 
 
 

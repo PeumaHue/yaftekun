@@ -55,6 +55,7 @@ class Participante_model extends CI_Model {
 	
 	public $imagen;
 	
+	
 	public function __construct()
 	{
 		$this->load->database();
