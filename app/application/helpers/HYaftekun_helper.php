@@ -24,11 +24,13 @@ function _renderizar_datos_link($ruta, $campoID, $campoMostrar, $datos, $divClas
  * @param 		object 	$datos	obtenidos del modelo
  * @param 		string	$campo_clave nombre del campo clave
  * @param 		string 	$campo_descripcion nombre del campo a mostrar en el combo
+ * @param 		string 	$cadena_sin_seleccion el nombre de la cadena del diccionario que se usa para mostrar en el combo cuando no se selecciono nada (default NULL=form_combo_seleccionar)
  * @return array con lista y clave seleccionada
  */
-function _obtener_array_asociativo($datos, $campo_clave, $campo_descripcion)
+function _obtener_array_asociativo($datos, $campo_clave, $campo_descripcion, $cadena_sin_seleccion=NULL)
 {
-	$resultado[''] = "[".lang('form_combo_seleccionar')."]";
+	$cadena_sin_seleccion = isset($cadena_sin_seleccion) ? $cadena_sin_seleccion : 'form_combo_seleccionar';
+	$resultado[''] = lang($cadena_sin_seleccion);
 	foreach ($datos as $i)
 	{
 		$resultado[$i[$campo_clave]] = $i[$campo_descripcion];

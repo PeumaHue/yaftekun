@@ -48,9 +48,23 @@ function validar_jugador()
                 validators: {
                     notEmpty: {
                         message: 'Debe ingresar un numero de documento'
+                    	},
+            		digits: {
+            			message: 'Solo se admiten numeros'
+            			}
+                	},
+            }, 
+            fecha_nacimiento: {
+            	validators: {
+                    notEmpty: {
+                        message: 'The date is required'
+                    },
+                    date: {
+                        format: 'MM/DD/YYYY',
+                        message: 'The date is not a valid'
                     }
                 }
-            }, 
+            }
         }
     });
 }

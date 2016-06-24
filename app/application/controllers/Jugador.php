@@ -23,7 +23,7 @@ class Jugador extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('form_validation');
-		$this->load->helper(array('url', 'form'));
+		$this->load->helper(array('url', 'form', 'HYaftekun'));
 		$this->load->model('Participante_model');
 		$this->load->model('Equipo_model');
 		$this->datos_formulario = new stdClass();//Instancio una clase vacia para evitar el warning "Creating default object from empty value"
@@ -61,11 +61,11 @@ class Jugador extends CI_Controller {
 	public function alta()
 	{
 		$this->_setear_variables('', '', site_url('jugador/alta'),'', site_url('jugador'), '', 'Agregar');
-		$this->_obtener_combo_documento();
-		$this->_obtener_combo_estado_civil();
-		$this->_obtener_combo_estado_jugador();
-		$this->_obtener_combo_equipo();
-		$this->_obtener_combo_provincia();
+		$this->variables['documentos']=_obtener_array_asociativo($this->Participante_model->consulta_tipos_de_documentos_de_participantes(), 'id_tipo_documento', 'descripcion', 'form_label_tipo_documento');
+		$this->variables['estados_civiles']=_obtener_array_asociativo($this->Participante_model->consulta_tipos_de_estados_civiles_de_participantes(), 'id_tipo_estado_civil', 'descripcion', 'form_label_estado_civil');
+		$this->variables['estados']=_obtener_array_asociativo($this->Participante_model->consulta_tipos_de_estados_de_participantes(), 'id_tipo_estado_jugador', 'descripcion', 'form_label_estado');
+		$this->variables['equipos']=_obtener_array_asociativo($this->Equipo_model->consulta(NULL, 1, NULL, 500, 0), 'id_equipo', 'nombre'); //@todo
+		$this->variables['provincias']=_obtener_array_asociativo($this->Participante_model->consulta_provincias(), 'id_tipo_provincia', 'descripcion','form_label_provincia');
 		$this->datos_formulario->nombre_archivo_foto='no-foto.png';
 		$this->_setear_reglas();
 		if($this->form_validation->run() == FALSE)
@@ -117,6 +117,12 @@ class Jugador extends CI_Controller {
 	public function editar($id_participante=NULL)
 	{
 		$this->_setear_variables('', '', site_url('jugador/editar'), '', site_url('jugador'), site_url('jugador/baja') . '/' . ($id_participante==NULL ? $this->input->post('id_participante') : $id_participante), 'Editar');
+		$this->variables['documentos']=_obtener_array_asociativo($this->Participante_model->consulta_tipos_de_documentos_de_participantes(), 'id_tipo_documento', 'descripcion', 'form_label_tipo_documento');
+		$this->variables['estados_civiles']=_obtener_array_asociativo($this->Participante_model->consulta_tipos_de_estados_civiles_de_participantes(), 'id_tipo_estado_civil', 'descripcion', 'form_label_estado_civil');
+		$this->variables['estados']=_obtener_array_asociativo($this->Participante_model->consulta_tipos_de_estados_de_participantes(), 'id_tipo_estado_jugador', 'descripcion', 'form_label_estado');
+		$this->variables['equipos']=_obtener_array_asociativo($this->Equipo_model->consulta(NULL, 1, NULL, 500, 0), 'id_equipo', 'nombre'); //@todo
+		$this->variables['provincias']=_obtener_array_asociativo($this->Participante_model->consulta_provincias(), 'id_tipo_provincia', 'descripcion','form_label_provincia');
+		
 		//Si no es un post, no se llama al editar y solo se muestran los campos para editar
 		if(!$this->input->post('nombre'))
 		{
@@ -128,9 +134,9 @@ class Jugador extends CI_Controller {
 			$this->datos_formulario->apellido = $participante->apellido;
 			$this->datos_formulario->numero_camiseta = $participante->numero_camiseta;
 			$this->datos_formulario->id_tipo_posicion_juego = $participante->id_tipo_posicion_juego;
-			$this->_obtener_combo_estado_jugador($this->datos_formulario->id_tipo_estado_jugador = $participante->id_tipo_estado_jugador);
+			$this->datos_formulario->id_tipo_estado_jugador = $participante->id_tipo_estado_jugador;
 			$this->datos_formulario->numero_carnet_socio = $participante->numero_carnet_socio;
-			$this->_obtener_combo_equipo($this->datos_formulario->id_equipo = $participante->id_equipo);
+			$this->datos_formulario->id_equipo = $participante->id_equipo;
 			$this->datos_formulario->trayectoria = $participante->trayectoria;
 			$this->datos_formulario->telefono = $participante->telefono;
 			$this->datos_formulario->telefono_celular = $participante->telefono_celular;
@@ -142,12 +148,12 @@ class Jugador extends CI_Controller {
 			$this->datos_formulario->numero = $participante->numero;
 			$this->datos_formulario->depto = $participante->depto;
 			$this->datos_formulario->codpostal = $participante->codpostal;
-			$this->_obtener_combo_provincia($this->datos_formulario->id_provincia = $participante->id_provincia);
+			$this->datos_formulario->id_provincia = $participante->id_provincia;
 			$this->datos_formulario->localidad = $participante->localidad;
 			$this->datos_formulario->nacionalidad = $participante->nacionalidad;
-			$this->_obtener_combo_estado_civil($this->datos_formulario->id_estado_civil = $participante->id_estado_civil);
+			$this->datos_formulario->id_estado_civil = $participante->id_estado_civil;
 			$this->datos_formulario->conyuge_nombre = $participante->conyuge_nombre;
-			$this->_obtener_combo_documento($this->datos_formulario->id_tipo_doc = $participante->id_tipo_doc);
+			$this->datos_formulario->id_tipo_doc = $participante->id_tipo_doc;
 			$this->datos_formulario->nro_doc = $participante->nro_doc;
 			$this->datos_formulario->cobertura_medica = $participante->cobertura_medica;
 			$this->datos_formulario->fecha_apto_medico = $participante->fecha_apto_medico;
@@ -189,11 +195,6 @@ class Jugador extends CI_Controller {
 					}
 				}
 			}
-			$this->_obtener_combo_documento($this->input->post('id_tipo_doc'));
-			$this->_obtener_combo_estado_civil($this->input->post('id_estado_civil'));
-			$this->_obtener_combo_equipo($this->input->post('id_equipo'));
-			$this->_obtener_combo_estado_jugador($this->input->post('id_tipo_estado_jugador'));
-			$this->_obtener_combo_provincia($this->input->post('id_provincia'));
 			if ($this->subeimagen)
 			{
 				$this->datos_formulario->nombre_archivo_foto = $this->upload->data('file_name');
@@ -377,101 +378,5 @@ class Jugador extends CI_Controller {
 		$this->variables['eliminar']	= $eliminar;
 		$this->variables['agregar_o_editar']	= $agregar_o_editar;
 	}
-	
-	/**
-	 * Funcion que completa el combo de tipo de documento si no recibe ningún parametro, sino muestra el combo con el id que recibe
-	 * @param 		integer 	$id_tipo_documento
-	 * @return void
-	 */
-	private function _obtener_combo_documento($id_tipo_documento=NULL)
-	{
-		$documentos = $this->Participante_model->consulta_tipos_de_documentos_de_participantes();
-		$descripcion[''] = lang('form_label_tipo_documento');
-		foreach ($documentos as $i)
-		{
-			$descripcion[$i['id_tipo_documento']] = $i['descripcion'];
-		}
-		$this->variables['documentos']=$descripcion;
-		$this->variables['documento']= isset($id_tipo_documento) ? $id_tipo_documento : '';
-	}
-	
-	/**
-	 * Funcion que completa el combo de tipo de estado civil si no recibe ningún parametro, sino muestra el combo con el id que recibe
-	 * @param 		integer 	$id_tipo_estado_civil
-	 * @return void
-	 */
-	private function _obtener_combo_estado_civil($id_tipo_estado_civil=NULL)
-	{
-		$estados_civiles = $this->Participante_model->consulta_tipos_de_estados_civiles_de_participantes();
-		$descripcion[''] = lang('form_label_estado_civil');
-		foreach ($estados_civiles as $i)
-		{
-			$descripcion[$i['id_tipo_estado_civil']] = $i['descripcion'];
-		}
-		$this->variables['estados_civiles']=$descripcion;
-		$this->variables['estado_civil']= isset($id_tipo_estado_civil) ? $id_tipo_estado_civil : '';
-	}
-	
-	/**
-	 * Funcion que completa el combo de tipo de estado de jugador si no recibe ningún parametro, sino muestra el combo con el id que recibe
-	 * @param 		integer 	$id_tipo_estado_jugador
-	 * @return void
-	 */
-	private function _obtener_combo_estado_jugador($id_tipo_estado_jugador=NULL)
-	{
-		$estados = $this->Participante_model->consulta_tipos_de_estados_de_participantes();
-		$descripcion[''] = lang('form_label_estado');
-		foreach ($estados as $i)
-		{
-			$descripcion[$i['id_tipo_estado_jugador']] = $i['descripcion'];
-		}
-		$this->variables['estados']=$descripcion;
-		$this->variables['estado']= isset($id_tipo_estado_jugador) ? $id_tipo_estado_jugador : '';
-	}
-	
-	/**
-	 * Funcion que completa el combo de equipo si no recibe ningún parametro, sino muestra el combo con el id que recibe
-	 * @param 		integer 	$id_equipo
-	 * @return void
-	 */
-	private function _obtener_combo_equipo($id_equipo=NULL)
-	{
-		$equipos = $this->Equipo_model->consulta(NULL, 1, NULL, 500, 0);  //@todo 
-		$descripcion[''] = lang('form_label_equipo');
-		foreach ($equipos as $i)
-		{
-			$descripcion[$i['id_equipo']] = $i['nombre'];
-		}
-		$this->variables['equipos']=$descripcion;
-		$this->variables['equipo']= isset($id_equipo) ? $id_equipo : '';
-	}
-	
-	/**
-	 * Funcion que completa el combo de provincia si no recibe ningún parametro, sino muestra el combo con el id que recibe
-	 * @param 		integer 	$id_tipo_provincia
-	 * @return void
-	 */
-	private function _obtener_combo_provincia($id_tipo_provincia=NULL)
-	{
-		$provincias = $this->Participante_model->consulta_provincias();
-		$descripcion[''] = lang('form_label_provincia');
-		foreach ($provincias as $i)
-		{
-			$descripcion[$i['id_tipo_provincia']] = $i['descripcion'];
-		}
-		$this->variables['provincias']=$descripcion;
-		$this->variables['provincia']= isset($id_tipo_provincia) ? $id_tipo_provincia : '';
-	}
-	
-	public function archivo_upload()
-	{
-		$this->load->model('Archivo_model');
-		
-		if ($this->input->post('upload')) {
-			$this->Archivo_model->do_upload();
-		}
-		$data['images'] = $this->Archivo_model->get_images();
-	}
-	
-	
+
 }

@@ -87,4 +87,4 @@ $lang['form_button_modificar']		= 'Modificar';
 $lang['form_button_eliminar']		= 'Eliminar';
 $lang['form_button_selecccionar']	= 'Seleccionar';
 
-$lang['form_combo_seleccionar']		= 'Seleccione';
+$lang['form_combo_seleccionar']		= '[Seleccione]';
