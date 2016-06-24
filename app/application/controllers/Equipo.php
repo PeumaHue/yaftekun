@@ -43,9 +43,7 @@ class Equipo extends CI_Controller {
 	
 	public function index() {
 		
-// 		$this->variables['ligas']=_obtener_array_asociativo($this->Equipo_model->obtener_ligas(), 'id_liga', 'nombre');
-// 		$this->variables['estadios']=_obtener_array_asociativo($this->Equipo_model->obtener_estadios(), 'id_estadio', 'nombre');
-		$this->variables['html_datos_ppal'] =_renderizar_datos_link('equipo/editar', 'id_equipo','nombre',$this->Equipo_model->consulta(NULL,NULL,NULL));
+		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'equipo/editar', "campoID"=>'id_equipo',"camposMostrar"=>array('id_equipo','nombre'),"datos"=>$this->Equipo_model->consulta(NULL,NULL,NULL),"separador_valores"=>' <-> '));
 		
 // 		$this->_setear_campos();
 		$this->_setear_variables('','',site_url('equipo/alta'),site_url('equipo'),'','');
@@ -66,9 +64,9 @@ class Equipo extends CI_Controller {
 	
 	public function busqueda($nombre) {
 		$this->_setear_campos();
-		$this->variables['ligas']=_obtener_array_asociativo($this->Equipo_model->obtener_ligas(), 'id_liga', 'nombre');
-		$this->variables['estadios']=_obtener_array_asociativo($this->Equipo_model->obtener_estadios(), 'id_estadio', 'nombre');
-		$this->variables['html_datos_ppal'] =_renderizar_datos_link('equipo/editar', 'id_equipo','nombre',$this->Equipo_model->consulta(NULL,NULL,$nombre));
+		$this->variables['ligas']=_obtener_array_asociativo(array("datos"=>$this->Equipo_model->obtener_ligas(), "campo_clave"=>'id_liga', "campo_descripcion"=>'nombre'));
+		$this->variables['estadios']=_obtener_array_asociativo(array("datos"=>$this->Equipo_model->obtener_estadios(), "campo_clave"=>'id_estadio', "campo_descripcion"=>'nombre'));
+		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'equipo/editar', "campoID"=>'id_equipo',"camposMostrar"=>'nombre',"datos"=>$this->Equipo_model->consulta(NULL,NULL,$nombre)));
 	
 		
 		$this->_setear_variables('','',site_url('equipo/alta'),site_url('equipo'),'','');
@@ -120,10 +118,10 @@ class Equipo extends CI_Controller {
 				}
 			}
 		}
-		
-		$this->variables['ligas']=_obtener_array_asociativo($this->Equipo_model->obtener_ligas(), 'id_liga', 'nombre');
-		$this->variables['estadios']=_obtener_array_asociativo($this->Equipo_model->obtener_estadios(), 'id_estadio', 'nombre');
-		$this->variables['html_datos_ppal'] =_renderizar_datos_link('equipo/editar', 'id_equipo','nombre',$this->Equipo_model->consulta(NULL,NULL,NULL));
+
+		$this->variables['ligas']=_obtener_array_asociativo(array("datos"=>$this->Equipo_model->obtener_ligas(), "campo_clave"=>'id_liga', "campo_descripcion"=>'nombre'));
+		$this->variables['estadios']=_obtener_array_asociativo(array("datos"=>$this->Equipo_model->obtener_estadios(), "campo_clave"=>'id_estadio', "campo_descripcion"=>'nombre'));
+		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'equipo/editar', "campoID"=>'id_equipo',"camposMostrar"=>'nombre',"datos"=>$this->Equipo_model->consulta(NULL,NULL,NULL)));
 		
 		$this->load->view('templates/header', $this->variables);
 		$this->load->view('equipos/principal',$this->variables);
@@ -137,8 +135,8 @@ class Equipo extends CI_Controller {
 	 */
 	public function editar($id_equipo=NULL)
 	{
-		$this->variables['ligas']=_obtener_array_asociativo($this->Equipo_model->obtener_ligas(), 'id_liga', 'nombre');
-		$this->variables['estadios']=_obtener_array_asociativo($this->Equipo_model->obtener_estadios(), 'id_estadio', 'nombre');
+		$this->variables['ligas']=_obtener_array_asociativo(array("datos"=>$this->Equipo_model->obtener_ligas(), "campo_clave"=>'id_liga', "campo_descripcion"=>'nombre'));
+		$this->variables['estadios']=_obtener_array_asociativo(array("datos"=>$this->Equipo_model->obtener_estadios(), "campo_clave"=>'id_estadio', "campo_descripcion"=>'nombre'));
 		$this->_setear_variables('','',site_url('equipo/editar'),site_url('equipo'),'',site_url('equipo/baja'.'/'.$this->datos_formulario->id_equipo));
 		
 		if (!$this->input->post('nombre'))
@@ -179,7 +177,7 @@ class Equipo extends CI_Controller {
 			}
 		}
 		
-		$this->variables['html_datos_ppal'] =_renderizar_datos_link('equipo/editar', 'id_equipo','nombre',$this->Equipo_model->consulta(NULL,NULL,NULL));
+		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'equipo/editar', "campoID"=>'id_equipo',"camposMostrar"=>'nombre',"datos"=>$this->Equipo_model->consulta(NULL,NULL,NULL)));
 		
 		$this->load->view('templates/header', $this->variables);
 		$this->load->view('equipos/principal',$this->variables);
