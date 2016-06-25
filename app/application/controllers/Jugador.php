@@ -11,6 +11,7 @@ class Jugador extends CI_Controller {
 	 * @var array
 	 */
 	public $datos_formulario;
+	
 	public $mensaje;
 	
 	
@@ -47,7 +48,7 @@ class Jugador extends CI_Controller {
 	}
 	
 	public function index() {
-		$this->_renderizar_jugadores();
+		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'jugador/editar', "campoID"=>'id_participante',"camposMostrar"=>array('apellido','nombre'),"datos"=>$this->Participante_model->consulta(NULL, NULL, 1)));
 		$this->load->view('jugadores/principal_jugador', $this->variables);
 		$this->load->view('jugadores/busqueda_jugador', $this->variables);
 		$this->load->view('templates/footer');
@@ -61,11 +62,11 @@ class Jugador extends CI_Controller {
 	public function alta()
 	{
 		$this->_setear_variables('', '', site_url('jugador/alta'),'', site_url('jugador'), '', 'Agregar');
-		$this->variables['documentos']=_obtener_array_asociativo($this->Participante_model->consulta_tipos_de_documentos_de_participantes(), 'id_tipo_documento', 'descripcion', 'form_label_tipo_documento');
-		$this->variables['estados_civiles']=_obtener_array_asociativo($this->Participante_model->consulta_tipos_de_estados_civiles_de_participantes(), 'id_tipo_estado_civil', 'descripcion', 'form_label_estado_civil');
-		$this->variables['estados']=_obtener_array_asociativo($this->Participante_model->consulta_tipos_de_estados_de_participantes(), 'id_tipo_estado_jugador', 'descripcion', 'form_label_estado');
-		$this->variables['equipos']=_obtener_array_asociativo($this->Equipo_model->consulta(NULL, 1, NULL, 500, 0), 'id_equipo', 'nombre'); //@todo
-		$this->variables['provincias']=_obtener_array_asociativo($this->Participante_model->consulta_provincias(), 'id_tipo_provincia', 'descripcion','form_label_provincia');
+		$this->variables['documentos']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_tipos_de_documentos_de_participantes(), "campo_clave"=>'id_tipo_documento', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_tipo_documento'));
+		$this->variables['estados_civiles']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_tipos_de_estados_civiles_de_participantes(), "campo_clave"=>'id_tipo_estado_civil', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_estado_civil'));
+		$this->variables['estados']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_tipos_de_estados_de_participantes(), "campo_clave"=>'id_tipo_estado_jugador', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_estado'));
+		$this->variables['equipos']=_obtener_array_asociativo(array("datos"=>$this->Equipo_model->consulta(NULL, 1, NULL, 500, 0), "campo_clave"=>'id_equipo', "campo_descripcion"=>'nombre', "cadena_sin_seleccion"=>'form_label_equipo')); //@todo
+		$this->variables['provincias']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_provincias(), "campo_clave"=> 'id_tipo_provincia', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_provincia'));
 		$this->datos_formulario->nombre_archivo_foto='no-foto.png';
 		$this->_setear_reglas();
 		if($this->form_validation->run() == FALSE)
@@ -102,7 +103,7 @@ class Jugador extends CI_Controller {
 			$query = $this->Participante_model->alta($this->_obtener_post());
 			
 		}
-		$this->_renderizar_jugadores();
+		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'jugador/editar', "campoID"=>'id_participante',"camposMostrar"=>array('apellido','nombre'),"datos"=>$this->Participante_model->consulta(NULL, NULL, 1)));
 		$this->load->view('jugadores/principal_jugador', $this->variables);
 		$this->load->view('jugadores/datos_jugador', $this->variables);
 		$this->load->view('jugadores/mensajes_jugador', $this->variables);
@@ -117,11 +118,11 @@ class Jugador extends CI_Controller {
 	public function editar($id_participante=NULL)
 	{
 		$this->_setear_variables('', '', site_url('jugador/editar'), '', site_url('jugador'), site_url('jugador/baja') . '/' . ($id_participante==NULL ? $this->input->post('id_participante') : $id_participante), 'Editar');
-		$this->variables['documentos']=_obtener_array_asociativo($this->Participante_model->consulta_tipos_de_documentos_de_participantes(), 'id_tipo_documento', 'descripcion', 'form_label_tipo_documento');
-		$this->variables['estados_civiles']=_obtener_array_asociativo($this->Participante_model->consulta_tipos_de_estados_civiles_de_participantes(), 'id_tipo_estado_civil', 'descripcion', 'form_label_estado_civil');
-		$this->variables['estados']=_obtener_array_asociativo($this->Participante_model->consulta_tipos_de_estados_de_participantes(), 'id_tipo_estado_jugador', 'descripcion', 'form_label_estado');
-		$this->variables['equipos']=_obtener_array_asociativo($this->Equipo_model->consulta(NULL, 1, NULL, 500, 0), 'id_equipo', 'nombre'); //@todo
-		$this->variables['provincias']=_obtener_array_asociativo($this->Participante_model->consulta_provincias(), 'id_tipo_provincia', 'descripcion','form_label_provincia');
+		$this->variables['documentos']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_tipos_de_documentos_de_participantes(), "campo_clave"=>'id_tipo_documento', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_tipo_documento'));
+		$this->variables['estados_civiles']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_tipos_de_estados_civiles_de_participantes(), "campo_clave"=>'id_tipo_estado_civil', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_estado_civil'));
+		$this->variables['estados']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_tipos_de_estados_de_participantes(), "campo_clave"=>'id_tipo_estado_jugador', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_estado'));
+		$this->variables['equipos']=_obtener_array_asociativo(array("datos"=>$this->Equipo_model->consulta(NULL, 1, NULL, 500, 0), "campo_clave"=>'id_equipo', "campo_descripcion"=>'nombre', "cadena_sin_seleccion"=>'form_label_equipo')); //@todo
+		$this->variables['provincias']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_provincias(), "campo_clave"=> 'id_tipo_provincia', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_provincia'));
 		
 		//Si no es un post, no se llama al editar y solo se muestran los campos para editar
 		if(!$this->input->post('nombre'))
@@ -158,7 +159,6 @@ class Jugador extends CI_Controller {
 			$this->datos_formulario->cobertura_medica = $participante->cobertura_medica;
 			$this->datos_formulario->fecha_apto_medico = $participante->fecha_apto_medico;
 			$this->datos_formulario->nombre_archivo_apto_medico = $participante->nombre_archivo_apto_medico;
-			
 			$this->datos_formulario->nombre_archivo_foto             = $participante->nombre_archivo_foto;
 			$this->datos_formulario->imagen_original    = $participante->nombre_archivo_foto;
 		
@@ -205,7 +205,7 @@ class Jugador extends CI_Controller {
 			}
 
 		}
-		$this->_renderizar_jugadores();
+		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'jugador/editar', "campoID"=>'id_participante',"camposMostrar"=>array('apellido','nombre'),"datos"=>$this->Participante_model->consulta(NULL, NULL, 1)));
 		$this->load->view('jugadores/principal_jugador', $this->variables);
 		$this->load->view('jugadores/datos_jugador', $this->variables);
 		$this->load->view('jugadores/mensajes_jugador', $this->variables);
@@ -319,7 +319,6 @@ class Jugador extends CI_Controller {
 		$this->datos_formulario->cobertura_medica = '';
 		$this->datos_formulario->fecha_apto_medico = '';
 		$this->datos_formulario->nombre_archivo_apto_medico = '';
-		
 		$this->datos_formulario->nombre_archivo_foto = isset($this->datos_formulario->nombre_archivo_foto) ? $this->datos_formulario->nombre_archivo_foto : 'no-foto.png';
 		$this->datos_formulario->imagen_original = isset($this->datos_formulario->imagen_original) ? $this->datos_formulario->imagen_original : '';
 	}
@@ -335,34 +334,6 @@ class Jugador extends CI_Controller {
 		//$this->form_validation->set_rules('nombre', 'Nombre fff', 'trim|required');
 	}
 	
-	private function _renderizar_jugadores()
-	{
-		$jugadores = $this->Participante_model->consulta(NULL, NULL, 1);
-		$link_jugador = site_url('jugador/editar');
-		$html = '';
-		foreach ($jugadores as $i)
-		{
-			$link_jugador = $link_jugador . '/' . $i['id_participante'];
-			$html = $html . '<div class="form-group col-md-4"><a href="' . $link_jugador . '" class="btn btn-link">' . $i['nombre'].'&nbsp;'.$i['apellido'].'</a></div>';
-			$link_jugador = site_url('jugador/editar');
-		}
-		$this->variables['jugadores']=$html;
-	}
-	
-	/**
-	 * Funcion para generar una lista de jugadores que se pasara en una variable a la pagina
-	 * se carga en la variable $variables['datos_ppal']
-	 * @var string
-	 */
-	private function _renderizar_datos($idparticipante, $idEquipo, $id_tipo_participante){
-		$datos_ppal='<ul class="list-inline small interlineado-X1">';
-		foreach (($this->Participante_model->consulta($idparticipante, $idEquipo, $id_tipo_participante)) as $item):
-		$datos_ppal=$datos_ppal.'<li class="col-xs-12 col-sm-3">'.$item['nombre'].'&nbsp;'.$item['apellido'].'</li>';
-		endforeach;
-		$datos_ppal=$datos_ppal.'</ul>';
-	
-		$this->variables['datos_ppal'] = $datos_ppal;
-	}
 	
 	 /**
 	 * Funcion que setea las parametros basicos de las variables de la pagina

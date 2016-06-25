@@ -1,5 +1,5 @@
 <div class="container">
-<div class="alert alert-danger">
+<div class="alert alert-warning">
    <div id="#messages">
     <?php echo $mensaje; ?>
     </div>

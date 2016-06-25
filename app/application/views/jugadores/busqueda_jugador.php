@@ -20,7 +20,7 @@
     </div>
     <div class="panel-body collapse in" id="jugador_body" aria-expanded="true">
    		<div class="row">
-			<?php echo $jugadores?>
+			<?php echo $html_datos_ppal?>
        	</div>
     </div>
 </div>
