@@ -61,47 +61,89 @@ function validar_jugador()
             apellido: {
                 validators: {
                     notEmpty: {
-                        message: 'Debe ingresar el apellido del jugador'
-                    }
+                        message: 'Hey!! no te olvides de ingresar el apellido del jugador'
+                    	},
+                    	regexp: {
+                            regexp: /^[a-zA-Z ]*$/,
+                            message: 'Ups! Solo se admiten letras!'
+                        }
                 }
             },
             nombre: {
                 validators: {
                     notEmpty: {
-                        message: 'Debe ingresar el nombre del jugador'
+                        message: 'Ups!! no te olvides de ingresar el nombre del jugador'
+                    },
+                	regexp: {
+                        regexp: /^[a-zA-Z ]*$/,
+                        message: 'Ups! Solo se admiten letras!'
                     }
                 }
             },            
             id_tipo_doc: {
                 validators: {
                     notEmpty: {
-                        message: 'Debe seleccionar un tipo de documento'
+                        message: 'Ojo!! selecciona un tipo de documento'
                     }
                 }
             },
             nro_doc: {
                 validators: {
                     notEmpty: {
-                        message: 'Debe ingresar un numero de documento'
+                        message: 'Hey!! ingresa un numero de documento'
                     	},
             		digits: {
-            			message: 'Solo se admiten numeros'
+            			message: 'Ojo!! solo se admiten numeros'
             			}
                 	},
             }, 
             fecha_nacimiento: {
-            	validators: {
-                    notEmpty: {
-                        message: 'The date is required'
-                    },
-                    date: {
-                        format: 'MM/DD/YYYY',
-                        message: 'The date is not a valid'
+                validators: {
+                    regexp: {
+                        regexp: /^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[/\\/](19|20)\d{2}$/,
+                        message: 'Ups! El formato de la fecha no es el correcto! deberia ser DD/MM/AAAA'
                     }
                 }
-            }
-        }
-    });
-}
-
-
+            },
+            nacionalidad:{
+                validators: {
+                	regexp: {
+                        regexp: /^[a-zA-Z ]*$/,
+                        message: 'Ups! Solo se admiten letras!'
+                    }
+                	},
+            }, 
+            conyuge_nombre:{
+                validators: {
+                	regexp: {
+                        regexp: /^[a-zA-Z ]*$/,
+                        message: 'Ups! Solo se admiten letras!'
+                    }
+                	},
+            }, 
+            fecha_apto_medico: {
+                validators: {
+                    regexp: {
+                        regexp: /^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[/\\/](19|20)\d{2}$/,
+                        message: 'Ups! El formato de la fecha no es el correcto! deberia ser DD/MM/AAAA'
+                    }
+                }
+            },
+            numero: {
+                validators: {
+            		digits: {
+            			message: 'Ojo!! solo se admiten numeros'
+            			}
+                	},
+            },
+            localidad:{
+                validators: {
+                	regexp: {
+                        regexp: /^[a-zA-Z ]*$/,
+                        message: 'Ups! Solo se admiten letras!'
+                    }
+                	},
+            }, 
+           }
+       });
+   }

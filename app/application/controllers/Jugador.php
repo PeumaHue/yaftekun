@@ -29,7 +29,6 @@ class Jugador extends CI_Controller {
 		$this->load->model('Equipo_model');
 		$this->datos_formulario = new stdClass();//Instancio una clase vacia para evitar el warning "Creating default object from empty value"
 		$this->variables['includes']='<script src="'.base_url('js/bootstrap-filestyle.min.js').'"></script>';
-		$this->variables['includes']=$this->variables['includes'].'<script src="'.base_url('js/bootstrap-filestyle.js').'"></script>';
 		$this->variables['includes']=$this->variables['includes'].'<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/valida_jugador.js').'"></script>';
 		$this->variables['accion'] = site_url('Jugador/alta');
@@ -330,7 +329,7 @@ class Jugador extends CI_Controller {
 	 */
 	private function _setear_reglas()
 	{
-		$this->form_validation->set_rules('apellido', 'Apellido fff', 'trim|required');
+		//this->form_validation->set_rules('fecha_nacimiento', 'Date of birth', 'regex_match[(0[1-9]|1[0-9]|2[0-9]|3(0|1))-(0[1-9]|1[0-2])-\d{4}]');
 		//$this->form_validation->set_rules('nombre', 'Nombre fff', 'trim|required');
 	}
 	
