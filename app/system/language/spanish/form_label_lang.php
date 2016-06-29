@@ -32,7 +32,7 @@ $lang['form_label_celular']				= 'Teléfono celular';
 $lang['form_label_radio']				= 'Teléfono radio';
 $lang['form_label_trayectoria']			= 'Trayectoria';
 $lang['form_label_estado']				= 'Estado actual';
-$lang['form_label_fecha_apto_medico']	= 'Apto médico';
+$lang['form_label_fecha_apto_medico']	= 'Fecha de caducidad de apto médico';
 
 $lang['form_label_comentario']				= 'Comentario';
 $lang['form_label_nombre_conyuge']			= 'Nombre del cónyuge';
