@@ -205,7 +205,7 @@ class Jugador extends CI_Controller {
 			}
 
 		}
-		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'jugador/editar', "campoID"=>'id_participante',"camposMostrar"=>array('apellido','nombre'),"datos"=>$this->Participante_model->consulta(NULL, NULL, 1)));
+		#$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'jugador/editar', "campoID"=>'id_participante',"camposMostrar"=>array('apellido','nombre'),"datos"=>$this->Participante_model->consulta(NULL, NULL, 1)));
 		$this->load->view('jugadores/principal_jugador', $this->variables);
 		$this->load->view('jugadores/datos_jugador', $this->variables);
 		$this->load->view('jugadores/mensajes_jugador', $this->variables);

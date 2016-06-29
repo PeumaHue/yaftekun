@@ -25,6 +25,7 @@ class Equipo extends CI_Controller {
 		$this->load->model('Equipo_model');
 		
 		$this->variables['includes']='<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
+		$this->variables['includes']=$this->variables['includes'].'<script src="'.base_url('js/bootstrap-filestyle.js').'"></script>';
 		$this->variables['includes']=$this->variables['includes'].'<script src="'.base_url('js/valida_equipos.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/jquery.easy-autocomplete.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<link rel="stylesheet" href="'.base_url('css/easy-autocomplete.min.css').'" />';
@@ -43,13 +44,14 @@ class Equipo extends CI_Controller {
 	
 	public function index() {
 		
-		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'equipo/editar', "campoID"=>'id_equipo',"camposMostrar"=>array('id_equipo','nombre'),"datos"=>$this->Equipo_model->consulta(NULL,NULL,NULL),"separador_valores"=>' <-> '));
+		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'equipo/editar', "campoID"=>'id_equipo',"camposMostrar"=>'nombre',"datos"=>$this->Equipo_model->consulta(NULL,NULL,NULL)));
 		
 // 		$this->_setear_campos();
 		$this->_setear_variables('','',site_url('equipo/alta'),site_url('equipo'),'','');
 		
 		$this->load->view('templates/header', $this->variables);
-		$this->load->view('equipos/principal',$this->variables);
+		$this->load->view('equipos/principal_equipo', $this->variables);
+		$this->load->view('equipos/busqueda_equipo',$this->variables);
 		$this->load->view('templates/footer');
 	}
 
@@ -81,10 +83,7 @@ class Equipo extends CI_Controller {
 	 * Funcion para generar un nuevo equipo
 	 */
 	public function alta(){
-	
-		
 		$this->_setear_variables('','',site_url('equipo/alta'),site_url('equipo'),'','');
-// 		$this->_setear_campos();
 		$this->_setear_reglas();
 
 		if ($this->form_validation->run()==FALSE)
@@ -121,6 +120,7 @@ class Equipo extends CI_Controller {
 
 		$this->variables['ligas']=_obtener_array_asociativo(array("datos"=>$this->Equipo_model->obtener_ligas(), "campo_clave"=>'id_liga', "campo_descripcion"=>'nombre'));
 		$this->variables['estadios']=_obtener_array_asociativo(array("datos"=>$this->Equipo_model->obtener_estadios(), "campo_clave"=>'id_estadio', "campo_descripcion"=>'nombre'));
+
 		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'equipo/editar', "campoID"=>'id_equipo',"camposMostrar"=>'nombre',"datos"=>$this->Equipo_model->consulta(NULL,NULL,NULL)));
 		
 		$this->load->view('templates/header', $this->variables);
@@ -265,11 +265,11 @@ class Equipo extends CI_Controller {
 				
 		
 		
-		$this->variables['form_id'] = '"equipos"';
-		$this->variables['titulo_label'] = 'html_equipo_titulo_default';
-		$this->variables['funcionaltabusqueda'] = 'equipo/alta';
-		$this->variables['titulo_formato_panel'] = 'panel-equipos';
-		$this->variables['grilla_ppal_label'] = 'form_label_equipo';
+		#$this->variables['form_id'] = '"equipos"';
+		#$this->variables['titulo_label'] = 'html_equipo_titulo_default';
+		#$this->variables['funcionaltabusqueda'] = 'equipo/alta';
+		#$this->variables['titulo_formato_panel'] = 'panel-equipos';
+		#$this->variables['grilla_ppal_label'] = 'form_label_equipo';
 		
 
 	}
