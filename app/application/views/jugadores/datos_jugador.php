@@ -5,6 +5,8 @@
 				<i class="glyphicon glyphicon-user ico-panel" ></i>                      
 					<?php echo $agregar_o_editar; ?>
 			</div>
+			
+			
 	 		    <div class="panel-body">
 					<div class="row">
 						<div class="col-sm-3">

@@ -21,10 +21,10 @@ function setear_autocomplete()
 				},
 				onClickEvent: function() {
 					window.location.href = originalLocation + "/editar/" + $("#txt_busqueda").getSelectedItemData().id_torneo;
-				},
+				}/*,
 				onKeyEnterEvent : function() {
 					window.location.href = originalLocation + "/editar/" + $("#txt_busqueda").getSelectedItemData().id_torneo;
-				}
+				}*/
 				/* Si es necesario guardar el id en un campo oculto
 				onSelectItemEvent: function() {
 					var value = $("#txt_busqueda").getSelectedItemData().id_torneo;

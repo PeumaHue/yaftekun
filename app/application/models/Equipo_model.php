@@ -185,7 +185,7 @@ class Equipo_model extends CI_Model {
 	 */
 	public function baja($equipo)
 	{
-		if($query = $this->db->query($this->sp_baja, array('id_equipo' => $equipo->id_equipo))) {
+		if($this->db->query($this->sp_baja, array('id_equipo' => $equipo->id_equipo))) {
 			$resultado['resultado']='OK';
 		}
 		else{
