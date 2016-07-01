@@ -2,10 +2,9 @@
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-heading"> 
-				<i class="glyphicon glyphicon-user ico-panel" ></i>                      
-					<?php echo $agregar_o_editar; ?>
+				<i class="glyphicon glyphicon-user ico-panel" ></i><?php echo $agregar_o_editar; ?>
 			</div>
-	 		    <div class="panel-body">
+	 		<div class="panel-body">
 					<div class="row">
 						<div class="col-sm-3">
 							<div class="row">
@@ -51,47 +50,46 @@
 	                            		<input type="text" id="txt_Conyugue" value="<?php echo ($reset) ? '' : set_value('conyuge_nombre',$this->datos_formulario->conyuge_nombre); ?>" name="conyuge_nombre" class="form-control"  maxlength="50" placeholder="<?php echo lang('form_label_nombre_conyuge');?>">
 	                        		</div>
 								</div>
+								<div class="row"></div>
 								<div class="row">
-				       			  	<div class="form-group col-sm-12">
-				  						<div class="panel panel-default">
-				  							<div class="panel-heading" id="ficha_medica">
-									        	<i class="glyphicon glyphicon-heart-empty ico-panel"></i>
-									            <?php echo lang('form_label_ficha_medica');?>
-									            <div class="pull-right">
-					                        		<div class="btn-group">
-									                	<button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#ficha_medica_body">
-									                    	<i id="flecha_ficha_medica" class="fa fa-chevron-down"></i>
-									                    </button>
-					                        		</div>
-					                    		</div>
-					                		</div>
-								            <div class="panel-body collapse" id="ficha_medica_body">
-							                	<div class="row">
-							                    	<div class="form-group col-sm-6">
-									                	<input type="text" id="txt_CoberturaMedica" value="<?php echo ($reset) ? '' : set_value('cobertura_medica',$this->datos_formulario->cobertura_medica); ?>" name="cobertura_medica" class="form-control"  maxlength="50" placeholder="<?php echo lang('form_label_cobertura_medica');?>">
-			        		                        </div>
-							                        <div class="form-group  col-sm-6">
-							                            <input type="text" id="txt_Fecha_apto_medico" value="<?php echo ($reset) ? '' : set_value('fecha_apto_medico',$this->datos_formulario->conyuge_nombre); ?>" name="fecha_apto_medico" class="form-control"  maxlength="50" placeholder="<?php echo lang('form_label_fecha_apto_medico');?>">
-			    				                    </div>
-							                 	</div>
-							                 	<div class="row">
-							                 		<div class="form-group col-sm-12"></div>
-							            	    </div>
-						                    </div>
-							            </div>
-				       			    </div>
-				       			</div>
+									<div class="col-sm-12">
+										<div class="panel panel-default">
+											<div class="panel-heading" id="ficha_medica">
+												<i class="glyphicon glyphicon-heart-empty ico-panel"></i>
+												<?php echo lang('form_label_ficha_medica');?>
+												<div class="pull-right">
+													<div class="btn-group">
+														<button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#ficha_medica_body">
+															<i id="flecha_ficha_medica" class="fa fa-chevron-down"></i>
+														</button>
+													</div>
+												</div>
+											</div>
+											<div class="panel-body collapse" id="ficha_medica_body">
+												<div class="row">
+													<div class="form-group col-sm-6">
+														<input type="text" id="txt_CoberturaMedica" value="<?php echo ($reset) ? '' : set_value('cobertura_medica',$this->datos_formulario->cobertura_medica); ?>" name="cobertura_medica" class="form-control"  maxlength="50" placeholder="<?php echo lang('form_label_cobertura_medica');?>">
+													</div>
+													<div class="form-group col-sm-6">
+														<input type="text" formnovalidate id="txt_Fecha_apto_medico" value="<?php echo ($reset) ? '' : set_value('fecha_apto_medico',$this->datos_formulario->conyuge_nombre); ?>" name="fecha_apto_medico" class="form-control"  maxlength="50" placeholder="<?php echo lang('form_label_fecha_apto_medico');?>">
+													</div>
+												</div>
+												<div class="row">
+													<div class="form-group col-sm-12"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 								<div class="row">
-									<div class="form-group col-sm-12">
+									<div class="col-sm-12">
 										<div class="panel panel-default">
 											<div class="panel-heading" id="equipo">
 												<i class="glyphicon glyphicon-star ico-panel"></i>
 												<?php echo lang('form_label_equipo');?>
 												<div class="pull-right">
 													<div class="btn-group">
-														<button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#equipo_body">
-															<i id="flecha_equipo" class="fa fa-chevron-down"></i>
-														</button>
+														<button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#equipo_body"><i id="flecha_equipo" class="fa fa-chevron-down"></i></button>
 													</div>
 												</div>
 											</div>
@@ -113,8 +111,8 @@
 										</div>
 									</div>
 								</div>		          
-	 	   			            <div class="row">
-									<div class="form-group col-sm-12">
+								<div class="row">		
+									<div class="col-sm-12">
 										<div class="panel panel-default">
 											<div class="panel-heading" id="domicilio">
 												<i class="glyphicon glyphicon-home ico-panel"></i>
@@ -171,12 +169,12 @@
 														<input type="email" id="txt_Mail" value="<?php echo ($reset) ? '' : set_value('email',$this->datos_formulario->email); ?>" class="form-control" name="email"  maxlength="100" placeholder="<?php echo lang('form_label_mail');?>">
 												    </div>
 											    </div>
-										</div>
-									</div>
+										    </div>
+									    </div>
+								    </div>
 								</div>
-								<div class="row"></div>
 						</div>
-					</div>
+					 </div>
 					<div class="row">
 					    <!-- Show the messages in #errors -->
 			            <div class="form-group col-sm-12">
@@ -190,15 +188,13 @@
 		                	<a id="btn_volver" href="<?php echo $volver; ?>" class="btn boton  boton-azul  btn-ancho120" role="button"><i class="fa fa-times"></i><?php echo lang('form_button_volver');?></a>
 		 	       		</div>
 			        </div>
-	   			</div>        
-			</div>
+	   		</div>        
 		</div>
 	</div>
 <?php echo form_hidden('id_participante', $this->datos_formulario->id_participante); ?>
 <?php echo form_hidden('id_tipo_participante', $this->datos_formulario->id_tipo_participante); ?>
 <?php echo form_hidden('imagen_original', $this->datos_formulario->nombre_archivo_foto); ?>
 </form>
-
 
 
 
