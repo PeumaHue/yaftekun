@@ -5,7 +5,7 @@ class Participante_model extends CI_Model {
 	 * Variables para los stored procedures usados por el modelo
 	 * @var string
 	 */
-	private $sp_consulta 	= 'call participante_consulta(?, ?, ?, ?, ?)';
+	private $sp_consulta 	= 'call participante_consulta(?, ?, ?, ?, ?, ?)';
 	private $sp_alta 		= 'call participante_alta(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 	private $sp_editar 		= 'call participante_editar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 	private $sp_baja 		= 'call participante_baja(?, ?)';
@@ -68,15 +68,18 @@ class Participante_model extends CI_Model {
 	 * @param 		integer 	$id_participante
 	 * @param 		integer 	$id_equipo
 	 * @param       integer     $id_tipo_participante
+	 * @param       varchar     $apellido
 	 * @return 		mixed 		object|array Si se consulta para clave primaria retorna un objeto.  Caso contrario retorna un array.
 	 */
-	public function consulta($id_participante=NULL, $id_equipo = NULL, $id_tipo_participante = NULL)
+	public function consulta($id_participante=NULL, $id_equipo = NULL, $id_tipo_participante = NULL, $apellido = NULL)
 	{
-		$query = $this->db->query($this->sp_consulta, array('id_participante' => $id_participante, 'id_equipo' => $id_equipo, 'id_tipo_participante' => $id_tipo_participante, 'row_count' => NULL, 'offset' => NULL));
+		$query = $this->db->query($this->sp_consulta, array('id_participante' => $id_participante, 'id_equipo' => $id_equipo, 'id_tipo_participante' => $id_tipo_participante, 'apellido' => $apellido, 'row_count' => NULL, 'offset' => NULL));
 		if($id_participante)
 		{
-			if ($query->num_rows() > 0) {
+			if ($query->num_rows() > 0) 
+			{
 				$row=$query->row_array();
+				$this->id_participante=$row["id_participante"];
 				$this->id_tipo_participante=$row["id_tipo_participante"];
 				$this->id_equipo=$row["id_equipo"];
 				$this->nombre_archivo_foto=$row["nombre_archivo_foto"];
@@ -106,10 +109,9 @@ class Participante_model extends CI_Model {
 				$this->nro_doc=$row["nro_doc"];
 				$this->cobertura_medica=$row["cobertura_medica"];
 				$this->fecha_apto_medico=$row["fecha_apto_medico"];
+				$this->nombre_archivo_apto_medico=$row["nombre_archivo_apto_medico"];
 				$this->fecha_creacion=$row["fecha_creacion"];
 				$this->id_usuario=$row["id_usuario"];
-				
-				
 			}
 			if (mysqli_more_results($this->db->conn_id)) {
 				mysqli_next_result($this->db->conn_id);
@@ -226,7 +228,9 @@ class Participante_model extends CI_Model {
 						'id_usuario'			     =>$participante->id_usuario
 				))
 				)
+		{
 			$resultado['resultado']='OK';
+		}
 		else{
 			$resultado['resultado']='ERROR';
 		}

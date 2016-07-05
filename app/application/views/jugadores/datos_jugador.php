@@ -14,7 +14,7 @@
 											<div id="thumbnail_fotoparticipante_caption"></div>
 								   	    	<img id="foto" class="img-thumbnail" src="<?php echo base_url('images/jugadores/'. $this->datos_formulario->nombre_archivo_foto);?>" />
 										</div>
-									    <input type="file" id="imagen" name="imagen" class="filestyle" data-buttonName="btn-primary" data-input="false">
+									    <input type="file" id="nombre_archivo_foto" name="nombre_archivo_foto" class="filestyle" data-buttonName="btn-primary" data-input="false">
 									</div>
 								</div>
 							</div>
@@ -75,7 +75,15 @@
 													</div>
 												</div>
 												<div class="row">
-													<div class="form-group col-sm-12"></div>
+													<div class="form-group col-sm-12">
+													<div align="center">
+														<div class="thumbnail_aptomedico">
+															<div id="thumbnail_aptopmedico_caption"></div>
+								   	    						<img id="imagen_certificado" class="img-thumbnail_aptomedico" src="<?php echo ($reset) ? '' : base_url('images/certificados_medicos/'. $this->datos_formulario->nombre_archivo_apto_medico);?>" />
+															</div>
+									   						 <input type="file" id="nombre_archivo_apto_medico" name="nombre_archivo_apto_medico" class="filestyle" data-buttonName="btn-primary" data-input="false">
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -193,7 +201,8 @@
 	</div>
 <?php echo form_hidden('id_participante', $this->datos_formulario->id_participante); ?>
 <?php echo form_hidden('id_tipo_participante', $this->datos_formulario->id_tipo_participante); ?>
-<?php echo form_hidden('imagen_original', $this->datos_formulario->nombre_archivo_foto); ?>
+<?php echo form_hidden('imagen_original_perfil', $this->datos_formulario->nombre_archivo_foto); ?>
+<?php echo form_hidden('imagen_original_aptomedico', $this->datos_formulario->nombre_archivo_apto_medico); ?>
 </form>
 
 
