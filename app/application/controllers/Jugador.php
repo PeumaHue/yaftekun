@@ -279,7 +279,7 @@ class Jugador extends CI_Controller {
 		$participante->telefono_celular           = $this->input->post('telefono_celular');
 		$participante->telefono_radio             = $this->input->post('telefono_radio');
 		$participante->email                      = $this->input->post('email');
-		$participante->fecha_nacimiento           = $this->input->post('fecha_nacimiento');
+		$participante->fecha_nacimiento           = ($this->input->post('fecha_nacimiento')=='' ? NULL : $this->input->post('fecha_nacimiento'));
 		$participante->calle			          = $this->input->post('calle');
 		$participante->piso                       = $this->input->post('piso');
 		$participante->numero                     = $this->input->post('numero');
@@ -406,7 +406,7 @@ class Jugador extends CI_Controller {
 		$this->datos_formulario->telefono_celular           = isset($objeto->telefono_celular) ? $objeto->telefono_celular : '';
 		$this->datos_formulario->telefono_radio             = isset($objeto->telefono_radio) ? $objeto->telefono_radio : '';
 		$this->datos_formulario->email                      = isset($objeto->email) ? $objeto->email : '';
-		$this->datos_formulario->fecha_nacimiento           = isset($objeto->fecha_nacimiento) ? $objeto->fecha_nacimiento : '';
+		$this->datos_formulario->fecha_nacimiento           = isset($objeto->fecha_nacimiento) ? $objeto->fecha_nacimiento : NULL;
 		$this->datos_formulario->calle                      = isset($objeto->calle) ? $objeto->calle : '';
 		$this->datos_formulario->piso                       = isset($objeto->piso) ? $objeto->piso : '';
 		$this->datos_formulario->numero                     = isset($objeto->numero) ? $objeto->numero : '';
