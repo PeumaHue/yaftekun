@@ -14,7 +14,7 @@
 											<div id="thumbnail_fotoparticipante_caption"></div>
 								   	    	<img id="foto" class="img-thumbnail" src="<?php echo base_url('images/arbitros/'. $this->datos_formulario->nombre_archivo_foto);?>" />
 										</div>
-									    <input type="file" id="imagen" name="imagen" class="filestyle" data-buttonName="btn-primary" data-input="false">
+									    <input type="file" id="nombre_archivo_foto" name="nombre_archivo_foto" class="filestyle" data-buttonName="btn-primary" data-input="false">
 									</div>
 								</div>
 							</div>
@@ -133,5 +133,5 @@
 	</div>
 <?php echo form_hidden('id_participante', $this->datos_formulario->id_participante); ?>
 <?php echo form_hidden('id_tipo_participante', $this->datos_formulario->id_tipo_participante); ?>
-<?php echo form_hidden('imagen_original', $this->datos_formulario->nombre_archivo_foto); ?>
+<?php echo form_hidden('imagen_original_perfil', $this->datos_formulario->nombre_archivo_foto); ?>
 </form>
