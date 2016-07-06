@@ -129,7 +129,7 @@ function validar_jugador()
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            apellido: {
+        	apellido: {
                 validators: {
                     notEmpty: {
                         message: 'Hey!! no te olvides de ingresar el apellido del jugador'

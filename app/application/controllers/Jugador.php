@@ -33,7 +33,7 @@ class Jugador extends CI_Controller {
 		parent::__construct();
 		$this->datos_formulario = new stdClass();//Instancio una clase vacia para evitar el warning "Creating default object from empty value"
 		$this->load->library('form_validation');
-		$this->load->helper(array('url', 'form', 'HYaftekun'));
+		$this->load->helper(array('url', 'form', 'HYaftekun','email'));
 		$this->load->model('Participante_model');
 		$this->load->model('Equipo_model');
 		
@@ -293,7 +293,7 @@ class Jugador extends CI_Controller {
 		$participante->id_tipo_doc 	              = $this->input->post('id_tipo_doc');
 		$participante->nro_doc                    = $this->input->post('nro_doc');
 		$participante->cobertura_medica           = $this->input->post('cobertura_medica');
-		$participante->fecha_apto_medico          = $this->input->post('fecha_apto_medico');
+		$participante->fecha_apto_medico          = ($this->input->post('fecha_apto_medico')=='' ? NULL : $this->input->post('fecha_apto_medico'));
 		$participante->nombre_archivo_apto_medico = $this->input->post('nombre_archivo_apto_medico');
 		$participante->id_usuario			      = '1';// @todo Pasar el usuario logueado
 		if ($this->subeimagen_perfil)
@@ -365,8 +365,26 @@ class Jugador extends CI_Controller {
 	 */
 	private function _setear_reglas()
 	{
-		$this->form_validation->set_rules('fecha_nacimiento', 'Date of birth', 'regex_match[(0[1-9]|1[0-9]|2[0-9]|3(0|1))-(0[1-9]|1[0-2])-\d{4}]');
-		//$this->form_validation->set_rules('nombre', 'Nombre fff', 'trim|required');
+		$this->form_validation->set_rules('apellido', 'apellido', 'required');
+		$this->form_validation->set_rules('apellido', 'apellido', 'regex_match[/^[a-zA-Z ]*$/]');
+		$this->form_validation->set_rules('nombre', 'nombre', 'required');
+		$this->form_validation->set_rules('nombre', 'nombre', 'regex_match[/^[a-zA-Z ]*$/]');
+		$this->form_validation->set_rules('id_tipo_doc', 'id_tipo_doc', 'required');
+		$this->form_validation->set_rules('nro_doc', 'nro_doc', 'required');
+		$this->form_validation->set_rules('nro_doc', 'nro_doc', 'regex_match[/^[0-9]*$|^\s*$/]');
+		$this->form_validation->set_rules('fecha_nacimiento', 'fecha_nacimiento', 'regex_match[/[0-31]{2}\/[0-12]{2}\/[0-9]{4}/]');
+		$this->form_validation->set_rules('nacionalidad', 'nacionalidad', 'regex_match[/^[a-zA-Z ]*$/]');
+		$this->form_validation->set_rules('conyuge_nombre', 'conyuge_nombre', 'regex_match[/^[a-zA-Z ]*$/]');
+		$this->form_validation->set_rules('fecha_apto_medico', 'fecha_apto_medico', 'regex_match[/[0-31]{2}\/[0-12]{2}\/[0-9]{4}/]');
+		$this->form_validation->set_rules('numero', 'numero', 'required');
+		$this->form_validation->set_rules('numero', 'numero', 'regex_match[/^[0-9]*$|^\s*$/]');
+		$this->form_validation->set_rules('telefono', 'telefono', 'required');
+		$this->form_validation->set_rules('telefono', 'telefono', 'regex_match[/^[0-9]*$|^\s*$/]');
+		$this->form_validation->set_rules('telefono_celular', 'telefono_celular', 'required');
+		$this->form_validation->set_rules('telefono_celular', 'telefono_celular', 'regex_match[/^[0-9]*$|^\s*$/]');
+		$this->form_validation->set_rules('telefono_radio', 'telefono_radio', 'required');
+		$this->form_validation->set_rules('telefono_radio', 'telefono_radio', 'regex_match[/^[0-9]*$|^\s*$/]');
+		$this->form_validation->set_rules('email', 'Email', 'valid_email|xss_clean');
 	}
 	
 	
@@ -420,7 +438,7 @@ class Jugador extends CI_Controller {
 		$this->datos_formulario->id_tipo_doc                = isset($objeto->id_tipo_doc) ? $objeto->id_tipo_doc : '';
 		$this->datos_formulario->nro_doc                    = isset($objeto->nro_doc) ? $objeto->nro_doc : '';
 		$this->datos_formulario->cobertura_medica           = isset($objeto->cobertura_medica) ? $objeto->cobertura_medica : '';
-		$this->datos_formulario->fecha_apto_medico          = isset($objeto->fecha_apto_medico) ? $objeto->fecha_apto_medico : '';
+		$this->datos_formulario->fecha_apto_medico          = isset($objeto->fecha_apto_medico) ? $objeto->fecha_apto_medico : NULL;
 		$this->datos_formulario->nombre_archivo_apto_medico = isset($objeto->nombre_archivo_apto_medico) ? $objeto->nombre_archivo_apto_medico : '';
 		$this->datos_formulario->nombre_archivo_foto        = isset($objeto->nombre_archivo_foto) ? $objeto->nombre_archivo_foto : '';
 		$this->datos_formulario->imagen_original_perfil     = isset($objeto->imagen_original_perfil) ? $objeto->imagen_original_perfil : '';
