@@ -33,7 +33,7 @@ class Jugador extends CI_Controller {
 		parent::__construct();
 		$this->datos_formulario = new stdClass();//Instancio una clase vacia para evitar el warning "Creating default object from empty value"
 		$this->load->library('form_validation');
-		$this->load->helper(array('url', 'form', 'HYaftekun','email'));
+		$this->load->helper(array('url', 'form', 'HYaftekun','email', 'date'));
 		$this->load->model('Participante_model');
 		$this->load->model('Equipo_model');
 		
@@ -279,7 +279,7 @@ class Jugador extends CI_Controller {
 		$participante->telefono_celular           = $this->input->post('telefono_celular');
 		$participante->telefono_radio             = $this->input->post('telefono_radio');
 		$participante->email                      = $this->input->post('email');
-		$participante->fecha_nacimiento           = ($this->input->post('fecha_nacimiento')=='' ? NULL : $this->input->post('fecha_nacimiento'));
+		$participante->fecha_nacimiento           = $this->input->post('fecha_nacimiento');
 		$participante->calle			          = $this->input->post('calle');
 		$participante->piso                       = $this->input->post('piso');
 		$participante->numero                     = $this->input->post('numero');
@@ -293,7 +293,7 @@ class Jugador extends CI_Controller {
 		$participante->id_tipo_doc 	              = $this->input->post('id_tipo_doc');
 		$participante->nro_doc                    = $this->input->post('nro_doc');
 		$participante->cobertura_medica           = $this->input->post('cobertura_medica');
-		$participante->fecha_apto_medico          = ($this->input->post('fecha_apto_medico')=='' ? NULL : $this->input->post('fecha_apto_medico'));
+		$participante->fecha_apto_medico          = $this->input->post('fecha_apto_medico');
 		$participante->nombre_archivo_apto_medico = $this->input->post('nombre_archivo_apto_medico');
 		$participante->id_usuario			      = '1';// @todo Pasar el usuario logueado
 		if ($this->subeimagen_perfil)
@@ -372,10 +372,10 @@ class Jugador extends CI_Controller {
 		$this->form_validation->set_rules('id_tipo_doc', 'id_tipo_doc', 'required');
 		$this->form_validation->set_rules('nro_doc', 'nro_doc', 'required');
 		$this->form_validation->set_rules('nro_doc', 'nro_doc', 'regex_match[/^[0-9]*$|^\s*$/]');
-		$this->form_validation->set_rules('fecha_nacimiento', 'fecha_nacimiento', 'regex_match[/[0-31]{2}\/[0-12]{2}\/[0-9]{4}/]');
+		//$this->form_validation->set_rules('fecha_nacimiento', 'fecha_nacimiento', 'regex_match[[0-9]{2}/[0-9]{2}/[0-9]{4}]');
 		$this->form_validation->set_rules('nacionalidad', 'nacionalidad', 'regex_match[/^[a-zA-Z ]*$/]');
 		$this->form_validation->set_rules('conyuge_nombre', 'conyuge_nombre', 'regex_match[/^[a-zA-Z ]*$/]');
-		$this->form_validation->set_rules('fecha_apto_medico', 'fecha_apto_medico', 'regex_match[/[0-31]{2}\/[0-12]{2}\/[0-9]{4}/]');
+		//$this->form_validation->set_rules('fecha_apto_medico', 'fecha_apto_medico', 'regex_match[/(0[1-9]|1[0-9]|2[0-9]|3(0|1))-(0[1-9]|1[0-2])-\d{4}/]');
 		$this->form_validation->set_rules('numero', 'numero', 'required');
 		$this->form_validation->set_rules('numero', 'numero', 'regex_match[/^[0-9]*$|^\s*$/]');
 		$this->form_validation->set_rules('telefono', 'telefono', 'required');

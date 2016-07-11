@@ -71,7 +71,7 @@
 														<input type="text" id="txt_CoberturaMedica" value="<?php echo ($reset) ? '' : set_value('cobertura_medica',$this->datos_formulario->cobertura_medica); ?>" name="cobertura_medica" class="form-control"  maxlength="50" placeholder="<?php echo lang('form_label_cobertura_medica');?>">
 													</div>
 													<div class="form-group col-sm-6">
-														<input type="text" formnovalidate id="txt_Fecha_apto_medico" value="<?php echo ($reset) ? '' : set_value('fecha_apto_medico',$this->datos_formulario->conyuge_nombre); ?>" name="fecha_apto_medico" class="form-control"  maxlength="50" placeholder="<?php echo lang('form_label_fecha_apto_medico');?>">
+														<input type="text" formnovalidate id="txt_Fecha_apto_medico" value="<?php echo ($reset) ? '' : set_value('fecha_apto_medico',$this->datos_formulario->fecha_apto_medico); ?>" name="fecha_apto_medico" class="form-control"  maxlength="50" placeholder="<?php echo lang('form_label_fecha_apto_medico');?>">
 													</div>
 												</div>
 												<div class="row">

@@ -94,7 +94,7 @@ class Participante_model extends CI_Model {
 				$this->telefono_celular=$row["telefono_celular"];
 				$this->telefono_radio=$row["telefono_radio"];
 				$this->email=$row["email"];
-				$this->fecha_nacimiento=$row["fecha_nacimiento"];
+				$this->fecha_nacimiento= ($row["fecha_nacimiento"] == NULL ? '' : date('d/m/Y', strtotime($row["fecha_nacimiento"])));
 				$this->calle=$row["calle"];
 				$this->piso=$row["piso"];
 				$this->numero=$row["numero"];
@@ -108,7 +108,7 @@ class Participante_model extends CI_Model {
 				$this->id_tipo_doc=$row["id_tipo_doc"];
 				$this->nro_doc=$row["nro_doc"];
 				$this->cobertura_medica=$row["cobertura_medica"];
-				$this->fecha_apto_medico=$row["fecha_apto_medico"];
+				$this->fecha_apto_medico= ($row["fecha_apto_medico"] == NULL ? '' : date('d/m/Y', strtotime($row["fecha_apto_medico"])));  
 				$this->nombre_archivo_apto_medico=$row["nombre_archivo_apto_medico"];
 				$this->fecha_creacion=$row["fecha_creacion"];
 				$this->id_usuario=$row["id_usuario"];
@@ -209,7 +209,7 @@ class Participante_model extends CI_Model {
 						'telefono_celular'		     =>$participante->telefono_celular,
 						'telefono_radio'		     =>$participante->telefono_radio,
 						'email'					     =>$participante->email,
-						'fecha_nacimiento'		     =>$participante->fecha_nacimiento,
+						'fecha_nacimiento'		     =>$participante->fecha_nacimiento == '' ? NULL : date('Y-m-d', strtotime(str_replace('/', '-', $participante->fecha_nacimiento))),
 						'calle'					     =>$participante->calle,
 						'piso'					     =>$participante->piso,
 						'numero'				     =>$participante->numero,
@@ -223,7 +223,7 @@ class Participante_model extends CI_Model {
 						'id_tipo_doc'			     =>$participante->id_tipo_doc,
 						'nro_doc'				     =>$participante->nro_doc,
 						'cobertura_medica'    	 	 =>$participante->cobertura_medica,
-						'fecha_apto_medico'          =>$participante->fecha_apto_medico,
+						'fecha_apto_medico'          =>$participante->fecha_apto_medico == '' ? NULL : date('Y-m-d', strtotime(str_replace('/', '-', $participante->fecha_apto_medico))),
 						'nombre_archivo_apto_medico' =>$participante->nombre_archivo_apto_medico,
 						'id_usuario'			     =>$participante->id_usuario
 				))
