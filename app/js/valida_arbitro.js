@@ -1,8 +1,13 @@
 ﻿$(document).ready(function () {
+	mostrar_foto();
 	setear_botones();
 	validar_arbitro();
-	$("#imagen").filestyle('buttonText', 'Agregar');
-    $("#imagen").on('change', function() {
+});
+
+function mostrar_foto()
+{
+	$("#nombre_archivo_foto").filestyle('buttonText', 'Agregar');
+    $("#nombre_archivo_foto").on('change', function() {
         //Get count of selected files
         var countFiles = $(this)[0].files.length;
         var imgPath = $(this)[0].value;
@@ -31,18 +36,18 @@
               reader.readAsDataURL($(this)[0].files[i]);
             }
           } else {
-            alert("This browser does not support FileReader.");
+            alert("Navegador no soportado.");
           }
         } else {
-          alert("Pls select only images");
+          alert("Por favor seleccione un archivo de imagen valido: GIF, PNG, JPG o JPEG.");
         }
-      });
-});
+      });	
+}
 
 function setear_botones()
 {
 	originalLocation = window.location.href;
-	if(originalLocation.indexOf("jugador/alta") >= 0)//Si esta en el alta no se muestra el boton eliminar
+	if(originalLocation.indexOf("arbitro/alta") >= 0)//Si esta en el alta no se muestra el boton eliminar
 	{
 		document.getElementById('btn_eliminar').style.visibility = "hidden";
 	}	
@@ -120,14 +125,6 @@ function validar_arbitro()
                     }
                 	},
             }, 
-            fecha_apto_medico: {
-                validators: {
-                    regexp: {
-                		regexp: /^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[/\\/](19|20)\d{2}$|^\s*$/,
-                        message: 'Ups! El formato de la fecha no es el correcto! deberia ser DD/MM/AAAA'
-                    }
-                }
-            },
             numero: {
                 validators: {
                 	regexp: {

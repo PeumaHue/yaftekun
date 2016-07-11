@@ -22,7 +22,7 @@ class Arbitro extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('form_validation');
-		$this->load->helper(array('url', 'form', 'HYaftekun'));
+		$this->load->helper(array('url', 'form', 'HYaftekun', 'email', 'date'));
 		$this->load->model(array('Participante_model', 'Equipo_model'));
 		$this->datos_formulario = new stdClass();//Instancio una clase vacia para evitar el warning "Creating default object from empty value"
 		$this->variables['includes']='<script src="'.base_url('js/bootstrap-filestyle.min.js').'"></script>';
@@ -36,7 +36,7 @@ class Arbitro extends CI_Controller {
 		$this->_setear_campos();
 	
 		$this->subeimagen_perfil = false;
-		$this->subeimagen_perfil_conf_['upload_path'] = './images/jugadores/';
+		$this->subeimagen_perfil_conf_['upload_path'] = './images/arbitros/';
 		$this->subeimagen_perfil_conf_['allowed_types'] = 'gif|jpg|png';
 		$this->subeimagen_perfil_conf_['max_size']     = '200';
 		$this->subeimagen_perfil_conf_['max_width'] = '1000';
@@ -44,7 +44,7 @@ class Arbitro extends CI_Controller {
 	}
 	
 	public function index() {
-		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'arbitro/editar', "campoID"=>'id_participante',"camposMostrar"=>array('apellido','nombre'),"datos"=>$this->Participante_model->consulta(NULL, NULL, 1)));
+		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'arbitro/editar', "campoID"=>'id_participante',"camposMostrar"=>array('apellido','nombre'),"datos"=>$this->Participante_model->consulta(NULL, NULL, 2)));
 		$this->load->view('templates/header', $this->variables);
 		$this->load->view('arbitros/principal_arbitro', $this->variables);
 		$this->load->view('arbitros/busqueda_arbitro', $this->variables);
@@ -188,7 +188,7 @@ class Arbitro extends CI_Controller {
 	
 	
 	/**
-	 * Funcion que realiza una búsqueda por nombre de jugador
+	 * Funcion que realiza una búsqueda por nombre de arbitro
 	 * @return void
 	 */
 	public function obtener_autocomplete($apellido=NULL)
@@ -209,12 +209,17 @@ class Arbitro extends CI_Controller {
 		$participante->nombre_archivo_foto        = $this->input->post('nombre_archivo_foto');
 		$participante->nombre 			          = $this->input->post('nombre');
 		$participante->apellido                   = $this->input->post('apellido');
+		$participante->numero_camiseta            = '';
+		$participante->id_tipo_posicion_juego     = '';
 		$participante->id_tipo_estado_jugador     = 1;//@todo Por ahora el arbitro siempre esta ACTIVO
+		$participante->numero_carnet_socio        = '';
+		$participante->id_equipo                  = '';
+		$participante->trayectoria                = '';
 		$participante->telefono                   = $this->input->post('telefono');
 		$participante->telefono_celular           = $this->input->post('telefono_celular');
 		$participante->telefono_radio             = $this->input->post('telefono_radio');
 		$participante->email                      = $this->input->post('email');
-		$participante->fecha_nacimiento           = ($this->input->post('fecha_nacimiento')=='' ? NULL : $this->input->post('fecha_nacimiento'));
+		$participante->fecha_nacimiento           = $this->input->post('fecha_nacimiento');
 		$participante->calle			          = $this->input->post('calle');
 		$participante->piso                       = $this->input->post('piso');
 		$participante->numero                     = $this->input->post('numero');
@@ -227,6 +232,9 @@ class Arbitro extends CI_Controller {
 		$participante->conyuge_nombre             = $this->input->post('conyuge_nombre');
 		$participante->id_tipo_doc 	              = $this->input->post('id_tipo_doc');
 		$participante->nro_doc                    = $this->input->post('nro_doc');
+		$participante->cobertura_medica           = '';
+		$participante->fecha_apto_medico          = '';
+		$participante->nombre_archivo_apto_medico = '';
 		$participante->id_usuario			      = '1';// @todo Pasar el usuario logueado
 		if ($this->subeimagen_perfil)
 		{
@@ -250,7 +258,12 @@ class Arbitro extends CI_Controller {
 		$this->datos_formulario->nombre_archivo_foto = '';
 		$this->datos_formulario->nombre = '';
 		$this->datos_formulario->apellido = '';
-		//$this->datos_formulario->id_tipo_estado_jugador = '';
+		$this->datos_formulario->numero_camiseta = '';
+		$this->datos_formulario->id_tipo_posicion_juego = '';
+		$this->datos_formulario->id_tipo_estado_jugador = '';
+		$this->datos_formulario->numero_carnet_socio = '';
+		$this->datos_formulario->id_equipo = '';
+		$this->datos_formulario->trayectoria = '';
 		$this->datos_formulario->telefono = '';
 		$this->datos_formulario->telefono_celular = '';
 		$this->datos_formulario->telefono_radio = '';
@@ -268,8 +281,12 @@ class Arbitro extends CI_Controller {
 		$this->datos_formulario->conyuge_nombre = '';
 		$this->datos_formulario->id_tipo_doc = '';
 		$this->datos_formulario->nro_doc = '';
+		$this->datos_formulario->cobertura_medica = '';
+		$this->datos_formulario->fecha_apto_medico = '';
+		$this->datos_formulario->nombre_archivo_apto_medico = '';
 		$this->datos_formulario->nombre_archivo_foto = isset($this->datos_formulario->nombre_archivo_foto) ? $this->datos_formulario->nombre_archivo_foto : 'no-foto.png';
 		$this->datos_formulario->imagen_original_perfil = isset($this->datos_formulario->imagen_original_perfil) ? $this->datos_formulario->imagen_original_perfil : '';
+		$this->datos_formulario->imagen_original_aptomedico = '';
 		$this->datos_formulario->id_usuario = '';
 	}
 	
@@ -280,7 +297,18 @@ class Arbitro extends CI_Controller {
 	 */
 	private function _setear_reglas()
 	{
-		$this->form_validation->set_rules('nombre', 'Nombre', 'trim|required');
+		$this->form_validation->set_rules('apellido', 'lang:form_label_apellido', 'required|regex_match[/^[a-zA-Z ]*$/]');
+		$this->form_validation->set_rules('nombre', 'lang:form_label_nombre', 'required|regex_match[/^[a-zA-Z ]*$/]');
+		$this->form_validation->set_rules('id_tipo_doc', 'lang:form_label_tipo_documento', 'required');
+		$this->form_validation->set_rules('nro_doc', 'lang:form_label_numero_documento', 'required|regex_match[/^[0-9]*$|^\s*$/]');
+		//$this->form_validation->set_rules('fecha_nacimiento', 'fecha_nacimiento', 'regex_match[[0-9]{2}/[0-9]{2}/[0-9]{4}]');
+		$this->form_validation->set_rules('nacionalidad', 'lang:form_label_nacionalidad', 'regex_match[/^[a-zA-Z ]*$/]');
+		$this->form_validation->set_rules('conyuge_nombre', 'lang:form_label_nombre_conyuge', 'regex_match[/^[a-zA-Z ]*$/]');
+		$this->form_validation->set_rules('numero', 'lang:form_label_numero_calle', 'regex_match[/^[0-9]*$|^\s*$/]');
+		$this->form_validation->set_rules('telefono', 'lang:form_label_telefono', 'regex_match[/^[0-9]*$|^\s*$/]');
+		$this->form_validation->set_rules('telefono_celular', 'lang:form_label_celular', 'regex_match[/^[0-9]*$|^\s*$/]');
+		$this->form_validation->set_rules('telefono_radio', 'lang:form_label_radio', 'regex_match[/^[0-9]*$|^\s*$/]');
+		$this->form_validation->set_rules('email', 'lang:form_label_mail', 'valid_email|xss_clean');
 	}
 	
 	/**
@@ -305,7 +333,7 @@ class Arbitro extends CI_Controller {
 	private function _cargar_datos_formulario($objeto)
 	{
 		$this->datos_formulario->id_participante            = isset($objeto->id_participante) ? $objeto->id_participante : '';
-		$this->datos_formulario->id_tipo_participante       = 1;
+		$this->datos_formulario->id_tipo_participante       = 2;
 		$this->datos_formulario->nombre_archivo_foto        = isset($objeto->nombre_archivo_foto) ? $objeto->nombre_archivo_foto : '';
 		$this->datos_formulario->nombre                     = isset($objeto->nombre) ? $objeto->nombre : '';
 		$this->datos_formulario->apellido                   = isset($objeto->apellido) ? $objeto->apellido : '';
