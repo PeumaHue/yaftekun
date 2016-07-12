@@ -50,6 +50,11 @@
 	                            		<input type="text" id="txt_Conyugue" value="<?php echo ($reset) ? '' : set_value('conyuge_nombre',$this->datos_formulario->conyuge_nombre); ?>" name="conyuge_nombre" class="form-control"  maxlength="50" placeholder="<?php echo lang('form_label_nombre_conyuge');?>">
 	                        		</div>
 								</div>
+								<div class="row">
+									<div class="form-group col-sm-12">
+										<textarea rows="3" id="txt_Trayectoria" name="trayectoria" class="form-control"  maxlength="50" placeholder="<?php echo lang('form_label_trayectoria');?>"><?php echo ($reset) ? '' : set_value('trayectoria',$this->datos_formulario->trayectoria); ?></textarea>
+									</div>
+								</div>
 								<div class="row"></div>	          
 								<div class="row">		
 									<div class="col-sm-12">

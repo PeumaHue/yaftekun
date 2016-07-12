@@ -191,9 +191,9 @@ class Arbitro extends CI_Controller {
 	 * Funcion que realiza una búsqueda por nombre de arbitro
 	 * @return void
 	 */
-	public function obtener_autocomplete($apellido=NULL)
+	public function obtener_autocomplete($nombre_apellido=NULL)
 	{
-		echo json_encode($this->Participante_model->consulta(NULL, NULL, NULL, $apellido));
+		echo json_encode($this->Participante_model->consulta(NULL, NULL, 2, $nombre_apellido));
 	}
 	
 	/**
@@ -209,12 +209,10 @@ class Arbitro extends CI_Controller {
 		$participante->nombre_archivo_foto        = $this->input->post('nombre_archivo_foto');
 		$participante->nombre 			          = $this->input->post('nombre');
 		$participante->apellido                   = $this->input->post('apellido');
-		$participante->numero_camiseta            = '';
-		$participante->id_tipo_posicion_juego     = '';
 		$participante->id_tipo_estado_jugador     = 1;//@todo Por ahora el arbitro siempre esta ACTIVO
 		$participante->numero_carnet_socio        = '';
 		$participante->id_equipo                  = '';
-		$participante->trayectoria                = '';
+		$participante->trayectoria                = $this->input->post('trayectoria');
 		$participante->telefono                   = $this->input->post('telefono');
 		$participante->telefono_celular           = $this->input->post('telefono_celular');
 		$participante->telefono_radio             = $this->input->post('telefono_radio');
@@ -232,9 +230,6 @@ class Arbitro extends CI_Controller {
 		$participante->conyuge_nombre             = $this->input->post('conyuge_nombre');
 		$participante->id_tipo_doc 	              = $this->input->post('id_tipo_doc');
 		$participante->nro_doc                    = $this->input->post('nro_doc');
-		$participante->cobertura_medica           = '';
-		$participante->fecha_apto_medico          = '';
-		$participante->nombre_archivo_apto_medico = '';
 		$participante->id_usuario			      = '1';// @todo Pasar el usuario logueado
 		if ($this->subeimagen_perfil)
 		{
@@ -258,8 +253,6 @@ class Arbitro extends CI_Controller {
 		$this->datos_formulario->nombre_archivo_foto = '';
 		$this->datos_formulario->nombre = '';
 		$this->datos_formulario->apellido = '';
-		$this->datos_formulario->numero_camiseta = '';
-		$this->datos_formulario->id_tipo_posicion_juego = '';
 		$this->datos_formulario->id_tipo_estado_jugador = '';
 		$this->datos_formulario->numero_carnet_socio = '';
 		$this->datos_formulario->id_equipo = '';
@@ -281,9 +274,6 @@ class Arbitro extends CI_Controller {
 		$this->datos_formulario->conyuge_nombre = '';
 		$this->datos_formulario->id_tipo_doc = '';
 		$this->datos_formulario->nro_doc = '';
-		$this->datos_formulario->cobertura_medica = '';
-		$this->datos_formulario->fecha_apto_medico = '';
-		$this->datos_formulario->nombre_archivo_apto_medico = '';
 		$this->datos_formulario->nombre_archivo_foto = isset($this->datos_formulario->nombre_archivo_foto) ? $this->datos_formulario->nombre_archivo_foto : 'no-foto.png';
 		$this->datos_formulario->imagen_original_perfil = isset($this->datos_formulario->imagen_original_perfil) ? $this->datos_formulario->imagen_original_perfil : '';
 		$this->datos_formulario->imagen_original_aptomedico = '';
@@ -292,7 +282,6 @@ class Arbitro extends CI_Controller {
 	
 	/**
 	 * Funcion que setea las reglas de validacion del formulario y sus mensajes de errores
-	 * @todo traducir los mensajes de errores en los archivos de configuracion para no tener que usar set_messsage
 	 * @return void
 	 */
 	private function _setear_reglas()
@@ -308,7 +297,7 @@ class Arbitro extends CI_Controller {
 		$this->form_validation->set_rules('telefono', 'lang:form_label_telefono', 'regex_match[/^[0-9]*$|^\s*$/]');
 		$this->form_validation->set_rules('telefono_celular', 'lang:form_label_celular', 'regex_match[/^[0-9]*$|^\s*$/]');
 		$this->form_validation->set_rules('telefono_radio', 'lang:form_label_radio', 'regex_match[/^[0-9]*$|^\s*$/]');
-		$this->form_validation->set_rules('email', 'lang:form_label_mail', 'valid_email|xss_clean');
+		$this->form_validation->set_rules('email', 'lang:form_label_mail', 'valid_email');
 	}
 	
 	/**
@@ -338,6 +327,7 @@ class Arbitro extends CI_Controller {
 		$this->datos_formulario->nombre                     = isset($objeto->nombre) ? $objeto->nombre : '';
 		$this->datos_formulario->apellido                   = isset($objeto->apellido) ? $objeto->apellido : '';
 		$this->datos_formulario->id_tipo_estado_jugador     = isset($objeto->id_tipo_estado_jugador) ? $objeto->id_tipo_estado_jugador : '';
+		$this->datos_formulario->trayectoria                = isset($objeto->trayectoria) ? $objeto->trayectoria : '';
 		$this->datos_formulario->telefono                   = isset($objeto->telefono) ? $objeto->telefono : '';
 		$this->datos_formulario->telefono_celular           = isset($objeto->telefono_celular) ? $objeto->telefono_celular : '';
 		$this->datos_formulario->telefono_radio             = isset($objeto->telefono_radio) ? $objeto->telefono_radio : '';
@@ -355,7 +345,6 @@ class Arbitro extends CI_Controller {
 		$this->datos_formulario->conyuge_nombre             = isset($objeto->conyuge_nombre) ? $objeto->conyuge_nombre : '';
 		$this->datos_formulario->id_tipo_doc                = isset($objeto->id_tipo_doc) ? $objeto->id_tipo_doc : '';
 		$this->datos_formulario->nro_doc                    = isset($objeto->nro_doc) ? $objeto->nro_doc : '';
-		$this->datos_formulario->cobertura_medica           = isset($objeto->cobertura_medica) ? $objeto->cobertura_medica : '';
 		$this->datos_formulario->nombre_archivo_foto        = isset($objeto->nombre_archivo_foto) ? $objeto->nombre_archivo_foto : '';
 		$this->datos_formulario->imagen_original_perfil     = isset($objeto->imagen_original_perfil) ? $objeto->imagen_original_perfil : '';
 		$this->datos_formulario->id_usuario                 = isset($objeto->id_usuario) ? $objeto->id_usuario : '';
