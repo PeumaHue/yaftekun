@@ -354,17 +354,23 @@ a
 
 }
 
-.panel-directores {
-    border-color: hsl(194, 66%, 51%);
-    background-color: hsl(194, 66%, 51%);
-}
+/**********************************************          
+    PANEL DIRECTORES TECNICOS
+**********************************************/
+
 .panel-directores .panel-heading {
-    border-color: hsl(194, 66%, 51%);
     color: hsl(0, 100%, 100%);
+    border-color: hsl(194, 66%, 51%);
     background-color: hsl(194, 66%, 51%);
 }
-.panel-directores a {
-    color: hsl(194, 66%, 51%);
+.panel-directores-secundario {
+    color: hsl(0, 100%, 100%);
+    border-color: hsl(194, 66%, 51%);
+    background-color: hsl(194, 66%, 51%);
+    font-weight: bolder;
+    font-size: 200%;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px 5px 15px 20px;
 }
 
 

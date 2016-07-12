@@ -365,26 +365,26 @@ class Jugador extends CI_Controller {
 	 */
 	private function _setear_reglas()
 	{
-		$this->form_validation->set_rules('apellido', 'apellido', 'required');
-		$this->form_validation->set_rules('apellido', 'apellido', 'regex_match[/^[a-zA-Z ]*$/]');
-		$this->form_validation->set_rules('nombre', 'nombre', 'required');
-		$this->form_validation->set_rules('nombre', 'nombre', 'regex_match[/^[a-zA-Z ]*$/]');
-		$this->form_validation->set_rules('id_tipo_doc', 'id_tipo_doc', 'required');
-		$this->form_validation->set_rules('nro_doc', 'nro_doc', 'required');
-		$this->form_validation->set_rules('nro_doc', 'nro_doc', 'regex_match[/^[0-9]*$|^\s*$/]');
+		$this->form_validation->set_rules('apellido', 'lang:form_label_apellido', 'required');
+		$this->form_validation->set_rules('apellido', 'lang:form_label_apellido', 'regex_match[/^[a-zA-Z ]*$/]');
+		$this->form_validation->set_rules('nombre', 'lang:form_label_nombre', 'required');
+		$this->form_validation->set_rules('nombre', 'lang:form_label_nombre', 'regex_match[/^[a-zA-Z ]*$/]');
+		$this->form_validation->set_rules('id_tipo_doc', 'lang:form_label_tipo_documento', 'required');
+		$this->form_validation->set_rules('nro_doc', 'lang:form_label_numero_documento', 'required');
+		$this->form_validation->set_rules('nro_doc', 'lang:form_label_numero_documento', 'regex_match[/^[0-9]*$|^\s*$/]');
 		//$this->form_validation->set_rules('fecha_nacimiento', 'fecha_nacimiento', 'regex_match[[0-9]{2}/[0-9]{2}/[0-9]{4}]');
-		$this->form_validation->set_rules('nacionalidad', 'nacionalidad', 'regex_match[/^[a-zA-Z ]*$/]');
-		$this->form_validation->set_rules('conyuge_nombre', 'conyuge_nombre', 'regex_match[/^[a-zA-Z ]*$/]');
+		$this->form_validation->set_rules('nacionalidad', 'lang:form_label_nacionalidad', 'regex_match[/^[a-zA-Z ]*$/]');
+		$this->form_validation->set_rules('conyuge_nombre', 'lang:form_label_nombre_conyuge', 'regex_match[/^[a-zA-Z ]*$/]');
 		//$this->form_validation->set_rules('fecha_apto_medico', 'fecha_apto_medico', 'regex_match[/(0[1-9]|1[0-9]|2[0-9]|3(0|1))-(0[1-9]|1[0-2])-\d{4}/]');
-		$this->form_validation->set_rules('numero', 'numero', 'required');
-		$this->form_validation->set_rules('numero', 'numero', 'regex_match[/^[0-9]*$|^\s*$/]');
-		$this->form_validation->set_rules('telefono', 'telefono', 'required');
-		$this->form_validation->set_rules('telefono', 'telefono', 'regex_match[/^[0-9]*$|^\s*$/]');
-		$this->form_validation->set_rules('telefono_celular', 'telefono_celular', 'required');
-		$this->form_validation->set_rules('telefono_celular', 'telefono_celular', 'regex_match[/^[0-9]*$|^\s*$/]');
-		$this->form_validation->set_rules('telefono_radio', 'telefono_radio', 'required');
-		$this->form_validation->set_rules('telefono_radio', 'telefono_radio', 'regex_match[/^[0-9]*$|^\s*$/]');
-		$this->form_validation->set_rules('email', 'Email', 'valid_email|xss_clean');
+		$this->form_validation->set_rules('numero', 'lang:form_label_numero_calle', 'required');
+		$this->form_validation->set_rules('numero', 'lang:form_label_numero_calle', 'regex_match[/^[0-9]*$|^\s*$/]');
+		$this->form_validation->set_rules('telefono', 'lang:form_label_telefono', 'required');
+		$this->form_validation->set_rules('telefono', 'lang:form_label_telefono', 'regex_match[/^[0-9]*$|^\s*$/]');
+		$this->form_validation->set_rules('telefono_celular', 'lang:form_label_celular', 'required');
+		$this->form_validation->set_rules('telefono_celular', 'lang:form_label_celular', 'regex_match[/^[0-9]*$|^\s*$/]');
+		$this->form_validation->set_rules('telefono_radio', 'lang:form_label_radio', 'required');
+		$this->form_validation->set_rules('telefono_radio', 'lang:form_label_radio', 'regex_match[/^[0-9]*$|^\s*$/]');
+		$this->form_validation->set_rules('email', 'lang:form_label_mail', 'valid_email|xss_clean');
 	}
 	
 	

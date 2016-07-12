@@ -135,38 +135,44 @@ class Participante_model extends CI_Model {
 	 */
 	public function alta($participante)
 	{	
+		if($participante->id_tipo_participante<>1)
+		{
+			$participante->cobertura_medica = NULL;
+			$participante->fecha_apto_medico = NULL;
+			$participante->nombre_archivo_apto_medico = NULL;
+		}
 		$query = $this->db->query($this->sp_alta, 
 				array(
 						'id_tipo_participante'	       =>$participante->id_tipo_participante,
-						'nombre_archivo_foto'          =>$participante->nombre_archivo_foto,
+						'nombre_archivo_foto'          =>$participante->nombre_archivo_foto == '' ? NULL : $participante->nombre_archivo_foto,
 						'nombre'				       =>$participante->nombre,
 						'apellido'				       =>$participante->apellido,
-						'numero_camiseta'		       =>$participante->numero_camiseta,
-						'id_tipo_posicion_juego'       =>$participante->id_tipo_posicion_juego,
-						'id_tipo_estado_jugador'       =>$participante->id_tipo_estado_jugador,
-						'numero_carnet_socio'	       =>$participante->numero_carnet_socio,
-						'id_equipo'				       =>$participante->id_equipo,
-						'trayectoria'			       =>$participante->trayectoria,
-						'telefono'				       =>$participante->telefono,
-						'telefono_celular'		       =>$participante->telefono_celular,
-						'telefono_radio'		       =>$participante->telefono_radio,
-						'email'					       =>$participante->email,
-						'fecha_nacimiento'		       =>$participante->fecha_nacimiento,
-						'calle'					       =>$participante->calle,
-						'piso'					       =>$participante->piso,
-						'numero'				       =>$participante->numero,
-						'depto'					       =>$participante->depto,
-						'codpostal'				       =>$participante->codpostal,
-						'id_provincia'			       =>$participante->id_provincia,
-						'localidad'				       =>$participante->localidad,
-						'nacionalidad'			       =>$participante->nacionalidad,
-						'id_estado_civil'		       =>$participante->id_estado_civil,
-						'conyuge_nombre'		       =>$participante->conyuge_nombre,
+						'numero_camiseta'		       =>$participante->numero_camiseta == '' ? NULL : $participante->numero_camiseta,
+						'id_tipo_posicion_juego'       =>$participante->id_tipo_posicion_juego == '' ? NULL : $participante->id_tipo_posicion_juego,
+						'id_tipo_estado_jugador'       =>$participante->id_tipo_estado_jugador == '' ? NULL : $participante->id_tipo_estado_jugador,
+						'numero_carnet_socio'	       =>$participante->numero_carnet_socio == '' ? NULL : $participante->numero_carnet_socio,
+						'id_equipo'				       =>$participante->id_equipo == '' ? NULL : $participante->id_equipo,
+						'trayectoria'			       =>$participante->trayectoria == '' ? NULL : $participante->trayectoria,
+						'telefono'				       =>$participante->telefono == '' ? NULL : $participante->telefono,
+						'telefono_celular'		       =>$participante->telefono_celular == '' ? NULL : $participante->telefono_celular,
+						'telefono_radio'		       =>$participante->telefono_radio == '' ? NULL : $participante->telefono_radio,
+						'email'					       =>$participante->email == '' ? NULL : $participante->email,
+						'fecha_nacimiento'		       =>$participante->fecha_nacimiento == '' ? NULL : date('Y-m-d', strtotime(str_replace('/', '-', $participante->fecha_nacimiento))),
+						'calle'					       =>$participante->calle == '' ? NULL : $participante->calle,
+						'piso'					       =>$participante->piso == '' ? NULL : $participante->piso,
+						'numero'				       =>$participante->numero == '' ? NULL : $participante->numero,
+						'depto'					       =>$participante->depto == '' ? NULL : $participante->depto,
+						'codpostal'				       =>$participante->codpostal == '' ? NULL : $participante->codpostal,
+						'id_provincia'			       =>$participante->id_provincia == '' ? NULL : $participante->id_provincia,
+						'localidad'				       =>$participante->localidad == '' ? NULL : $participante->localidad,
+						'nacionalidad'			       =>$participante->nacionalidad == '' ? NULL : $participante->nacionalidad,
+						'id_estado_civil'		       =>$participante->id_estado_civil == '' ? NULL : $participante->id_estado_civil,
+						'conyuge_nombre'		       =>$participante->conyuge_nombre == '' ? NULL : $participante->conyuge_nombre,
 						'id_tipo_doc'			       =>$participante->id_tipo_doc,
 						'nro_doc'				       =>$participante->nro_doc,
-						'cobertura_medica'		       =>$participante->cobertura_medica,
-						'fecha_apto_medico'            =>$participante->fecha_apto_medico,
-						'nombre_archivo_apto_medico'   =>$participante->nombre_archivo_apto_medico,
+						'cobertura_medica'		       =>$participante->cobertura_medica == '' ? NULL : $participante->cobertura_medica,
+						'fecha_apto_medico'            =>$participante->fecha_apto_medico == '' ? NULL : date('Y-m-d', strtotime(str_replace('/', '-', $participante->fecha_apto_medico))),
+						'nombre_archivo_apto_medico'   =>$participante->nombre_archivo_apto_medico == '' ? NULL : $participante->nombre_archivo_aptop_medico,
 						'id_usuario'			       =>$participante->id_usuario
 				));
 				
@@ -192,40 +198,46 @@ class Participante_model extends CI_Model {
 	 */
 	public function editar($participante)
 	{
+	if($participante->id_tipo_participante<>1)
+		{
+			$participante->cobertura_medica = NULL;
+			$participante->fecha_apto_medico = NULL;
+			$participante->nombre_archivo_apto_medico = NULL;
+		}
 		if($this->db->query($this->sp_editar, 
 				array(
-						'id_participante'            =>$participante->id_participante,
-						'id_tipo_participante'	     =>$participante->id_tipo_participante,
-						'nombre_archivo_foto'        =>$participante->nombre_archivo_foto,
-						'nombre'				     =>$participante->nombre,
-						'apellido'				     =>$participante->apellido,
-						'numero_camiseta'		     =>$participante->numero_camiseta,
-						'id_tipo_posicion_juego'     =>$participante->id_tipo_posicion_juego,
-						'id_tipo_estado_jugador'     =>$participante->id_tipo_estado_jugador,
-						'numero_carnet_socio'	     =>$participante->numero_carnet_socio,
-						'id_equipo'                  =>$participante->id_equipo,
-						'trayectoria'			     =>$participante->trayectoria,
-						'telefono'			    	 =>$participante->telefono,
-						'telefono_celular'		     =>$participante->telefono_celular,
-						'telefono_radio'		     =>$participante->telefono_radio,
-						'email'					     =>$participante->email,
-						'fecha_nacimiento'		     =>$participante->fecha_nacimiento == '' ? NULL : date('Y-m-d', strtotime(str_replace('/', '-', $participante->fecha_nacimiento))),
-						'calle'					     =>$participante->calle,
-						'piso'					     =>$participante->piso,
-						'numero'				     =>$participante->numero,
-						'depto'					     =>$participante->depto,
-						'codpostal'				     =>$participante->codpostal,
-						'id_provincia'			     =>$participante->id_provincia,
-						'localidad'				     =>$participante->localidad,
-						'nacionalidad'			     =>$participante->nacionalidad,
-						'id_estado_civil'		     =>$participante->id_estado_civil,
-						'conyuge_nombre'		     =>$participante->conyuge_nombre,
-						'id_tipo_doc'			     =>$participante->id_tipo_doc,
-						'nro_doc'				     =>$participante->nro_doc,
-						'cobertura_medica'    	 	 =>$participante->cobertura_medica,
-						'fecha_apto_medico'          =>$participante->fecha_apto_medico == '' ? NULL : date('Y-m-d', strtotime(str_replace('/', '-', $participante->fecha_apto_medico))),
-						'nombre_archivo_apto_medico' =>$participante->nombre_archivo_apto_medico,
-						'id_usuario'			     =>$participante->id_usuario
+						'id_participante'              =>$participante->id_participante,
+						'id_tipo_participante'	       =>$participante->id_tipo_participante,
+						'nombre_archivo_foto'          =>$participante->nombre_archivo_foto == '' ? NULL : $participante->nombre_archivo_foto,
+						'nombre'				       =>$participante->nombre,
+						'apellido'				       =>$participante->apellido,
+						'numero_camiseta'		       =>$participante->numero_camiseta == '' ? NULL : $participante->numero_camiseta,
+						'id_tipo_posicion_juego'       =>$participante->id_tipo_posicion_juego == '' ? NULL : $participante->id_tipo_posicion_juego,
+						'id_tipo_estado_jugador'       =>$participante->id_tipo_estado_jugador == '' ? NULL : $participante->id_tipo_estado_jugador,
+						'numero_carnet_socio'	       =>$participante->numero_carnet_socio == '' ? NULL : $participante->numero_carnet_socio,
+						'id_equipo'				       =>$participante->id_equipo == '' ? NULL : $participante->id_equipo,
+						'trayectoria'			       =>$participante->trayectoria == '' ? NULL : $participante->trayectoria,
+						'telefono'				       =>$participante->telefono == '' ? NULL : $participante->telefono,
+						'telefono_celular'		       =>$participante->telefono_celular == '' ? NULL : $participante->telefono_celular,
+						'telefono_radio'		       =>$participante->telefono_radio == '' ? NULL : $participante->telefono_radio,
+						'email'					       =>$participante->email == '' ? NULL : $participante->email,
+						'fecha_nacimiento'		       =>$participante->fecha_nacimiento == '' ? NULL : date('Y-m-d', strtotime(str_replace('/', '-', $participante->fecha_nacimiento))),
+						'calle'					       =>$participante->calle == '' ? NULL : $participante->calle,
+						'piso'					       =>$participante->piso == '' ? NULL : $participante->piso,
+						'numero'				       =>$participante->numero == '' ? NULL : $participante->numero,
+						'depto'					       =>$participante->depto == '' ? NULL : $participante->depto,
+						'codpostal'				       =>$participante->codpostal == '' ? NULL : $participante->codpostal,
+						'id_provincia'			       =>$participante->id_provincia == '' ? NULL : $participante->id_provincia,
+						'localidad'				       =>$participante->localidad == '' ? NULL : $participante->localidad,
+						'nacionalidad'			       =>$participante->nacionalidad == '' ? NULL : $participante->nacionalidad,
+						'id_estado_civil'		       =>$participante->id_estado_civil == '' ? NULL : $participante->id_estado_civil,
+						'conyuge_nombre'		       =>$participante->conyuge_nombre == '' ? NULL : $participante->conyuge_nombre,
+						'id_tipo_doc'			       =>$participante->id_tipo_doc,
+						'nro_doc'				       =>$participante->nro_doc,
+						'cobertura_medica'		       =>$participante->cobertura_medica == '' ? NULL : $participante->cobertura_medica,
+						'fecha_apto_medico'            =>$participante->fecha_apto_medico == '' ? NULL : date('Y-m-d', strtotime(str_replace('/', '-', $participante->fecha_apto_medico))),
+						'nombre_archivo_apto_medico'   =>$participante->nombre_archivo_apto_medico == '' ? NULL : $participante->nombre_archivo_aptop_medico,
+						'id_usuario'			       =>$participante->id_usuario
 				))
 				)
 		{
