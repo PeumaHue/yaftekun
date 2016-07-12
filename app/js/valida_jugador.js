@@ -75,8 +75,6 @@ $(document).ready(function () {
           alert("Pls select only images");
         }
       });
-
-    
 });
 
 function setear_autocomplete()

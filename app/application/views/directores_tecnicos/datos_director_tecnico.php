@@ -128,7 +128,7 @@
 														<input id="txt_Telefono" value="<?php echo ($reset) ? '' : set_value('telefono',$this->datos_formulario->telefono); ?>" class="form-control" name="telefono"  maxlength="11" placeholder="<?php echo lang('form_label_telefono');?>">
 													</div>
 													<div class="form-group col-sm-4 col-xs-12">
-														<input id="txt_Celulalar" value="<?php echo ($reset) ? '' : set_value('telefono_celular',$this->datos_formulario->telefono_celular); ?>" class="form-control" name="telefono_celular"  maxlength="11" placeholder="<?php echo lang('form_label_celular');?>">
+														<input id="txt_Celular" value="<?php echo ($reset) ? '' : set_value('telefono_celular',$this->datos_formulario->telefono_celular); ?>" class="form-control" name="telefono_celular"  maxlength="11" placeholder="<?php echo lang('form_label_celular');?>">
 													</div>
 													<div class="form-group col-sm-4 col-xs-12">
 														<input id="txt_Radio" value="<?php echo ($reset) ? '' : set_value('telefono_radio',$this->datos_formulario->telefono_radio); ?>" class="form-control" name="telefono_radio"  maxlength="15" placeholder="<?php echo lang('form_label_radio');?>">

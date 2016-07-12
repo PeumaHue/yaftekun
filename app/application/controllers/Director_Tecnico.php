@@ -207,7 +207,7 @@ class Director_Tecnico extends CI_Controller {
 	 */
 	public function obtener_autocomplete($apellido=NULL)
 	{
-		echo json_encode($this->Participante_model->consulta(NULL, NULL, NULL, $apellido));
+		echo json_encode($this->Participante_model->consulta(NULL, NULL, 3, $apellido));
 	}
 	
 	/**
@@ -379,7 +379,4 @@ class Director_Tecnico extends CI_Controller {
 		$this->datos_formulario->imagen_original_perfil     = isset($objeto->imagen_original_perfil) ? $objeto->imagen_original_perfil : '';
 		$this->datos_formulario->id_usuario                 = isset($objeto->id_usuario) ? $objeto->id_usuario : '';
 	}
-	
-	
-	
 }

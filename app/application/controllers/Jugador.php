@@ -36,19 +36,17 @@ class Jugador extends CI_Controller {
 		$this->load->helper(array('url', 'form', 'HYaftekun','email', 'date'));
 		$this->load->model('Participante_model');
 		$this->load->model('Equipo_model');
-		
+		$this->variables['mensaje']= '';
 		$this->variables['includes']='<script src="'.base_url('js/bootstrap-filestyle.min.js').'"></script>';
 		$this->variables['includes']=$this->variables['includes'].'<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/valida_jugador.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/jquery.easy-autocomplete.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<link rel="stylesheet" href="'.base_url('css/easy-autocomplete.min.css').'" />';
 		$this->variables['includes']= $this->variables['includes'].'<link rel="stylesheet" href="'.base_url('css/easy-autocomplete.themes.min.css').'" />';
-		
 		$this->variables['accion'] = site_url('Jugador/alta');
 		$this->variables['id_participante'] = '';
 		$this->variables['reset'] = FALSE;//Variable para indicar si hay que resetear los campos del formulario
 		$this->_setear_campos();
-		
 		$this->subeimagen_perfil = false;
 		$this->subeimagen_perfil_conf_['upload_path'] = './images/jugadores/';
 		$this->subeimagen_perfil_conf_['allowed_types'] = 'gif|jpg|png';
@@ -61,15 +59,14 @@ class Jugador extends CI_Controller {
 		$this->subeimagen_aptomedico_conf_['max_size']     = '200';
 		$this->subeimagen_aptomedico_conf_['max_width'] = '1000';
 		$this->subeimagen_aptomedico_conf_['max_height'] = '1000';
-		
 	}
 	
 	public function index() {
 		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'jugador/editar', "campoID"=>'id_participante',"camposMostrar"=>array('apellido','nombre'),"datos"=>$this->Participante_model->consulta(NULL, NULL, 1)));
-		
 		$this->load->view('templates/header', $this->variables);
 		$this->load->view('jugadores/principal_jugador', $this->variables);
 		$this->load->view('jugadores/busqueda_jugador', $this->variables);
+		$this->load->view('jugadores/mensajes_jugador', $this->variables);
 		$this->load->view('templates/footer');
 	}
 	
@@ -253,7 +250,7 @@ class Jugador extends CI_Controller {
 	 */
 	public function obtener_autocomplete($apellido=NULL)
 	{
-		echo json_encode($this->Participante_model->consulta(NULL, NULL, NULL, $apellido));
+		echo json_encode($this->Participante_model->consulta(NULL, NULL, 1, $apellido));
 	}
 	
 	/**
