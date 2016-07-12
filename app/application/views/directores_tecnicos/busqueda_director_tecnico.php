@@ -10,7 +10,7 @@
                     	<button class="btn btn-default" type="button">
                         	<i class="fa fa-search"></i>
                         </button>
-                        <a href="<?php echo base_url("jugador/alta");?>" role="button" class="btn btn-info">
+                        <a href="<?php echo base_url("director_tecnico/alta");?>" role="button" class="btn btn-info">
     	        			<i class="fa fa-plus"></i>
            	    		</a>
                     </div>   
@@ -18,12 +18,10 @@
    			 </div>
         </div>
     </div>
-    <div class="panel-body collapse in" id="jugador_body" aria-expanded="true">
+    <div class="panel-body collapse in" id="director_tecnico_body" aria-expanded="true">
    		<div class="row">
 			<?php echo $html_datos_ppal?>
        	</div>
     </div>
 </div>
 </div>
-            
-            

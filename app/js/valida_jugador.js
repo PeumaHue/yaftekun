@@ -1,11 +1,7 @@
-﻿$(document).ready(function () {
-	mostrar_foto();
+$(document).ready(function () {
 	setear_botones();
-	validar_arbitro();
-});
-
-function mostrar_foto()
-{
+	validar_jugador();
+	setear_autocomplete();
 	$("#nombre_archivo_foto").filestyle('buttonText', 'Agregar');
     $("#nombre_archivo_foto").on('change', function() {
         //Get count of selected files
@@ -36,24 +32,95 @@ function mostrar_foto()
               reader.readAsDataURL($(this)[0].files[i]);
             }
           } else {
-            alert("Navegador no soportado.");
+            alert("This browser does not support FileReader.");
           }
         } else {
-          alert("Por favor seleccione un archivo de imagen valido: GIF, PNG, JPG o JPEG.");
+          alert("Pls select only images");
         }
-      });	
+      });
+
+    $("#nombre_archivo_apto_medico").filestyle('buttonText', 'Agregar');
+    $("#nombre_archivo_apto_medico").on('change', function() {
+        //Get count of selected files
+        var countFiles = $(this)[0].files.length;
+        var imgPath = $(this)[0].value;
+        var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+        var image_holder = $("#thumbnail_aptopmedico_caption");
+        image_holder.empty();
+        if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+          if (typeof(FileReader) != "undefined") {
+            //loop for each file selected for uploaded.
+            for (var i = 0; i < countFiles; i++) 
+            {
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                $("<img />", {
+                  "src": e.target.result,
+                  "class": "img-thumbnail_aptomedico"
+                }).appendTo(image_holder);
+                var elem = document.getElementById("imagen_certificado");
+                if (elem != null)
+              	  {
+              	     elem.parentElement.removeChild(elem);
+                          	  
+              	  }
+              }
+              image_holder.show();
+              reader.readAsDataURL($(this)[0].files[i]);
+            }
+          } else {
+            alert("This browser does not support FileReader.");
+          }
+        } else {
+          alert("Pls select only images");
+        }
+      });
+
+    
+});
+
+function setear_autocomplete()
+{ 
+	originalLocation = window.location.href;
+	var options = {
+		    url: function(phrase) { 
+		            return  originalLocation + "/obtener_autocomplete/" + phrase;    
+	    },
+	    getValue: 'apellido',
+	    ajaxSettings: {
+	        dataType: "json"
+	    },
+	    list: {
+			match: {
+				enabled: true
+			},
+			onClickEvent: function() {
+				window.location.href = originalLocation + "/editar/" + $("#txt_busqueda").getSelectedItemData().id_participante;
+			},
+			onKeyEnterEvent : function() {
+				window.location.href = originalLocation + "/editar/" + $("#txt_busqueda").getSelectedItemData().id_participante;
+			}
+			/* Si es necesario guardar el id en un campo oculto
+			onSelectItemEvent: function() {
+				var value = $("#txt_busqueda").getSelectedItemData().id_torneo;
+				$("#id_torneo").val(value).trigger("change");
+			}*/
+		},
+	    requestDelay: 500
+	};
+	$("#txt_busqueda").easyAutocomplete(options);
 }
 
 function setear_botones()
 {
 	originalLocation = window.location.href;
-	if(originalLocation.indexOf("arbitro/alta") >= 0)//Si esta en el alta no se muestra el boton eliminar
+	if(originalLocation.indexOf("jugador/alta") >= 0)//Si esta en el alta no se muestra el boton eliminar
 	{
 		document.getElementById('btn_eliminar').style.visibility = "hidden";
 	}	
 }
 
-function validar_arbitro()
+function validar_jugador()
 {
     $('#participante').bootstrapValidator({
         feedbackIcons: {
@@ -62,7 +129,7 @@ function validar_arbitro()
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            apellido: {
+        	apellido: {
                 validators: {
                     notEmpty: {
                         message: 'Hey!! no te olvides de ingresar el apellido del jugador'
@@ -125,6 +192,14 @@ function validar_arbitro()
                     }
                 	},
             }, 
+            fecha_apto_medico: {
+                validators: {
+                    regexp: {
+                		regexp: /^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[/\\/](19|20)\d{2}$|^\s*$/,
+                        message: 'Ups! El formato de la fecha no es el correcto! deberia ser DD/MM/AAAA'
+                    }
+                }
+            },
             numero: {
                 validators: {
                 	regexp: {

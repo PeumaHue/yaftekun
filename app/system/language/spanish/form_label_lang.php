@@ -12,12 +12,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Variables nombres de campos
  */
 
-$lang['form_label_nombre']				= 'Nombre';
-$lang['form_label_apellido']			= 'Apellido';
+$lang['form_label_nombre']				= 'Nombre/s';
+$lang['form_label_apellido']			= 'Apellido/s';
 $lang['form_label_mail']				= 'Mail';
-$lang['form_label_tipo_documento']		= 'Tipo documento';
+$lang['form_label_tipo_documento']		= 'Tipo de documento';
 $lang['form_label_numero_documento']	= 'Número de documento';
-$lang['form_label_fehca_nacimiento']	= 'Fecha de nacimiento';
+$lang['form_label_fecha_nacimiento']	= 'Fecha de nacimiento';
 $lang['form_label_nacionalidad']		= 'Nacionalidad';
 $lang['form_label_estado_civil']		= 'Estado civil';
 $lang['form_label_calle']				= 'Calle';
@@ -30,12 +30,13 @@ $lang['form_label_localidad']			= 'Localidad';
 $lang['form_label_telefono']			= 'Teléfono fijo';
 $lang['form_label_celular']				= 'Teléfono celular';
 $lang['form_label_radio']				= 'Teléfono radio';
-
+$lang['form_label_trayectoria']			= 'Trayectoria';
+$lang['form_label_estado']				= 'Estado actual';
+$lang['form_label_fecha_apto_medico']	= 'Fecha de caducidad de apto médico';
 
 $lang['form_label_comentario']				= 'Comentario';
 $lang['form_label_nombre_conyuge']			= 'Nombre del cónyuge';
 $lang['form_label_cobertura_medica']		= 'Cobertura médica';
-$lang['form_label_estado']					= 'Estado';
 $lang['form_label_posicion_juego']			= 'Posición de juego';
 $lang['form_label_numero_camiseta']			= 'Número de camiseta';
 $lang['form_label_cantidad_equipos']		= 'Cantidad de equipos';
@@ -64,9 +65,11 @@ $lang['form_label_ayuda_nombre_equipo']	= 'Ingrese el nombre del nuevo equipo';
  * Paneles 
  */
 $lang['form_panel_datos_personales']	= 'Agregar';
+$lang['form_label_ficha_medica']	    = 'Ficha médica';
 $lang['form_panel_domicilio']			= 'Domicilio';
 $lang['form_panel_integrantes']			= 'Integrantes';
 $lang['form_label_informacion_general']	= 'Información general';
+
 
 
 
@@ -84,4 +87,4 @@ $lang['form_button_modificar']		= 'Modificar';
 $lang['form_button_eliminar']		= 'Eliminar';
 $lang['form_button_selecccionar']	= 'Seleccionar';
 
-$lang['form_combo_seleccionar']		= 'Seleccione';
+$lang['form_combo_seleccionar']		= '[Seleccione]';

@@ -34,8 +34,11 @@ class Participante_test extends CI_Controller {
 	public $id_tipo_doc;
 	public $nro_doc;
 	public $cobertura_medica;
+	public $fecha_apto_medico;
 	public $fecha_creacion;
 	public $id_usuario;
+	public $nombre_archivo_foto;
+	public $nombre_archivo_apto_medico;
 	
 	
 	public function __construct()
@@ -95,7 +98,7 @@ class Participante_test extends CI_Controller {
 		$participante->nombre = "JUAN CARLOS";
 		$participante->apellido =  "GOYENECHE";
 		$participante->numero_camiseta = "10";
-		$participante->id_tipoposicion_juego = 1;
+		$participante->id_tipo_posicion_juego = 1;
 		$participante->id_tipo_estado_jugador = 1;
 		$participante->numero_carnet_socio = "9999";
 		$participante->trayectoria = "HA JUGADO EN BOCA JUNIORS EN EL PERIODO 1973-1978" ;
@@ -117,8 +120,10 @@ class Participante_test extends CI_Controller {
 		$participante->id_tipo_doc = 1;
 		$participante->nro_doc = 26965501;
 		$participante->cobertura_medica = "OSDE";
+		$participante->fecha_apto_medico = 20171010;
 		$participante->id_usuario = 1;
-			
+		$participante->nombre_archivo_foto = "imagen.jpg";
+		$participante->nombre_archivo_apto_medico = "imagen.jpg";
 		$resultado['resultado']='OK';
 		$test = $this->Participante_model->alta($participante);
 		$resultado['id'] = $test['id'];

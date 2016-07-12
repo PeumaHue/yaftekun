@@ -27,11 +27,13 @@ class Torneo extends CI_Controller {
 		$this->load->model('Torneo_model');
 		$this->datos_formulario = new stdClass();//Instancio una clase vacia para evitar el warning "Creating default object from empty value"
 		$this->variables['includes']='<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
+		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/jquery.easy-autocomplete.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/valida_torneo.js').'"></script>';
+		$this->variables['includes']= $this->variables['includes'].'<link rel="stylesheet" href="'.base_url('css/easy-autocomplete.min.css').'" />';
+		$this->variables['includes']= $this->variables['includes'].'<link rel="stylesheet" href="'.base_url('css/easy-autocomplete.themes.min.css').'" />';
 		$this->variables['accion'] = site_url('persona/alta');
 		$this->variables['id_torneo'] = '';
 		$this->variables['reset'] = FALSE;//Variable para indicar si hay que resetear los campos del formulario
-		$this->load->view('templates/header', $this->variables);
 		$this->_setear_campos();
 	}
 	
@@ -41,9 +43,19 @@ class Torneo extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->load->view('templates/header', $this->variables);
 		$this->_renderizar_torneos();
 		$this->load->view('torneos/principal_torneo', $this->variables);
 		$this->load->view('templates/footer');
+	}
+	
+	/**
+	 * Funcion que realiza una búsqueda por nombre de torneo
+	 * @return void
+	 */
+	public function obtener_autocomplete($nombre=NULL)
+	{
+		echo json_encode($this->Torneo_model->consulta(NULL, NULL, $nombre));
 	}
 	
 	/**
@@ -52,6 +64,7 @@ class Torneo extends CI_Controller {
 	 */
 	public function alta()
 	{
+		$this->load->view('templates/header', $this->variables);
 		$this->_setear_variables('', '', site_url('torneo/alta'), site_url('torneo'), '', '');
 		$this->_obtener_combo_modalidad();
 		$this->_setear_reglas();
@@ -83,6 +96,7 @@ class Torneo extends CI_Controller {
 	 */
 	public function editar($id_torneo=NULL)
 	{
+		$this->load->view('templates/header', $this->variables);
 		$this->_setear_variables('', '', site_url('torneo/editar'), site_url('torneo'), '', site_url('torneo/baja') . '/' . ($id_torneo==NULL ? $this->input->post('id_torneo') : $id_torneo));
 		//Si no es un post, no se llama al editar y solo se muestran los campos para editar
 		if(!$this->input->post('nombre'))
@@ -128,7 +142,8 @@ class Torneo extends CI_Controller {
 		$torneo = new stdClass();
 		$torneo->id_torneo = $id_torneo;
 		$this->Torneo_model->baja($torneo);
-		$this->index();
+		//$this->index();
+		redirect(site_url('torneo'));
 	}
 	
 	/**
