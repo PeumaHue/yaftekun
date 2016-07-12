@@ -140,6 +140,8 @@ class Participante_model extends CI_Model {
 			$participante->cobertura_medica = NULL;
 			$participante->fecha_apto_medico = NULL;
 			$participante->nombre_archivo_apto_medico = NULL;
+			$participante->numero_camiseta = NULL;
+			$participante->id_tipo_posicion_juego = NULL;
 		}
 		$query = $this->db->query($this->sp_alta, 
 				array(
@@ -203,6 +205,8 @@ class Participante_model extends CI_Model {
 			$participante->cobertura_medica = NULL;
 			$participante->fecha_apto_medico = NULL;
 			$participante->nombre_archivo_apto_medico = NULL;
+			$participante->numero_camiseta = NULL;
+			$participante->id_tipo_posicion_juego = NULL;
 		}
 		if($this->db->query($this->sp_editar, 
 				array(
