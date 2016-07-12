@@ -248,9 +248,9 @@ class Jugador extends CI_Controller {
 	 * Funcion que realiza una búsqueda por nombre de jugador
 	 * @return void
 	 */
-	public function obtener_autocomplete($apellido=NULL)
+	public function obtener_autocomplete($nombre_apellido=NULL)
 	{
-		echo json_encode($this->Participante_model->consulta(NULL, NULL, 1, $apellido));
+		echo json_encode($this->Participante_model->consulta(NULL, NULL, 1, $nombre_apellido));
 	}
 	
 	/**
