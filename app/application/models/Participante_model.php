@@ -68,12 +68,12 @@ class Participante_model extends CI_Model {
 	 * @param 		integer 	$id_participante
 	 * @param 		integer 	$id_equipo
 	 * @param       integer     $id_tipo_participante
-	 * @param       varchar     $apellido
+	 * @param       varchar     $nombre_apellido
 	 * @return 		mixed 		object|array Si se consulta para clave primaria retorna un objeto.  Caso contrario retorna un array.
 	 */
-	public function consulta($id_participante=NULL, $id_equipo = NULL, $id_tipo_participante = NULL, $apellido = NULL)
+	public function consulta($id_participante=NULL, $id_equipo = NULL, $id_tipo_participante = NULL, $nombre_apellido = NULL)
 	{
-		$query = $this->db->query($this->sp_consulta, array('id_participante' => $id_participante, 'id_equipo' => $id_equipo, 'id_tipo_participante' => $id_tipo_participante, 'apellido' => $apellido, 'row_count' => NULL, 'offset' => NULL));
+		$query = $this->db->query($this->sp_consulta, array('id_participante' => $id_participante, 'id_equipo' => $id_equipo, 'id_tipo_participante' => $id_tipo_participante, 'nombre_apellido' => $nombre_apellido, 'row_count' => NULL, 'offset' => NULL));
 		if($id_participante)
 		{
 			if ($query->num_rows() > 0) 
