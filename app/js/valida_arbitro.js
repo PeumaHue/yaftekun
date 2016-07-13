@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
 	mostrar_foto();
 	setear_botones();
+	setear_autocomplete();
 	validar_arbitro();
 });
 
@@ -49,8 +50,42 @@ function setear_botones()
 	originalLocation = window.location.href;
 	if(originalLocation.indexOf("arbitro/alta") >= 0)//Si esta en el alta no se muestra el boton eliminar
 	{
-		document.getElementById('btn_eliminar').style.visibility = "hidden";
+		$("#btn_eliminar").hide();
 	}	
+}
+
+function setear_autocomplete()
+{ 
+	originalLocation = window.location.href;
+	var options = {
+		    url: function(phrase) { 
+		            return  originalLocation + "/obtener_autocomplete/" + phrase;    
+		    },
+		    getValue: function(element){
+		    	return element.apellido + ' ' + element.nombre;
+		    },
+		    ajaxSettings: {
+		        dataType: "json"
+		    },
+		    list: {
+				match: {
+					enabled: true
+				},
+				onClickEvent: function() {
+					window.location.href = originalLocation + "/editar/" + $("#txt_busqueda").getSelectedItemData().id_participante;
+				},
+				onKeyEnterEvent : function() {
+					window.location.href = originalLocation + "/editar/" + $("#txt_busqueda").getSelectedItemData().id_participante;
+				}
+				/* Si es necesario guardar el id en un campo oculto
+				onSelectItemEvent: function() {
+					var value = $("#txt_busqueda").getSelectedItemData().id_torneo;
+					$("#id_torneo").val(value).trigger("change");
+				}*/
+			},
+		    requestDelay: 500
+		};
+		$("#txt_busqueda").easyAutocomplete(options);
 }
 
 function validar_arbitro()

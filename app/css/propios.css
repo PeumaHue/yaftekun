@@ -272,18 +272,32 @@ a
     color:#fff !important;
 }
 
+
+
+/**********************************************          
+    PANEL TORNEOS
+**********************************************/
+
+.panel-torneos .panel-heading {
+    color: hsl(0, 100%, 100%);
+    border-color: #337ab7;
+    background-color:#337ab7;
+}
+.panel-torneos-secundario {
+    color: hsl(0, 100%, 100%);
+    background-color: #337ab7;
+    border-color: #337ab7;
+    font-weight: bolder;
+    font-size: 200%;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px 5px 15px 20px;
+}
+
 .panel-torneos
 {
     border-color: #337ab7;
     background-color:#337ab7;
 }
-
-    .panel-torneos > .panel-heading
-    {
-        color: #fff;
-        background-color: #337ab7;
-        border-color: #337ab7;
-    }
 
 /**********************************************          
     PANEL EQUIPOS
@@ -374,18 +388,26 @@ a
 }
 
 
-.panel-delegados {
-    border-color: hsl(39, 39%, 67%);
-    background-color:hsl(39, 39%, 67%);
-}
+
+/**********************************************          
+    PANEL DELEGADOS
+**********************************************/
+
 .panel-delegados .panel-heading {
-    border-color: hsl(39, 39%, 67%);
     color: hsl(0, 100%, 100%);
+    border-color: hsl(39, 39%, 67%);
     background-color:hsl(39, 39%, 67%);
 }
-.panel-delegados a {
-    color: hsl(39, 39%, 67%);
+.panel-delegados-secundario {
+    color: hsl(0, 100%, 100%);
+    border-color: hsl(39, 39%, 67%);
+    background-color:hsl(39, 39%, 67%);
+    font-weight: bolder;
+    font-size: 200%;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px 5px 15px 20px;
 }
+
 
 .panel-error
 {

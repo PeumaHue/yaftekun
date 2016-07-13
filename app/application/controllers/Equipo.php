@@ -14,7 +14,6 @@ class Equipo extends CI_Controller {
 	 * @var array
 	 */
 	public $datos_formulario;
-	
 
 	public function __construct()
 	{
@@ -23,21 +22,17 @@ class Equipo extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->helper(array('url', 'form', 'HYaftekun'));
 		$this->load->model('Equipo_model');
-		
 		$this->variables['includes']='<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
 		$this->variables['includes']=$this->variables['includes'].'<script src="'.base_url('js/bootstrap-filestyle.js').'"></script>';
 		$this->variables['includes']=$this->variables['includes'].'<script src="'.base_url('js/valida_equipos.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/jquery.easy-autocomplete.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<link rel="stylesheet" href="'.base_url('css/easy-autocomplete.min.css').'" />';
 		$this->variables['includes']= $this->variables['includes'].'<link rel="stylesheet" href="'.base_url('css/easy-autocomplete.themes.min.css').'" />';
-		
-		#echo "<p>NOCACHEADO</p>";
 		$this->conf['upload_path'] = './images/escudos/';
 		$this->conf['allowed_types'] = 'gif|jpg|png';
 		$this->conf['max_size']     = '200';
 		$this->conf['max_width'] = '100';
 		$this->conf['max_height'] = '100';
-		
 		$this->subeimagen = false;
 		$this->_setear_campos();
 	}
@@ -47,8 +42,6 @@ class Equipo extends CI_Controller {
 		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'equipo/editar', "campoID"=>'id_equipo',"camposMostrar"=>'nombre',"datos"=>$this->Equipo_model->consulta(NULL,NULL,NULL)));
 		$msj = isset($this->variables['mensaje']) ? $this->variables['mensaje'] : ''; 
 		$this->_setear_variables('', $msj, site_url('equipo'), site_url('equipo'), '', '');
-			
-		
 		$this->load->view('templates/header', $this->variables);
 		$this->load->view('equipos/principal_equipo', $this->variables);
 		$this->load->view('equipos/busqueda_equipo',$this->variables);
@@ -76,7 +69,6 @@ class Equipo extends CI_Controller {
 		$this->variables['estadios']=_obtener_array_asociativo(array("datos"=>$this->Equipo_model->obtener_estadios(), "campo_clave"=>'id_estadio', "campo_descripcion"=>'nombre', "cadena_sin_seleccion"=>'form_label_estadio'));
 		$this->variables['agregar_o_editar']='Agregar';
 		$this->_setear_reglas();
-
 		if ($this->input->method()=='post')
 		{
 			if ($this->form_validation->run()==FALSE)
@@ -89,11 +81,9 @@ class Equipo extends CI_Controller {
 				if ($this->subeimagen)
 				{
 					$this->load->library('upload', $this->conf);
-					
 					if ( ! $this->upload->do_upload('imagen'))
 					{
 						$this->variables['mensaje'] = $this->upload->display_errors();
-							
 					}
 				}
 				
@@ -110,16 +100,13 @@ class Equipo extends CI_Controller {
 						$this->variables['mensaje'] = lang('message_guardar_error');
 					}
 				}
-			
 			}
 		}
-		
 		$this->load->view('templates/header', $this->variables);
 		$this->load->view('equipos/principal_equipo',$this->variables);
 		$this->load->view('equipos/datos_equipo',$this->variables);
 		$this->load->view('equipos/mensajes_equipo', $this->variables);
 		$this->load->view('templates/footer');
-		
 	}
 	
 	/**
@@ -131,14 +118,12 @@ class Equipo extends CI_Controller {
 		$this->variables['estadios']=_obtener_array_asociativo(array("datos"=>$this->Equipo_model->obtener_estadios(), "campo_clave"=>'id_estadio', "campo_descripcion"=>'nombre'));
 		$this->_setear_variables('','',site_url('equipo/editar'),site_url('equipo'),site_url('equipo'),site_url('equipo/baja').'/'.($id_equipo==NULL ? $this->input->post('id_equipo') : $id_equipo));
 		$this->variables['agregar_o_editar']='Editar';
-		//site_url('equipo/baja') . '/' . ($id_equipo==NULL ? $this->input->post('id_equipo') : $id_equipo
-		
 		if (!$this->input->post('nombre'))
 		{
 			$this->_cargar_datos_formulario($this->Equipo_model->consulta($id_equipo,NULL,NULL));
 		}
-		else {
-			
+		else 
+		{
 			$this->subeimagen = ($_FILES['imagen']['tmp_name']!='');
 			$this->_setear_reglas();
 			if ($this->form_validation->run()==FALSE)
@@ -168,16 +153,18 @@ class Equipo extends CI_Controller {
 						$this->variables['mensaje'] = lang('message_guardar_error');
 					}	
 				}
-				
 			}
 		}
-		
 		$this->load->view('templates/header', $this->variables);
 		$this->load->view('equipos/principal_equipo',$this->variables);
 		$this->load->view('equipos/datos_equipo',$this->variables);
 		$this->load->view('templates/footer');
 	}
 	
+	/**
+	 * Funcion de baja
+	 * @return void
+	 */
 	public function baja($id_equipo=NULL)
 	{
 		$equipo = new stdClass();
@@ -249,6 +236,10 @@ class Equipo extends CI_Controller {
 		
 	}
 	
+	/**
+	 * Funcion que setea las parametros basicos de las variables de la pagina
+	 * @return void
+	 */
 	private function _setear_variables($titulo=NULL, $mensaje=NULL, $accion=NULL, $cancelar=NULL, $volver=NULL, $eliminar=NULL)
 	{
 		$this->variables['accion'] 		= $accion;
@@ -263,6 +254,10 @@ class Equipo extends CI_Controller {
 		}
 	}
 	
+	/**
+	 * Funcion que carga los datos del formulario
+	 * @param 		object		$participante
+	 */
 	private function _cargar_datos_formulario($objeto){
 		$this->datos_formulario->id_equipo          = isset($objeto->id_equipo) ? $objeto->id_equipo : '';
 		$this->datos_formulario->id_liga            = isset($objeto->id_liga) ? $objeto->id_liga : '';

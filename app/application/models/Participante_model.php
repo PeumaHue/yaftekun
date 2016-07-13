@@ -68,12 +68,12 @@ class Participante_model extends CI_Model {
 	 * @param 		integer 	$id_participante
 	 * @param 		integer 	$id_equipo
 	 * @param       integer     $id_tipo_participante
-	 * @param       varchar     $apellido
+	 * @param       varchar     $nombre_apellido
 	 * @return 		mixed 		object|array Si se consulta para clave primaria retorna un objeto.  Caso contrario retorna un array.
 	 */
-	public function consulta($id_participante=NULL, $id_equipo = NULL, $id_tipo_participante = NULL, $apellido = NULL)
+	public function consulta($id_participante=NULL, $id_equipo = NULL, $id_tipo_participante = NULL, $nombre_apellido = NULL)
 	{
-		$query = $this->db->query($this->sp_consulta, array('id_participante' => $id_participante, 'id_equipo' => $id_equipo, 'id_tipo_participante' => $id_tipo_participante, 'apellido' => $apellido, 'row_count' => NULL, 'offset' => NULL));
+		$query = $this->db->query($this->sp_consulta, array('id_participante' => $id_participante, 'id_equipo' => $id_equipo, 'id_tipo_participante' => $id_tipo_participante, 'nombre_apellido' => $nombre_apellido, 'row_count' => NULL, 'offset' => NULL));
 		if($id_participante)
 		{
 			if ($query->num_rows() > 0) 
@@ -140,6 +140,8 @@ class Participante_model extends CI_Model {
 			$participante->cobertura_medica = NULL;
 			$participante->fecha_apto_medico = NULL;
 			$participante->nombre_archivo_apto_medico = NULL;
+			$participante->numero_camiseta = NULL;
+			$participante->id_tipo_posicion_juego = NULL;
 		}
 		$query = $this->db->query($this->sp_alta, 
 				array(
@@ -172,7 +174,7 @@ class Participante_model extends CI_Model {
 						'nro_doc'				       =>$participante->nro_doc,
 						'cobertura_medica'		       =>$participante->cobertura_medica == '' ? NULL : $participante->cobertura_medica,
 						'fecha_apto_medico'            =>$participante->fecha_apto_medico == '' ? NULL : date('Y-m-d', strtotime(str_replace('/', '-', $participante->fecha_apto_medico))),
-						'nombre_archivo_apto_medico'   =>$participante->nombre_archivo_apto_medico == '' ? NULL : $participante->nombre_archivo_aptop_medico,
+						'nombre_archivo_apto_medico'   =>$participante->nombre_archivo_apto_medico == '' ? NULL : $participante->nombre_archivo_apto_medico,
 						'id_usuario'			       =>$participante->id_usuario
 				));
 				
@@ -203,6 +205,8 @@ class Participante_model extends CI_Model {
 			$participante->cobertura_medica = NULL;
 			$participante->fecha_apto_medico = NULL;
 			$participante->nombre_archivo_apto_medico = NULL;
+			$participante->numero_camiseta = NULL;
+			$participante->id_tipo_posicion_juego = NULL;
 		}
 		if($this->db->query($this->sp_editar, 
 				array(
