@@ -1,19 +1,52 @@
--- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.29, for Win32 (AMD64)
 --
--- Host: 127.0.0.1    Database: yaftekun
+-- Host: gsytsismic08    Database: yaftekun
 -- ------------------------------------------------------
 -- Server version	5.6.29
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES UTF8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `encuentro_participante`
+--
+
+DROP TABLE IF EXISTS `encuentro_participante`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `encuentro_participante` (
+  `id_participante` bigint(10) unsigned NOT NULL,
+  `id_encuentro` bigint(10) unsigned NOT NULL,
+  `id_tipo_participante` int(10) unsigned NOT NULL,
+  `nombre` varchar(120) NOT NULL,
+  `id_equipo` bigint(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id_participante`,`id_encuentro`),
+  KEY `idequipo` (`id_equipo`),
+  KEY `idparticipante` (`id_participante`),
+  KEY `fk_encuentro_participante_fixture_idx` (`id_encuentro`),
+  KEY `fk_encuentro_participante_tipo_tarticipante_idx` (`id_tipo_participante`),
+  CONSTRAINT `fk_encuentro_participante_fixture` FOREIGN KEY (`id_encuentro`) REFERENCES `fixture` (`id_encuentro`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_encuentro_participante_participante` FOREIGN KEY (`id_participante`) REFERENCES `participante` (`id_participante`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_encuentro_participante_tipo_tarticipante` FOREIGN KEY (`id_tipo_participante`) REFERENCES `tipo_participante` (`id_tipo_participante`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `encuentro_participante`
+--
+
+LOCK TABLES `encuentro_participante` WRITE;
+/*!40000 ALTER TABLE `encuentro_participante` DISABLE KEYS */;
+/*!40000 ALTER TABLE `encuentro_participante` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `equipo`
@@ -31,9 +64,10 @@ CREATE TABLE `equipo` (
   `fecha_creacion` datetime NOT NULL,
   `imagen` tinytext,
   PRIMARY KEY (`id_equipo`),
+  UNIQUE KEY `ixu_EquipoNombre` (`nombre`),
   KEY `fk_equipo_liga_idx` (`id_liga`),
   CONSTRAINT `fk_equipo_liga` FOREIGN KEY (`id_liga`) REFERENCES `liga` (`id_liga`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4294967333 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4294967385 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +76,7 @@ CREATE TABLE `equipo` (
 
 LOCK TABLES `equipo` WRITE;
 /*!40000 ALTER TABLE `equipo` DISABLE KEYS */;
-INSERT INTO `equipo` VALUES (1,1,'LANUS',1,1,'2016-05-03 09:09:42',NULL),(4294967295,4294967295,'liga de campeones',3,3,'2016-03-01 00:00:00',NULL),(4294967299,1,'aldosivi',1,1,'2016-05-05 19:57:29','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967300,1,'aldosivi',1,1,'2016-05-05 20:02:10','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967301,1,'aldosivi',1,1,'2016-05-05 20:02:11','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967305,1,'aldosivi',1,1,'2016-05-05 20:02:33','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967306,1,'aldosivi',1,1,'2016-05-05 20:02:34','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967307,1,'aldosivi',1,1,'2016-05-06 13:19:35','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967309,1,'aldosivi',1,1,'2016-05-06 14:27:22','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967310,1,'aldosivi',1,1,'2016-05-06 15:01:09','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967312,1,'aldosivi',1,1,'2016-05-06 15:10:16','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967313,1,'aldosivi',1,1,'2016-05-06 15:16:27','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967314,1,'aldosivi',1,1,'2016-05-06 15:17:34','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967315,1,'aldosivi',1,1,'2016-05-06 15:18:57','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967316,1,'aldosivi',1,1,'2016-05-06 15:19:37','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967327,1,'aldosivi',1,1,'2016-05-06 15:22:19','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967328,1,'boca',1,1,'2016-05-23 15:27:53','boca_juniors.png'),(4294967329,1,'kkkk',1,1,'2016-05-23 15:37:59','colon.png'),(4294967330,1,'fdsfd',1,1,'2016-05-23 15:47:39','defensa_y_justicia.png'),(4294967331,1,'fdddd',1,1,'2016-05-23 15:47:55','arsenal.png'),(4294967332,1,'peperoncino',1,1,'2016-05-23 17:41:04','banfield.png');
+INSERT INTO `equipo` VALUES (1,1,'LANUS',1,1,'2016-05-03 09:09:42',NULL),(2,4294967295,'EDITADO',1,1,'2016-03-01 00:00:00','ninguna.png'),(3,1,'aldosivi',1,1,'2016-05-05 19:57:29','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4,1,'boca',1,1,'2016-05-23 15:27:53','boca_juniors.png'),(5,1,'fdsfd',1,1,'2016-05-23 15:47:39','defensa_y_justicia.png'),(6,1,'fdddd',1,1,'2016-05-23 15:47:55','arsenal.png'),(7,1,'peperoncino',1,1,'2016-05-23 17:41:04','banfield.png'),(8,1,'otro',1,1,'2016-05-24 18:16:41','atletico_tucuman.png'),(9,1,'mas',1,1,'2016-05-24 18:17:03','colon.png'),(10,1,'uuuuu',1,1,'2016-05-28 14:03:47',NULL),(4294967343,1,'ppppp',1,1,'2016-05-28 14:14:23',''),(4294967344,1,'iiiiii',1,1,'2016-05-28 14:31:32',NULL),(4294967345,1,'llllllll',1,1,'2016-05-28 14:41:54',NULL),(4294967346,1,'ultimo',2,2,'2016-05-30 00:20:12',NULL),(4294967347,1,'xxxxx',1,1,'2016-06-01 18:15:22',NULL),(4294967349,1,'qqqq',1,1,'2016-06-01 18:17:22',NULL),(4294967350,1,'vvvvvv',1,1,'2016-06-01 18:18:05',NULL),(4294967351,1,'wwwwww',1,1,'2016-06-01 18:18:32',NULL),(4294967352,1,'wq',1,1,'2016-06-01 18:19:12',NULL),(4294967353,1,'45',1,1,'2016-06-01 18:24:41',NULL),(4294967354,1,'123',1,1,'2016-06-01 18:30:15',NULL),(4294967355,1,'789',1,1,'2016-06-01 18:39:16',''),(4294967358,1,'xxxxxxxxxxxxxxxxxxx',1,1,'2016-06-02 20:17:45','belgrano.png'),(4294967359,1,'Prueba 1p',3,1,'2016-06-03 17:50:30','belgrano1.png'),(4294967360,1,'kkkk 1',2,2,'2016-06-03 20:25:43',''),(4294967361,1,'kkkk 2',1,1,'2016-06-03 20:26:06','boca_juniors.png'),(4294967362,1,'wwww 45',1,1,'2016-06-03 20:26:26','atletico_rafaela.png'),(4294967363,1,'ppp4',1,1,'2016-06-06 11:32:33',''),(4294967368,1,'ppppqw',3,1,'2016-06-10 16:37:26',''),(4294967373,1,'ioio',1,1,'2016-06-10 17:38:39','a1.gif'),(4294967377,1,'otromas',1,1,'2016-06-22 16:12:46','huracan.png'),(4294967378,1,'perinolonchelodmon',2,1,'2016-06-29 17:44:49','atletico_tucuman5.png'),(4294967379,1,'con imagen',2,1,'2016-06-29 17:46:29','aldosivi3.png'),(4294967381,1,'DEFE',1,1,'2016-06-29 19:17:26','atletico_tucuman6.png'),(4294967382,1,'chota',1,1,'2016-07-01 15:06:15',''),(4294967383,1,'Xeneize',1,1,'2016-07-05 12:24:52','belgrano4.png'),(4294967384,1,'Marian',1,1,'2016-07-06 11:12:41','');
 /*!40000 ALTER TABLE `equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,11 +89,11 @@ DROP TABLE IF EXISTS `equipo_integrante`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `equipo_integrante` (
   `id_equipo` bigint(10) unsigned NOT NULL,
-  `id_participante` bigint(20) unsigned NOT NULL,
-  `id_tipo_participante` int(11) unsigned NOT NULL,
+  `id_participante` bigint(10) unsigned NOT NULL,
+  `id_tipo_participante` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_equipo`,`id_participante`),
   KEY `fk_equipo_integrante_participante_idx` (`id_participante`),
-  CONSTRAINT `fk_equipo_integrante_equipo` FOREIGN KEY (`id_equipo`) REFERENCES `equipo` (`id_equipo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_equipo_integrante_equipo` FOREIGN KEY (`id_equipo`) REFERENCES `equipo` (`id_equipo`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `fk_equipo_integrante_participante` FOREIGN KEY (`id_participante`) REFERENCES `participante` (`id_participante`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -70,7 +104,7 @@ CREATE TABLE `equipo_integrante` (
 
 LOCK TABLES `equipo_integrante` WRITE;
 /*!40000 ALTER TABLE `equipo_integrante` DISABLE KEYS */;
-INSERT INTO `equipo_integrante` VALUES (1,15,1),(1,79,1),(1,80,1),(1,81,1),(1,82,1),(1,83,1),(1,84,1),(1,85,1),(1,86,1),(1,87,1),(1,88,1),(1,89,1),(1,90,1),(1,91,1),(1,92,1),(1,93,1),(1,94,1),(1,95,1),(1,96,1),(1,97,1),(1,98,1),(1,99,1),(1,100,1),(1,101,1),(1,102,1),(1,103,1),(1,104,1),(1,105,1),(1,106,1),(1,107,1),(1,108,1),(1,109,1),(1,110,1),(1,111,1),(1,112,1),(1,113,1),(1,114,1);
+INSERT INTO `equipo_integrante` VALUES (1,62,1),(1,63,1);
 /*!40000 ALTER TABLE `equipo_integrante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,7 +136,50 @@ CREATE TABLE `estadio` (
 
 LOCK TABLES `estadio` WRITE;
 /*!40000 ALTER TABLE `estadio` DISABLE KEYS */;
+INSERT INTO `estadio` VALUES (1,'INDETERMINADO','',NULL,NULL,NULL,NULL,NULL,1,'2016-01-01 00:00:00'),(2,'INDETERMINADO2','',NULL,NULL,NULL,NULL,NULL,1,'2016-01-01 00:00:00'),(3,'INDETERMINADO3','',NULL,NULL,NULL,NULL,NULL,1,'2016-01-01 00:00:00');
 /*!40000 ALTER TABLE `estadio` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `fixture`
+--
+
+DROP TABLE IF EXISTS `fixture`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `fixture` (
+  `id_encuentro` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id_torneo` bigint(20) unsigned NOT NULL,
+  `id_ronda` int(10) unsigned NOT NULL,
+  `idsede` int(11) unsigned NOT NULL,
+  `id_grupo` int(10) unsigned NOT NULL,
+  `id_equipoa` bigint(20) unsigned DEFAULT NULL,
+  `id_equipob` bigint(20) unsigned DEFAULT NULL,
+  `fechaevento` datetime DEFAULT NULL,
+  `tantosa` int(11) DEFAULT NULL,
+  `tantosb` int(11) DEFAULT NULL,
+  `ganador_por_sorteo` bit(1) NOT NULL DEFAULT b'0',
+  `son_posiciones` bit(1) NOT NULL DEFAULT b'0',
+  PRIMARY KEY (`id_encuentro`),
+  UNIQUE KEY `idencuentro_UNIQUE` (`id_encuentro`),
+  KEY `idequipoa` (`id_equipoa`),
+  KEY `idequipob` (`id_equipob`),
+  KEY `idtorneo` (`id_torneo`),
+  KEY `fk_fixture_sede_idx` (`idsede`),
+  CONSTRAINT `fk_fixture_equipoa` FOREIGN KEY (`id_equipoa`) REFERENCES `equipo` (`id_equipo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_fixture_equipob` FOREIGN KEY (`id_equipob`) REFERENCES `equipo` (`id_equipo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_fixture_sede` FOREIGN KEY (`idsede`) REFERENCES `sede` (`id_sede`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `fixture`
+--
+
+LOCK TABLES `fixture` WRITE;
+/*!40000 ALTER TABLE `fixture` DISABLE KEYS */;
+INSERT INTO `fixture` VALUES (1,1,1,1,1,1,2,NULL,NULL,NULL,'\0','\0'),(2,1,1,1,1,1,3,NULL,NULL,NULL,'\0','\0'),(3,1,1,1,1,2,3,NULL,NULL,NULL,'\0','\0'),(4,1,1,1,1,1,4,NULL,NULL,NULL,'\0','\0'),(5,1,1,1,1,2,4,NULL,NULL,NULL,'\0','\0'),(6,1,1,1,1,3,4,NULL,NULL,NULL,'\0','\0'),(7,1,1,1,1,1,5,NULL,NULL,NULL,'\0','\0'),(8,1,1,1,1,2,5,NULL,NULL,NULL,'\0','\0'),(9,1,1,1,1,3,5,NULL,NULL,NULL,'\0','\0'),(10,1,1,1,1,4,5,NULL,NULL,NULL,'\0','\0'),(11,1,1,1,1,1,6,NULL,NULL,NULL,'\0','\0'),(12,1,1,1,1,2,6,NULL,NULL,NULL,'\0','\0'),(13,1,1,1,1,3,6,NULL,NULL,NULL,'\0','\0'),(14,1,1,1,1,4,6,NULL,NULL,NULL,'\0','\0'),(15,1,1,1,1,5,6,NULL,NULL,NULL,'\0','\0'),(16,1,1,1,1,1,7,NULL,NULL,NULL,'\0','\0'),(17,1,1,1,1,2,7,NULL,NULL,NULL,'\0','\0'),(18,1,1,1,1,3,7,NULL,NULL,NULL,'\0','\0'),(19,1,1,1,1,4,7,NULL,NULL,NULL,'\0','\0'),(20,1,1,1,1,5,7,NULL,NULL,NULL,'\0','\0'),(21,1,1,1,1,6,7,NULL,NULL,NULL,'\0','\0'),(22,1,1,1,1,1,8,NULL,NULL,NULL,'\0','\0'),(23,1,1,1,1,2,8,NULL,NULL,NULL,'\0','\0'),(24,1,1,1,1,3,8,NULL,NULL,NULL,'\0','\0'),(25,1,1,1,1,4,8,NULL,NULL,NULL,'\0','\0'),(26,1,1,1,1,5,8,NULL,NULL,NULL,'\0','\0'),(27,1,1,1,1,6,8,NULL,NULL,NULL,'\0','\0'),(28,1,1,1,1,7,8,NULL,NULL,NULL,'\0','\0'),(29,1,1,1,1,1,9,NULL,NULL,NULL,'\0','\0'),(30,1,1,1,1,2,9,NULL,NULL,NULL,'\0','\0'),(31,1,1,1,1,3,9,NULL,NULL,NULL,'\0','\0'),(32,1,1,1,1,4,9,NULL,NULL,NULL,'\0','\0'),(33,1,1,1,1,5,9,NULL,NULL,NULL,'\0','\0'),(34,1,1,1,1,6,9,NULL,NULL,NULL,'\0','\0'),(35,1,1,1,1,7,9,NULL,NULL,NULL,'\0','\0'),(36,1,1,1,1,8,9,NULL,NULL,NULL,'\0','\0'),(37,1,1,1,1,1,10,NULL,NULL,NULL,'\0','\0'),(38,1,1,1,1,2,10,NULL,NULL,NULL,'\0','\0'),(39,1,1,1,1,3,10,NULL,NULL,NULL,'\0','\0'),(40,1,1,1,1,4,10,NULL,NULL,NULL,'\0','\0'),(41,1,1,1,1,5,10,NULL,NULL,NULL,'\0','\0'),(42,1,1,1,1,6,10,NULL,NULL,NULL,'\0','\0'),(43,1,1,1,1,7,10,NULL,NULL,NULL,'\0','\0'),(44,1,1,1,1,8,10,NULL,NULL,NULL,'\0','\0'),(45,1,1,1,1,9,10,NULL,NULL,NULL,'\0','\0'),(64,1,2,1,2,1,2,NULL,NULL,NULL,'\0',''),(65,1,2,1,2,3,4,NULL,NULL,NULL,'\0',''),(66,1,2,1,3,5,6,NULL,NULL,NULL,'\0','\0'),(67,1,2,1,3,5,7,NULL,NULL,NULL,'\0','\0'),(68,1,2,1,3,6,7,NULL,NULL,NULL,'\0','\0'),(69,1,2,1,3,5,8,NULL,NULL,NULL,'\0','\0'),(70,1,2,1,3,6,8,NULL,NULL,NULL,'\0','\0'),(71,1,2,1,3,7,8,NULL,NULL,NULL,'\0','\0'),(72,1,2,1,3,5,9,NULL,NULL,NULL,'\0','\0'),(73,1,2,1,3,6,9,NULL,NULL,NULL,'\0','\0'),(74,1,2,1,3,7,9,NULL,NULL,NULL,'\0','\0'),(75,1,2,1,3,8,9,NULL,NULL,NULL,'\0','\0'),(76,1,2,1,3,5,10,NULL,NULL,NULL,'\0','\0'),(77,1,2,1,3,6,10,NULL,NULL,NULL,'\0','\0'),(78,1,2,1,3,7,10,NULL,NULL,NULL,'\0','\0'),(79,1,2,1,3,8,10,NULL,NULL,NULL,'\0','\0'),(80,1,2,1,3,9,10,NULL,NULL,NULL,'\0','\0');
+/*!40000 ALTER TABLE `fixture` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -140,7 +217,7 @@ DROP TABLE IF EXISTS `participante`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `participante` (
   `id_participante` bigint(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_tipo_participante` int(10) unsigned NOT NULL,
+  `id_tipo_participante` int(10) unsigned DEFAULT NULL,
   `nombre` varchar(100) NOT NULL,
   `apellido` varchar(100) NOT NULL,
   `numero_camiseta` varchar(2) DEFAULT NULL,
@@ -151,8 +228,8 @@ CREATE TABLE `participante` (
   `telefono` varchar(11) DEFAULT NULL,
   `telefono_celular` varchar(11) DEFAULT NULL,
   `telefono_radio` varchar(15) DEFAULT NULL,
-  `email` varchar(100) NOT NULL,
-  `fecha_nacimiento` datetime NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `fecha_nacimiento` date DEFAULT NULL,
   `calle` varchar(100) DEFAULT NULL,
   `piso` int(11) DEFAULT NULL,
   `numero` int(11) DEFAULT NULL,
@@ -161,15 +238,20 @@ CREATE TABLE `participante` (
   `id_provincia` int(11) DEFAULT NULL,
   `localidad` varchar(100) DEFAULT NULL,
   `nacionalidad` varchar(50) DEFAULT NULL,
-  `id_estado_civil` int(11) DEFAULT NULL,
+  `id_tipo_estado_civil` int(10) unsigned DEFAULT NULL,
   `conyuge_nombre` varchar(50) DEFAULT NULL,
-  `id_tipo_doc` int(11) NOT NULL,
-  `nro_doc` varchar(8) NOT NULL,
+  `id_tipo_doc` int(11) DEFAULT NULL,
+  `nro_doc` varchar(8) DEFAULT NULL,
   `cobertura_medica` varchar(50) DEFAULT NULL,
-  `fecha_creacion` datetime NOT NULL,
-  `id_usuario` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id_participante`)
-) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8;
+  `fecha_apto_medico` date DEFAULT NULL,
+  `nombre_archivo_apto_medico` varchar(100) DEFAULT NULL,
+  `nombre_archivo_foto` varchar(100) DEFAULT NULL,
+  `fecha_creacion` datetime DEFAULT NULL,
+  `id_usuario` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id_participante`),
+  KEY `fk_participante_tipo_estado_civil_idx` (`id_tipo_estado_civil`),
+  CONSTRAINT `fk_participante_tipo_estado_civil` FOREIGN KEY (`id_tipo_estado_civil`) REFERENCES `tipo_estado_civil` (`id_tipo_estado_civil`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,7 +260,7 @@ CREATE TABLE `participante` (
 
 LOCK TABLES `participante` WRITE;
 /*!40000 ALTER TABLE `participante` DISABLE KEYS */;
-INSERT INTO `participante` VALUES (2,1,'JUAN ROMAN','RIQUELME','10',1,1,123456,'CAPO CAPO',NULL,NULL,NULL,'','0000-00-00 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'26965501',NULL,'0000-00-00 00:00:00',1),(15,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-21 16:44:57',0),(79,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:00:15',0),(80,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:02:10',0),(81,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:03:44',0),(82,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:03:45',0),(83,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:03:45',0),(84,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:03:46',0),(85,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:03:46',0),(86,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:03:46',0),(87,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:03:46',0),(88,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:03:47',0),(89,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:03:47',0),(90,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:11:28',0),(91,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:11:54',0),(92,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:11:55',0),(93,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:11:55',0),(94,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:11:55',0),(95,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:11:55',0),(96,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:11:55',0),(97,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:12:58',0),(98,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:16:48',0),(99,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:16:53',0),(100,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:16:54',0),(101,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:16:54',0),(102,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:16:54',0),(103,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:16:54',0),(104,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:16:54',0),(105,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:16:54',0),(106,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:16:54',0),(107,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:17:47',0),(108,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:17:48',0),(109,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:17:48',0),(110,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:17:48',0),(111,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:18:39',0),(112,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:40:13',0),(113,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:43:05',0),(114,1,'1','JUAN CARLOS','GO',10,1,1,'9999','HA JUGADO E','46579999','1135659878','1135659545','0000-00-00 00:00:00','19501010',0,1,'77','A',1702,'1','RANELAGH',0,'1',0,'1','26965501','2016-05-24 12:44:25',0);
+INSERT INTO `participante` VALUES (62,1,'Nestor','Craviotto',NULL,NULL,1,NULL,'','','','','','0000-00-00','',0,0,'','',0,'','',NULL,'',1,'21565565','','0000-00-00',NULL,'neuer.jpg','2016-06-21 07:53:48',1),(63,1,'Oscar','Ruggieri',NULL,NULL,0,NULL,'','','','','','0000-00-00','',0,0,'','',0,'','',NULL,'',1,'20269999','','0000-00-00',NULL,'logotorneo7.png','2016-06-21 08:05:19',1),(65,1,'Carlos','Kozlowski','',0,0,0,'','','','','',NULL,'',0,0,'','',0,'','',NULL,'',1,'232323','','0000-00-00','','neuer3.jpg','2016-06-23 12:38:01',1),(66,1,'Marco','Cupo',NULL,NULL,0,NULL,'','','','','','0000-00-00','',0,0,'','',117,'','',NULL,'',1,'12321321','','0000-00-00',NULL,'neuer52.jpg','2016-06-23 14:13:01',1),(73,1,'Mariano','Andolfatto Trolo','',0,0,0,'','','','','',NULL,'',0,0,'','',0,'','',NULL,'',1,'34343434','','0000-00-00','neuer1.jpg','neuer1.jpg','2016-06-24 12:05:15',1),(74,1,'Juan','Chotalargas','',0,0,0,'','','','','','0000-00-00','',0,0,'','',0,'','',NULL,'',3,'0000000','',NULL,'logotorneo1.png','logotorneo1.png','2016-06-29 10:55:36',1),(94,1,'Coco','Channel','',0,0,0,'','','','','','0000-00-00','',0,0,'','',0,'','',NULL,'',1,'123456','','0000-00-00','','no-foto.png','2016-07-06 08:29:35',1),(98,1,'Sergio','Raiputo','',0,0,0,'','','','','','0000-00-00','',0,0,'','',0,'','',NULL,'',1,'23232','','0000-00-00','','no-foto.png','2016-07-06 14:34:23',1),(100,1,'Iglesias','Toti',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2012-01-12',NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'433434',NULL,'1969-12-31',NULL,'neuer41.jpg','2016-07-07 12:14:05',1),(101,1,'Rob','Fag','',0,0,0,'','','','','','1978-10-25','',0,0,'','',0,'','',NULL,'',2,'32323','','1980-10-25','','no-foto.png','2016-07-07 13:17:40',1),(102,2,'Arbitro','Hijo De mil Puta',NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,'1969-12-31',NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'12',NULL,NULL,NULL,'mago_matematico.jpg','2016-07-11 17:08:30',1),(103,2,'Joe','Valachi',NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,'1969-12-31',NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'43',NULL,NULL,NULL,'kafka_recortado.jpg','2016-07-11 17:33:11',1),(104,2,'Juan','cabarulo',NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,'1969-12-31',NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'12',NULL,NULL,NULL,'nudos_para_zapatillas.jpg','2016-07-11 17:36:14',1),(109,3,'Jean Carlos','Pelotudo',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1978-10-12',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'262626',NULL,NULL,NULL,'neuer42.jpg','2016-07-12 09:30:54',1),(110,3,'Eber','Luduena',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'26262',NULL,NULL,NULL,'no-foto.png','2016-07-12 09:34:59',1),(114,4,'Ernest','Basavilvaso',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'26965501',NULL,NULL,NULL,'images16.jpg','2016-07-12 12:26:44',1),(119,2,'Lino Verga','Topo',NULL,NULL,1,NULL,'Antes era puto',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'232',NULL,NULL,NULL,'no-foto.png','2016-07-12 14:52:23',1),(122,2,'Lorena','Verga',NULL,NULL,1,NULL,'as','1','1','1','456@mail.tuvieja.en.tanga.com','1988-02-22','Falsa',1,123,'1','1',118,'LA CHOTA','Argelino ',NULL,'Tu hermana',1,'343',NULL,NULL,NULL,'no-foto.png','2016-07-12 15:05:22',1),(123,4,'Christoper','London',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'2625',NULL,NULL,NULL,'images15.jpg','2016-07-13 11:50:42',1);
 /*!40000 ALTER TABLE `participante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,6 +287,30 @@ CREATE TABLE `ronda` (
 LOCK TABLES `ronda` WRITE;
 /*!40000 ALTER TABLE `ronda` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ronda` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sede`
+--
+
+DROP TABLE IF EXISTS `sede`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sede` (
+  `id_sede` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_sede`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sede`
+--
+
+LOCK TABLES `sede` WRITE;
+/*!40000 ALTER TABLE `sede` DISABLE KEYS */;
+INSERT INTO `sede` VALUES (1,'Sin Sede Asignada');
+/*!40000 ALTER TABLE `sede` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -422,7 +528,7 @@ CREATE TABLE `tipo_provincia` (
   `descripcion` varchar(100) NOT NULL,
   `descripcion_corta` varchar(3) NOT NULL,
   PRIMARY KEY (`id_tipo_provincia`)
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -431,7 +537,7 @@ CREATE TABLE `tipo_provincia` (
 
 LOCK TABLES `tipo_provincia` WRITE;
 /*!40000 ALTER TABLE `tipo_provincia` DISABLE KEYS */;
-INSERT INTO `tipo_provincia` VALUES (100,'CAPITAL FEDERAL','CFE'),(101,'BUENOS AIRES','BAI'),(102,'CATAMARCA','CAT'),(103,'CORDOBA','CBA'),(104,'CORRIENTES','COR'),(105,'ENTRE RIOS','ERI'),(106,'JUJUY','JUJ'),(107,'LA RIOJA','LRI'),(108,'MENDOZA','MEN'),(109,'SALTA','SAL'),(110,'SAN JUAN','SJU'),(111,'SAN LUIS','SLU'),(112,'SANTA FE','SFE'),(113,'SANTIAGO DEL ESTERO','SDE'),(114,'TUCUMAN','TUC'),(115,'CHACO','CHA'),(116,'CHUBUT','CHU'),(117,'FORMOSA','FOR'),(118,'LA PAMPA','LPA'),(119,'MISIONES','MIS'),(120,'NEUQUEN','NEU'),(121,'RIO NEGRO','RNE'),(122,'SANTA CRUZ','SCR'),(123,'TIERRA DEL FUEGO','TDF'),(124,'DESCONOCIDA','DES');
+INSERT INTO `tipo_provincia` VALUES (100,'CAPITAL FEDERAL','CFE'),(101,'BUENOS AIRES','BAI'),(102,'CATAMARCA','CAT'),(103,'CORDOBA','CBA'),(104,'CORRIENTES','COR'),(105,'ENTRE RIOS','ERI'),(106,'JUJUY','JUJ'),(107,'LA RIOJA','LRI'),(108,'MENDOZA','MEN'),(109,'SALTA','SAL'),(110,'SAN JUAN','SJU'),(111,'SAN LUIS','SLU'),(112,'SANTA FE','SFE'),(113,'SANTIAGO DEL ESTERO','SDE'),(114,'TUCUMAN','TUC'),(115,'CHACO','CHA'),(116,'CHUBUT','CHU'),(117,'FORMOSA','FOR'),(118,'LA PAMPA','LPA'),(119,'MISIONES','MIS'),(120,'NEUQUEN','NEU'),(121,'RIO NEGRO','RNE'),(122,'SANTA CRUZ','SCR'),(123,'TIERRA DEL FUEGO','TDF');
 /*!40000 ALTER TABLE `tipo_provincia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -477,7 +583,7 @@ CREATE TABLE `torneo` (
   `id_usuario` int(10) unsigned NOT NULL,
   `fecha_creacion` datetime NOT NULL,
   PRIMARY KEY (`id_torneo`,`id_liga`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -486,7 +592,7 @@ CREATE TABLE `torneo` (
 
 LOCK TABLES `torneo` WRITE;
 /*!40000 ALTER TABLE `torneo` DISABLE KEYS */;
-INSERT INTO `torneo` VALUES (19,2147483647,1,2016,'Torneo nacional sub 60 LA VERGA',10,1,'2016-05-18 17:44:07'),(21,9999,2,2016,'Torneo nacional 2 sub 60',8,99,'2016-05-03 16:53:14'),(22,9999,3,2016,'Torneo Final',12,1,'2016-05-19 11:04:21'),(23,9999,1,2016,'Torneo de Verano a',14,1,'2016-05-19 17:01:17'),(28,1,1,2016,'343',34,1,'2016-05-23 15:41:57'),(29,1,2,2016,'343',346,1,'2016-05-23 15:42:11');
+INSERT INTO `torneo` VALUES (21,9999,2,2016,'Torneo nacional 2 sub 60',8,99,'2016-05-03 16:53:14'),(22,9999,3,2016,'Torneo Final',122,1,'2016-06-16 14:47:45'),(31,1,3,2016,'TORNEO LA VERGA 4',44,1,'2016-06-19 22:07:52'),(38,1,3,2016,'marian trolo 2001',552,1,'2016-07-12 14:52:27'),(46,0,0,0,'0',0,0,'2016-06-20 15:47:05'),(51,1,1,2016,'benedict arnold',3,1,'2016-07-12 14:58:02'),(56,1,2,2016,'rere',3,1,'2016-07-12 14:19:59'),(57,1,3,2016,'ded',332,1,'2016-07-12 14:35:04'),(58,1,1,2016,'eeee',22,1,'2016-07-12 14:52:15'),(59,1,1,2016,'ded',33,1,'2016-07-12 14:52:38'),(60,1,1,2016,'3434',444,1,'2016-07-12 14:59:07'),(61,1,1,2016,'2323',2,1,'2016-07-12 15:03:51');
 /*!40000 ALTER TABLE `torneo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -536,7 +642,7 @@ UNLOCK TABLES;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `equipo_alta`(
   id_liga_IN bigint unsigned,
@@ -565,7 +671,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `equipo_baja`(
 	IN id_equipo_IN BIGINT
@@ -588,25 +694,34 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `equipo_consulta`(
 	IN id_equipo_IN BIGINT,
     IN Id_liga_IN BIGINT,
+    IN nombre_IN varchar(100),
     IN row_count_IN int,
     IN offset_IN int
 )
 BEGIN
 
-	set row_count_IN = ifnull(row_count_IN,10);
-    set offset_IN = ifnull(offset_IN,0);
-        
-	Select id_equipo, id_liga, nombre, id_estadio, id_usuario, fecha_creacion, imagen
-    from equipo
-    where (id_liga = Id_liga_IN or Id_liga_IN IS NULL)
-		AND ( id_equipo = id_equipo_IN or id_equipo_IN IS NULL ) 
-	order by id_equipo DESC
-	LIMIT row_count_IN OFFSET offset_IN;
+
+    if (nombre_IN is null) 
+    then
+		Select id_equipo, id_liga, nombre, id_estadio, id_usuario, fecha_creacion, imagen
+		from equipo
+		where (id_liga = Id_liga_IN or Id_liga_IN IS NULL)
+			AND ( id_equipo = id_equipo_IN or id_equipo_IN IS NULL ) 
+			AND ( nombre like concat('%', nombre_IN ,'%') or nombre_IN IS NULL ) 
+		order by id_equipo DESC
+		LIMIT row_count_IN OFFSET offset_IN;
+	else
+		Select id_equipo, nombre
+		from equipo
+		where  nombre like concat('%', nombre_IN ,'%')
+		order by nombre DESC
+		LIMIT row_count_IN OFFSET offset_IN;
+    end if;
 
 END ;;
 DELIMITER ;
@@ -622,7 +737,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `equipo_editar`(
   IN id_equipo_IN bigint,
@@ -647,6 +762,39 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `estadio_consulta` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`127.0.0.1` PROCEDURE `estadio_consulta`(
+)
+BEGIN
+	
+    SELECT 
+		id_estadio,
+		nombre,
+		calle,
+		numero,
+		codpostal,
+		localidad,
+		provincia,
+		telefono,
+		id_usuario,
+		fecha_creacion
+    FROM estadio
+    order by nombre;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `liga_alta` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -655,7 +803,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`127.0.0.1` PROCEDURE `liga_alta`(
 
@@ -682,7 +830,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `liga_baja`(
 	IN id_liga_IN bigint
@@ -709,7 +857,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`127.0.0.1` PROCEDURE `liga_consulta`(
     IN id_liga_IN INT
@@ -734,7 +882,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `liga_editar`(
 	IN id_liga_IN bigint,
@@ -761,17 +909,18 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `participante_alta`(
-	#IN id_participante_IN bigint,
-	IN id_tipo_participante_IN int,
+	IN id_tipo_participante_IN int(10),
+    IN nombre_archivo_foto_IN varchar(100),
 	IN nombre_IN varchar(100),
 	IN apellido_IN varchar(100),
 	IN numero_camiseta_IN varchar(2),
 	IN id_tipo_posicion_juego_IN int,
 	IN id_tipo_estado_jugador_IN int,
 	IN numero_carnet_socio_IN int,
+	IN id_equipo_IN bigint(10), 
 	IN trayectoria_IN varchar(500),
 	IN telefono_IN varchar(11),
 	IN telefono_celular_IN varchar(11),
@@ -791,50 +940,29 @@ CREATE DEFINER=`root`@`%` PROCEDURE `participante_alta`(
 	IN id_tipo_doc_IN int,
 	IN nro_doc_IN varchar(8),
 	IN cobertura_medica_IN varchar(50),
-	#IN fecha_creacion_IN datetime,
-	IN id_usuario_IN int unsigned,
-    IN id_equipo_IN bigint unsigned#,
-    
-    #IN id_tipointegranteequipo_IN int
+	IN fecha_apto_medico_IN datetime,
+    IN nombre_archivo_apto_medico_IN varchar(100),
+	IN id_usuario_IN int
 )
 BEGIN
 	
 	declare id_participante_V bigint;  
-    
-	DECLARE EXIT HANDLER FOR SQLEXCEPTION, SQLWARNING
-	BEGIN
-		ROLLBACK;
-		SELECT 'Error, no se pudo guardar los datos.' as error;
-	END;
- 
-	    
-	START TRANSACTION;
-
-	#set id_tipointegranteequipo_IN = coalesce(id_tipointegranteequipo_IN, id_tipo_participante_IN);
 
 	insert into participante 
-	(id_tipo_participante   ,nombre   ,apellido   ,numero_camiseta   ,id_tipo_posicion_juego   ,id_tipo_estado_jugador   ,numero_carnet_socio   ,trayectoria   ,telefono   ,telefono_celular   ,telefono_radio   ,email   ,fecha_nacimiento   ,calle   ,piso   ,numero   ,depto   ,codpostal   ,id_provincia   ,localidad   ,nacionalidad   ,id_estado_civil   ,conyuge_nombre   ,id_tipo_doc   ,nro_doc   ,cobertura_medica   ,fecha_creacion ,id_usuario) VALUES
-	(id_tipo_participante_IN,nombre_IN,apellido_IN,numero_camiseta_IN,id_tipo_posicion_juego_IN,id_tipo_estado_jugador_IN,numero_carnet_socio_IN,trayectoria_IN,telefono_IN,telefono_celular_IN,telefono_radio_IN,email_IN,fecha_nacimiento_IN,calle_IN,piso_IN,numero_IN,depto_IN,codpostal_IN,id_provincia_IN,localidad_IN,nacionalidad_IN,id_estado_civil_IN,conyuge_nombre_IN,id_tipo_doc_IN,nro_doc_IN,cobertura_medica_IN,now()          ,id_usuario_IN );
-	
-	
+	(id_tipo_participante   ,nombre   ,apellido   ,numero_camiseta   ,id_tipo_posicion_juego   ,id_tipo_estado_jugador   ,numero_carnet_socio   ,trayectoria   ,telefono   ,telefono_celular   ,telefono_radio   ,email   ,fecha_nacimiento   ,calle   ,piso   ,numero   ,depto   ,codpostal   ,id_provincia   ,localidad   ,nacionalidad   ,id_estado_civil   ,conyuge_nombre   ,id_tipo_doc   ,nro_doc   ,cobertura_medica   ,fecha_apto_medico   ,nombre_archivo_foto   , nombre_archivo_apto_medico   , fecha_creacion ,id_usuario) VALUES
+	(id_tipo_participante_IN,nombre_IN,apellido_IN,numero_camiseta_IN,id_tipo_posicion_juego_IN,id_tipo_estado_jugador_IN,numero_carnet_socio_IN,trayectoria_IN,telefono_IN,telefono_celular_IN,telefono_radio_IN,email_IN,fecha_nacimiento_IN,calle_IN,piso_IN,numero_IN,depto_IN,codpostal_IN,id_provincia_IN,localidad_IN,nacionalidad_IN,id_estado_civil_IN,conyuge_nombre_IN,id_tipo_doc_IN,nro_doc_IN,cobertura_medica_IN,fecha_apto_medico_IN,nombre_archivo_foto_IN, nombre_archivo_apto_medico_IN,now()         ,id_usuario_IN );
 	            
     set id_participante_V = LAST_INSERT_ID();
-
 	
-	if id_equipo_IN is not null then
+	if id_equipo_IN > 0 then 
 		
         INSERT INTO equipo_integrante 
 			(id_equipo   ,id_participante, id_tipo_participante) VALUES
 			(id_equipo_IN,id_participante_V, id_tipo_participante_IN);
 
+	 end if; 
 
-	end if; 
-
-	COMMIT;
-
-	select id_participante_V as id;
-	
-    
+	select id_participante_V as id_participante;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -849,7 +977,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `participante_baja`(
 	IN id_participante_IN INT,
@@ -900,40 +1028,46 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `participante_consulta`(
 	
     IN id_participante_IN BIGINT(10),
     IN id_equipo_IN BIGINT,
     IN id_tipo_participante_IN INT,
+    IN nombre_apellido_IN varchar(100),
     IN row_count_IN int,
     IN offset_IN int
 )
 BEGIN
 
-	set row_count_IN = ifnull(row_count_IN,10);
-    set offset_IN = ifnull(offset_IN,0);
-    
-    Select p.id_participante, p.id_tipo_participante, e.id_equipo, p.nombre, p.apellido,p.numero_camiseta,p.id_tipo_posicion_juego,p.id_tipo_estado_jugador,
-			p.numero_carnet_socio,p.trayectoria,p.telefono,p.telefono_celular,
-  		    p.telefono_radio,p.email,p.fecha_nacimiento,p.calle,p.piso,
-            p.numero,p.depto,p.codpostal,p.id_provincia,p.localidad,p.nacionalidad,p.id_estado_civil,p.conyuge_nombre,p.id_tipo_doc,p.nro_doc,
-		    p.cobertura_medica,p.fecha_creacion,p.id_usuario,
-            e.nombre as 'nombre_equipo'
-	
-    from participante p 
-    left join equipo_integrante ei on ei.id_participante = p.id_participante
-    left join equipo e on e.id_equipo = ei.id_equipo	
-        
-    where (p.id_participante = id_participante_IN OR id_participante_IN is null )
-		AND (ei.id_equipo = id_equipo_IN OR id_equipo_IN is null)	
-        AND (p.id_tipo_participante = id_tipo_participante_IN OR id_tipo_participante_IN is null)
-        
-    order by p.id_participante DESC
-	LIMIT row_count_IN OFFSET offset_IN;
-    
-    
+	if (nombre_apellido_IN is null) 
+    then
+		set row_count_IN = ifnull(row_count_IN,10);
+		set offset_IN = ifnull(offset_IN,0);
+		Select p.id_participante, p.id_tipo_participante, e.id_equipo, p.nombre, p.apellido,p.numero_camiseta,p.id_tipo_posicion_juego,p.id_tipo_estado_jugador,
+				p.numero_carnet_socio,p.trayectoria,p.telefono,p.telefono_celular,
+				p.telefono_radio,p.email,p.fecha_nacimiento,p.calle,p.piso,
+				p.numero,p.depto,p.codpostal,p.id_provincia,p.localidad,p.nacionalidad,p.id_estado_civil,p.conyuge_nombre,p.id_tipo_doc,p.nro_doc,
+				p.cobertura_medica,p.fecha_apto_medico,p.nombre_archivo_foto,p.nombre_archivo_apto_medico,p.fecha_creacion,p.id_usuario,
+				e.nombre as 'nombre_equipo'
+		
+		from participante p 
+		left join equipo_integrante ei on ei.id_participante = p.id_participante
+		left join equipo e on e.id_equipo = ei.id_equipo	
+			
+		where (p.id_participante = id_participante_IN OR id_participante_IN is null )
+			AND (ei.id_equipo = id_equipo_IN OR id_equipo_IN is null)	
+			AND (p.id_tipo_participante = id_tipo_participante_IN OR id_tipo_participante_IN is null)
+			
+		order by p.id_participante DESC
+		LIMIT row_count_IN OFFSET offset_IN;
+	else
+		Select p.id_participante, p.apellido, p.nombre
+		from participante p
+		where (p.apellido like concat('%', nombre_apellido_IN ,'%') or p.nombre like concat('%', nombre_apellido_IN ,'%')) and (p.id_tipo_participante = id_tipo_participante_IN OR id_tipo_participante_IN is null )
+		order by p.apellido DESC;
+    end if;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -948,18 +1082,20 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `participante_editar`(
 	IN id_participante_IN bigint,
 	IN id_tipo_participante_IN int,
+	IN nombre_archivo_foto_IN varchar(100),
 	IN nombre_IN varchar(100),
 	IN apellido_IN varchar(100),
 	IN numero_camiseta_IN varchar(2),
-	IN id_tipoposicion_juego_IN int,
+	IN id_tipo_posicion_juego_IN int,
 	IN id_tipo_estado_jugador_IN int,
 	IN numero_carnet_socio_IN int,
-	IN trayectoria_IN varchar(500),
+    IN id_equipo_IN bigint,
+    IN trayectoria_IN varchar(500),
 	IN telefono_IN varchar(11),
 	IN telefono_celular_IN varchar(11),
 	IN telefono_radio_IN varchar(15),
@@ -978,14 +1114,12 @@ CREATE DEFINER=`root`@`%` PROCEDURE `participante_editar`(
 	IN id_tipo_doc_IN int,
 	IN nro_doc_IN varchar(8),
 	IN cobertura_medica_IN varchar(50),
-	#IN fecha_creacion_IN datetime,
-	IN id_usuario_IN int unsigned,
-    IN id_equipo_IN bigint unsigned,
-    
-    IN id_tipointegranteequipo_IN int
+	IN fecha_apto_medico_IN datetime,
+    IN nombre_archivo_apto_medico_IN varchar(100),
+	IN id_usuario_IN int unsigned
 )
 BEGIN
-
+/*
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION, SQLWARNING
 	BEGIN
 		ROLLBACK;
@@ -993,14 +1127,14 @@ BEGIN
 	END;
    
 	START TRANSACTION;
-
+*/
 	UPDATE participante
     SET
 		id_tipo_participante = id_tipo_participante_IN,
 		nombre = nombre_IN ,
 		apellido = apellido_IN ,
 		numero_camiseta =  numero_camiseta_IN , 
-		id_tipoposicion_juego = id_tipoposicion_juego_IN ,
+		id_tipo_posicion_juego = id_tipo_posicion_juego_IN ,
 		id_tipo_estado_jugador = id_tipo_estado_jugador_IN ,
 		numero_carnet_socio = numero_carnet_socio_IN ,
 		trayectoria = trayectoria_IN ,
@@ -1022,10 +1156,13 @@ BEGIN
 		id_tipo_doc = id_tipo_doc_IN ,
 		nro_doc = nro_doc_IN ,
 		cobertura_medica = cobertura_medica_IN ,
+        fecha_apto_medico = fecha_apto_medico_IN,
+        nombre_archivo_foto = nombre_archivo_foto_IN,
+        nombre_archivo_apto_medico = nombre_archivo_apto_medico_IN,
 		id_usuario = id_usuario_IN 
 	where 
 		id_participante = id_participante_IN;
-        
+        /*
 	if id_equipo_IN is not null then
 		if (select count(*) from equipo_integrante where id_participante = id_participante_IN) = 1 then
 			update equipo_integrante set
@@ -1035,6 +1172,9 @@ BEGIN
     end if;
     
     COMMIT;
+    */
+    select * from participante
+	where id_participante = id_participante_IN;
     
 END ;;
 DELIMITER ;
@@ -1050,7 +1190,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`127.0.0.1` PROCEDURE `resumen_consulta`()
 BEGIN
@@ -1086,7 +1226,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `tipo_amonestacion_consulta`()
 BEGIN
@@ -1106,7 +1246,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `tipo_documento_consulta`()
 BEGIN
@@ -1126,7 +1266,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `tipo_estado_civil_consulta`()
 BEGIN
@@ -1146,7 +1286,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `tipo_estado_jugador_consulta`()
 BEGIN
@@ -1166,7 +1306,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `tipo_modalidad_consulta`()
 BEGIN
@@ -1185,7 +1325,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `tipo_participante_consulta`()
 BEGIN
@@ -1205,7 +1345,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `tipo_posicion_juego_consulta`()
 BEGIN
@@ -1225,7 +1365,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `tipo_provincia_consulta`()
 BEGIN
@@ -1245,7 +1385,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`127.0.0.1` PROCEDURE `torneo_alta`(
 
@@ -1261,7 +1401,6 @@ BEGIN
 
 	insert into torneo (id_liga, id_tipo_modalidad, nombre, anio, cantidad_equipos, id_usuario,fecha_creacion) 
 				values (id_liga_IN, id_tipo_modalidad_IN, nombre_IN, anio_IN , cantidad_equipos_IN, id_usuario_IN, now() );
-	
     Select LAST_INSERT_ID() as id_torneo;
 
 END ;;
@@ -1278,7 +1417,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`127.0.0.1` PROCEDURE `torneo_baja`(
 
@@ -1306,12 +1445,13 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`127.0.0.1` PROCEDURE `torneo_consulta`(
 
 	IN id_torneo_IN bigint , 
     IN anio_IN INT,
+	IN nombre_IN varchar(200),
     IN row_count_IN int,
     IN offset_IN int
 )
@@ -1325,13 +1465,21 @@ BEGIN
 		SET anio_IN  = year(now()) ;
 	END IF;
 
-	Select id_liga, id_torneo, id_tipo_modalidad, anio, nombre, 
-    cantidad_equipos, id_usuario, fecha_creacion
-    from torneo t
-    where (id_torneo = id_torneo_IN OR id_torneo_IN is null )
-		  AND anio = anio_IN 
-	order by p.id_participante DESC
-	LIMIT row_count_IN OFFSET offset_IN;
+	IF nombre_IN is null then
+		Select id_liga, id_torneo, id_tipo_modalidad, anio, nombre, 
+		cantidad_equipos, id_usuario, fecha_creacion
+		from torneo t
+		where ((id_torneo = id_torneo_IN OR id_torneo_IN is null )
+			  AND anio = anio_IN)
+		order by t.id_torneo DESC
+		LIMIT row_count_IN OFFSET offset_IN;
+	ELSE
+		Select id_torneo, nombre
+		from torneo t
+		where nombre like concat('%', nombre_IN, '%')
+		order by t.id_torneo DESC
+		LIMIT row_count_IN OFFSET offset_IN;
+	END IF;
     
 END ;;
 DELIMITER ;
@@ -1347,7 +1495,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`127.0.0.1` PROCEDURE `torneo_editar`(
 
@@ -1393,4 +1541,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-24 17:44:07
+-- Dump completed on 2016-07-13 15:52:28
