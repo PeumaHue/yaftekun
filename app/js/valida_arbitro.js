@@ -62,7 +62,7 @@ function setear_autocomplete()
 		            return  originalLocation + "/obtener_autocomplete/" + phrase;    
 		    },
 		    getValue: function(element){
-		    	return element.nombre + ' ' + element.apellido;
+		    	return element.apellido + ' ' + element.nombre;
 		    },
 		    ajaxSettings: {
 		        dataType: "json"

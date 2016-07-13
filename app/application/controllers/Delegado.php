@@ -1,5 +1,6 @@
 <?php
 class Delegado extends CI_Controller {
+
 	/**
 	 * Array para guardar todas las variables de la pagina
 	 * @var array
@@ -32,12 +33,10 @@ class Delegado extends CI_Controller {
 		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/jquery.easy-autocomplete.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<link rel="stylesheet" href="'.base_url('css/easy-autocomplete.min.css').'" />';
 		$this->variables['includes']= $this->variables['includes'].'<link rel="stylesheet" href="'.base_url('css/easy-autocomplete.themes.min.css').'" />';
-		
 		$this->variables['accion'] = site_url('delegado/alta');
 		$this->variables['id_participante'] = '';
 		$this->variables['reset'] = FALSE;//Variable para indicar si hay que resetear los campos del formulario
 		$this->_setear_campos();
-		
 		$this->subeimagen_perfil = false;
 		$this->subeimagen_perfil_conf_['upload_path'] = './images/delegados/';
 		$this->subeimagen_perfil_conf_['allowed_types'] = 'gif|jpg|png';
@@ -54,8 +53,7 @@ class Delegado extends CI_Controller {
 		$this->load->view('delegados/mensajes_delegado', $this->variables);
 		$this->load->view('templates/footer');
 	}
-	
-	
+		
 	/**
 	 * Funcion que muestra el formulario de alta y guarda la misma cuando la validacion del formulario no arroja errores
 	 * @return void
@@ -70,7 +68,6 @@ class Delegado extends CI_Controller {
 		$this->variables['provincias']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_provincias(), "campo_clave"=> 'id_tipo_provincia', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_provincia'));
 		$this->datos_formulario->nombre_archivo_foto='no-foto.png';
 		$this->_setear_reglas();
-		
 		if ($this->input->method()=='post')
 		{
 			if($this->form_validation->run() == FALSE)
@@ -92,7 +89,6 @@ class Delegado extends CI_Controller {
 					{
 						$this->subeimagen_perfil_nombre_archivo_final = $this->upload->data('file_name');
 					}
-					
 				}
 				if ($this->variables['mensaje']=='')
 				{
@@ -117,7 +113,6 @@ class Delegado extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 	
-	
 	/**
 	 * Funcion que muestra el formulario de edición y guarda la misma cuando la validacion del formulario no arroja errores
 	 * @return void
@@ -130,7 +125,6 @@ class Delegado extends CI_Controller {
 		$this->variables['estados']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_tipos_de_estados_de_participantes(), "campo_clave"=>'id_tipo_estado_jugador', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_estado'));
 		$this->variables['equipos']=_obtener_array_asociativo(array("datos"=>$this->Equipo_model->consulta(NULL, 1, NULL, 500, 0), "campo_clave"=>'id_equipo', "campo_descripcion"=>'nombre', "cadena_sin_seleccion"=>'form_label_equipo')); //@todo
 		$this->variables['provincias']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_provincias(), "campo_clave"=> 'id_tipo_provincia', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_provincia'));
-		
 		//Si no es un post, no se llama al editar y solo se muestran los campos para editar
 		if (!($this->input->method()=='post'))
 		{
@@ -181,7 +175,6 @@ class Delegado extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 	
-	
 	/**
 	 * Funcion de baja
 	 * @return void
@@ -199,14 +192,13 @@ class Delegado extends CI_Controller {
 		$this->index();
 	}
 	
-	
 	/**
 	 * Funcion que realiza una búsqueda por nombre de jugador
 	 * @return void
 	 */
-	public function obtener_autocomplete($apellido=NULL)
+	public function obtener_autocomplete($apellido_nombre=NULL)
 	{
-		echo json_encode($this->Participante_model->consulta(NULL, NULL, NULL, $apellido));
+		echo json_encode($this->Participante_model->consulta(NULL, NULL, 4, $apellido_nombre));
 	}
 	
 	/**
@@ -298,7 +290,6 @@ class Delegado extends CI_Controller {
 	
 	/**
 	 * Funcion que setea las reglas de validacion del formulario y sus mensajes de errores
-	 * @todo traducir los mensajes de errores en los archivos de configuracion para no tener que usar set_messsage
 	 * @return void
 	 */
 	private function _setear_reglas()
@@ -323,7 +314,6 @@ class Delegado extends CI_Controller {
 		$this->form_validation->set_rules('telefono_radio', 'lang:form_label_radio', 'regex_match[/^[0-9]*$|^\s*$/]');
 		$this->form_validation->set_rules('email', 'lang:form_label_mail', 'valid_email|xss_clean');
 	}
-	
 	
 	 /**
 	 * Funcion que setea las parametros basicos de las variables de la pagina

@@ -1,17 +1,16 @@
 <?php
 class Arbitro extends CI_Controller {
+	
 	/**
 	 * Array para guardar todas las variables de la pagina
 	 * @var array
 	 */
 	private $variables;
-	
 	/**
 	 * Array para guardar exclusivamente los values del formulario
 	 * @var array
 	 */
 	public $datos_formulario;
-	
 	public $mensaje;
 	public $subeimagen_perfil;
 	public $subeimagen_perfil_conf_;
@@ -34,7 +33,6 @@ class Arbitro extends CI_Controller {
 		$this->variables['id_participante'] = '';
 		$this->variables['reset'] = FALSE;//Variable para indicar si hay que resetear los campos del formulario
 		$this->_setear_campos();
-	
 		$this->subeimagen_perfil = false;
 		$this->subeimagen_perfil_conf_['upload_path'] = './images/arbitros/';
 		$this->subeimagen_perfil_conf_['allowed_types'] = 'gif|jpg|png';
@@ -63,7 +61,6 @@ class Arbitro extends CI_Controller {
 		$this->variables['provincias']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_provincias(), "campo_clave"=> 'id_tipo_provincia', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_provincia'));
 		$this->datos_formulario->nombre_archivo_foto='no-foto.png';
 		$this->_setear_reglas();
-		
 		if ($this->input->method()=='post')
 		{
 			if($this->form_validation->run() == FALSE)
@@ -84,7 +81,6 @@ class Arbitro extends CI_Controller {
 					{
 						$this->subeimagen_perfil_nombre_archivo_final = $this->upload->data('file_name');
 					}
-					
 				}
 				if ($this->variables['mensaje']=='')
 				{
@@ -119,7 +115,6 @@ class Arbitro extends CI_Controller {
 		$this->variables['documentos']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_tipos_de_documentos_de_participantes(), "campo_clave"=>'id_tipo_documento', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_tipo_documento'));
 		$this->variables['estados_civiles']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_tipos_de_estados_civiles_de_participantes(), "campo_clave"=>'id_tipo_estado_civil', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_estado_civil'));
 		$this->variables['provincias']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_provincias(), "campo_clave"=> 'id_tipo_provincia', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_provincia'));
-	
 		//Si no es un post, no se llama al editar y solo se muestran los campos para editar
 		if (!($this->input->method()=='post'))
 		{
@@ -186,14 +181,13 @@ class Arbitro extends CI_Controller {
 		$this->index();
 	}
 	
-	
 	/**
 	 * Funcion que realiza una búsqueda por nombre de arbitro
 	 * @return void
 	 */
-	public function obtener_autocomplete($nombre_apellido=NULL)
+	public function obtener_autocomplete($apellido_nombre=NULL)
 	{
-		echo json_encode($this->Participante_model->consulta(NULL, NULL, 2, $nombre_apellido));
+		echo json_encode($this->Participante_model->consulta(NULL, NULL, 2, $apellido_nombre));
 	}
 	
 	/**

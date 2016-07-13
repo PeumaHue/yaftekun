@@ -210,7 +210,6 @@ class Torneo extends CI_Controller {
 		$this->form_validation->set_rules('id_tipo_modalidad', 'Modalidad de juego', 'required');
 	}
 	
-	
 	/**
 	 * Funcion que setea las parametros basicos de las variables de la pagina
 	 * @return void

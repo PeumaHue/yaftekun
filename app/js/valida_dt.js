@@ -47,7 +47,9 @@ function setear_autocomplete()
 		    url: function(phrase) { 
 		            return  originalLocation + "/obtener_autocomplete/" + phrase;    
 	    },
-	    getValue: 'apellido',
+	    getValue: function(element){
+	    	return element.apellido + ' ' + element.nombre;
+	    },
 	    ajaxSettings: {
 	        dataType: "json"
 	    },
