@@ -174,7 +174,7 @@ class Participante_model extends CI_Model {
 						'nro_doc'				       =>$participante->nro_doc,
 						'cobertura_medica'		       =>$participante->cobertura_medica == '' ? NULL : $participante->cobertura_medica,
 						'fecha_apto_medico'            =>$participante->fecha_apto_medico == '' ? NULL : date('Y-m-d', strtotime(str_replace('/', '-', $participante->fecha_apto_medico))),
-						'nombre_archivo_apto_medico'   =>$participante->nombre_archivo_apto_medico == '' ? NULL : $participante->nombre_archivo_aptop_medico,
+						'nombre_archivo_apto_medico'   =>$participante->nombre_archivo_apto_medico == '' ? NULL : $participante->nombre_archivo_apto_medico,
 						'id_usuario'			       =>$participante->id_usuario
 				));
 				
