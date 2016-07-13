@@ -44,7 +44,7 @@ class Participante_model extends CI_Model {
 	public $id_provincia;
 	public $localidad;
 	public $nacionalidad;
-	public $id_estado_civil;
+	public $id_tipo_estado_civil;
 	public $conyuge_nombre;
 	public $id_tipo_doc;
 	public $nro_doc;
@@ -103,7 +103,7 @@ class Participante_model extends CI_Model {
 				$this->id_provincia=$row["id_provincia"];
 				$this->localidad=$row["localidad"];
 				$this->nacionalidad=$row["nacionalidad"];
-				$this->id_estado_civil=$row["id_estado_civil"];
+				$this->id_tipo_estado_civil=$row["id_tipo_estado_civil"];
 				$this->conyuge_nombre=$row["conyuge_nombre"];
 				$this->id_tipo_doc=$row["id_tipo_doc"];
 				$this->nro_doc=$row["nro_doc"];
@@ -168,7 +168,7 @@ class Participante_model extends CI_Model {
 						'id_provincia'			       =>$participante->id_provincia == '' ? NULL : $participante->id_provincia,
 						'localidad'				       =>$participante->localidad == '' ? NULL : $participante->localidad,
 						'nacionalidad'			       =>$participante->nacionalidad == '' ? NULL : $participante->nacionalidad,
-						'id_estado_civil'		       =>$participante->id_estado_civil == '' ? NULL : $participante->id_estado_civil,
+						'id_tipo_estado_civil'		   =>$participante->id_tipo_estado_civil == '' ? NULL : $participante->id_tipo_estado_civil,
 						'conyuge_nombre'		       =>$participante->conyuge_nombre == '' ? NULL : $participante->conyuge_nombre,
 						'id_tipo_doc'			       =>$participante->id_tipo_doc,
 						'nro_doc'				       =>$participante->nro_doc,
@@ -234,7 +234,7 @@ class Participante_model extends CI_Model {
 						'id_provincia'			       =>$participante->id_provincia == '' ? NULL : $participante->id_provincia,
 						'localidad'				       =>$participante->localidad == '' ? NULL : $participante->localidad,
 						'nacionalidad'			       =>$participante->nacionalidad == '' ? NULL : $participante->nacionalidad,
-						'id_estado_civil'		       =>$participante->id_estado_civil == '' ? NULL : $participante->id_estado_civil,
+						'id_tipo_estado_civil'		   =>$participante->id_tipo_estado_civil == '' ? NULL : $participante->id_tipo_estado_civil,
 						'conyuge_nombre'		       =>$participante->conyuge_nombre == '' ? NULL : $participante->conyuge_nombre,
 						'id_tipo_doc'			       =>$participante->id_tipo_doc,
 						'nro_doc'				       =>$participante->nro_doc,

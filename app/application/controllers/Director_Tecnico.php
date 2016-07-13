@@ -235,7 +235,7 @@ class Director_Tecnico extends CI_Controller {
 		$participante->id_provincia               = $this->input->post('id_provincia');
 		$participante->localidad                  = $this->input->post('localidad');
 		$participante->nacionalidad               = $this->input->post('nacionalidad');
-		$participante->id_estado_civil            = $this->input->post('id_estado_civil');
+		$participante->id_tipo_estado_civil          = $this->input->post('id_tipo_estado_civil');
 		$participante->conyuge_nombre             = $this->input->post('conyuge_nombre');
 		$participante->id_tipo_doc 	              = $this->input->post('id_tipo_doc');
 		$participante->nro_doc                    = $this->input->post('nro_doc');
@@ -281,7 +281,7 @@ class Director_Tecnico extends CI_Controller {
 		$this->datos_formulario->id_provincia = '';
 		$this->datos_formulario->localidad = '';
 		$this->datos_formulario->nacionalidad = '';
-		$this->datos_formulario->id_estado_civil = '';
+		$this->datos_formulario->id_tipo_estado_civil = '';
 		$this->datos_formulario->conyuge_nombre = '';
 		$this->datos_formulario->id_tipo_doc = '';
 		$this->datos_formulario->nro_doc = '';
@@ -364,7 +364,7 @@ class Director_Tecnico extends CI_Controller {
 		$this->datos_formulario->id_provincia               = isset($objeto->id_provincia) ? $objeto->id_provincia : '';
 		$this->datos_formulario->localidad                  = isset($objeto->localidad) ? $objeto->localidad : '';
 		$this->datos_formulario->nacionalidad               = isset($objeto->nacionalidad) ? $objeto->nacionalidad : '';
-		$this->datos_formulario->id_estado_civil            = isset($objeto->id_estado_civil) ? $objeto->id_estado_civil : '';
+		$this->datos_formulario->id_tipo_estado_civil          = isset($objeto->id_tipo_estado_civil) ? $objeto->id_tipo_estado_civil : '';
 		$this->datos_formulario->conyuge_nombre             = isset($objeto->conyuge_nombre) ? $objeto->conyuge_nombre : '';
 		$this->datos_formulario->id_tipo_doc                = isset($objeto->id_tipo_doc) ? $objeto->id_tipo_doc : '';
 		$this->datos_formulario->nro_doc                    = isset($objeto->nro_doc) ? $objeto->nro_doc : '';
