@@ -15,7 +15,7 @@ class Calendario extends CI_Controller {
 		parent::__construct();
 
 		$this->load->helper('url');
-		
+				
 		$this->variables['includes']='<link rel="stylesheet" href="'.base_url('assets/fullcalendar-2.9.0/fullcalendar.css').'" />';
 		$this->variables['includes']=$this->variables['includes'].'<script src="'.base_url('assets/fullcalendar-2.9.0/lib/jquery.min.js').'"></script>';
 		$this->variables['includes']=$this->variables['includes'].'<script src="'.base_url('assets/fullcalendar-2.9.0/lib/moment.min.js').'"></script>';
