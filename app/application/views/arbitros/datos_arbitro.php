@@ -44,7 +44,7 @@
 	                           	 		<input id="txt_Nacionalidad" value="<?php echo ($reset) ? '' : set_value('nacionalidad',$this->datos_formulario->nacionalidad); ?>" class="form-control" name="nacionalidad"  maxlength="10" placeholder="<?php echo lang('form_label_nacionalidad');?>">
 	                        		</div>
 									<div class="form-group col-md-4 col-sm-4 col-xs-12">
-	                           			<?php echo form_dropdown('id_estado_civil', $estados_civiles, set_value('id_estado_civil',$this->datos_formulario->id_estado_civil), 'class="form-control"'); ?>
+	                           			<?php echo form_dropdown('id_tipo_estado_civil', $estados_civiles, set_value('id_tipo_estado_civil',$this->datos_formulario->id_tipo_estado_civil), 'class="form-control"'); ?>
 	                        		</div>
 									<div class="form-group col-md-4 col-sm-8 col-xs-12">
 	                            		<input type="text" id="txt_Conyugue" value="<?php echo ($reset) ? '' : set_value('conyuge_nombre',$this->datos_formulario->conyuge_nombre); ?>" name="conyuge_nombre" class="form-control"  maxlength="50" placeholder="<?php echo lang('form_label_nombre_conyuge');?>">
