@@ -75,8 +75,6 @@ $(document).ready(function () {
           alert("Pls select only images");
         }
       });
-
-    
 });
 
 function setear_autocomplete()
@@ -86,7 +84,9 @@ function setear_autocomplete()
 		    url: function(phrase) { 
 		            return  originalLocation + "/obtener_autocomplete/" + phrase;    
 	    },
-	    getValue: 'apellido',
+	    getValue: function(element){
+	    	return element.apellido + ' ' + element.nombre;
+	    },
 	    ajaxSettings: {
 	        dataType: "json"
 	    },
@@ -116,7 +116,7 @@ function setear_botones()
 	originalLocation = window.location.href;
 	if(originalLocation.indexOf("jugador/alta") >= 0)//Si esta en el alta no se muestra el boton eliminar
 	{
-		document.getElementById('btn_eliminar').style.visibility = "hidden";
+		$("#btn_eliminar").hide();
 	}	
 }
 

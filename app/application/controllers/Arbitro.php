@@ -1,17 +1,16 @@
 <?php
 class Arbitro extends CI_Controller {
+	
 	/**
 	 * Array para guardar todas las variables de la pagina
 	 * @var array
 	 */
 	private $variables;
-	
 	/**
 	 * Array para guardar exclusivamente los values del formulario
 	 * @var array
 	 */
 	public $datos_formulario;
-	
 	public $mensaje;
 	public $subeimagen_perfil;
 	public $subeimagen_perfil_conf_;
@@ -34,7 +33,6 @@ class Arbitro extends CI_Controller {
 		$this->variables['id_participante'] = '';
 		$this->variables['reset'] = FALSE;//Variable para indicar si hay que resetear los campos del formulario
 		$this->_setear_campos();
-	
 		$this->subeimagen_perfil = false;
 		$this->subeimagen_perfil_conf_['upload_path'] = './images/arbitros/';
 		$this->subeimagen_perfil_conf_['allowed_types'] = 'gif|jpg|png';
@@ -63,7 +61,6 @@ class Arbitro extends CI_Controller {
 		$this->variables['provincias']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_provincias(), "campo_clave"=> 'id_tipo_provincia', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_provincia'));
 		$this->datos_formulario->nombre_archivo_foto='no-foto.png';
 		$this->_setear_reglas();
-		
 		if ($this->input->method()=='post')
 		{
 			if($this->form_validation->run() == FALSE)
@@ -84,7 +81,6 @@ class Arbitro extends CI_Controller {
 					{
 						$this->subeimagen_perfil_nombre_archivo_final = $this->upload->data('file_name');
 					}
-					
 				}
 				if ($this->variables['mensaje']=='')
 				{
@@ -119,7 +115,6 @@ class Arbitro extends CI_Controller {
 		$this->variables['documentos']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_tipos_de_documentos_de_participantes(), "campo_clave"=>'id_tipo_documento', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_tipo_documento'));
 		$this->variables['estados_civiles']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_tipos_de_estados_civiles_de_participantes(), "campo_clave"=>'id_tipo_estado_civil', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_estado_civil'));
 		$this->variables['provincias']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_provincias(), "campo_clave"=> 'id_tipo_provincia', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_provincia'));
-	
 		//Si no es un post, no se llama al editar y solo se muestran los campos para editar
 		if (!($this->input->method()=='post'))
 		{
@@ -186,14 +181,13 @@ class Arbitro extends CI_Controller {
 		$this->index();
 	}
 	
-	
 	/**
 	 * Funcion que realiza una búsqueda por nombre de arbitro
 	 * @return void
 	 */
-	public function obtener_autocomplete($apellido=NULL)
+	public function obtener_autocomplete($apellido_nombre=NULL)
 	{
-		echo json_encode($this->Participante_model->consulta(NULL, NULL, NULL, $apellido));
+		echo json_encode($this->Participante_model->consulta(NULL, NULL, 2, $apellido_nombre));
 	}
 	
 	/**
@@ -209,12 +203,10 @@ class Arbitro extends CI_Controller {
 		$participante->nombre_archivo_foto        = $this->input->post('nombre_archivo_foto');
 		$participante->nombre 			          = $this->input->post('nombre');
 		$participante->apellido                   = $this->input->post('apellido');
-		$participante->numero_camiseta            = '';
-		$participante->id_tipo_posicion_juego     = '';
 		$participante->id_tipo_estado_jugador     = 1;//@todo Por ahora el arbitro siempre esta ACTIVO
 		$participante->numero_carnet_socio        = '';
 		$participante->id_equipo                  = '';
-		$participante->trayectoria                = '';
+		$participante->trayectoria                = $this->input->post('trayectoria');
 		$participante->telefono                   = $this->input->post('telefono');
 		$participante->telefono_celular           = $this->input->post('telefono_celular');
 		$participante->telefono_radio             = $this->input->post('telefono_radio');
@@ -228,13 +220,10 @@ class Arbitro extends CI_Controller {
 		$participante->id_provincia               = $this->input->post('id_provincia');
 		$participante->localidad                  = $this->input->post('localidad');
 		$participante->nacionalidad               = $this->input->post('nacionalidad');
-		$participante->id_estado_civil            = $this->input->post('id_estado_civil');
+		$participante->id_tipo_estado_civil          = $this->input->post('id_tipo_estado_civil');
 		$participante->conyuge_nombre             = $this->input->post('conyuge_nombre');
 		$participante->id_tipo_doc 	              = $this->input->post('id_tipo_doc');
 		$participante->nro_doc                    = $this->input->post('nro_doc');
-		$participante->cobertura_medica           = '';
-		$participante->fecha_apto_medico          = '';
-		$participante->nombre_archivo_apto_medico = '';
 		$participante->id_usuario			      = '1';// @todo Pasar el usuario logueado
 		if ($this->subeimagen_perfil)
 		{
@@ -258,8 +247,6 @@ class Arbitro extends CI_Controller {
 		$this->datos_formulario->nombre_archivo_foto = '';
 		$this->datos_formulario->nombre = '';
 		$this->datos_formulario->apellido = '';
-		$this->datos_formulario->numero_camiseta = '';
-		$this->datos_formulario->id_tipo_posicion_juego = '';
 		$this->datos_formulario->id_tipo_estado_jugador = '';
 		$this->datos_formulario->numero_carnet_socio = '';
 		$this->datos_formulario->id_equipo = '';
@@ -277,13 +264,10 @@ class Arbitro extends CI_Controller {
 		$this->datos_formulario->id_provincia = '';
 		$this->datos_formulario->localidad = '';
 		$this->datos_formulario->nacionalidad = '';
-		$this->datos_formulario->id_estado_civil = '';
+		$this->datos_formulario->id_tipo_estado_civil = '';
 		$this->datos_formulario->conyuge_nombre = '';
 		$this->datos_formulario->id_tipo_doc = '';
 		$this->datos_formulario->nro_doc = '';
-		$this->datos_formulario->cobertura_medica = '';
-		$this->datos_formulario->fecha_apto_medico = '';
-		$this->datos_formulario->nombre_archivo_apto_medico = '';
 		$this->datos_formulario->nombre_archivo_foto = isset($this->datos_formulario->nombre_archivo_foto) ? $this->datos_formulario->nombre_archivo_foto : 'no-foto.png';
 		$this->datos_formulario->imagen_original_perfil = isset($this->datos_formulario->imagen_original_perfil) ? $this->datos_formulario->imagen_original_perfil : '';
 		$this->datos_formulario->imagen_original_aptomedico = '';
@@ -292,7 +276,6 @@ class Arbitro extends CI_Controller {
 	
 	/**
 	 * Funcion que setea las reglas de validacion del formulario y sus mensajes de errores
-	 * @todo traducir los mensajes de errores en los archivos de configuracion para no tener que usar set_messsage
 	 * @return void
 	 */
 	private function _setear_reglas()
@@ -308,7 +291,7 @@ class Arbitro extends CI_Controller {
 		$this->form_validation->set_rules('telefono', 'lang:form_label_telefono', 'regex_match[/^[0-9]*$|^\s*$/]');
 		$this->form_validation->set_rules('telefono_celular', 'lang:form_label_celular', 'regex_match[/^[0-9]*$|^\s*$/]');
 		$this->form_validation->set_rules('telefono_radio', 'lang:form_label_radio', 'regex_match[/^[0-9]*$|^\s*$/]');
-		$this->form_validation->set_rules('email', 'lang:form_label_mail', 'valid_email|xss_clean');
+		$this->form_validation->set_rules('email', 'lang:form_label_mail', 'valid_email');
 	}
 	
 	/**
@@ -338,6 +321,7 @@ class Arbitro extends CI_Controller {
 		$this->datos_formulario->nombre                     = isset($objeto->nombre) ? $objeto->nombre : '';
 		$this->datos_formulario->apellido                   = isset($objeto->apellido) ? $objeto->apellido : '';
 		$this->datos_formulario->id_tipo_estado_jugador     = isset($objeto->id_tipo_estado_jugador) ? $objeto->id_tipo_estado_jugador : '';
+		$this->datos_formulario->trayectoria                = isset($objeto->trayectoria) ? $objeto->trayectoria : '';
 		$this->datos_formulario->telefono                   = isset($objeto->telefono) ? $objeto->telefono : '';
 		$this->datos_formulario->telefono_celular           = isset($objeto->telefono_celular) ? $objeto->telefono_celular : '';
 		$this->datos_formulario->telefono_radio             = isset($objeto->telefono_radio) ? $objeto->telefono_radio : '';
@@ -351,11 +335,10 @@ class Arbitro extends CI_Controller {
 		$this->datos_formulario->id_provincia               = isset($objeto->id_provincia) ? $objeto->id_provincia : '';
 		$this->datos_formulario->localidad                  = isset($objeto->localidad) ? $objeto->localidad : '';
 		$this->datos_formulario->nacionalidad               = isset($objeto->nacionalidad) ? $objeto->nacionalidad : '';
-		$this->datos_formulario->id_estado_civil            = isset($objeto->id_estado_civil) ? $objeto->id_estado_civil : '';
+		$this->datos_formulario->id_tipo_estado_civil          = isset($objeto->id_tipo_estado_civil) ? $objeto->id_tipo_estado_civil : '';
 		$this->datos_formulario->conyuge_nombre             = isset($objeto->conyuge_nombre) ? $objeto->conyuge_nombre : '';
 		$this->datos_formulario->id_tipo_doc                = isset($objeto->id_tipo_doc) ? $objeto->id_tipo_doc : '';
 		$this->datos_formulario->nro_doc                    = isset($objeto->nro_doc) ? $objeto->nro_doc : '';
-		$this->datos_formulario->cobertura_medica           = isset($objeto->cobertura_medica) ? $objeto->cobertura_medica : '';
 		$this->datos_formulario->nombre_archivo_foto        = isset($objeto->nombre_archivo_foto) ? $objeto->nombre_archivo_foto : '';
 		$this->datos_formulario->imagen_original_perfil     = isset($objeto->imagen_original_perfil) ? $objeto->imagen_original_perfil : '';
 		$this->datos_formulario->id_usuario                 = isset($objeto->id_usuario) ? $objeto->id_usuario : '';

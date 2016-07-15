@@ -5,7 +5,6 @@ class Director_Tecnico extends CI_Controller {
 	 * @var array
 	 */
 	private $variables;
-	
 	/**
 	 * Array para guardar exclusivamente los values del formulario
 	 * @var array
@@ -32,12 +31,10 @@ class Director_Tecnico extends CI_Controller {
 		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/jquery.easy-autocomplete.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<link rel="stylesheet" href="'.base_url('css/easy-autocomplete.min.css').'" />';
 		$this->variables['includes']= $this->variables['includes'].'<link rel="stylesheet" href="'.base_url('css/easy-autocomplete.themes.min.css').'" />';
-		
 		$this->variables['accion'] = site_url('director_tecnico/alta');
 		$this->variables['id_participante'] = '';
 		$this->variables['reset'] = FALSE;//Variable para indicar si hay que resetear los campos del formulario
 		$this->_setear_campos();
-		
 		$this->subeimagen_perfil = false;
 		$this->subeimagen_perfil_conf_['upload_path'] = './images/directores_tecnicos/';
 		$this->subeimagen_perfil_conf_['allowed_types'] = 'gif|jpg|png';
@@ -48,7 +45,6 @@ class Director_Tecnico extends CI_Controller {
 	
 	public function index() {
 		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'director_tecnico/editar', "campoID"=>'id_participante',"camposMostrar"=>array('apellido','nombre'),"datos"=>$this->Participante_model->consulta(NULL, NULL, 3)));
-		
 		$this->load->view('templates/header', $this->variables);
 		$this->load->view('directores_tecnicos/principal_director_tecnico', $this->variables);
 		$this->load->view('directores_tecnicos/busqueda_director_tecnico', $this->variables);
@@ -71,7 +67,6 @@ class Director_Tecnico extends CI_Controller {
 		$this->variables['provincias']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_provincias(), "campo_clave"=> 'id_tipo_provincia', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_provincia'));
 		$this->datos_formulario->nombre_archivo_foto='no-foto.png';
 		$this->_setear_reglas();
-		
 		if ($this->input->method()=='post')
 		{
 			if($this->form_validation->run() == FALSE)
@@ -93,7 +88,6 @@ class Director_Tecnico extends CI_Controller {
 					{
 						$this->subeimagen_perfil_nombre_archivo_final = $this->upload->data('file_name');
 					}
-					
 				}
 				if ($this->variables['mensaje']=='')
 				{
@@ -131,7 +125,6 @@ class Director_Tecnico extends CI_Controller {
 		$this->variables['estados']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_tipos_de_estados_de_participantes(), "campo_clave"=>'id_tipo_estado_jugador', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_estado'));
 		$this->variables['equipos']=_obtener_array_asociativo(array("datos"=>$this->Equipo_model->consulta(NULL, 1, NULL, 500, 0), "campo_clave"=>'id_equipo', "campo_descripcion"=>'nombre', "cadena_sin_seleccion"=>'form_label_equipo')); //@todo
 		$this->variables['provincias']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_provincias(), "campo_clave"=> 'id_tipo_provincia', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_provincia'));
-		
 		//Si no es un post, no se llama al editar y solo se muestran los campos para editar
 		if (!($this->input->method()=='post'))
 		{
@@ -205,9 +198,9 @@ class Director_Tecnico extends CI_Controller {
 	 * Funcion que realiza una búsqueda por nombre de jugador
 	 * @return void
 	 */
-	public function obtener_autocomplete($apellido=NULL)
+	public function obtener_autocomplete($apellido_nombre=NULL)
 	{
-		echo json_encode($this->Participante_model->consulta(NULL, NULL, NULL, $apellido));
+		echo json_encode($this->Participante_model->consulta(NULL, NULL, 3, $apellido_nombre));
 	}
 	
 	/**
@@ -242,7 +235,7 @@ class Director_Tecnico extends CI_Controller {
 		$participante->id_provincia               = $this->input->post('id_provincia');
 		$participante->localidad                  = $this->input->post('localidad');
 		$participante->nacionalidad               = $this->input->post('nacionalidad');
-		$participante->id_estado_civil            = $this->input->post('id_estado_civil');
+		$participante->id_tipo_estado_civil          = $this->input->post('id_tipo_estado_civil');
 		$participante->conyuge_nombre             = $this->input->post('conyuge_nombre');
 		$participante->id_tipo_doc 	              = $this->input->post('id_tipo_doc');
 		$participante->nro_doc                    = $this->input->post('nro_doc');
@@ -288,7 +281,7 @@ class Director_Tecnico extends CI_Controller {
 		$this->datos_formulario->id_provincia = '';
 		$this->datos_formulario->localidad = '';
 		$this->datos_formulario->nacionalidad = '';
-		$this->datos_formulario->id_estado_civil = '';
+		$this->datos_formulario->id_tipo_estado_civil = '';
 		$this->datos_formulario->conyuge_nombre = '';
 		$this->datos_formulario->id_tipo_doc = '';
 		$this->datos_formulario->nro_doc = '';
@@ -371,7 +364,7 @@ class Director_Tecnico extends CI_Controller {
 		$this->datos_formulario->id_provincia               = isset($objeto->id_provincia) ? $objeto->id_provincia : '';
 		$this->datos_formulario->localidad                  = isset($objeto->localidad) ? $objeto->localidad : '';
 		$this->datos_formulario->nacionalidad               = isset($objeto->nacionalidad) ? $objeto->nacionalidad : '';
-		$this->datos_formulario->id_estado_civil            = isset($objeto->id_estado_civil) ? $objeto->id_estado_civil : '';
+		$this->datos_formulario->id_tipo_estado_civil          = isset($objeto->id_tipo_estado_civil) ? $objeto->id_tipo_estado_civil : '';
 		$this->datos_formulario->conyuge_nombre             = isset($objeto->conyuge_nombre) ? $objeto->conyuge_nombre : '';
 		$this->datos_formulario->id_tipo_doc                = isset($objeto->id_tipo_doc) ? $objeto->id_tipo_doc : '';
 		$this->datos_formulario->nro_doc                    = isset($objeto->nro_doc) ? $objeto->nro_doc : '';
@@ -379,7 +372,4 @@ class Director_Tecnico extends CI_Controller {
 		$this->datos_formulario->imagen_original_perfil     = isset($objeto->imagen_original_perfil) ? $objeto->imagen_original_perfil : '';
 		$this->datos_formulario->id_usuario                 = isset($objeto->id_usuario) ? $objeto->id_usuario : '';
 	}
-	
-	
-	
 }

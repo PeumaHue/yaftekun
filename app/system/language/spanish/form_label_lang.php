@@ -61,6 +61,8 @@ $lang['form_label_delegado']			= 'Delegado';
 $lang['form_label_delegados']			= 'Delegados';
 $lang['form_label_equipo_imagen']		= 'Imagen del escudo';
 $lang['form_label_ayuda_nombre_equipo']	= 'Ingrese el nombre del nuevo equipo';
+$lang['form_label_calendario']			= 'Calendario';
+$lang['form_label_calendarios']			= 'Calendarios';
 /*
  * Paneles 
  */

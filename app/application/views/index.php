@@ -128,6 +128,24 @@
                     </div>
                 </div>
             </div>
+            <!--CALENDARIO-->
+            <div class="col-lg-6 col-md-6">
+                <div class="panel panel-delegados">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <a href="<?php echo site_url('calendario'); ?>">
+                                <span class="col-xs-3">
+                                    <i class="fa fa-support fa-5x"></i>
+                                </span>
+                                <span class="col-xs-9 text-right">
+                                    <span class="huge"><?php echo 1;?></span><br>
+                                    <span><?php echo lang('form_label_calendario');?></span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
