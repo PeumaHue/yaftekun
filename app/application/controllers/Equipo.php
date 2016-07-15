@@ -30,9 +30,9 @@ class Equipo extends CI_Controller {
 		$this->variables['includes']= $this->variables['includes'].'<link rel="stylesheet" href="'.base_url('css/easy-autocomplete.themes.min.css').'" />';
 		$this->conf['upload_path'] = './images/escudos/';
 		$this->conf['allowed_types'] = 'gif|jpg|png';
-		$this->conf['max_size']     = '200';
-		$this->conf['max_width'] = '100';
-		$this->conf['max_height'] = '100';
+		$this->conf['max_size']     = '2048';		
+		//$this->conf['max_width'] = '100';
+		//$this->conf['max_height'] = '100';
 		$this->subeimagen = false;
 		$this->_setear_campos();
 	}
@@ -138,7 +138,29 @@ class Equipo extends CI_Controller {
 					if (! $this->upload->do_upload('imagen')) 
 					{
 						$this->variables['mensaje'] = $this->upload->display_errors();
-					}	
+					}
+					else 
+					{
+						$data = array('upload_data' => $this->upload->data());
+						$img_full_path = $this->conf['upload_path'] . $data['upload_data']['file_name'];
+						
+						 
+						// REDIMENSIONAMOS
+						$config['image_library'] = 'gd2';
+						$config['source_image'] = $img_full_path;
+						$config['maintain_ratio'] = TRUE;
+						$config['width'] = 200;
+						$config['height'] = 200;						
+						
+						$config['new_image'] =$img_full_path;
+						
+						//$img_redim1 = $config['new_image'];
+						$this->load->library('image_lib', $config);
+						if (!$this->image_lib->resize()) {												
+							$this->variables['mensaje']= validation_errors();
+						}
+						
+					}
 				}
 				if ($this->variables['mensaje']=='')
 				{
@@ -158,6 +180,7 @@ class Equipo extends CI_Controller {
 		$this->load->view('templates/header', $this->variables);
 		$this->load->view('equipos/principal_equipo',$this->variables);
 		$this->load->view('equipos/datos_equipo',$this->variables);
+		$this->load->view('equipos/mensajes_equipo', $this->variables);
 		$this->load->view('templates/footer');
 	}
 	
