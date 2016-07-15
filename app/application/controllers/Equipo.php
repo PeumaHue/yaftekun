@@ -85,6 +85,25 @@ class Equipo extends CI_Controller {
 					{
 						$this->variables['mensaje'] = $this->upload->display_errors();
 					}
+					else 
+					{						
+						$data = array('upload_data' => $this->upload->data());
+						$img_full_path = $this->conf['upload_path'] . $data['upload_data']['file_name'];					
+							
+						// REDIMENSIONAMOS
+						$config['image_library'] = 'gd2';
+						$config['source_image'] = $img_full_path;
+						$config['maintain_ratio'] = TRUE;
+						$config['width'] = 200;
+						$config['height'] = 200;
+					
+						$config['new_image'] =$img_full_path;					
+					
+						$this->load->library('image_lib', $config);
+						if (!$this->image_lib->resize()) {
+							$this->variables['mensaje']= validation_errors();
+						}
+					}
 				}
 				
 				if ($this->variables['mensaje']=='')
@@ -154,7 +173,6 @@ class Equipo extends CI_Controller {
 						
 						$config['new_image'] =$img_full_path;
 						
-						//$img_redim1 = $config['new_image'];
 						$this->load->library('image_lib', $config);
 						if (!$this->image_lib->resize()) {												
 							$this->variables['mensaje']= validation_errors();
