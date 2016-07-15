@@ -38,6 +38,13 @@ class Calendario extends CI_Controller {
 		}
 		$this->load->view('templates/footer');
 	}
+	
+	public function reasignarfecha($idEncuentro, $fecha) {
+		
+		$this->load->model('Calendario_model');
+		$this->Calendario_model->editafecha($idEncuentro, $fecha);
+		$this->Index();
+	}
 
 
 

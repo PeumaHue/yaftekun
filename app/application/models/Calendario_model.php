@@ -7,7 +7,7 @@ class Calendario_model extends CI_Model {
 	 */
 	private $sp_consulta 	= 'call calendario_consulta()';
 	private $sp_alta 		= '';
-	private $sp_editar 		= '';
+	private $sp_editar 		= 'call calendario_edita_fecha(?, ?)';
 	private $sp_baja 		= '';
 	private $sp_ligas		= '';
 	private $sp_estadios	= '';
@@ -36,6 +36,20 @@ class Calendario_model extends CI_Model {
 		return $query->result_array();
 	}
 
-
+	public function editafecha($idevento, $fecha)
+	{
+		if ($this->db->query($this->sp_editar, array('id_encuentro_IN' => $idevento, 'fechaevento_IN' => $fecha)))
+		//if ($this->db->query($this->sp_editar))
+		{
+			$resultado['resultado']='OK';
+		}
+		else{
+			$resultado['resultado']='ERROR';
+		}
+		
+		if (mysqli_more_results($this->db->conn_id)) {
+			mysqli_next_result($this->db->conn_id);
+		}
+	}
 
 }
