@@ -76,7 +76,11 @@ CREATE TABLE `equipo` (
 
 LOCK TABLES `equipo` WRITE;
 /*!40000 ALTER TABLE `equipo` DISABLE KEYS */;
+<<<<<<< HEAD
+INSERT INTO `equipo` VALUES (1,1,'LANUS',1,1,'2016-05-03 09:09:42',NULL),(4294967295,4294967295,'EDITADO',1,1,'2016-03-01 00:00:00','ninguna.png'),(4294967299,1,'aldosivi',1,1,'2016-05-05 19:57:29','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4294967328,1,'boca',1,1,'2016-05-23 15:27:53','boca_juniors.png'),(4294967330,1,'fdsfd',1,1,'2016-05-23 15:47:39','defensa_y_justicia.png'),(4294967331,1,'fdddd',1,1,'2016-05-23 15:47:55','arsenal.png'),(4294967332,1,'peperoncino',1,1,'2016-05-23 17:41:04','banfield.png'),(4294967333,1,'otro',1,1,'2016-05-24 18:16:41','atletico_tucuman.png'),(4294967334,1,'mas',1,1,'2016-05-24 18:17:03','colon.png'),(4294967342,1,'uuuuu',1,1,'2016-05-28 14:03:47',NULL),(4294967343,1,'ppppp',1,1,'2016-05-28 14:14:23',''),(4294967344,1,'iiiiii',1,1,'2016-05-28 14:31:32',NULL),(4294967345,1,'llllllll',1,1,'2016-05-28 14:41:54',NULL),(4294967346,1,'ultimo',2,2,'2016-05-30 00:20:12',NULL),(4294967347,1,'xxxxx',1,1,'2016-06-01 18:15:22',NULL),(4294967349,1,'qqqq',1,1,'2016-06-01 18:17:22',NULL),(4294967350,1,'vvvvvv',1,1,'2016-06-01 18:18:05',NULL),(4294967351,1,'wwwwww',1,1,'2016-06-01 18:18:32',NULL),(4294967352,1,'wq',1,1,'2016-06-01 18:19:12',NULL),(4294967353,1,'45',1,1,'2016-06-01 18:24:41',NULL),(4294967354,1,'123',1,1,'2016-06-01 18:30:15',NULL),(4294967355,1,'789',1,1,'2016-06-01 18:39:16',''),(4294967358,1,'xxxxxxxxxxxxxxxxxxx',1,1,'2016-06-02 20:17:45','belgrano.png'),(4294967359,1,'Prueba 1p',3,1,'2016-06-03 17:50:30','belgrano1.png'),(4294967360,1,'kkkk 1',2,2,'2016-06-03 20:25:43',''),(4294967361,1,'kkkk 2',1,1,'2016-06-03 20:26:06','boca_juniors.png'),(4294967362,1,'wwww 45',1,1,'2016-06-03 20:26:26','atletico_rafaela.png'),(4294967363,1,'ppp4',1,1,'2016-06-06 11:32:33',''),(4294967368,1,'ppppqw',3,1,'2016-06-10 16:37:26',''),(4294967373,1,'ioio',1,1,'2016-06-10 17:38:39','a1.gif'),(4294967377,1,'otromas',1,1,'2016-06-22 16:12:46','huracan.png'),(4294967378,1,'perinolonchelodmon',2,1,'2016-06-29 17:44:49','atletico_tucuman5.png'),(4294967379,1,'con imagen',2,1,'2016-06-29 17:46:29','aldosivi3.png'),(4294967381,1,'DEFE',1,1,'2016-06-29 19:17:26','atletico_tucuman6.png'),(4294967382,1,'chota',1,1,'2016-07-01 15:06:15',''),(4294967383,1,'Xeneize',1,1,'2016-07-05 12:24:52',''),(4294967384,1,'Marian',1,1,'2016-07-06 11:12:41','');
+=======
 INSERT INTO `equipo` VALUES (1,1,'LANUS',1,1,'2016-05-03 09:09:42',NULL),(2,4294967295,'EDITADO',1,1,'2016-03-01 00:00:00','ninguna.png'),(3,1,'aldosivi',1,1,'2016-05-05 19:57:29','C:\\Bitnami\\wampstack-5.6.19-0\\apps\\yaftekun\\db\\imagenes\\aldosivi.png'),(4,1,'boca',1,1,'2016-05-23 15:27:53','boca_juniors.png'),(5,1,'fdsfd',1,1,'2016-05-23 15:47:39','defensa_y_justicia.png'),(6,1,'fdddd',1,1,'2016-05-23 15:47:55','arsenal.png'),(7,1,'peperoncino',1,1,'2016-05-23 17:41:04','banfield.png'),(8,1,'otro',1,1,'2016-05-24 18:16:41','atletico_tucuman.png'),(9,1,'mas',1,1,'2016-05-24 18:17:03','colon.png'),(10,1,'uuuuu',1,1,'2016-05-28 14:03:47',NULL),(4294967343,1,'ppppp',1,1,'2016-05-28 14:14:23',''),(4294967344,1,'iiiiii',1,1,'2016-05-28 14:31:32',NULL),(4294967345,1,'llllllll',1,1,'2016-05-28 14:41:54',NULL),(4294967346,1,'ultimo',2,2,'2016-05-30 00:20:12',NULL),(4294967347,1,'xxxxx',1,1,'2016-06-01 18:15:22',NULL),(4294967349,1,'qqqq',1,1,'2016-06-01 18:17:22',NULL),(4294967350,1,'vvvvvv',1,1,'2016-06-01 18:18:05',NULL),(4294967351,1,'wwwwww',1,1,'2016-06-01 18:18:32',NULL),(4294967352,1,'wq',1,1,'2016-06-01 18:19:12',NULL),(4294967353,1,'45',1,1,'2016-06-01 18:24:41',NULL),(4294967354,1,'123',1,1,'2016-06-01 18:30:15',NULL),(4294967355,1,'789',1,1,'2016-06-01 18:39:16',''),(4294967358,1,'xxxxxxxxxxxxxxxxxxx',1,1,'2016-06-02 20:17:45','belgrano.png'),(4294967359,1,'Prueba 1p',3,1,'2016-06-03 17:50:30','belgrano1.png'),(4294967360,1,'kkkk 1',2,2,'2016-06-03 20:25:43',''),(4294967361,1,'kkkk 2',1,1,'2016-06-03 20:26:06','boca_juniors.png'),(4294967362,1,'wwww 45',1,1,'2016-06-03 20:26:26','atletico_rafaela.png'),(4294967363,1,'ppp4',1,1,'2016-06-06 11:32:33',''),(4294967368,1,'ppppqw',3,1,'2016-06-10 16:37:26',''),(4294967373,1,'ioio',1,1,'2016-06-10 17:38:39','a1.gif'),(4294967377,1,'otromas',1,1,'2016-06-22 16:12:46','huracan.png'),(4294967378,1,'perinolonchelodmon',2,1,'2016-06-29 17:44:49','atletico_tucuman5.png'),(4294967379,1,'con imagen',2,1,'2016-06-29 17:46:29','aldosivi3.png'),(4294967381,1,'DEFE',1,1,'2016-06-29 19:17:26','atletico_tucuman6.png'),(4294967382,1,'chota',1,1,'2016-07-01 15:06:15',''),(4294967383,1,'Xeneize',1,1,'2016-07-05 12:24:52','belgrano4.png'),(4294967384,1,'Marian',1,1,'2016-07-06 11:12:41','');
+>>>>>>> 4758455046f7b0966bb4a46c6c740ee23e5df342
 /*!40000 ALTER TABLE `equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -248,10 +252,15 @@ CREATE TABLE `participante` (
   `nombre_archivo_foto` varchar(100) DEFAULT NULL,
   `fecha_creacion` datetime DEFAULT NULL,
   `id_usuario` int(10) unsigned DEFAULT NULL,
+<<<<<<< HEAD
+  PRIMARY KEY (`id_participante`)
+) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8;
+=======
   PRIMARY KEY (`id_participante`),
   KEY `fk_participante_tipo_estado_civil_idx` (`id_tipo_estado_civil`),
   CONSTRAINT `fk_participante_tipo_estado_civil` FOREIGN KEY (`id_tipo_estado_civil`) REFERENCES `tipo_estado_civil` (`id_tipo_estado_civil`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8;
+>>>>>>> 4758455046f7b0966bb4a46c6c740ee23e5df342
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -260,7 +269,11 @@ CREATE TABLE `participante` (
 
 LOCK TABLES `participante` WRITE;
 /*!40000 ALTER TABLE `participante` DISABLE KEYS */;
+<<<<<<< HEAD
+INSERT INTO `participante` VALUES (62,1,'Nestor','Craviotto',NULL,NULL,1,NULL,'','','','','','0000-00-00','',0,0,'','',0,'','',0,'',1,'21565565','','0000-00-00',NULL,'neuer.jpg','2016-06-21 07:53:48',1),(63,1,'Oscar','Ruggieri',NULL,NULL,0,NULL,'','','','','','0000-00-00','',0,0,'','',0,'','',0,'',1,'20269999','','0000-00-00',NULL,'logotorneo7.png','2016-06-21 08:05:19',1),(65,1,'Carlos','Kozlowski','',0,0,0,'','','','','',NULL,'',0,0,'','',0,'','',0,'',1,'232323','','0000-00-00','','neuer3.jpg','2016-06-23 12:38:01',1),(66,1,'Marco','Cupo',NULL,NULL,0,NULL,'','','','','','0000-00-00','',0,0,'','',117,'','',1,'',1,'12321321','','0000-00-00',NULL,'neuer52.jpg','2016-06-23 14:13:01',1),(73,1,'Mariano','Andolfatto','',0,0,0,'','','','','',NULL,'',0,0,'','',0,'','',0,'',1,'34343434','','0000-00-00','neuer1.jpg','neuer1.jpg','2016-06-24 12:05:15',1),(74,1,'Juan','Chotalargas','',0,0,0,'','','','','','0000-00-00','',0,0,'','',0,'','',0,'',3,'0000000','',NULL,'logotorneo1.png','logotorneo1.png','2016-06-29 10:55:36',1),(94,1,'Coco','Sullivan','',0,0,0,'','','','','','0000-00-00','',0,0,'','',0,'','',0,'',1,'123456','','0000-00-00','','no-foto.png','2016-07-06 08:29:35',1),(98,1,'Sergio','Denis','',0,0,0,'','','','','','0000-00-00','',0,0,'','',0,'','',0,'',1,'23232','','0000-00-00','','no-foto.png','2016-07-06 14:34:23',1),(100,1,'Iglesias','Toti','',0,0,0,'','','','','','2012-01-12','',0,0,'','',0,'','',0,'',1,'433434','','0000-00-00','','no-foto.png','2016-07-07 12:14:05',1),(101,1,'Rob','Fag','',0,0,0,'','','','','','1978-10-25','',0,0,'','',0,'','',0,'',2,'32323','','1980-10-25','','no-foto.png','2016-07-07 13:17:40',1);
+=======
 INSERT INTO `participante` VALUES (62,1,'Nestor','Craviotto',NULL,NULL,1,NULL,'','','','','','0000-00-00','',0,0,'','',0,'','',NULL,'',1,'21565565','','0000-00-00',NULL,'neuer.jpg','2016-06-21 07:53:48',1),(63,1,'Oscar','Ruggieri',NULL,NULL,0,NULL,'','','','','','0000-00-00','',0,0,'','',0,'','',NULL,'',1,'20269999','','0000-00-00',NULL,'logotorneo7.png','2016-06-21 08:05:19',1),(65,1,'Carlos','Kozlowski','',0,0,0,'','','','','',NULL,'',0,0,'','',0,'','',NULL,'',1,'232323','','0000-00-00','','neuer3.jpg','2016-06-23 12:38:01',1),(66,1,'Marco','Cupo',NULL,NULL,0,NULL,'','','','','','0000-00-00','',0,0,'','',117,'','',NULL,'',1,'12321321','','0000-00-00',NULL,'neuer52.jpg','2016-06-23 14:13:01',1),(73,1,'Mariano','Andolfatto Trolo','',0,0,0,'','','','','',NULL,'',0,0,'','',0,'','',NULL,'',1,'34343434','','0000-00-00','neuer1.jpg','neuer1.jpg','2016-06-24 12:05:15',1),(74,1,'Juan','Chotalargas','',0,0,0,'','','','','','0000-00-00','',0,0,'','',0,'','',NULL,'',3,'0000000','',NULL,'logotorneo1.png','logotorneo1.png','2016-06-29 10:55:36',1),(94,1,'Coco','Channel','',0,0,0,'','','','','','0000-00-00','',0,0,'','',0,'','',NULL,'',1,'123456','','0000-00-00','','no-foto.png','2016-07-06 08:29:35',1),(98,1,'Sergio','Raiputo','',0,0,0,'','','','','','0000-00-00','',0,0,'','',0,'','',NULL,'',1,'23232','','0000-00-00','','no-foto.png','2016-07-06 14:34:23',1),(100,1,'Iglesias','Toti',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2012-01-12',NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'433434',NULL,'1969-12-31',NULL,'neuer41.jpg','2016-07-07 12:14:05',1),(101,1,'Rob','Fag','',0,0,0,'','','','','','1978-10-25','',0,0,'','',0,'','',NULL,'',2,'32323','','1980-10-25','','no-foto.png','2016-07-07 13:17:40',1),(102,2,'Arbitro','Hijo De mil Puta',NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,'1969-12-31',NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'12',NULL,NULL,NULL,'mago_matematico.jpg','2016-07-11 17:08:30',1),(103,2,'Joe','Valachi',NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,'1969-12-31',NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'43',NULL,NULL,NULL,'kafka_recortado.jpg','2016-07-11 17:33:11',1),(104,2,'Juan','cabarulo',NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,'1969-12-31',NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'12',NULL,NULL,NULL,'nudos_para_zapatillas.jpg','2016-07-11 17:36:14',1),(109,3,'Jean Carlos','Pelotudo',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1978-10-12',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'262626',NULL,NULL,NULL,'neuer42.jpg','2016-07-12 09:30:54',1),(110,3,'Eber','Luduena',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'26262',NULL,NULL,NULL,'no-foto.png','2016-07-12 09:34:59',1),(114,4,'Ernest','Basavilvaso',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'26965501',NULL,NULL,NULL,'images16.jpg','2016-07-12 12:26:44',1),(119,2,'Lino Verga','Topo',NULL,NULL,1,NULL,'Antes era puto',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'232',NULL,NULL,NULL,'no-foto.png','2016-07-12 14:52:23',1),(122,2,'Lorena','Verga',NULL,NULL,1,NULL,'as','1','1','1','456@mail.tuvieja.en.tanga.com','1988-02-22','Falsa',1,123,'1','1',118,'LA CHOTA','Argelino ',NULL,'Tu hermana',1,'343',NULL,NULL,NULL,'no-foto.png','2016-07-12 15:05:22',1),(123,4,'Christoper','London',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'2625',NULL,NULL,NULL,'images15.jpg','2016-07-13 11:50:42',1);
+>>>>>>> 4758455046f7b0966bb4a46c6c740ee23e5df342
 /*!40000 ALTER TABLE `participante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -583,7 +596,11 @@ CREATE TABLE `torneo` (
   `id_usuario` int(10) unsigned NOT NULL,
   `fecha_creacion` datetime NOT NULL,
   PRIMARY KEY (`id_torneo`,`id_liga`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
+=======
 ) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
+>>>>>>> 4758455046f7b0966bb4a46c6c740ee23e5df342
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -592,7 +609,11 @@ CREATE TABLE `torneo` (
 
 LOCK TABLES `torneo` WRITE;
 /*!40000 ALTER TABLE `torneo` DISABLE KEYS */;
+<<<<<<< HEAD
+INSERT INTO `torneo` VALUES (21,9999,2,2016,'Torneo nacional 2 sub 60',8,99,'2016-05-03 16:53:14'),(22,9999,3,2016,'Torneo Final',122,1,'2016-06-16 14:47:45'),(31,1,3,2016,'TORNEO LA VERGA 4',44,1,'2016-06-19 22:07:52'),(38,1,1,2016,'marian trolo 200',55,1,'2016-06-21 17:15:03'),(44,1,1,2016,'aab',3,1,'2016-06-19 22:39:32'),(46,0,0,0,'0',0,0,'2016-06-20 15:47:05'),(47,1,1,2016,'ssss',12,1,'2016-06-20 15:47:57'),(51,1,3,2016,'benedict arnold',3,1,'2016-06-22 11:23:54');
+=======
 INSERT INTO `torneo` VALUES (21,9999,2,2016,'Torneo nacional 2 sub 60',8,99,'2016-05-03 16:53:14'),(22,9999,3,2016,'Torneo Final',122,1,'2016-06-16 14:47:45'),(31,1,3,2016,'TORNEO LA VERGA 4',44,1,'2016-06-19 22:07:52'),(38,1,3,2016,'marian trolo 2001',552,1,'2016-07-12 14:52:27'),(46,0,0,0,'0',0,0,'2016-06-20 15:47:05'),(51,1,1,2016,'benedict arnold',3,1,'2016-07-12 14:58:02'),(56,1,2,2016,'rere',3,1,'2016-07-12 14:19:59'),(57,1,3,2016,'ded',332,1,'2016-07-12 14:35:04'),(58,1,1,2016,'eeee',22,1,'2016-07-12 14:52:15'),(59,1,1,2016,'ded',33,1,'2016-07-12 14:52:38'),(60,1,1,2016,'3434',444,1,'2016-07-12 14:59:07'),(61,1,1,2016,'2323',2,1,'2016-07-12 15:03:51');
+>>>>>>> 4758455046f7b0966bb4a46c6c740ee23e5df342
 /*!40000 ALTER TABLE `torneo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -770,7 +791,11 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+<<<<<<< HEAD
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+=======
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+>>>>>>> 4758455046f7b0966bb4a46c6c740ee23e5df342
 DELIMITER ;;
 CREATE DEFINER=`root`@`127.0.0.1` PROCEDURE `estadio_consulta`(
 )
@@ -1035,13 +1060,21 @@ CREATE DEFINER=`root`@`%` PROCEDURE `participante_consulta`(
     IN id_participante_IN BIGINT(10),
     IN id_equipo_IN BIGINT,
     IN id_tipo_participante_IN INT,
+<<<<<<< HEAD
+    IN apellido_IN varchar(100),
+=======
     IN nombre_apellido_IN varchar(100),
+>>>>>>> 4758455046f7b0966bb4a46c6c740ee23e5df342
     IN row_count_IN int,
     IN offset_IN int
 )
 BEGIN
 
+<<<<<<< HEAD
+	if (apellido_IN is null) 
+=======
 	if (nombre_apellido_IN is null) 
+>>>>>>> 4758455046f7b0966bb4a46c6c740ee23e5df342
     then
 		set row_count_IN = ifnull(row_count_IN,10);
 		set offset_IN = ifnull(offset_IN,0);
@@ -1063,10 +1096,17 @@ BEGIN
 		order by p.id_participante DESC
 		LIMIT row_count_IN OFFSET offset_IN;
 	else
+<<<<<<< HEAD
+		Select id_participante, apellido, nombre
+		from participante
+		where apellido like concat('%', apellido_IN ,'%')
+		order by apellido DESC;
+=======
 		Select p.id_participante, p.apellido, p.nombre
 		from participante p
 		where (p.apellido like concat('%', nombre_apellido_IN ,'%') or p.nombre like concat('%', nombre_apellido_IN ,'%')) and (p.id_tipo_participante = id_tipo_participante_IN OR id_tipo_participante_IN is null )
 		order by p.apellido DESC;
+>>>>>>> 4758455046f7b0966bb4a46c6c740ee23e5df342
     end if;
 END ;;
 DELIMITER ;
@@ -1541,4 +1581,8 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+<<<<<<< HEAD
+-- Dump completed on 2016-07-11 14:53:07
+=======
 -- Dump completed on 2016-07-13 15:52:28
+>>>>>>> 4758455046f7b0966bb4a46c6c740ee23e5df342

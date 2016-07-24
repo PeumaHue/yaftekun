@@ -14,7 +14,7 @@ class Calendario_feed extends CI_Controller {
 		
 		$eventList = array();            // Assemble list of all events here
 		
-		
+		/*
 		$eventList[] ='<?xml version="1.0" encoding="UTF-8" ?>';
 		$eventList[] ='<rss version="2.0">';
 		
@@ -22,19 +22,23 @@ class Calendario_feed extends CI_Controller {
 		$eventList[] ='<title>Fechas Yaftekun Torneo Actual</title>';
 		$eventList[] ='<link>http://www.Yaftekun.com</link>';
 		$eventList[] ='<description>Almanaque torneo señor oficial</description>';
+		*/
 		
 		foreach($Items as $Item):
 			$eventList[] = array(             
-					'id'    => (int) $Item['id_encuentro'],
-					'title' => "Partido",
-					'start' => $Item['fechaevento'],
-					'end'   => $Item['fechaevento']
+					'id_encuentro'	=> (int) $Item['id_encuentro'],
+					'title' 		=> "Partido ( ".$Item['id_encuentro']." )" ,
+					'start' 		=> $Item['fechaevento'],
+					'end'   		=> $Item['fechaevento'],
+					'editable'   	=> "true"
 			);
 		endforeach;
 		
-		
+		/*
 		$eventList[] ='</channel>\n';
 		$eventList[] ='</rss>';
+		*/
+		
 		echo json_encode($eventList);
 	}
 }
