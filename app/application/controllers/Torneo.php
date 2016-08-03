@@ -25,6 +25,7 @@ class Torneo extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->helper(array('url', 'form', 'HYaftekun','email'));
 		$this->load->model('Torneo_model');
+		$this->load->model('Calendario_model');
 		$this->datos_formulario = new stdClass();//Instancio una clase vacia para evitar el warning "Creating default object from empty value"
 		$this->variables['mensaje']= '';
 		$this->variables['includes']='<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
@@ -107,6 +108,11 @@ class Torneo extends CI_Controller {
 	 */
 	public function editar($id_torneo=NULL)
 	{
+		$fixture = new stdClass();
+		$fixture = $this->Calendario_model->fixture_consulta(75);
+		$this->_renderizar_tabla(NULL, $fixture);
+		
+		
 		$this->_setear_variables('', '', site_url('torneo/editar'), '', site_url('torneo'), site_url('torneo/baja') . '/' . ($id_torneo==NULL ? $this->input->post('id_torneo') : $id_torneo), 'Editar');
 		$this->variables['modalidades']=_obtener_array_asociativo(array("datos"=>$this->Torneo_model->consulta_tipo_modalidad(), "campo_clave"=>'id_tipo_modalidad', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_modalidad_juego'));
 		//Si no es un post, no se llama al editar y solo se muestran los campos para editar
@@ -239,4 +245,48 @@ class Torneo extends CI_Controller {
 		$this->datos_formulario->id_usuario = isset($objeto->id_usuario) ? $objeto->id_usuario : '';
 		$this->datos_formulario->anio = isset($objeto->anio) ? $objeto->anio : '';
 	}
+
+	/**
+	 * Renderiza una tabla en base a un template HTML y un object|array
+	 * @param		string		$template
+	 * @param		mixed 		object|array Puede recibir un objeto de una persona o un array de varias
+	 * @return		void
+	 */
+	private function _renderizar_tabla($template=NULL, $datos)
+	{
+		//Si los datos a renderizar son un objeto, es porque vino un único registro, se convierte a array para poder iterar el el foreach de mas abajo
+		if(is_object($datos))
+		{
+			$array[0] = get_object_vars($datos);
+			$datos = $array;
+		}
+		$template = isset($template) ? $template : array('table_open' => '<table border="0" cellpadding="4" cellspacing="0" class="table table-striped">');
+		$this->load->library('table');
+		$this->table->set_template($template);
+		$this->table->set_heading('Nro Fecha', 'Fecha', 'Local', '', 'Visitante');
+		$contador=1;
+		foreach ($datos as $fixture)
+		{
+			if ($fixture['nro_fecha'] != $contador)
+			{
+				$this->table->add_row('<td colspan=5>Pija muerta</td>');
+				$contador += 1;
+			}	
+
+		//	$this->table->add_row($fixture['nro_fecha'], $fixture['fecha_evento'],
+		//			'<select name="s" id="'+ $fixture['id_encuentro'] +'"><option value="' + $fixture['id_equipoa'] + '">'+ $fixture['id_equipoa'] +'</option></select>',
+		//			'vs', '#'.$fixture['id_equipob']);
+			
+			$this->table->add_row($fixture['nro_fecha'], $fixture['fecha_evento'],
+					'<select name="s" id="1"><option value="1">#'.$fixture['id_equipoa'].'</option></select>',
+					'vs',
+					'<select name="s" id="1"><option value="1">#'.$fixture['id_equipob'].'</option></select>'
+					);
+			
+			//$this->table->add_row($fixture['nro_fecha'], $fixture['fecha_evento'], '#'.$fixture['id_equipoa'],'vs', '#'.$fixture['id_equipob']);
+		}
+		$this->table->add_row('<td colspan=5>Pija muerta</td>');
+		$this->variables['tabla'] = $this->table->generate();
+	}
+
 }

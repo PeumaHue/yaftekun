@@ -63,6 +63,10 @@ $lang['form_label_equipo_imagen']		= 'Imagen del escudo';
 $lang['form_label_ayuda_nombre_equipo']	= 'Ingrese el nombre del nuevo equipo';
 $lang['form_label_calendario']			= 'Calendario';
 $lang['form_label_calendarios']			= 'Calendarios';
+$lang['form_label_participantes']		= 'Participantes';
+$lang['form_label_fixture']		        = 'Fixture';
+$lang['form_label_clasificacion']		= 'Clasificación';
+
 /*
  * Paneles 
  */
