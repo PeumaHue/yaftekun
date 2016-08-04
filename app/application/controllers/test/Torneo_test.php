@@ -37,6 +37,7 @@ class Torneo_test extends CI_Controller {
 		$this->consulta_test_por_nombre();
 		$this->baja_test();
 		$this->consulta_tipo_modalidad();
+		$this->consulta_equipos();
 		echo $this->unit->report();
 	}
 	
@@ -166,6 +167,20 @@ class Torneo_test extends CI_Controller {
 		$notes = var_export($test, true);
 		$this->unit->run($test, $expected_result, $test_name, $notes);
 	}
+	
+	/**
+	 * Funcion para testear la consulta satisfactoria de los equipos participantes en un torneo
+	 * @return void
+	 */
+	public function consulta_equipos()
+	{
+		$test = $this->Torneo_model->obtener_equipos(75);
+		$expected_result = 'is_array';
+		$test_name = 'Consulta de equipos participantes en un torneo';
+		$notes = var_export($test, true);
+		$this->unit->run($test, $expected_result, $test_name, $notes);
+	}
+	
 	
 	/**
 	 * @todo

@@ -13,9 +13,7 @@ class Calendario extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-
 		$this->load->helper('url');
-				
 		$this->variables['includes']='<link rel="stylesheet" href="'.base_url('assets/fullcalendar-2.9.0/fullcalendar.css').'" />';
 		$this->variables['includes']=$this->variables['includes'].'<script src="'.base_url('assets/fullcalendar-2.9.0/lib/jquery.min.js').'"></script>';
 		$this->variables['includes']=$this->variables['includes'].'<script src="'.base_url('assets/fullcalendar-2.9.0/lib/moment.min.js').'"></script>';
@@ -28,13 +26,11 @@ class Calendario extends CI_Controller {
 
 		$msj = isset($this->variables['mensaje']) ? $this->variables['mensaje'] : '';
 		$this->_setear_variables('', $msj, site_url('equipo'), site_url('equipo'), '', '');
-			
-
 		$this->load->view('templates/header', $this->variables);
-		$this->load->view('calendario/principal_calendario', $this->variables);
-		$this->load->view('calendario/calendario', $this->variables);
+		$this->load->view('calendarios/principal_calendario', $this->variables);
+		$this->load->view('calendarios/calendario', $this->variables);
 		if ($msj!='') {
-			$this->load->view('calendario/mensajes_calendario',$this->variables);
+			$this->load->view('calendarios/mensajes_calendario',$this->variables);
 		}
 		$this->load->view('templates/footer');
 	}
@@ -45,10 +41,6 @@ class Calendario extends CI_Controller {
 		$this->Calendario_model->editafecha($idEncuentro, $fecha);
 		$this->Index();
 	}
-
-
-
-	
 	
 	private function _setear_variables($titulo=NULL, $mensaje=NULL, $accion=NULL, $cancelar=NULL, $volver=NULL, $eliminar=NULL)
 	{
@@ -63,4 +55,5 @@ class Calendario extends CI_Controller {
 			$this->variables['reset']=false;
 		}
 	}
+	
 }

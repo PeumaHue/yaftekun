@@ -9,6 +9,7 @@ class Torneo_model extends CI_Model {
 	private $sp_editar 					= 'call torneo_editar(?, ?, ?, ?, ?, ?)';
 	private $sp_baja 					= 'call torneo_baja(?)';
 	private $sp_consulta_tipo_modalidad = 'call tipo_modalidad_consulta()';
+	private $sp_obtener_equipos         = 'call torneo_obtener_equipo(?,?,?)';
 	
 	/**
 	 * Variables para los atributos del modelo
@@ -155,6 +156,21 @@ class Torneo_model extends CI_Model {
 		$query = $this->db->query($this->sp_consulta_tipo_modalidad);
 		if (mysqli_more_results($this->db->conn_id))
 		{
+			mysqli_next_result($this->db->conn_id);
+		}
+		return $query->result_array();
+	}
+	
+	/**
+	 * Consulta de equipos por torneo
+	 * @param 		integer 	$id_torneo
+	 * @param 		string   	$nombre_equipo
+	 * @return 		array       Retorna un array.
+	 */
+	public function obtener_equipos($id_torneo=NULL, $nombre_equipo='', $nombre_equipo_libre='')
+	{
+		$query = $this->db->query($this->sp_obtener_equipos, array('id_torneo' => $id_torneo, 'NombreEquipo' => $nombre_equipo, 'NombreEquipoL' => $nombre_equipo_libre));
+		if (mysqli_more_results($this->db->conn_id)) {
 			mysqli_next_result($this->db->conn_id);
 		}
 		return $query->result_array();

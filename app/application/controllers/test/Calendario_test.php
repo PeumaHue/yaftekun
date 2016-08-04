@@ -2,10 +2,9 @@
 class Calendario_test extends CI_Controller {
 	
 	/**
-	 * Equipo_prueba se usa para poder probar completo ABM de equipos.
+	 * Equipo_prueba se usa para poder probar completo ABM de calendario.
 	 * 
 	 */
-	
 	
 	public function __construct()
 	{
@@ -20,17 +19,13 @@ class Calendario_test extends CI_Controller {
 	 */
 	public function index()
 	{
-		
-		
 		$this->consulta_test();
-				
+		$this->consulta_fixture_test();
 		echo $this->unit->report();
-		
 	}
 	
 	public function consulta_test()
 	{
-		#$test = $this->Equipo_model->consulta(4294967299, NULL);
 		$test = $this->Calendario_model->consulta();
 		$expected_result = 'is_array';
 		$test_name = 'consulta_calendario_test';
@@ -38,6 +33,12 @@ class Calendario_test extends CI_Controller {
 		$this->unit->run($test, $expected_result, $test_name, $notes);
 	}
 	
-	
-	
+	public function consulta_fixture_test()
+	{
+		$test = $this->Calendario_model->fixture_consulta(75);
+		$expected_result = 'is_array';
+		$test_name = 'consulta_fixture_test';
+		$notes = var_export($test, true);
+		$this->unit->run($test, $expected_result, $test_name, $notes);
+	}
 }

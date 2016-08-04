@@ -5,7 +5,7 @@
 				<i class="glyphicon glyphicon-user ico-panel" ></i><?php echo $agregar_o_editar; ?>
 			</div>
 	 		<div class="panel-body">
-    			<div clas="row">
+    			<div class="row">
     				<div class="form-group col-sm-6">
 		           		<input type="text" id="txt_NombreTorneo" value="<?php echo ($reset) ? '' : set_value('nombre',$this->datos_formulario->nombre); ?>" class="form-control" name="nombre" placeholder="<?php echo lang('form_label_nombre');?>" maxlength="200">
 		        	</div>
@@ -17,6 +17,68 @@
 		            </div>
 		        </div>
 		        <div class="row"></div>
+		        <div class="row">
+									<div class="col-sm-12">
+										<div class="panel panel-default">
+											<div class="panel-heading" id="participantes">
+												<i class="glyphicon glyphicon-star ico-panel"></i>
+												<?php echo lang('form_label_participantes');?>
+												<div class="pull-right">
+													<div class="btn-group">
+														<button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#participante_body"><i id="flecha_participante" class="fa fa-chevron-down"></i></button>
+													</div>
+												</div>
+											</div>
+											<div class="panel-body collapse" id="participante_body">
+												<div class="row">
+												</div>
+											</div>
+										</div>
+									</div>
+				</div>
+				<div class="row">
+									<div class="col-sm-12">
+										<div class="panel panel-default">
+											<div class="panel-heading" id="fixture">
+												<i class="glyphicon glyphicon-star ico-panel"></i>
+												<?php echo lang('form_label_fixture');?>
+												<div class="pull-right">
+													<div class="btn-group">
+														<button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#fixture_body"><i id="flecha_fixture" class="fa fa-chevron-down"></i></button>
+													</div>
+												</div>
+											</div>
+											<div class="panel-body collapse" id="fixture_body">
+												<div class="row">
+												<?php
+													if (!empty($tabla)) {
+														echo $tabla;
+													}
+													?>
+												</div>
+											</div>
+										</div>
+									</div>
+				</div>		
+		        <div class="row">
+									<div class="col-sm-12">
+										<div class="panel panel-default">
+											<div class="panel-heading" id="clasificacion">
+												<i class="glyphicon glyphicon-star ico-panel"></i>
+												<?php echo lang('form_label_clasificacion');?>
+												<div class="pull-right">
+													<div class="btn-group">
+														<button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#clasificacion_body"><i id="flecha_clasificacion" class="fa fa-chevron-down"></i></button>
+													</div>
+												</div>
+											</div>
+											<div class="panel-body collapse" id="clasificacion_body">
+												<div class="row">
+												</div>
+											</div>
+										</div>
+									</div>
+				</div>		
 		        <div class="row">
 						<div class="col-lg-12" style="text-align: right; padding-top: 20px; padding-bottom: 10px;">
 							<a id="btn_eliminar" href="<?php echo $eliminar; ?>" class="btn boton  boton-azul  btn-ancho120" role="button"><i class="fa fa-trash-o"></i><?php echo lang('form_button_eliminar');?></a>

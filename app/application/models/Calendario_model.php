@@ -5,12 +5,25 @@ class Calendario_model extends CI_Model {
 	 * Variables para los stored procedures usados por el modelo
 	 * @var string
 	 */
-	private $sp_consulta 	= 'call calendario_consulta()';
-	private $sp_alta 		= '';
-	private $sp_editar 		= 'call calendario_edita_fecha(?, ?)';
-	private $sp_baja 		= '';
-	private $sp_ligas		= '';
-	private $sp_estadios	= '';
+	private $sp_consulta 	     = 'call calendario_consulta()';
+	private $sp_consulta_fixture = 'call fixture_consulta(?)';
+	private $sp_alta 		     = '';
+	private $sp_editar 		     = 'call calendario_edita_fecha(?, ?)';
+	private $sp_baja      		 = '';
+	private $sp_ligas	  	     = '';
+	private $sp_estadios	     = '';
+	
+	public $id_encuentro;
+	public $id_torneo;
+	public $id_ronda;
+	public $id_sede;
+	public $id_grupo;
+	public $id_equipoa;
+	public $id_equipob;
+	public $fecha_evento;
+	public $nro_fecha;
+	public $tantosa;
+	public $tantosb;
 	
 		
 	public function __construct()
@@ -30,6 +43,22 @@ class Calendario_model extends CI_Model {
 	{
 		$query = $this->db->query($this->sp_consulta);
 
+		if (mysqli_more_results($this->db->conn_id)) {
+			mysqli_next_result($this->db->conn_id);
+		}
+		return $query->result_array();
+	}
+	
+	/**
+	 * Consulta de fixture
+	 *
+	 * Consulta de fixture por torneo 
+	 * @param 		bigint 	$id_torneo
+	 * @return 		object  Retorna un array.
+	 */
+	public function fixture_consulta($id_torneo=NULL)
+	{
+		$query = $this->db->query($this->sp_consulta_fixture, array('id_torneo' => $id_torneo));
 		if (mysqli_more_results($this->db->conn_id)) {
 			mysqli_next_result($this->db->conn_id);
 		}
