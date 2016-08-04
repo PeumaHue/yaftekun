@@ -26,6 +26,7 @@ class Torneo extends CI_Controller {
 		$this->load->helper(array('url', 'form', 'HYaftekun','email'));
 		$this->load->model('Torneo_model');
 		$this->load->model('Calendario_model');
+		$this->load->model('Equipo_model');
 		$this->datos_formulario = new stdClass();//Instancio una clase vacia para evitar el warning "Creating default object from empty value"
 		$this->variables['mensaje']= '';
 		$this->variables['includes']='<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
@@ -254,6 +255,8 @@ class Torneo extends CI_Controller {
 	 */
 	private function _renderizar_tabla($template=NULL, $datos)
 	{
+		global $options;
+		$equipos=_obtener_array_asociativo(array("datos"=>$this->Torneo_model->obtener_equipos(75, null), "campo_clave"=>'numero', "campo_descripcion"=>'numero')); //@todo
 		//Si los datos a renderizar son un objeto, es porque vino un único registro, se convierte a array para poder iterar el el foreach de mas abajo
 		if(is_object($datos))
 		{
@@ -269,21 +272,18 @@ class Torneo extends CI_Controller {
 		{
 			if ($fixture['nro_fecha'] != $contador)
 			{
-				$this->table->add_row('<td colspan=5>Pija muerta</td>');
+				$this->table->add_row('<td colspan=5>Separador</td>');
 				$contador += 1;
 			}	
-
-		//	$this->table->add_row($fixture['nro_fecha'], $fixture['fecha_evento'],
-		//			'<select name="s" id="'+ $fixture['id_encuentro'] +'"><option value="' + $fixture['id_equipoa'] + '">'+ $fixture['id_equipoa'] +'</option></select>',
-		//			'vs', '#'.$fixture['id_equipob']);
 			
 			$this->table->add_row($fixture['nro_fecha'], $fixture['fecha_evento'],
+					form_dropdown('cboEquipoA'.$fixture['id_encuentro'], $equipos, $fixture['id_equipoa'], 'class="form-control"'),
 					'<select name="s" id="1"><option value="1">#'.$fixture['id_equipoa'].'</option></select>',
 					'vs',
-					'<select name="s" id="1"><option value="1">#'.$fixture['id_equipob'].'</option></select>'
+					'<select name="s" id="1"><option value="1">#'.$fixture['id_equipob'].'</option></select>',
+					form_dropdown('cboEquipoB'.$fixture['id_encuentro'], $equipos, $fixture['id_equipob'], 'class="form-control"'),
+					form_hidden('id_encuentro'.$fixture['id_encuentro'], $fixture['id_encuentro'])
 					);
-			
-			//$this->table->add_row($fixture['nro_fecha'], $fixture['fecha_evento'], '#'.$fixture['id_equipoa'],'vs', '#'.$fixture['id_equipob']);
 		}
 		$this->table->add_row('<td colspan=5>Pija muerta</td>');
 		$this->variables['tabla'] = $this->table->generate();
