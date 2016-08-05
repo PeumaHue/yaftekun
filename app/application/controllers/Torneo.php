@@ -110,8 +110,8 @@ class Torneo extends CI_Controller {
 	public function editar($id_torneo=NULL)
 	{
 		$fixture = new stdClass();
-		$fixture = $this->Calendario_model->fixture_consulta(75);
-		$this->_renderizar_tabla(NULL, $fixture);
+		$fixture = $this->Calendario_model->fixture_consulta(75); // @todo
+		$this->_renderizar_tabla_fixture(NULL, $fixture);
 		
 		
 		$this->_setear_variables('', '', site_url('torneo/editar'), '', site_url('torneo'), site_url('torneo/baja') . '/' . ($id_torneo==NULL ? $this->input->post('id_torneo') : $id_torneo), 'Editar');
@@ -253,20 +253,38 @@ class Torneo extends CI_Controller {
 	 * @param		mixed 		object|array Puede recibir un objeto de una persona o un array de varias
 	 * @return		void
 	 */
-	private function _renderizar_tabla($template=NULL, $datos)
+	private function _renderizar_tabla_fixture($template=NULL, $datos)
 	{
-		global $options;
+		$equipos_model=$this->Torneo_model->obtener_equipos(75, null);
 		$equipos=_obtener_array_asociativo(array("datos"=>$this->Torneo_model->obtener_equipos(75, null), "campo_clave"=>'numero', "campo_descripcion"=>'numero')); //@todo
+		
+		//$equipos=_obtener_array_asociativo(array("datos"=>$this->Torneo_model->obtener_equipos(75, null), "campo_clave"=>'numero', "campo_descripcion"=>'numero')); //@todo
+		
 		//Si los datos a renderizar son un objeto, es porque vino un único registro, se convierte a array para poder iterar el el foreach de mas abajo
 		if(is_object($datos))
 		{
 			$array[0] = get_object_vars($datos);
 			$datos = $array;
 		}
+		
+		//EQUIPOS
 		$template = isset($template) ? $template : array('table_open' => '<table border="0" cellpadding="4" cellspacing="0" class="table table-striped">');
 		$this->load->library('table');
 		$this->table->set_template($template);
-		$this->table->set_heading('Nro Fecha', 'Fecha', 'Local', '', 'Visitante');
+		$this->table->set_heading('Número', 'Equipo');
+		foreach ($equipos_model as $row)
+		{
+			$this->table->add_row($row['numero']);
+					//form_dropdown('cboEquipo'.$row['numero'], $equipos, $row['descripcion'], 'class="form-control"'));
+		}
+		$this->table->add_row('<td colspan=5>Separador</td>');
+		$this->variables['tabla_equipos'] = $this->table->generate();
+		
+		//FIXTURE
+		$template = isset($template) ? $template : array('table_open' => '<table border="0" cellpadding="4" cellspacing="0" class="table table-striped">');
+		$this->load->library('table');
+		$this->table->set_template($template);
+		$this->table->set_heading('Jornada', 'Fecha del evento', 'Encuentro');
 		$contador=1;
 		foreach ($datos as $fixture)
 		{
@@ -275,18 +293,15 @@ class Torneo extends CI_Controller {
 				$this->table->add_row('<td colspan=5>Separador</td>');
 				$contador += 1;
 			}	
-			
 			$this->table->add_row($fixture['nro_fecha'], $fixture['fecha_evento'],
 					form_dropdown('cboEquipoA'.$fixture['id_encuentro'], $equipos, $fixture['id_equipoa'], 'class="form-control"'),
-					'<select name="s" id="1"><option value="1">#'.$fixture['id_equipoa'].'</option></select>',
 					'vs',
-					'<select name="s" id="1"><option value="1">#'.$fixture['id_equipob'].'</option></select>',
 					form_dropdown('cboEquipoB'.$fixture['id_encuentro'], $equipos, $fixture['id_equipob'], 'class="form-control"'),
 					form_hidden('id_encuentro'.$fixture['id_encuentro'], $fixture['id_encuentro'])
 					);
 		}
-		$this->table->add_row('<td colspan=5>Pija muerta</td>');
-		$this->variables['tabla'] = $this->table->generate();
+		$this->table->add_row('<td colspan=5>Separador</td>');
+		$this->variables['tabla_fixture'] = $this->table->generate();
 	}
 
 }
