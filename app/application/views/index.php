@@ -1,10 +1,12 @@
 
-<br>
+<section id="content">
+    
     <div class="container">
 
         <div class="row col-lg-4 col-md-4 ">
 
-            <div class="panel panel-torneos">
+			
+            <div class="card-header">
                 <div class="panel-heading"><?php echo lang('form_label_torneos');?></div>
                 <div class="panel-body">
    					<?php echo $torneos;?>
@@ -148,6 +150,9 @@
             </div>
         </div>
     </div>
+    
+    </section>
+    
 
 
    

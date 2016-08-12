@@ -1,0 +1,20 @@
+.f-80
+{
+	font-size: 80px
+}
+
+.p-b-70
+{
+    padding-bottom: 70px !important;
+}
+
+.contenedor_botones
+{
+	text-align:right;
+}
+
+.contenedor_botones button
+{
+	margin-left:20px;
+	width:120px;
+}

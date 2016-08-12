@@ -23,9 +23,18 @@ class Index extends CI_Controller {
 		$this->_renderizar_torneos();
 		$this->_obtener_datos_tablero();
 		
-		$this->load->view('templates/header');
+		$this->load->view('templates/head');
+		
+		$this->load->view('templates/main');
+
 		$this->load->view('index', $this->variables);
+
+
 		$this->load->view('templates/footer');
+		$this->load->view ('templates/libraries');		
+		
+		$this->load->view('templates/end');
+		
 	}
 	
 	/**
