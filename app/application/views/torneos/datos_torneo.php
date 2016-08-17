@@ -20,17 +20,22 @@
 		        <div class="row">
 									<div class="col-sm-12">
 										<div class="panel panel-default">
-											<div class="panel-heading" id="participantes">
+											<div class="panel-heading" id="equipos">
 												<i class="glyphicon glyphicon-star ico-panel"></i>
-												<?php echo lang('form_label_participantes');?>
+												<?php echo lang('form_label_equipos');?>
 												<div class="pull-right">
 													<div class="btn-group">
-														<button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#participante_body"><i id="flecha_participante" class="fa fa-chevron-down"></i></button>
+														<button class="btn btn-default btn-xs dropdown-toggle " type="button" data-toggle="collapse" data-target="#equipo_body"><i id="flecha_equipo" class="fa fa-chevron-down"></i></button>
 													</div>
 												</div>
 											</div>
-											<div class="panel-body collapse" id="participante_body">
+											<div class="panel-body collapse" id="equipo_body">
 												<div class="row">
+												<?php
+													if (!empty($tabla_equipos)) {
+														echo $tabla_equipos;
+													}
+													?>
 												</div>
 											</div>
 										</div>
@@ -51,8 +56,8 @@
 											<div class="panel-body collapse" id="fixture_body">
 												<div class="row">
 												<?php
-													if (!empty($tabla)) {
-														echo $tabla;
+													if (!empty($tabla_fixture)) {
+														echo $tabla_fixture;
 													}
 													?>
 												</div>

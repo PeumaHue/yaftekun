@@ -47,7 +47,7 @@ class Torneo extends CI_Controller {
 	public function index()
 	{
 		$fecha = getdate();
-		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'torneo/editar', "campoID"=>'id_torneo',"camposMostrar"=>array('nombre'),"datos"=>$this->Torneo_model->consulta(NULL, $fecha['year'])));
+		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'torneo/editar', "campoID"=>'id_torneo',"camposMostrar"=>array('id_torneo','nombre'),"datos"=>$this->Torneo_model->consulta(NULL, $fecha['year'])));
 		$this->load->view('templates/header', $this->variables);
 		$this->load->view('torneos/principal_torneo', $this->variables);
 		$this->load->view('torneos/busqueda_torneo', $this->variables);
@@ -110,7 +110,18 @@ class Torneo extends CI_Controller {
 	public function editar($id_torneo=NULL)
 	{
 		$fixture = new stdClass();
-		$fixture = $this->Calendario_model->fixture_consulta(75);
+
+		$fixture = $this->Calendario_model->fixture_consulta($id_torneo);
+		$datos_torneo = $this->Torneo_model->consulta($id_torneo);
+		
+		if(is_object($datos_torneo))
+		{
+			$array['torneo'] = get_object_vars($datos_torneo);
+			$datos_torneo = $array;
+		}
+		
+		$datos_torneo['fixture']=$fixture;
+		
 		$this->_renderizar_tabla(NULL, $fixture);
 		
 		
@@ -119,7 +130,7 @@ class Torneo extends CI_Controller {
 		//Si no es un post, no se llama al editar y solo se muestran los campos para editar
 		if (!($this->input->method()=='post'))
 		{
-			$this->_cargar_datos_formulario($this->Torneo_model->consulta($id_torneo));
+			$this->_cargar_datos_formulario($datos_torneo);
 		}
 		else
 		{
@@ -238,13 +249,27 @@ class Torneo extends CI_Controller {
 	 */
 	private function _cargar_datos_formulario($objeto)
 	{
-		$this->datos_formulario->id_torneo= isset($objeto->id_torneo) ? $objeto->id_torneo : '';
-		$this->datos_formulario->nombre = isset($objeto->nombre) ? $objeto->nombre : '';
-		$this->datos_formulario->cantidad_equipos = isset($objeto->cantidad_equipos) ? $objeto->cantidad_equipos : '';
-		$this->datos_formulario->id_tipo_modalidad = isset($objeto->id_tipo_modalidad) ? $objeto->id_tipo_modalidad : '';
-		$this->datos_formulario->id_liga = isset($objeto->id_liga) ? $objeto->id_liga : '';
-		$this->datos_formulario->id_usuario = isset($objeto->id_usuario) ? $objeto->id_usuario : '';
-		$this->datos_formulario->anio = isset($objeto->anio) ? $objeto->anio : '';
+		if (is_array($objeto))
+		{
+			if (isset($objeto['torneo']))
+				
+			$this->datos_formulario->id_torneo= isset($objeto->id_torneo) ? $objeto->id_torneo : '';
+			$this->datos_formulario->nombre = isset($objeto['torneo']['nombre']) ? $objeto['torneo']['nombre'] : '';
+			$this->datos_formulario->cantidad_equipos = isset($objeto['torneo']['cantidad_equipos']) ? $objeto['torneo']['cantidad_equipos'] : '';
+			$this->datos_formulario->id_tipo_modalidad = isset($objeto['torneo']['id_tipo_modalidad']) ? $objeto['torneo']['id_tipo_modalidad'] : '';
+			$this->datos_formulario->id_liga = isset($objeto['torneo']['id_liga']) ? $objeto['torneo']['id_liga'] : '';
+			$this->datos_formulario->id_usuario = isset($objeto['torneo']['id_usuario']) ? $objeto['torneo']['id_usuario'] : '';
+			$this->datos_formulario->anio = isset($objeto['torneo']['anio']) ? $objeto['torneo']['anio'] : '';
+		}
+		else{
+			$this->datos_formulario->id_torneo= isset($objeto->id_torneo) ? $objeto->id_torneo : '';
+			$this->datos_formulario->nombre = isset($objeto->nombre) ? $objeto->nombre : '';
+			$this->datos_formulario->cantidad_equipos = isset($objeto->cantidad_equipos) ? $objeto->cantidad_equipos : '';
+			$this->datos_formulario->id_tipo_modalidad = isset($objeto->id_tipo_modalidad) ? $objeto->id_tipo_modalidad : '';
+			$this->datos_formulario->id_liga = isset($objeto->id_liga) ? $objeto->id_liga : '';
+			$this->datos_formulario->id_usuario = isset($objeto->id_usuario) ? $objeto->id_usuario : '';
+			$this->datos_formulario->anio = isset($objeto->anio) ? $objeto->anio : '';
+		}
 	}
 
 	/**
@@ -255,18 +280,37 @@ class Torneo extends CI_Controller {
 	 */
 	private function _renderizar_tabla($template=NULL, $datos)
 	{
-		global $options;
-		$equipos=_obtener_array_asociativo(array("datos"=>$this->Torneo_model->obtener_equipos(75, null), "campo_clave"=>'numero', "campo_descripcion"=>'numero')); //@todo
+		$equipos_en_torneo=$this->Torneo_model->obtener_equipos(75, null);
+		$equipos_en_liga=_obtener_array_asociativo(array("datos"=>$this->Equipo_model->consulta(NULL, 1, NULL), "campo_clave"=>'id_equipo', "campo_descripcion"=>'nombre'));
+		$equipos=_obtener_array_asociativo(array("datos"=>$equipos_en_torneo, "campo_clave"=>'numero', "campo_descripcion"=>'numero')); //@todo
+		
+		//$equipos=_obtener_array_asociativo(array("datos"=>$this->Torneo_model->obtener_equipos(75, null), "campo_clave"=>'numero', "campo_descripcion"=>'numero')); //@todo
+		
 		//Si los datos a renderizar son un objeto, es porque vino un único registro, se convierte a array para poder iterar el el foreach de mas abajo
 		if(is_object($datos))
 		{
 			$array[0] = get_object_vars($datos);
 			$datos = $array;
 		}
+		
+		//EQUIPOS
 		$template = isset($template) ? $template : array('table_open' => '<table border="0" cellpadding="4" cellspacing="0" class="table table-striped">');
 		$this->load->library('table');
 		$this->table->set_template($template);
-		$this->table->set_heading('Nro Fecha', 'Fecha', 'Local', '', 'Visitante');
+		$this->table->set_heading('Número', 'Equipo');
+		foreach ($equipos_en_torneo as $row)
+		{
+			$this->table->add_row($row['numero'],
+					              form_dropdown('cboEquipo'.$row['numero'], $equipos_en_liga, $row['descripcion'], 'class="form-control"'));
+		}
+		$this->table->add_row('<td colspan=5>Separador</td>');
+		$this->variables['tabla_equipos'] = $this->table->generate();
+		
+		//FIXTURE
+		$template = isset($template) ? $template : array('table_open' => '<table border="0" cellpadding="4" cellspacing="0" class="table table-striped">');
+		$this->load->library('table');
+		$this->table->set_template($template);
+		$this->table->set_heading('Jornada', 'Fecha del evento', 'Encuentro');
 		$contador=1;
 		foreach ($datos as $fixture)
 		{
@@ -275,18 +319,15 @@ class Torneo extends CI_Controller {
 				$this->table->add_row('<td colspan=5>Separador</td>');
 				$contador += 1;
 			}	
-			
 			$this->table->add_row($fixture['nro_fecha'], $fixture['fecha_evento'],
 					form_dropdown('cboEquipoA'.$fixture['id_encuentro'], $equipos, $fixture['id_equipoa'], 'class="form-control"'),
-					'<select name="s" id="1"><option value="1">#'.$fixture['id_equipoa'].'</option></select>',
 					'vs',
-					'<select name="s" id="1"><option value="1">#'.$fixture['id_equipob'].'</option></select>',
 					form_dropdown('cboEquipoB'.$fixture['id_encuentro'], $equipos, $fixture['id_equipob'], 'class="form-control"'),
 					form_hidden('id_encuentro'.$fixture['id_encuentro'], $fixture['id_encuentro'])
 					);
 		}
-		$this->table->add_row('<td colspan=5>Pija muerta</td>');
-		$this->variables['tabla'] = $this->table->generate();
+		$this->table->add_row('<td colspan=5>Separador</td>');
+		$this->variables['tabla_fixture'] = $this->table->generate();
 	}
 
 }
