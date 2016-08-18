@@ -84,7 +84,8 @@ class Torneo extends CI_Controller {
 				if ($this->variables['mensaje']=='')
 				{
 					$this->_cargar_datos_formulario($this->_obtener_post());
-					if($this->Torneo_model->alta($this->datos_formulario)['resultado']='OK')
+					$r = $this->Torneo_model->alta($this->datos_formulario);
+					if($r['resultado']=='OK')
 					{	
 						$this->variables['mensaje'] = lang('message_guardar_ok');
 						$this->variables['reset'] = TRUE;

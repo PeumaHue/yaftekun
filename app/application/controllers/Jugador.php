@@ -196,7 +196,7 @@ class Jugador extends CI_Controller {
 				if ($this->variables['mensaje']=='')
 				{
 					$this->_cargar_datos_formulario($this->_obtener_post());
-					if($this->Participante_model->editar($this->datos_formulario)['resultado']='OK')
+					if($this->Participante_model->editar($this->datos_formulario)['resultado']=='OK')
 					{
 						$this->variables['mensaje'] = lang('message_guardar_cambios_ok');
 					}

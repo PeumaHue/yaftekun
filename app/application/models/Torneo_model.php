@@ -5,7 +5,7 @@ class Torneo_model extends CI_Model {
 	 * @var string
 	 */
 	private $sp_consulta 				= 'call torneo_consulta(?, ?, ?, ?, ?)';
-	private $sp_alta 					= 'call torneo_alta(?, ?, ?, ?, ?, ?)';
+	private $sp_alta 					= 'call torneo_alta(?, ?, ?, ?, ?, ?, ?)';
 	private $sp_editar 					= 'call torneo_editar(?, ?, ?, ?, ?, ?)';
 	private $sp_baja 					= 'call torneo_baja(?)';
 	private $sp_consulta_tipo_modalidad = 'call tipo_modalidad_consulta()';
@@ -85,13 +85,20 @@ class Torneo_model extends CI_Model {
 						'id_tipo_modalidad'	=> $torneo->id_tipo_modalidad,
 						'nombre' 			=> $torneo->nombre, 
 						'cantidad_equipos' 	=> $torneo->cantidad_equipos,
-						'id_usuario'		=>$torneo->id_usuario
+						'id_usuario'		=>$torneo->id_usuario,
+						'id_pla_torneo'		=>1  //@todo
 				));
 				
 		if( $query	)
 		{	
-			$resultado['resultado']='OK';
-			$resultado['id']=$query->row_array()["id_torneo"];
+			if($query->row_array()["id_torneo"] == 0)
+			{
+				$resultado['resultado']='ERROR';
+			}
+			else{
+				$resultado['resultado']='OK';
+				$resultado['id']=$query->row_array()["id_torneo"];
+			}
 		}	
 		else{
 			$resultado['resultado']='ERROR';
