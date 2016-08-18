@@ -15,7 +15,7 @@
 
       <?php $this->load->view('templates/header'); ?>
       
-
+<section id="main">
   
 
   

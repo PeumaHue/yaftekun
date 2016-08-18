@@ -9,6 +9,9 @@
     <!-- CSS -->
     <link href="<?php echo base_url("css/app.min.1.css");?>" rel="stylesheet">
     <link href="<?php echo base_url("css/app.min.2.css");?>" rel="stylesheet">
+    
+     <link href="css/propios.css" rel="stylesheet">
+    
 
     <!-- 
       <link href="css/propios.css" rel="stylesheet">

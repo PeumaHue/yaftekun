@@ -1,4 +1,6 @@
-
+	</section>
+	<!-- END MAIN  -->
+	
         <!-- Page Loader -->
         <div class="page-loader palette-Teal bg">
             <div class="preloader pl-xl pls-white">
