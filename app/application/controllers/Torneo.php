@@ -87,8 +87,10 @@ class Torneo extends CI_Controller {
 					$r = $this->Torneo_model->alta($this->datos_formulario);
 					if($r['resultado']=='OK')
 					{	
+						
 						$this->variables['mensaje'] = lang('message_guardar_ok');
 						$this->variables['reset'] = TRUE;
+						redirect(site_url('torneo/editar/'.$r['id']), 'refresh');
 					}
 					else
 					{
@@ -146,7 +148,7 @@ class Torneo extends CI_Controller {
 				if ($this->variables['mensaje']=='')
 				{
 					$this->_cargar_datos_formulario($this->_obtener_post());
-					if($this->Torneo_model->editar($this->datos_formulario)['resultado']='OK')
+					if($this->Torneo_model->editar($this->datos_formulario)['resultado']=='OK')
 					{
 						$this->variables['mensaje'] = lang('message_guardar_cambios_ok');
 					}
@@ -172,7 +174,7 @@ class Torneo extends CI_Controller {
 	{
 		$torneo = new stdClass();
 		$torneo->id_torneo = $id_torneo;
-		if($this->Torneo_model->baja($torneo)['resultado']='OK')
+		if($this->Torneo_model->baja($torneo)['resultado']=='OK')
 		{
 			$this->variables['mensaje'] = lang('message_guardar_cambios_ok');
 		}

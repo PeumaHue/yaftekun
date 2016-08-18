@@ -183,7 +183,7 @@ class Equipo extends CI_Controller {
 				if ($this->variables['mensaje']=='')
 				{
 					$this->_cargar_datos_formulario($this->_obtener_post());
-					if ($this->Equipo_model->editar($this->datos_formulario)['resultado']='OK')
+					if ($this->Equipo_model->editar($this->datos_formulario)['resultado']=='OK')
 					{
 						$this->variables['mensaje'] = lang('message_guardar_ok');
 						#$this->variables['reset'] = TRUE;
