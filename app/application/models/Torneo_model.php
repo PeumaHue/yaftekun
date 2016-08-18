@@ -10,6 +10,8 @@ class Torneo_model extends CI_Model {
 	private $sp_baja 					= 'call torneo_baja(?)';
 	private $sp_consulta_tipo_modalidad = 'call tipo_modalidad_consulta()';
 	private $sp_obtener_equipos         = 'call torneo_obtener_equipo(?,?,?)';
+	private $sp_configurar_y_armar_fixture  = 'call torneo_configurar_desde_plantilla(?,?,?)';
+	private $sp_armar_fixture  			= 'call armar_fixture(?)';
 	
 	/**
 	 * Variables para los atributos del modelo
@@ -174,5 +176,47 @@ class Torneo_model extends CI_Model {
 			mysqli_next_result($this->db->conn_id);
 		}
 		return $query->result_array();
+	}
+	
+	/**
+	 * configura el torneo para poder generar el fixture
+	 * @param 		integer(64) 	$id_torneo
+	 * @param 		integer   	$cant_participantes
+	 * @param 		integer   	$id_pla_torneo
+	 * @return 		array Devuelve un array con la la clave 'resultado', OK en caso de alta exitosa y sino ERROR
+	 */
+	public function configurar_desde_plantilla_y_armar_fixture($id_torneo, $cant_participantes=0, $id_pla_torneo=1)
+	{
+		$query = $this->db->query($this->$sp_configurar_y_armar_fixture,
+				array(
+						'id_torneo' 			=> $id_torneo,
+						'cant_participantes' 	=> $cant_participantes,
+						'id_pla_torneo'	=> $id_pla_torneo
+				));
+	
+		if( $query	)
+		{
+			
+			$query = $this->db->query($this->$sp_armar_fixture,
+					array(
+							'id_torneo' 			=> $id_torneo
+					));
+			if( $query	)
+			{
+				$resultado['resultado']='OK';
+			}
+			else{
+				$resultado['resultado']='ERROR';
+			}
+
+		}
+		else{
+			$resultado['resultado']='ERROR';
+		}
+	
+		if (mysqli_more_results($this->db->conn_id)) {
+			mysqli_next_result($this->db->conn_id);
+		}
+		return $resultado;
 	}
 }
