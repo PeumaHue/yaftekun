@@ -17,7 +17,7 @@
 	</ul>
 
 	<ul class="main-menu">
-		<li class="active"><a href="index.php"><i class="zmdi zmdi-home"></i>
+		<li class="active"><a href="..\index.php"><i class="zmdi zmdi-home"></i>
 				Inicio</a></li>
 
 		<li><a href="calendario.php"><i class="zmdi zmdi-calendar"></i>Agenda</a></li>

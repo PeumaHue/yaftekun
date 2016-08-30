@@ -2,7 +2,7 @@
 
     <header id="header" class="media">
         <div class="pull-left h-logo">
-            <a href="index.php" class="hidden-xs">
+            <a href="..\index.php" class="hidden-xs">
                 <img class="media-object" src="<?php echo base_url('img/logo_yaftekun.png');?>" alt="">
                 <small>Administrador</small>
             </a>

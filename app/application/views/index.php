@@ -14,8 +14,8 @@
 						</a>
 	
 							<ul class="dropdown-menu dropdown-menu-right">
-								<li><a href="">Cambiar torneo</a></li>  <!-- //TODO: Agregar submenu que muestra los torneos "vigentes" para seleccionar uno  -->
-								<li><a href="">Nuevo torneo</a></li>
+								<li><a href="">Cambiar liga</a></li>  <!-- //TODO: Agregar submenu que muestra los torneos "vigentes" para seleccionar uno  -->
+								<li><a href="">Nueva liga</a></li>
 							</ul>
 					</li>
 				</ul>
