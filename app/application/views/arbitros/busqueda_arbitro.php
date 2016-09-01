@@ -2,10 +2,11 @@
 
 <section id="content">
     
-    	<?php $this->load->view('arbitros/busqueda_hdr_arbitro.php'); ?>
-
+      	
  <form id="participante" data-toggle="validator"
 		action="<?php echo $accion; ?>" method="POST">
+
+      	<?php $this->load->view('arbitros/busqueda_hdr_arbitro.php'); ?> 
 
 		<!--//TODO - Investigar para agregar los botones de guadar y eliminar etc  -->
 		<!-- BOTON DE ALTA 
@@ -15,7 +16,7 @@
 		</button>
 		-->
 		
-		<!-- BARRA BOTONES-->
+		<!-- BARRA BOTONES
 		<div class="action-header palette-Teal-400 bg clearfix m-b-0">
 			<div class="ah-label hidden-xs palette-White text">Listado de
 				jugadores</div>
@@ -55,7 +56,7 @@
 						<li><a href="">Listview Settings</a></li>
 					</ul></li>
 			</ul>
-		</div>
+		</div>-->
 		<!-- FIN BARRA BOTONES-->
 		<div class="card m-b-0">
 

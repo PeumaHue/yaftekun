@@ -25,7 +25,7 @@ class Arbitro extends CI_Controller {
 		$this->load->model(array('Participante_model', 'Equipo_model'));
 		$this->datos_formulario = new stdClass();//Instancio una clase vacia para evitar el warning "Creating default object from empty value"
 
-		//TODO: Ver como emprolijar esto
+		//@todo Ver como emprolijar esto
 		$this->variables['includes']='<script src="'.base_url('js/bootstrap-filestyle.min.js').'"></script>';
 		$this->variables['includes']=$this->variables['includes'].'<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/valida_arbitro.js').'"></script>';
