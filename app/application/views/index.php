@@ -1,8 +1,8 @@
 
 <section id="content">
 	<div class="container">
-		<div class="card m-t-5">
-			<div class="card-header" style="height: 200px; padding-top: 80px">
+		<div class="card m-t-5"> <!--//TODO: hay que mirar porque hay dos tarjeta; esta y la de abajo  -->
+			<div class="card-header palette-Teal-200 bg" style="height: 200px; padding-top: 80px">
 				<!--<div style="margin-top:50px">-->
 				<div class="pull-left m-r-10">
 					<img class="media-object" src="<?php echo base_url('img_users/logotorneo.png');?>" width="34" height="42" alt="">

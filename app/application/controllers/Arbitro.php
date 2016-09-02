@@ -56,6 +56,7 @@ class Arbitro extends CI_Controller {
 		$this->load->view('arbitros/busqueda_arbitro', $this->variables);
 		
 		$this->load->view('templates/footer');
+		
 		$this->load->view ('templates/libraries');
 		
 		$this->load->view('templates/end');
