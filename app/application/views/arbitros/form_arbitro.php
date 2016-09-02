@@ -5,23 +5,27 @@
       	
  <form id="participante" data-toggle="validator" action="<?php echo $accion; ?>" method="POST">
 
-      	<?php $this->load->view('arbitros/busqueda_hdr_arbitro.php'); ?> 
+      	<?php $this->load->view('arbitros/form_hdr_arbitro.php'); ?> 
 
 		<!--//TODO - Investigar para agregar los botones de guadar y eliminar etc  -->
 		<!-- BOTON DE ALTA --> 
+		<!--  
 		<button class="btn btn-float btn-danger m-btn">
 			<i class="zmdi zmdi-plus" onclick="<?php echo base_url("arbitro/alta");?>"></i>
 		</button>
-			
-		<div class="card m-b-0 palette-Teal-200 bg text">	<!--Es la tarjeta  -->
+		-->
+					
+		<div class="card m-b-0 ">	<!--Es la tarjeta  -->
 
-			<!-- PANEL DE NOMBRES DE JUGADORES -->
+			<!-- PANEL FORM CARGA -->
+	    	<!--  
 	    	<div class="panel-body collapse in" id="jugador_body" aria-expanded="true">
 	   			<div class="row">
-					<?php echo $html_datos_ppal?>
+					//<?php echo $html_datos_ppal?>
 	       		</div>
 	    	</div>
-			<!-- FIN PANEL DE NOMBRE DE JUGADORES -->
+	    	-->
+			<!-- FIN PANEL FORM CARGA -->
 
 		</div> 
 	</form>

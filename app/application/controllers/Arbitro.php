@@ -50,9 +50,13 @@ class Arbitro extends CI_Controller {
 		
 		$this->load->view('templates/main');
 		
+		}
+	
+	public function index() {
+		
+	
 		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'arbitro/editar', "campoID"=>'id_participante',"camposMostrar"=>array('apellido','nombre'),"datos"=>$this->Participante_model->consulta(NULL, NULL, 2)));
 		
-		//$this->load->view('arbitros/principal_arbitro', $this->variables);  --- ESTO NO IRIA MAS
 		$this->load->view('arbitros/busqueda_arbitro', $this->variables);
 		
 		$this->load->view('templates/footer');
@@ -60,20 +64,7 @@ class Arbitro extends CI_Controller {
 		$this->load->view ('templates/libraries');
 		
 		$this->load->view('templates/end');
-	}
-	
-	public function index() {
-		/*
-		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'arbitro/editar', "campoID"=>'id_participante',"camposMostrar"=>array('apellido','nombre'),"datos"=>$this->Participante_model->consulta(NULL, NULL, 2)));
 		
-		
-		$this->load->view('templates/header', $this->variables);
-		
-		$this->load->view('arbitros/principal_arbitro', $this->variables);
-		$this->load->view('arbitros/busqueda_arbitro', $this->variables);
-		
-		$this->load->view('templates/footer');
-		*/
 		
 	}
 	
@@ -126,11 +117,25 @@ class Arbitro extends CI_Controller {
 				}
 			}
 		}
-		$this->load->view('templates/header', $this->variables);
-		$this->load->view('arbitros/principal_arbitro', $this->variables);
-		$this->load->view('arbitros/datos_arbitro', $this->variables);
+		
+		// $this->load->view('templates/head');
+		
+		//$this->load->view('templates/main'); 
+		
+		//$this->load->view('templates/header', $this->variables);
+		
+		//$this->load->view('arbitros/principal_arbitro', $this->variables);
+		
+		$this->load->view('arbitros/form_arbitro', $this->variables);
+
 		$this->load->view('arbitros/mensajes_arbitro', $this->variables);
+		
 		$this->load->view('templates/footer');
+		
+		$this->load->view ('templates/libraries');
+		
+		$this->load->view('templates/end');
+		
 	}
 	
 	/**
