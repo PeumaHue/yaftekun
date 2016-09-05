@@ -25,12 +25,14 @@ class Jugador extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->datos_formulario = new stdClass();//Instancio una clase vacia para evitar el warning "Creating default object from empty value"
 		$this->load->library('form_validation');
 		$this->load->helper(array('url', 'form', 'HYaftekun','email', 'date'));
 		$this->load->model('Participante_model');
 		$this->load->model('Equipo_model');
 		$this->variables['mensaje']= '';
+		$this->datos_formulario = new stdClass();//Instancio una clase vacia para evitar el warning "Creating default object from empty value"
+				
+		//@todo Ver como emprolijar esto
 		$this->variables['includes']='<script src="'.base_url('js/bootstrap-filestyle.min.js').'"></script>';
 		$this->variables['includes']=$this->variables['includes'].'<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/valida_jugador.js').'"></script>';
@@ -41,6 +43,8 @@ class Jugador extends CI_Controller {
 		$this->variables['id_participante'] = '';
 		$this->variables['reset'] = FALSE;//Variable para indicar si hay que resetear los campos del formulario
 		$this->_setear_campos();
+		
+		//TODO:  Estos datos tienen que venir desde un config.
 		$this->subeimagen_perfil = false;
 		$this->subeimagen_perfil_conf_['upload_path'] = './images/jugadores/';
 		$this->subeimagen_perfil_conf_['allowed_types'] = 'gif|jpg|png';
@@ -53,15 +57,22 @@ class Jugador extends CI_Controller {
 		$this->subeimagen_aptomedico_conf_['max_size']     = '200';
 		$this->subeimagen_aptomedico_conf_['max_width'] = '1000';
 		$this->subeimagen_aptomedico_conf_['max_height'] = '1000';
+		
+		$this->load->view('templates/head');
+		
+		$this->load->view('templates/main');
 	}
 	
 	public function index() {
 		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'jugador/editar', "campoID"=>'id_participante',"camposMostrar"=>array('apellido','nombre'),"datos"=>$this->Participante_model->consulta(NULL, NULL, 1)));
-		$this->load->view('templates/header', $this->variables);
-		$this->load->view('jugadores/principal_jugador', $this->variables);
+		/* $this->load->view('jugadores/principal_jugador', $this->variables); */
 		$this->load->view('jugadores/busqueda_jugador', $this->variables);
-		$this->load->view('jugadores/mensajes_jugador', $this->variables);
+		/* $this->load->view('jugadores/mensajes_jugador', $this->variables); */
 		$this->load->view('templates/footer');
+		
+		$this->load->view('templates/libraries');
+		
+		$this->load->view('templates/end');
 	}
 	
 	/**

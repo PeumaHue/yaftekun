@@ -61,7 +61,7 @@
 			</div>
 			<div class="col-md-4 col-sm-6">
 				<div class="card c-dark palette-Blue-Grey bg z-depth-1">
-					<a href="" class="palette-Blue-Grey-800 text">
+					<a href="<?php echo site_url('jugador'); ?>" class="palette-Blue-Grey-800 text">
 						<div class="ca-item media">
 							<div class="pull-left hidden-sm ">
 								<i class="zmdi zmdi-account zmdi-hc-fw f-80"></i>

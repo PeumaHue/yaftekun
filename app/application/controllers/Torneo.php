@@ -24,11 +24,11 @@ class Torneo extends CI_Controller {
 		parent::__construct();
 		$this->load->library('form_validation');
 		$this->load->helper(array('url', 'form', 'HYaftekun','email'));
-		$this->load->model('Torneo_model');
-		$this->load->model('Calendario_model');
-		$this->load->model('Equipo_model');
+		$this->load->model(array('Torneo_model','Calendario_model','Equipo_model'));
 		$this->datos_formulario = new stdClass();//Instancio una clase vacia para evitar el warning "Creating default object from empty value"
 		$this->variables['mensaje']= '';
+		
+		//@todo Ver como emprolijar esto
 		$this->variables['includes']='<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/jquery.easy-autocomplete.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/valida_torneo.js').'"></script>';
@@ -38,6 +38,10 @@ class Torneo extends CI_Controller {
 		$this->variables['id_torneo'] = '';
 		$this->variables['reset'] = FALSE;//Variable para indicar si hay que resetear los campos del formulario
 		$this->_setear_campos();
+		
+		$this->load->view('templates/head');
+		
+		$this->load->view('templates/main');
 	}
 	
 	/**
@@ -48,11 +52,14 @@ class Torneo extends CI_Controller {
 	{
 		$fecha = getdate();
 		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'torneo/editar', "campoID"=>'id_torneo',"camposMostrar"=>array('nombre'),"datos"=>$this->Torneo_model->consulta(NULL, $fecha['year'])));
-		$this->load->view('templates/header', $this->variables);
-		$this->load->view('torneos/principal_torneo', $this->variables);
+		/* $this->load->view('torneos/principal_torneo', $this->variables); */
 		$this->load->view('torneos/busqueda_torneo', $this->variables);
-		$this->load->view('torneos/mensajes_torneo', $this->variables);
+		/* $this->load->view('torneos/mensajes_torneo', $this->variables); */
 		$this->load->view('templates/footer');
+		
+		$this->load->view('templates/libraries');
+		
+		$this->load->view('templates/end');
 	}
 	
 	/**

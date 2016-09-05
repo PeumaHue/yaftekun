@@ -18,23 +18,33 @@ class Equipo extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->datos_formulario = new stdClass();
 		$this->load->library('form_validation');
 		$this->load->helper(array('url', 'form', 'HYaftekun'));
 		$this->load->model('Equipo_model');
+		$this->datos_formulario = new stdClass();
+		
+		//@todo Ver como emprolijar esto
 		$this->variables['includes']='<script src="'.base_url('js/bootstrapValidator.js').'"></script>';
 		$this->variables['includes']=$this->variables['includes'].'<script src="'.base_url('js/bootstrap-filestyle.js').'"></script>';
 		$this->variables['includes']=$this->variables['includes'].'<script src="'.base_url('js/valida_equipos.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/jquery.easy-autocomplete.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<link rel="stylesheet" href="'.base_url('css/easy-autocomplete.min.css').'" />';
 		$this->variables['includes']= $this->variables['includes'].'<link rel="stylesheet" href="'.base_url('css/easy-autocomplete.themes.min.css').'" />';
+		
+		$this->_setear_campos();
+		
+		//TODO:  Estos datos tienen que venir desde un config.
 		$this->conf['upload_path'] = './images/escudos/';
 		$this->conf['allowed_types'] = 'gif|jpg|png';
 		$this->conf['max_size']     = '2048';		
 		//$this->conf['max_width'] = '100';
 		//$this->conf['max_height'] = '100';
 		$this->subeimagen = false;
-		$this->_setear_campos();
+		
+		$this->load->view('templates/head');
+		
+		$this->load->view('templates/main');
+
 	}
 	
 	public function index() {
@@ -42,13 +52,17 @@ class Equipo extends CI_Controller {
 		$this->variables['html_datos_ppal'] =_renderizar_datos_link(array("ruta"=>'equipo/editar', "campoID"=>'id_equipo',"camposMostrar"=>'nombre',"datos"=>$this->Equipo_model->consulta(NULL,NULL,NULL)));
 		$msj = isset($this->variables['mensaje']) ? $this->variables['mensaje'] : ''; 
 		$this->_setear_variables('', $msj, site_url('equipo'), site_url('equipo'), '', '');
-		$this->load->view('templates/header', $this->variables);
-		$this->load->view('equipos/principal_equipo', $this->variables);
 		$this->load->view('equipos/busqueda_equipo',$this->variables);
 		if ($msj!='') {
 			$this->load->view('equipos/mensajes_equipo',$this->variables);
 		}
+		
 		$this->load->view('templates/footer');
+		
+		$this->load->view ('templates/libraries');
+		
+		$this->load->view('templates/end');
+		
 	}
 
 	/**
