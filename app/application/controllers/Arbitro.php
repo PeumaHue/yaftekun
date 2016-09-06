@@ -80,6 +80,7 @@ class Arbitro extends CI_Controller {
 		$this->variables['provincias']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_provincias(), "campo_clave"=> 'id_tipo_provincia', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_provincia'));
 		$this->datos_formulario->nombre_archivo_foto='no-foto.png';
 		$this->_setear_reglas();
+		
 		if ($this->input->method()=='post')
 		{
 			if($this->form_validation->run() == FALSE)
@@ -118,17 +119,10 @@ class Arbitro extends CI_Controller {
 			}
 		}
 		
-		// $this->load->view('templates/head');
-		
-		//$this->load->view('templates/main'); 
-		
-		//$this->load->view('templates/header', $this->variables);
-		
-		//$this->load->view('arbitros/principal_arbitro', $this->variables);
-		
+			
 		$this->load->view('arbitros/form_arbitro', $this->variables);
 
-		$this->load->view('arbitros/mensajes_arbitro', $this->variables);
+		//$this->load->view('arbitros/mensajes_arbitro', $this->variables);
 		
 		$this->load->view('templates/footer');
 		

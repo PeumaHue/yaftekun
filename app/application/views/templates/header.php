@@ -43,7 +43,7 @@
             </li>
             <li class="dropdown hm-profile">
                 <a data-toggle="dropdown" href="">
-                    <img src="img/profile-pics/1.jpg" alt="">
+                    <img src="<?php echo base_url('img/profile-pics/1.jpg');?>" alt="">
                 </a>
 
                 <ul class="dropdown-menu pull-right dm-icon">
@@ -62,7 +62,7 @@
 
         <div class="media-body h-search">
             <form class="p-relative">
-                <input type="text" class="hs-input" placeholder="Buscar personas, equipos y torneos">
+                <input type="text" class="hs-input" placeholder="Buscar participantes, equipos y torneos">
                 <i class="zmdi zmdi-search hs-reset" data-ma-action="search-clear"></i>
             </form>
         </div>
