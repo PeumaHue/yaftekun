@@ -1,8 +1,4 @@
-
-
 <section id="content">
-
-
 	<form id="participante" data-toggle="validator"
 		action="<?php echo $accion; ?>" method="POST"
 		class="bootstrap-validator-form">
@@ -30,7 +26,17 @@
 							<div class="pmo-pic">
 								<div class="p-relative">
 									<img class="img-responsive mCS_img_loaded" src="<?php echo base_url('img_users/arbitros/'. $this->datos_formulario->nombre_archivo_foto);?>" alt=""> 
-									<a href="" class="pmop-edit"> <i class="zmdi zmdi-camera"></i><span class="hidden-xs">Actualizar imagen</span></a>
+									<!-- <a href="" class="pmop-edit"> -->
+									 <div class="pmop-edit">
+									 <i class="zmdi zmdi-camera"></i><span class="hidden-xs">Actualizar imagen</span>
+									<!-- </a> -->
+									   
+									 </div>
+									 <input type="file" id="nombre_archivo_foto" name="nombre_archivo_foto" style="display:none;" class="pmop-edit">
+									 
+							<input type="file" id="myInput"/>
+    <a href="" id="myAnchor">Launch File Upload</a>
+									 
 								</div>
 								<div class="pmo-stat" ><?php echo (empty($this->datos_formulario->nombre) ? 'Sin información' : $this->datos_formulario->nombre ); ?></div>
 								
@@ -73,8 +79,8 @@
 									<dd>
 										<div class="form-group fg-float">
 											<div class="fg-line">
-												<input type="text" class="form-control " id="txt_Apellido"
-													name="apellido" maxlength="100"> <label class="fg-label">Apellido</label>
+													<label class="fg-label"><?php echo lang('form_label_apellido');?></label>
+													<input type="text" id="txt_Apellido" value="<?php echo ($reset) ? '' : set_value('apellido',$this->datos_formulario->apellido); ?>" name="apellido" class="form-control"  maxlength="100" >
 											</div>
 										</div>
 									</dd>
@@ -83,27 +89,19 @@
 									<dd>
 										<div class="form-group  fg-float">
 											<div class="fg-line">
-												<input type="text" class="form-control " id="txt_Nombre"
-													name="nombre" maxlength="100"> <label class="fg-label">Nombre</label>
+												<input type="text" id="txt_Nombre"   value="<?php echo ($reset) ? '' : set_value('nombre',$this->datos_formulario->nombre); ?>" name="nombre" class="datepicker form-control"  maxlength="100" >
+												<label class="fg-label"><?php echo lang('form_label_nombre');?></label>
 											</div>
 										</div>
 									</dd>
 								</dl>
 								<br />
-
 								<dl class="col-md-4">
 									<dd>
 										<div class="form-group ">
 											<div class="fg-line">
 												<div class="select">
-													<select class="form-control" name="id_tipo_doc">
-														<option>Tipo documento</option>
-														<option>Option 1</option>
-														<option>Option 2</option>
-														<option>Option 3</option>
-														<option>Option 4</option>
-														<option>Option 5</option>
-													</select>
+													<?php echo form_dropdown('id_tipo_doc', $documentos, set_value('id_tipo_doc',$this->datos_formulario->id_tipo_doc), 'class="form-control"'); ?>
 												</div>
 											</div>
 										</div>
@@ -113,10 +111,8 @@
 									<dd>
 										<div class="form-group fg-float ">
 											<div class="fg-line">
-												<input type="text" class="form-control fg-input"
-													name="nro_doc"
-													onkeypress="return validarNumeroControl(event)"
-													maxlength="8"> <label class="fg-label">Número Documento</label>
+										 		<input type="text" id="txt_NroDoc" value="<?php echo ($reset) ? '' : set_value('nro_doc',$this->datos_formulario->nro_doc); ?>" class="form-control" name="nro_doc"  maxlength="8" >
+			                    				<label class="fg-label"><?php echo lang('form_label_numero_documento');?></label>
 											</div>
 										</div>
 									</dd>
@@ -126,10 +122,8 @@
 
 										<div class="form-group fg-float ">
 											<div class="fg-line">
-												<input type="text" class="form-control input-mask"
-													data-mask="00/00/0000" name="fecha_nacimiento"
-													maxlength="10" autocomplete="off"> <label class="fg-label">Fecha
-													nacimiento</label>
+											        <input id="txt_FechaNacimiento" value="<?php echo ($reset) ? '' : set_value('fecha_nacimiento',$this->datos_formulario->fecha_nacimiento); ?>" class="form-control" name="fecha_nacimiento" data-date-format="YYYY-MM-DD" >
+	                		    					<label class="fg-label"><?php echo lang('form_label_fecha_nacimiento');?></label>
 											</div>
 										</div>
 									</dd>
@@ -139,9 +133,8 @@
 
 										<div class="form-group fg-float ">
 											<div class="fg-line">
-												<input type="text" class="form-control fg-input"
-													name="nacionalidad" maxlength="100"> <label
-													class="fg-label">Nacionalidad</label>
+									   	 		<input id="txt_Nacionalidad" value="<?php echo ($reset) ? '' : set_value('nacionalidad',$this->datos_formulario->nacionalidad); ?>" class="form-control" name="nacionalidad"  maxlength="10" >
+	                        					<label class="fg-label"><?php echo lang('form_label_nacionalidad');?></label>
 											</div>
 										</div>
 									</dd>
@@ -151,15 +144,8 @@
 										<div class="form-group ">
 											<div class="fg-line">
 												<div class="select">
-													<select class="form-control" name="id_tipo_estado_civil">
-														<option>Estado civil</option>
-														<option>Option 1</option>
-														<option>Option 2</option>
-														<option>Option 3</option>
-														<option>Option 4</option>
-														<option>Option 5</option>
-													</select>
-												</div>
+					                      			<?php echo form_dropdown('id_tipo_estado_civil', $estados_civiles, set_value('id_tipo_estado_civil',$this->datos_formulario->id_tipo_estado_civil), 'class="form-control"'); ?>
+	     										</div>
 											</div>
 										</div>
 									</dd>
@@ -170,9 +156,8 @@
 
 										<div class="form-group  fg-float">
 											<div class="fg-line">
-												<input type="text" class="form-control fg-input"
-													name="conyuge_nombre" maxlength="100"> <label
-													class="fg-label">Nombre cónyugue</label>
+								           		<input type="text" id="txt_Conyugue" value="<?php echo ($reset) ? '' : set_value('conyuge_nombre',$this->datos_formulario->conyuge_nombre); ?>" name="conyuge_nombre" class="form-control"  maxlength="50" >
+	                  							<label class="fg-label"><?php echo lang('form_label_nombre_conyuge');?></label>
 											</div>
 										</div>
 									</dd>
