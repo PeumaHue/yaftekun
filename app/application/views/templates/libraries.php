@@ -62,6 +62,8 @@
         <script src="<?php echo base_url("vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"); ?>" ></script>
         <script src="<?php echo base_url("js/flot-charts/curved-line-chart.js"); ?>" ></script>
         <script src="<?php echo base_url("js/flot-charts/line-chart.js"); ?>" ></script>
+        <script src="<?php echo base_url("vendors/fileinput/fileinput.min.js"); ?>" ></script>
+        <script src="<?php echo base_url("vendors/input-mask/input-mask.min.js"); ?>" ></script>
 
         <!-- Placeholder for IE9 -->
         <!--[if IE 9 ]>

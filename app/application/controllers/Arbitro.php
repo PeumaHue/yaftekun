@@ -32,6 +32,7 @@ class Arbitro extends CI_Controller {
 		$this->variables['includes']= $this->variables['includes'].'<script src="'.base_url('js/jquery.easy-autocomplete.js').'"></script>';
 		$this->variables['includes']= $this->variables['includes'].'<link rel="stylesheet" href="'.base_url('css/easy-autocomplete.min.css').'" />';
 		
+		
 		$this->variables['accion'] = site_url('arbitro/alta');
 		$this->variables['id_participante'] = '';
 		$this->variables['reset'] = FALSE;//Variable para indicar si hay que resetear los campos del formulario

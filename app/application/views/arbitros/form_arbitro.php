@@ -23,24 +23,29 @@
 					 <div id="mCSB_4" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical_horizontal mCSB_outside" tabindex="0">  
 						<!--//TODO: Quitar posicionamiento del div de abajo  -->
 						<div id="mCSB_4_container" class="mCSB_container mCS_x_hidden mCS_no_scrollbar_x"  style="position: relative; top: 0px; left: 0px; width: 100%; " dir="ltr"> 
+	
+	
+	
+							<!-- PANEL DE IMAGEN Y NOMBRE-->
 							<div class="pmo-pic">
 								<div class="p-relative">
-									<img class="img-responsive mCS_img_loaded" src="<?php echo base_url('img_users/arbitros/'. $this->datos_formulario->nombre_archivo_foto);?>" alt=""> 
-									<!-- <a href="" class="pmop-edit"> -->
-									 <div class="pmop-edit">
-									 <i class="zmdi zmdi-camera"></i><span class="hidden-xs">Actualizar imagen</span>
-									<!-- </a> -->
-									   
+									
+									<img class="img-responsive mCS_img_loaded fileinput-exists" src="<?php echo base_url('img_users/arbitros/'. $this->datos_formulario->nombre_archivo_foto);?>" alt=""> 
+									
+
+									 <div class="pmop-edit btn btn-file" data-provides="fileinput">
+									 
+									 	<i class="zmdi zmdi-camera"></i>
+									 	<span class="hidden-xs fileinput-new">Actualizar imagen</span> 
+										 	<input type="file" name="...">
+										 	<span class="fileinput-filename"></span>
 									 </div>
-									 <input type="file" id="nombre_archivo_foto" name="nombre_archivo_foto" style="display:none;" class="pmop-edit">
-									 
-							<input type="file" id="myInput"/>
-    <a href="" id="myAnchor">Launch File Upload</a>
-									 
+	                            						 
 								</div>
 								<div class="pmo-stat" ><?php echo (empty($this->datos_formulario->nombre) ? 'Sin información' : $this->datos_formulario->nombre ); ?></div>
-								
 							</div>
+							<!-- FIN PANEL DE IMAGEN Y NOMBRE-->
+
 
 							<div class="pmo-block pmo-contact hidden-xs">
 								<h2>Contacto</h2>
