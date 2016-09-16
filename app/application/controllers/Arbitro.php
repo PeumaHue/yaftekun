@@ -363,7 +363,7 @@ class Arbitro extends CI_Controller {
 		$this->datos_formulario->id_provincia               = isset($objeto->id_provincia) ? $objeto->id_provincia : '';
 		$this->datos_formulario->localidad                  = isset($objeto->localidad) ? $objeto->localidad : '';
 		$this->datos_formulario->nacionalidad               = isset($objeto->nacionalidad) ? $objeto->nacionalidad : '';
-		$this->datos_formulario->id_tipo_estado_civil          = isset($objeto->id_tipo_estado_civil) ? $objeto->id_tipo_estado_civil : '';
+		$this->datos_formulario->id_tipo_estado_civil       = isset($objeto->id_tipo_estado_civil) ? $objeto->id_tipo_estado_civil : '';
 		$this->datos_formulario->conyuge_nombre             = isset($objeto->conyuge_nombre) ? $objeto->conyuge_nombre : '';
 		$this->datos_formulario->id_tipo_doc                = isset($objeto->id_tipo_doc) ? $objeto->id_tipo_doc : '';
 		$this->datos_formulario->nro_doc                    = isset($objeto->nro_doc) ? $objeto->nro_doc : '';

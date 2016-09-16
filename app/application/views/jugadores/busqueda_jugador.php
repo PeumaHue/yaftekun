@@ -1,12 +1,19 @@
 <section id="content">
- <form id="participante" data-toggle="validator" action="<?php echo $accion; ?>" method="POST">
-
+<!--   <form id="participante" data-toggle="validator" action="<?php echo $accion; ?>" method="POST">-->
+	<div class="input-group-btn">
+                    	<button class="btn btn-default" type="button">
+                        	<i class="fa fa-search"></i>
+                        </button>
+                        <a href="<?php echo base_url("jugador/alta");?>" role="button" class="btn btn-info">
+    	        			<i class="fa fa-plus"></i>
+           	    		</a>
+                    </div> 
       	<?php $this->load->view('jugadores/busqueda_hdr_jugador.php'); ?> 
 
 		<!--//TODO - Investigar para agregar los botones de guadar y eliminar etc  -->
 		<!-- BOTON DE ALTA --> 
 		<button class="btn btn-float btn-danger m-btn">
-			<i class="zmdi zmdi-plus" onclick="<?php echo base_url("equipo/alta");?>"></i>
+			<i class="zmdi zmdi-plus" onclick="<?php echo base_url("jugador/alta");?>"></i>
 		</button>
 			
 		<div class="card m-b-0 palette-Teal-200 bg text">	<!--Es la tarjeta  -->
@@ -20,7 +27,7 @@
 			<!-- FIN PANEL DE NOMBRE DE JUGADORES -->
 
 		</div> 
-	</form>
+	<!--  </form>-->
 </section>
             
             

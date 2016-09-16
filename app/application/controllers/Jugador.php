@@ -88,9 +88,9 @@ class Jugador extends CI_Controller {
 		$this->variables['equipos']=_obtener_array_asociativo(array("datos"=>$this->Equipo_model->consulta(NULL, 1, NULL, 500, 0), "campo_clave"=>'id_equipo', "campo_descripcion"=>'nombre', "cadena_sin_seleccion"=>'form_label_equipo')); //@todo
 		$this->variables['provincias']=_obtener_array_asociativo(array("datos"=>$this->Participante_model->consulta_provincias(), "campo_clave"=> 'id_tipo_provincia', "campo_descripcion"=>'descripcion', "cadena_sin_seleccion"=>'form_label_provincia'));
 		$this->datos_formulario->nombre_archivo_foto='no-foto.png';
-		$this->_setear_reglas();
 		if ($this->input->method()=='post')
 		{
+			$this->_setear_reglas();
 			if($this->form_validation->run() == FALSE)
 			{
 				$this->variables['mensaje']= validation_errors();
@@ -142,11 +142,11 @@ class Jugador extends CI_Controller {
 				}
 			}
 		}
-		$this->load->view('templates/header', $this->variables);
-		$this->load->view('jugadores/principal_jugador', $this->variables);
-		$this->load->view('jugadores/datos_jugador', $this->variables);
+		$this->load->view('jugadores/form_jugador', $this->variables);
 		$this->load->view('jugadores/mensajes_jugador', $this->variables);
 		$this->load->view('templates/footer');
+		$this->load->view ('templates/libraries');
+		$this->load->view('templates/end');
 	}
 	
 	/**
@@ -379,7 +379,7 @@ class Jugador extends CI_Controller {
 		$this->form_validation->set_rules('telefono_celular', 'lang:form_label_celular', 'regex_match[/^[0-9]*$|^\s*$/]');
 		$this->form_validation->set_rules('telefono_radio', 'lang:form_label_radio', 'required');
 		$this->form_validation->set_rules('telefono_radio', 'lang:form_label_radio', 'regex_match[/^[0-9]*$|^\s*$/]');
-		$this->form_validation->set_rules('email', 'lang:form_label_mail', 'valid_email|xss_clean');
+		$this->form_validation->set_rules('email', 'lang:form_label_mail', 'valid_email|xss_clean'); 
 	}
 	
 	 /**

@@ -1,17 +1,16 @@
 <section id="content">
-	<form id="participante" data-toggle="validator"
-		action="<?php echo $accion; ?>" method="POST"
-		class="bootstrap-validator-form">
-      	<?php $this->load->view('arbitros/form_hdr_arbitro.php'); ?> 
+	<form id="participante" data-toggle="validator" action="<?php echo $accion; ?>" method="POST" class="bootstrap-validator-form" enctype="multipart/form-data">
+	   	<?php $this->load->view('jugadores/form_hdr_jugador.php'); ?> 
 		<!--//TODO - Investigar para agregar los botones de guadar y eliminar etc  -->
 		<!-- BOTON DE ALTA -->
-		<button class="btn btn-float btn-danger m-btn">
-			<i class="zmdi zmdi-plus" onclick="<?php echo base_url("arbitro/alta");?>"></i>
+		<!-- <button class="btn btn-float btn-danger m-btn">
+			<i class="zmdi zmdi-plus" onclick="<?php echo base_url("jugador/alta");?>"></i>
 		</button>
+		 -->
 		<div class="card m-b-0 ">			<!--Es la tarjeta Principal y que no debe tocarse -->
 			<!-- PANEL FORM CARGA -->
 			<div class="card-body p-b-0 p-t-0 " id="profile-main">
-				<!-- GRUPO IMAGEN PARTICIPANTE-->
+				<!-- GRUPO IMAGEN JUGADOR-->
 				<!--//TODO: Quitar estilo de abajo  -->
 				<div class="pm-overview c-overflow mCustomScrollbar _mCS_4 mCS-autoHide"	style="overflow: visible;">
 					 <div id="mCSB_4" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical_horizontal mCSB_outside" tabindex="0">  
@@ -37,6 +36,7 @@
 							<!-- FIN PANEL DE IMAGEN Y NOMBRE-->
 							<div class="pmo-block pmo-contact hidden-xs">
 								<h2>Contacto</h2>
+
 								<ul>
 									<li><i class="zmdi zmdi-phone"></i><?php echo (empty($this->datos_formulario->telefono) ? 'Sin informar' : $this->datos_formulario->telefono ); ?></li>
 									<li><i class="zmdi zmdi-email"></i><?php echo (empty($this->datos_formulario->email) ? 'Sin informar' : $this->datos_formulario->email ); ?></li>
@@ -48,12 +48,13 @@
 									</li>
 								</ul>
 							</div>
+
 					 	</div>
 					</div>
 				</div>
-				<!-- FIN GRUPO IMAGEN-->
+				<!-- FIN GRUPO IMAGEN JUGADOR-->
 				<div class="pm-body clearfix">
-					<!--DATOS DEL PARTICIPANTE-->
+					<!--DATOS DEL JUGADOR-->
 					<div class="pmb-block">
 						<div class="pmbb-header ">
 							<h2>
@@ -137,8 +138,10 @@
 										</div>
 									</dd>
 								</dl>
+
 								<dl class="col-md-12">
 									<dd>
+
 										<div class="form-group  fg-float">
 											<div class="fg-line">
 								           		<input type="text" id="txt_Conyugue" value="<?php echo ($reset) ? '' : set_value('conyuge_nombre',$this->datos_formulario->conyuge_nombre); ?>" name="conyuge_nombre" class="form-control"  maxlength="50" >
@@ -147,15 +150,142 @@
 										</div>
 									</dd>
 								</dl>
+
 							</div>
 						</div>
 					</div>
 					<div class="clearfix"></div>
-					<!--FIN DATOS-->
+					<!--FIN DATOS DEL JUGADOR-->
 					<!--COLAPSABLES-->
 					<div class="pmb-block">
 						<div class="panel-group " role="tablist"
 							aria-multiselectable="true">
+							<!--FICHA MEDICA-->
+							<div class="panel panel-collapse ">
+								<div class="panel-heading" role="tab" id="headingOne">
+
+									<h4 class="panel-title ">
+										<a class="collapsed f-15" data-toggle="collapse"
+											data-parent="#accordion" href="#collapseOne"
+											aria-expanded="false" aria-controls="collapseOne"> <i
+											class="zmdi  zmdi-favorite m-r-5"></i> Ficha Médica
+										</a>
+									</h4>
+								</div>
+
+								<div id="collapseOne" class="collapse" role="tabpanel"
+									aria-labelledby="headingOne" aria-expanded="true">
+									<div class="panel-body">
+
+
+										<div class="pmbb-body p-l-30 p-t-15 p-b-20">
+											<div class="pmbb-view">
+												<dl class="  col-md-6">
+													<dd>
+														<div class="form-group fg-float">
+															<div class="fg-line">
+																<input type="text" class="form-control "
+																	id="txt_Cobertura_Medica" name="cobertura_medica"
+																	maxlength="100"> <label class="fg-label">Cobertura
+																	médica</label>
+															</div>
+														</div>
+													</dd>
+												</dl>
+												<dl class="col-md-6">
+													<dd>
+														<div class="form-group fg-float">
+															<div class="fg-line">
+																<input type="text" class="form-control "
+																	id="txt_Fecha_apto_medico" name="fecha_apto_medico"
+																	maxlength="100"> <label class="fg-label">Fecha de
+																	caducidad de apto médico</label>
+															</div>
+														</div>
+													</dd>
+												</dl>
+
+												<div class="fileinput fileinput-new"
+													data-provides="fileinput">
+													<div class="fileinput-preview thumbnail"
+														data-trigger="fileinput"></div>
+													<div>
+														<span class="btn btn-info btn-file waves-effect"> <span
+															class="fileinput-new">Select image</span> <span
+															class="fileinput-exists">Change</span> <input type="file"
+															name="...">
+														</span> <a href="#"
+															class="btn btn-danger fileinput-exists waves-effect"
+															data-dismiss="fileinput">Remove</a>
+													</div>
+												</div>
+
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--FICHA MEDICA-->
+							<!--EQIPO-->
+							<div class="panel panel-collapse">
+								<div class="panel-heading" role="tab" id="headingTwo">
+									<h4 class="panel-title">
+										<a class="collapsed f-15" data-toggle="collapse"
+											data-parent="#accordion" href="#collapseTwo"
+											aria-expanded="false" aria-controls="collapseTwo"> <i
+											class="zmdi  zmdi-shield-security m-r-5"></i> Equipo
+										</a>
+									</h4>
+								</div>
+								<div id="collapseTwo" class="collapse" role="tabpanel"
+									aria-labelledby="headingTwo" aria-expanded="false"
+									style="height: 0px;">
+									<div class="panel-body">
+										<div class="pmbb-body p-l-30 p-t-15 p-b-20">
+											<div class="pmbb-view">
+												<dl class="  col-md-6">
+													<dd>
+														<div class="form-group ">
+															<div class="fg-line">
+																<div class="select">
+					                      							<?php echo form_dropdown('id_equipo', $equipos, set_value('id_equipo',$this->datos_formulario->id_equipo), 'class="form-control"'); ?>
+	     														</div>
+															</div>
+														</div>
+													</dd>
+												</dl>
+												<dl class="col-md-6">
+													<dd>
+														<div class="form-group  ">
+															<div class="fg-line">
+																<div class="select">
+																		<?php echo form_dropdown('id_tipo_estado_jugador', $estados, set_value('id_tipo_estado_jugador',$this->datos_formulario->id_tipo_estado_jugador), 'class="form-control"'); ?>
+																</div>
+															</div>
+														</div>
+													</dd>
+												</dl>
+												<dl class="col-md-12">
+													<dd>
+														<div class="form-group fg-float ">
+															<div class="fg-line">
+																<input type="text" class="form-control fg-input"
+																	id="txt_Trayectoria" name="trayectoria" maxlength="100" />
+																<label class="fg-label">Trayectoria</label>
+															</div>
+														</div>
+													</dd>
+												</dl>
+
+
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--FIN EQIPO-->
 							<!--DOMICILIO-->
 							<div class="panel panel-collapse">
 								<div class="panel-heading" role="tab" id="headingThree">
